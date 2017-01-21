@@ -4,6 +4,8 @@ imports:
     - { resource: services.yml }
     - { resource: fos_user/fos_user_config.yml }
     - { resource: sonata/sonata_block_config.yml }
+    - { resource: knp/knp_config.yml }
+    - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration

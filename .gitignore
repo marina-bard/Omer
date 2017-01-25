@@ -17,3 +17,4 @@
 /.idea
 *.php~
 /bower_components/
+/web/assets/

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Team</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ team.id }}</td>
+            </tr>
+            <tr>
+                <th>Nativeteamname</th>
+                <td>{{ team.nativeTeamName }}</td>
+            </tr>
+            <tr>
+                <th>Englishteamname</th>
+                <td>{{ team.englishTeamName }}</td>
+            </tr>
+            <tr>
+                <th>Membernumber</th>
+                <td>{{ team.memberNumber }}</td>
+            </tr>
+            <tr>
+                <th>Guo</th>
+                <td>{{ team.guo }}</td>
+            </tr>
+            <tr>
+                <th>Guoadress</th>
+                <td>{{ team.guoAdress }}</td>
+            </tr>
+            <tr>
+                <th>Principalfullname</th>
+                <td>{{ team.principalFullName }}</td>
+            </tr>
+            <tr>
+                <th>Educationdepartment</th>
+                <td>{{ team.educationDepartment }}</td>
+            </tr>
+            <tr>
+                <th>Educatuiondepartmentadress</th>
+                <td>{{ team.educatuionDepartmentAdress }}</td>
+            </tr>
+            <tr>
+                <th>Headofedufullname</th>
+                <td>{{ team.headOfEduFullName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('team_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

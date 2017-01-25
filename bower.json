@@ -1,0 +1,23 @@
+{
+  "name": "omer",
+  "homepage": "https://github.com/marina-bard/Omer",
+  "authors": [
+    "Marina Bardiyan <marina.bard.96@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "symfony-collection": "^2.0.4"
+  }
+}

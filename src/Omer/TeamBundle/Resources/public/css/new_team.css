@@ -1,0 +1,3 @@
+div[id*="omer_teambundle_team_members"] > label.required {
+    display: none;
+}

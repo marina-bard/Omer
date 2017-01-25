@@ -80,4 +80,158 @@ class TeamMember
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id", onDelete="cascade")
      */
     private $team;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set surname
+     *
+     * @param string $surname
+     *
+     * @return TeamMember
+     */
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+
+        return $this;
+    }
+
+    /**
+     * Get surname
+     *
+     * @return string
+     */
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return TeamMember
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set patronymic
+     *
+     * @param string $patronymic
+     *
+     * @return TeamMember
+     */
+    public function setPatronymic($patronymic)
+    {
+        $this->patronymic = $patronymic;
+
+        return $this;
+    }
+
+    /**
+     * Get patronymic
+     *
+     * @return string
+     */
+    public function getPatronymic()
+    {
+        return $this->patronymic;
+    }
+
+    /**
+     * Set age
+     *
+     * @param integer $age
+     *
+     * @return TeamMember
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get age
+     *
+     * @return integer
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * Set allergy
+     *
+     * @param string $allergy
+     *
+     * @return TeamMember
+     */
+    public function setAllergy($allergy)
+    {
+        $this->allergy = $allergy;
+
+        return $this;
+    }
+
+    /**
+     * Get allergy
+     *
+     * @return string
+     */
+    public function getAllergy()
+    {
+        return $this->allergy;
+    }
+
+    /**
+     * Set team
+     *
+     * @param \Omer\TeamBundle\Entity\Team $team
+     *
+     * @return TeamMember
+     */
+    public function setTeam(\Omer\TeamBundle\Entity\Team $team = null)
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Omer\TeamBundle\Entity\Team
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
 }

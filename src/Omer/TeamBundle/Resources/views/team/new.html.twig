@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig' %}
+
+    <h1>Team creation</h1>
+
+    <h3>Team info</h3>
+    {{ form_start(form, { 'action':path('team_new'), 'method':'POST'}) }}
+
+    {{ form_row(form.nativeTeamName) }}
+    {{ form_row(form.englishTeamName) }}
+    {{ form_row(form.memberNumber) }}
+    {{ form_row(form.guo) }}
+    {{ form_row(form.guoAdress) }}
+    {{ form_row(form.principalFullName) }}
+    {{ form_row(form.educationDepartment) }}
+    {{ form_row(form.educatuionDepartmentAdress) }}
+    {{ form_row(form.headOfEduFullName) }}
+
+    <h3>Coach</h3>
+
+    {{ form_row(form.coach) }}
+
+    <h3>Members</h3>
+
+    {% block collection_javascript %}
+    {{ (form_row(form.members)) }}
+    {% endblock %}
+
+    <script type="text/javascript">
+        $('.collection').collection({
+            add: '<a href="#">[ + ]</a>',
+            remove: '<a href="#">[ - ]</a>',
+            allow_add: true,
+            allow_remove: true,
+            add_at_the_end: true,
+            allow_up: false,
+            allow_down: false,
+        });
+    </script>
+
+    {{ form_end(form) }}
+
+    <input type="submit" value="Create" />
+
+    <ul>
+        <li>
+            <a href="{{ path('team_index') }}">Back to the list</a>
+        </li>
+    </ul>
+
+{% endblock %}
+

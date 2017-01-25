@@ -33,7 +33,9 @@
         "sonata-project/admin-bundle": "^3.11",
         "sonata-project/doctrine-orm-admin-bundle": "^3.1",
         "sonata-project/core-bundle": "^3.1",
-        "sonata-project/block-bundle": "^3.3"
+        "sonata-project/block-bundle": "^3.3",
+        "knplabs/doctrine-behaviors": "^1.4",
+        "ninsuo/symfony-collection": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

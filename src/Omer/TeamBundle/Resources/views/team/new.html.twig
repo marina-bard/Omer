@@ -25,9 +25,7 @@
 
     <h3>Members</h3>
 
-    {% block collection_javascript %}
     {{ (form_row(form.members)) }}
-    {% endblock %}
 
     <script type="text/javascript">
         $('.collection').collection({
@@ -41,10 +39,10 @@
         });
     </script>
 
-    {{ form_end(form) }}
-
     <input type="submit" value="Create" />
 
+    {{ form_end(form) }}
+    
     <ul>
         <li>
             <a href="{{ path('team_index') }}">Back to the list</a>

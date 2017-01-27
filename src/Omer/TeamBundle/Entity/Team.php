@@ -65,13 +65,13 @@ class Team
     private $guo;
 
     /**
-     * @ORM\Column(name="guo_adress", type="string", nullable=true)
+     * @ORM\Column(name="guo_address", type="string", nullable=true)
      *
      * @Assert\NotBlank(
      *     message="value is invalid(field must be non empty)",
      *     )
      */
-    private $guoAdress;
+    private $guoAddress;
 
     /**
      * @ORM\Column(name="principal_full_name", type="string", nullable=true)
@@ -92,13 +92,13 @@ class Team
     private $educationDepartment;
 
     /**
-     * @ORM\Column(name="educatuion_department_adress", type="string", nullable=true)
+     * @ORM\Column(name="education_department_address", type="string", nullable=true)
      *
      * @Assert\NotBlank(
      *     message="value is invalid(field must be non empty)",
      *     )
      */
-    private $educatuionDepartmentAdress;
+    private $educationDepartmentAddress;
 
     /**
      * @ORM\Column(name="head_of_edu_full_name", type="string", nullable=true)
@@ -234,27 +234,27 @@ class Team
     }
 
     /**
-     * Set guoAdress
+     * Set guoAddress
      *
-     * @param string $guoAdress
+     * @param string $guoAddress
      *
      * @return Team
      */
-    public function setGuoAdress($guoAdress)
+    public function setGuoAddress($guoAddress)
     {
-        $this->guoAdress = $guoAdress;
+        $this->guoAddress = $guoAddress;
 
         return $this;
     }
 
     /**
-     * Get guoAdress
+     * Get guoAddress
      *
      * @return string
      */
-    public function getGuoAdress()
+    public function getGuoAddress()
     {
-        return $this->guoAdress;
+        return $this->guoAddress;
     }
 
     /**
@@ -303,30 +303,6 @@ class Team
     public function getEducationDepartment()
     {
         return $this->educationDepartment;
-    }
-
-    /**
-     * Set educatuionDepartmentAdress
-     *
-     * @param string $educatuionDepartmentAdress
-     *
-     * @return Team
-     */
-    public function setEducatuionDepartmentAdress($educatuionDepartmentAdress)
-    {
-        $this->educatuionDepartmentAdress = $educatuionDepartmentAdress;
-
-        return $this;
-    }
-
-    /**
-     * Get educatuionDepartmentAdress
-     *
-     * @return string
-     */
-    public function getEducatuionDepartmentAdress()
-    {
-        return $this->educatuionDepartmentAdress;
     }
 
     /**
@@ -411,5 +387,29 @@ class Team
     public function getMembers()
     {
         return $this->members;
+    }
+
+    /**
+     * Set educationDepartmentAddress
+     *
+     * @param string $educationDepartmentAddress
+     *
+     * @return Team
+     */
+    public function setEducationDepartmentAddress($educationDepartmentAddress)
+    {
+        $this->educationDepartmentAddress = $educationDepartmentAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get educationDepartmentAddress
+     *
+     * @return string
+     */
+    public function getEducationDepartmentAddress()
+    {
+        return $this->educationDepartmentAddress;
     }
 }

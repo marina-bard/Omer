@@ -1,4 +1,22 @@
 services:
-#    omer_team.example:
-#        class: Omer\TeamBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    sonata.admin.team:
+        class: Omer\TeamBundle\Admin\TeamAdmin
+        arguments:
+            - ~
+            - Omer\TeamBundle\Entity\Team
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Team" , label: "Team info" }
+#        calls:
+#            - [ setTranslationDomain ]
+
+    sonata.admin.team_member:
+        class: Omer\TeamBundle\Admin\TeamMemberAdmin
+        arguments:
+            - ~
+            - Omer\TeamBundle\Entity\TeamMember
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Team" , label: "Team members" }
+#        calls:
+#            - [ setTranslationDomain ]

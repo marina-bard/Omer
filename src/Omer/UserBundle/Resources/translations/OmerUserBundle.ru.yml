@@ -1,0 +1,11 @@
+Coach:            Тренер команды
+Coach User List:  Список тренеров
+Action:           Действия
+
+label:
+    surname:    Фамилия
+    name:       Имя
+    patronymic: Отчество
+    phone:      Телефон
+    email:      Электронная почта
+

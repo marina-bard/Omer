@@ -10,6 +10,7 @@
 namespace Omer\TeamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Omer\UserBundle\Traits\FullNameTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -18,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class TeamMember
 {
+    use FullNameTrait;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -233,5 +236,14 @@ class TeamMember
     public function getTeam()
     {
         return $this->team;
+    }
+
+    public function __toString()
+    {
+       return $this->getFullName([
+           $this->surname,
+           $this->name,
+           $this->patronymic
+       ]);
     }
 }

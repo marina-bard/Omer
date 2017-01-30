@@ -412,4 +412,9 @@ class Team
     {
         return $this->educationDepartmentAddress;
     }
+
+    public function __toString()
+    {
+        return $this->nativeTeamName;
+    }
 }

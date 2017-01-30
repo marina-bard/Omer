@@ -2,6 +2,8 @@
 
 {% block body %}
 
+    {#{% trans_default_domain "OmerTeamBundle" %}#}
+
     {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig' %}
 
     <h1>Team creation</h1>
@@ -13,10 +15,10 @@
     {{ form_row(form.englishTeamName) }}
     {{ form_row(form.memberNumber) }}
     {{ form_row(form.guo) }}
-    {{ form_row(form.guoAdress) }}
+    {{ form_row(form.guoAddress) }}
     {{ form_row(form.principalFullName) }}
     {{ form_row(form.educationDepartment) }}
-    {{ form_row(form.educatuionDepartmentAdress) }}
+    {{ form_row(form.educationDepartmentAddress) }}
     {{ form_row(form.headOfEduFullName) }}
 
     <h3>Coach</h3>

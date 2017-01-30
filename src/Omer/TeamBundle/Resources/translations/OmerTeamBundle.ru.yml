@@ -3,9 +3,11 @@ Coach:            Тренер команды
 Team members:     Члены команды
 Team List:        Список команд
 Team Member List: Список членов команды
-Action:          Действия
+Action:           Действия
+team_info:        Регистрация команды
 
 label:
+    registration:   Регистрация команды
     team:
         native_team_name:   Название команды на родном языке
         english_team_name:  Название команды на английском языке
@@ -25,3 +27,6 @@ label:
         age:        Возраст
         allergy:    Аллергии
         full_name:  ФИО
+
+    register:
+        team_info:    Информация о команде

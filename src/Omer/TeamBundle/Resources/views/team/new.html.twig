@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% trans_default_domain 'OmerTeamBundle' %}
+
 {% block body %}
 
     {#{% trans_default_domain "OmerTeamBundle" %}#}
 
     {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig' %}
 
-    <h1>Team creation</h1>
+    <h1>{{ 'label.registration'|trans() }}</h1>
 
-    <h3>Team info</h3>
+    <h3>{{ 'label.register.team_info'|trans() }}</h3>
     {{ form_start(form, { 'action':path('team_new'), 'method':'POST'}) }}
 
     {{ form_row(form.nativeTeamName) }}
@@ -21,11 +23,11 @@
     {{ form_row(form.educationDepartmentAddress) }}
     {{ form_row(form.headOfEduFullName) }}
 
-    <h3>Coach</h3>
+    <h3>{{ 'Coach'|trans() }}</h3>
 
     {{ form_row(form.coach) }}
 
-    <h3>Members</h3>
+    <h3>{{ 'Team members'|trans() }}</h3>
 
     {{ (form_row(form.members)) }}
 

@@ -17,7 +17,7 @@ class CoachUserType extends AbstractType
     {
         $builder
             ->add('surname', TextType::class, [
-                'label' => 'label.surname'
+                'label' => 'label.surname',
             ])
             ->add('name', TextType::class, [
                 'label' => 'label.name'
@@ -40,7 +40,8 @@ class CoachUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Omer\UserBundle\Entity\CoachUser'
+            'data_class' => 'Omer\UserBundle\Entity\CoachUser',
+            'translation_domain' => 'OmerUserBundle'
         ));
     }
 

@@ -41,7 +41,8 @@ class TeamMemberType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Omer\TeamBundle\Entity\TeamMember'
+            'data_class' => 'Omer\TeamBundle\Entity\TeamMember',
+            'translation_domain' => 'OmerTeamBundle'
         ));
     }
 

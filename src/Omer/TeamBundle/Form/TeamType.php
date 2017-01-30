@@ -45,9 +45,11 @@ class TeamType extends AbstractType
             ->add('headOfEduFullName', TextType::class, [
                 'label' => 'label.team.head_edu_name'
             ])
-            ->add('coach', CoachUserType::class)
+            ->add('coach', CoachUserType::class, [
+                'label' => false
+            ])
             ->add('members',  CollectionType::class, [
-                'label'         => 'label.team.members',
+                'label'         => false,
                 'entry_type'    => TeamMemberType::class,
                 'allow_add'     => true,
                 'allow_delete'  => true,
@@ -65,7 +67,8 @@ class TeamType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Omer\TeamBundle\Entity\Team'
+            'data_class' => 'Omer\TeamBundle\Entity\Team',
+             'translation_domain' => 'OmerTeamBundle'
         ));
     }
 

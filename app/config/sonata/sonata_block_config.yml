@@ -1,3 +1,11 @@
+sonata_admin:
+    title: 'Omer'
+    templates:
+          layout: ::standard_layout.html.twig
+#          user_block: 'ApplicationSonataAdminBundle:Core:user_block_override.html.twig'
+    security:
+          handler: sonata.admin.security.handler.role
+
 sonata_block:
     default_contexts: [cms]
     blocks:

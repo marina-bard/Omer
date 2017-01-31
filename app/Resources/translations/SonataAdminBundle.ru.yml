@@ -2,3 +2,8 @@ Dashboard:      Главная панель
 Personal Info:  Личная информация
 Team info:      Регистрационная информация
 Coach:          Тренер команды
+title:          Одиссея Разума
+
+label:
+    logout: Выйти
+    side_bar_after_nav_content: Одиссея Разума

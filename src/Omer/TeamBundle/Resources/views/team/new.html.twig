@@ -2,56 +2,75 @@
 
 {% trans_default_domain 'OmerTeamBundle' %}
 
-{% block body %}
+{% block content %}
+    {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig'
+    %}
+    <div class="registration-bg" style="background-image: url({{ asset('bundles/omerteam/images/registration_bg.jpg') }});">
+        <div class="container team-registration wow fadeInDown" data-wow-delay="0.5s">
+            <div class="row">
+                <div class="col-md-12 ">
+                    {{ form_start(form, { 'action':path('team_new'), 'method':'POST'}, {'attr':{'class':'form-group'}}) }}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="registration-lead">{{ 'label.registration'|trans() }}</h1>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>{{ 'label.register.team_info'|trans() }}</h3>
+
+                            {{ form_row(form.nativeTeamName, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.englishTeamName, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.memberNumber, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.guo, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.guoAddress, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.principalFullName, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.educationDepartment, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.educationDepartmentAddress, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.headOfEduFullName, {'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        <div class="col-md-6">
+                            <h3>{{ 'Coach'|trans() }}</h3>
+
+                            {{ form_row(form.coach) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>{{ 'Team members'|trans() }}</h3>
+
+                            {{ (form_row(form.members)) }}
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        $('.collection').collection({
+                            add: '<button type="button" class="btn btn-success">{{ 'label.actions.add' | trans() }}</button>',
+                            remove: '<button type="button" class="btn btn-danger">{{ 'label.actions.delete' | trans() }}</button>',
+                            allow_add: true,
+                            allow_remove: true,
+                            add_at_the_end: true,
+                            allow_up: false,
+                            allow_down: false,
+                        });
+                        new WOW().init();
+                    </script>
+
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <input type="submit" class="btn btn-primary wow pulse" data-wow-delay="1.25s" id="create-team" value="{{ 'label.actions.create'|trans() }}" />
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
     {#{% trans_default_domain "OmerTeamBundle" %}#}
-
-    {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig' %}
-
-    <h1>{{ 'label.registration'|trans() }}</h1>
-
-    <h3>{{ 'label.register.team_info'|trans() }}</h3>
-    {{ form_start(form, { 'action':path('team_new'), 'method':'POST'}) }}
-
-    {{ form_row(form.nativeTeamName) }}
-    {{ form_row(form.englishTeamName) }}
-    {{ form_row(form.memberNumber) }}
-    {{ form_row(form.guo) }}
-    {{ form_row(form.guoAddress) }}
-    {{ form_row(form.principalFullName) }}
-    {{ form_row(form.educationDepartment) }}
-    {{ form_row(form.educationDepartmentAddress) }}
-    {{ form_row(form.headOfEduFullName) }}
-
-    <h3>{{ 'Coach'|trans() }}</h3>
-
-    {{ form_row(form.coach) }}
-
-    <h3>{{ 'Team members'|trans() }}</h3>
-
-    {{ (form_row(form.members)) }}
-
-    <script type="text/javascript">
-        $('.collection').collection({
-            add: '<a href="#">[ + ]</a>',
-            remove: '<a href="#">[ - ]</a>',
-            allow_add: true,
-            allow_remove: true,
-            add_at_the_end: true,
-            allow_up: false,
-            allow_down: false,
-        });
-    </script>
-
-    <input type="submit" value="Create" />
-
-    {{ form_end(form) }}
-    
-    <ul>
-        <li>
-            <a href="{{ path('team_index') }}">Back to the list</a>
-        </li>
-    </ul>
 
 {% endblock %}
 

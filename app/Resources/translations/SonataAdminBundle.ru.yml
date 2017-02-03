@@ -5,5 +5,6 @@ Coach:          Тренер команды
 title:          Одиссея Разума
 
 label:
+    login: Войти
     logout: Выйти
     side_bar_after_nav_content: Одиссея Разума

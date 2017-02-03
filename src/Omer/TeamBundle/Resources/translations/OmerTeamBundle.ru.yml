@@ -30,3 +30,8 @@ label:
 
     register:
         team_info:    Информация о команде
+
+    actions:
+        add:        Добавить
+        delete:     Удалить
+        create:     Создать

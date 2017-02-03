@@ -99,11 +99,88 @@ form[name="omer_teambundle_team"] .btn.collection-action {
     width: 100%;
 }
 
-
 form[name="omer_teambundle_team"] #create-team {
     text-transform: uppercase;
     font-size: 16px;
     width: 50%;
     height: 40px;
     margin-top: 20px;
+}
+
+video#bgvid {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url("../images/main_bg.png") no-repeat;
+    background-size: cover;
+}
+
+.main-form {
+    background-color: rgba(0,0,0, 0.3);
+    padding: 30px;
+    border-radius: 5px;
+}
+
+.main-form .login-text {
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-form input[type="email"],
+.main-form input[type="password"] {
+    background-color: rgba(0,0,0, 0.5);
+    height: 40px;
+    border: none;
+}
+
+.main-form .login-btn,
+.main-form .register-team-btn {
+    height: 40px;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.main-logo-lead {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    text-align: center;
+}
+
+.main-logo-lead a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.main-logo {
+    height: 30vh;
+    display: inline;
+    float:left;
+    vertical-align: middle;
+    margin-right: 40px;
+}
+
+.main-lead {
+    font-size: 80px;
+    color: white;
+    text-transform: uppercase;
+    display: inline;
+    vertical-align: middle;
+    text-align: left;
+    font-weight: bold;
+}
+
+.main-lead:hover {
+    cursor: pointer;
 }

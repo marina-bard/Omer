@@ -5,6 +5,7 @@ Team List:        Список команд
 Team Member List: Список членов команды
 Action:           Действия
 team_info:        Регистрация команды
+title:            Одиссея Разума
 
 label:
     registration:   Регистрация команды
@@ -35,3 +36,10 @@ label:
         add:        Добавить
         delete:     Удалить
         create:     Создать
+        login:      Войти
+        logout:     Выйти
+
+    form:
+        title:      Вход
+        login:      Логин
+        password:   Пароль

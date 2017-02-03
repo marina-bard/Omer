@@ -47,7 +47,6 @@ class TeamController extends Controller
         $team = new Team();
         $coach = new CoachUser();
         $team->setCoach($coach);
-        $coach->addTeam($team);
         $coach->setPlainPassword($this->randomPassword());
 
         $em = $this->getDoctrine()->getManager();

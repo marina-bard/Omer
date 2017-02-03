@@ -19,3 +19,13 @@ _sonata_admin:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+#admin_login:
+#    path:  /admin/login
+#    defaults: { _controller: FOSUserBundle:Security:login }
+
+#fos_user_resetting:
+#    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+#    prefix: /resetting
+
+

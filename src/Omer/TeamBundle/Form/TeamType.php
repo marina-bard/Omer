@@ -6,6 +6,7 @@ use Omer\UserBundle\Form\CoachUserType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,17 +18,38 @@ class TeamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nativeTeamName')
-            ->add('englishTeamName')
-            ->add('memberNumber')
-            ->add('guo')
-            ->add('guoAdress')
-            ->add('principalFullName')
-            ->add('educationDepartment')
-            ->add('educatuionDepartmentAdress')
-            ->add('headOfEduFullName')
-            ->add('coach', CoachUserType::class)
+            ->add('nativeTeamName', TextType::class, [
+                'label' => 'label.team.native_team_name'
+            ])
+            ->add('englishTeamName', TextType::class, [
+                'label' => 'label.team.english_team_name'
+            ])
+            ->add('memberNumber', TextType::class, [
+                'label' => 'label.team.member_number'
+            ])
+            ->add('guo', TextType::class, [
+                'label' => 'label.team.guo'
+            ])
+            ->add('guoAddress', TextType::class, [
+                'label' => 'label.team.guo_address'
+            ])
+            ->add('principalFullName', TextType::class, [
+                'label' => 'label.team.principal_name'
+            ])
+            ->add('educationDepartment', TextType::class, [
+                'label' => 'label.team.edu_dep'
+            ])
+            ->add('educationDepartmentAddress', TextType::class, [
+                'label' => 'label.team.edu_dep_address'
+            ])
+            ->add('headOfEduFullName', TextType::class, [
+                'label' => 'label.team.head_edu_name'
+            ])
+            ->add('coach', CoachUserType::class, [
+                'label' => false
+            ])
             ->add('members',  CollectionType::class, [
+                'label'         => false,
                 'entry_type'    => TeamMemberType::class,
                 'allow_add'     => true,
                 'allow_delete'  => true,
@@ -45,7 +67,8 @@ class TeamType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Omer\TeamBundle\Entity\Team'
+            'data_class' => 'Omer\TeamBundle\Entity\Team',
+             'translation_domain' => 'OmerTeamBundle'
         ));
     }
 

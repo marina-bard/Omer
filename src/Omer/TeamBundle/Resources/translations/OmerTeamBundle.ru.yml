@@ -1,0 +1,32 @@
+Team:             Команда
+Coach:            Тренер команды
+Team members:     Члены команды
+Team List:        Список команд
+Team Member List: Список членов команды
+Action:           Действия
+team_info:        Регистрация команды
+
+label:
+    registration:   Регистрация команды
+    team:
+        native_team_name:   Название команды на родном языке
+        english_team_name:  Название команды на английском языке
+        member_number:      Членский номер
+        guo:                Учреждение образования
+        guo_address:        Адрес учреждения образования
+        principal_name:     ФИО директора
+        edu_dep:            Управление образования
+        edu_dep_address:    Адрес управления образования
+        head_edu_name:      Начальник управления образования
+        members:            Члены команды
+
+    team_member:
+        surname:    Фамилия
+        name:       Имя
+        patronymic: Отчество
+        age:        Возраст
+        allergy:    Аллергии
+        full_name:  ФИО
+
+    register:
+        team_info:    Информация о команде

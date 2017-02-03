@@ -6,9 +6,10 @@ services:
             - Omer\TeamBundle\Entity\Team
             - ~
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Team" , label: "Team info" }
-#        calls:
-#            - [ setTranslationDomain ]
+            - { name: sonata.admin, manager_type: orm, group: "Team info" , label: "Team" }
+        calls:
+            - [ setTranslationDomain, [OmerTeamBundle] ]
+            - [ setTokenStorage, ['@security.token_storage'] ]
 
     sonata.admin.team_member:
         class: Omer\TeamBundle\Admin\TeamMemberAdmin
@@ -17,6 +18,7 @@ services:
             - Omer\TeamBundle\Entity\TeamMember
             - ~
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Team" , label: "Team members" }
-#        calls:
-#            - [ setTranslationDomain ]
+            - { name: sonata.admin, manager_type: orm, group: "Team info" , label: "Team members" }
+        calls:
+            - [ setTranslationDomain, [OmerTeamBundle] ]
+            - [ setTokenStorage, ['@security.token_storage'] ]

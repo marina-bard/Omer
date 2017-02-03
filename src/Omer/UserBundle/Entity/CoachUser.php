@@ -9,6 +9,7 @@
 namespace Omer\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Omer\UserBundle\Traits\FullNameTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -17,6 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CoachUser extends User
 {
+    use FullNameTrait;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -73,14 +76,11 @@ class CoachUser extends User
      */
     protected $teams;
 
-    /**
-     * @ORM\Column(name="password", type="string", nullable=true)
-     */
-    protected $password;
-
     public function __construct()
     {
         parent::__construct();
+        $this->addRole("ROLE_COACH");
+        $this->setEnabled(true);
     }
 
     public function setEmail($email)
@@ -217,5 +217,14 @@ class CoachUser extends User
     public function getTeams()
     {
         return $this->teams;
+    }
+
+    public function __toString()
+    {
+        return $this->getFullName([
+            $this->surname,
+            $this->name,
+            $this->patronymic
+        ]);
     }
 }

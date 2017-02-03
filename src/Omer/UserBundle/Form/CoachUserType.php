@@ -18,18 +18,38 @@ class CoachUserType extends AbstractType
         $builder
             ->add('surname', TextType::class, [
                 'label' => 'label.surname',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.surname'
+                ]
             ])
             ->add('name', TextType::class, [
-                'label' => 'label.name'
+                'label' => 'label.name',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.name'
+                ]
             ])
             ->add('patronymic', TextType::class, [
-                'label' => 'label.patronymic'
+                'label' => 'label.patronymic',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.patronymic'
+                ]
             ])
             ->add('phone', TextType::class, [
-                'label' => 'label.phone'
+                'label' => 'label.phone',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.phone'
+                ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'label.email'
+                'label' => 'label.email',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.email'
+                ]
             ])
         ;
     }

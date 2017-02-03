@@ -18,19 +18,39 @@ class TeamMemberType extends AbstractType
     {
         $builder
             ->add('surname', TextType::class, [
-                'label' => 'label.team_member.surname'
+                'label' => 'label.team_member.surname',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team_member.surname'
+                ]
             ])
             ->add('name', TextType::class, [
-                'label' => 'label.team_member.name'
+                'label' => 'label.team_member.name',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team_member.name'
+                ]
             ])
             ->add('patronymic', TextType::class, [
-                'label' => 'label.team_member.patronymic'
+                'label' => 'label.team_member.patronymic',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team_member.patronymic'
+                ]
             ])
             ->add('age', TextType::class, [
-                'label' => 'label.team_member.age'
+                'label' => 'label.team_member.age',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team_member.age'
+                ]
             ])
             ->add('allergy', TextareaType::class, [
-                'label' => 'label.team_member.allergy'
+                'label' => 'label.team_member.allergy',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team_member.allergy'
+                ]
             ])
         ;
     }

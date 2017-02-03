@@ -1,3 +1,38 @@
+.team-registration {
+    margin-top: 75px;
+}
+
+.navbar-brand img {
+    height: 100%;
+    display: inline;
+}
+
+.navbar-brand .navbar-title {
+    display: inline;
+}
+
 div[id*="omer_teambundle_team_members"] > label.required {
     display: none;
+}
+
+form[name="omer_teambundle_team"] {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+form[name="omer_teambundle_team"] label {
+    display: none;
+}
+
+form[name="omer_teambundle_team"] input[type="text"] {
+    margin: 10px 0px 10px 0px;
+}
+
+form[name="omer_teambundle_team"] .btn {
+    margin: 10px 0px 10px 0px;
+}
+
+form[name="omer_teambundle_team"] .btn-danger {
+    float: right;
 }

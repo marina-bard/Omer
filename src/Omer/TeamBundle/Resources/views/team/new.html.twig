@@ -5,13 +5,14 @@
 {% block content %}
     {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig'
     %}
-    <div class="container team-registration">
-        <div class="row">
-            <div class="col-md-12">
-                {{ form_start(form, { 'action':path('team_new'), 'method':'POST'}, {'attr':{'class':'form-group'}}) }}
+    <div class="registration-bg" style="background-image: url({{ asset('bundles/omerteam/images/registration_bg.jpg') }});">
+        <div class="container team-registration wow fadeInDown" data-wow-delay="0.5s">
+            <div class="row">
+                <div class="col-md-12 ">
+                    {{ form_start(form, { 'action':path('team_new'), 'method':'POST'}, {'attr':{'class':'form-group'}}) }}
                     <div class="row">
                         <div class="col-md-12">
-                            <h1>{{ 'label.registration'|trans() }}</h1>
+                            <h1 class="registration-lead">{{ 'label.registration'|trans() }}</h1>
                         </div>
                     </div>
 
@@ -55,15 +56,17 @@
                             allow_up: false,
                             allow_down: false,
                         });
+                        new WOW().init();
                     </script>
 
                     <div class="row">
-                        <div class="col-md-12">
-                            <input type="submit" class="btn btn-primary" value="{{ 'label.actions.create'|trans() }}" />
+                        <div class="col-md-12" style="text-align: center">
+                            <input type="submit" class="btn btn-primary wow pulse" data-wow-delay="1.25s" id="create-team" value="{{ 'label.actions.create'|trans() }}" />
                         </div>
                     </div>
 
                     {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>

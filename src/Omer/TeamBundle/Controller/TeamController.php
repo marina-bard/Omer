@@ -59,7 +59,7 @@ class TeamController extends Controller
         $team = new Team();
         $coach = new CoachUser();
         $team->setCoach($coach);
-        $coach->setPlainPassword($this->randomPassword());
+        $coach->setPlainPassword('1111');
 
         $em = $this->getDoctrine()->getManager();
 
@@ -70,7 +70,8 @@ class TeamController extends Controller
             $em->persist($team);
             $em->flush();
 
-            return $this->redirectToRoute('team_show', ['id' => $team->getId()]);
+            return $this->redirectToRoute('team_excel', [ 'id' => $team->getId() ]);
+
         }
 
         return $this->render('OmerTeamBundle:team:new.html.twig', [
@@ -199,6 +200,7 @@ class TeamController extends Controller
             ->setCellValue('A'.(++$label), $translator->trans('label.patronymic', [], self::TRANS_DOMAIN['user']))
             ->setCellValue('A'.(++$label), $translator->trans('label.phone', [], self::TRANS_DOMAIN['user']))
             ->setCellValue('A'.(++$label), $translator->trans('label.email', [], self::TRANS_DOMAIN['user']))
+            ->setCellValue('A'.(++$label), $translator->trans('label.form.password', [], self::TRANS_DOMAIN['team']))
         ;
 
         $value = 2;
@@ -208,6 +210,7 @@ class TeamController extends Controller
             ->setCellValue('B'.(++$value), $coach->getPatronymic())
             ->setCellValue('B'.(++$value), $coach->getPhone())
             ->setCellValue('B'.(++$value), $coach->getEmail())
+            ->setCellValue('B'.(++$value), $this->setCoachPassword($coach));
         ;
 
         $sheet->getColumnDimension('A')->setAutoSize(true);
@@ -226,7 +229,7 @@ class TeamController extends Controller
         $sheet = $excel->createSheet(2)->setTitle($translator->trans('Team members', [], self::TRANS_DOMAIN['team']));
         $sheet = $this->setSheetHeader($sheet, $translator->trans('Team members', [], self::TRANS_DOMAIN['team']));
         $sheet->getDefaultRowDimension()->setRowHeight(15);
-        
+
         $label = 2;
         $value = 2;
         /**
@@ -271,5 +274,17 @@ class TeamController extends Controller
 
         $sheet->getStyle("A1:B1")->applyFromArray($style);
         return $sheet;
+    }
+
+    public function setCoachPassword(CoachUser $coach)
+    {
+        $password = $this->randomPassword();
+        $coach->setPlainPassword($password);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($coach);
+        $em->flush();
+
+        return $password;
     }
 }

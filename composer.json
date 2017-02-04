@@ -36,7 +36,8 @@
         "sonata-project/block-bundle": "^3.3",
         "knplabs/doctrine-behaviors": "^1.4",
         "ninsuo/symfony-collection": "^2.0",
-        "doctrine/doctrine-fixtures-bundle": "^2.3"
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "liuggio/excelbundle": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

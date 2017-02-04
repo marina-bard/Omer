@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Liuggio\ExcelBundle\LiuggioExcelBundle(),
 
             new Omer\UserBundle\OmerUserBundle(),
             new Omer\TeamBundle\OmerTeamBundle(),

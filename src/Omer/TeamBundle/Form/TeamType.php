@@ -19,31 +19,67 @@ class TeamType extends AbstractType
     {
         $builder
             ->add('nativeTeamName', TextType::class, [
-                'label' => 'label.team.native_team_name'
+                'label' => 'label.team.native_team_name',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team.native_team_name'
+                ]
             ])
             ->add('englishTeamName', TextType::class, [
-                'label' => 'label.team.english_team_name'
+                'label' => 'label.team.english_team_name',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team.english_team_name'
+                ]
             ])
             ->add('memberNumber', TextType::class, [
-                'label' => 'label.team.member_number'
+                'label' => 'label.team.member_number',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team.member_number'
+                ]
             ])
             ->add('guo', TextType::class, [
-                'label' => 'label.team.guo'
+                'label' => 'label.team.guo',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team.guo'
+                ]
             ])
             ->add('guoAddress', TextType::class, [
-                'label' => 'label.team.guo_address'
+                'label' => 'label.team.guo_address',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team.guo_address'
+                ]
             ])
             ->add('principalFullName', TextType::class, [
-                'label' => 'label.team.principal_name'
+                'label' => 'label.team.principal_name',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team.principal_name'
+                ]
             ])
             ->add('educationDepartment', TextType::class, [
-                'label' => 'label.team.edu_dep'
+                'label' => 'label.team.edu_dep',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team.edu_dep'
+                ]
             ])
             ->add('educationDepartmentAddress', TextType::class, [
-                'label' => 'label.team.edu_dep_address'
+                'label' => 'label.team.edu_dep_address',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team.edu_dep_address'
+                ]
             ])
             ->add('headOfEduFullName', TextType::class, [
-                'label' => 'label.team.head_edu_name'
+                'label' => 'label.team.head_edu_name',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team.head_edu_name'
+                ]
             ])
             ->add('coach', CoachUserType::class, [
                 'label' => false

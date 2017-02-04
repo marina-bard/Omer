@@ -1,3 +1,186 @@
+@font-face {
+    font-family: "Rockwell Std Regular";
+    src: url("../fonts/rockwellstd.ttf");
+}
+
+@font-face {
+    font-family: "Trebuchet MS";
+    src: url("../fonts/TrebuchetMS.ttf");
+}
+
+
+body {
+    font-family: "Trebuchet MS", serif;
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.team-registration {
+    margin-top: 75px;
+}
+
+.navbar-brand img {
+    height: 100%;
+    display: inline;
+}
+
+.navbar-brand .navbar-title {
+    display: inline;
+}
+
+.registration-bg {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow-y: scroll;
+}
+
+.registration-bg form {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.registration-bg .registration-lead,
+.registration-bg h3 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.registration-bg input[type="text"],
+.registration-bg input[type="email"],
+.registration-bg textarea {
+    background-color: rgba(255,255,255, 0.9);
+}
+
+.registration-bg input::-moz-placeholder,
+.registration-bg input::-webkit-input-placeholder,
+.registration-bg input:-ms-input-placeholder {
+    color: white;
+}
+
+.registration-bg
 div[id*="omer_teambundle_team_members"] > label.required {
     display: none;
+}
+
+form[name="omer_teambundle_team"] {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 40px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+form[name="omer_teambundle_team"] label {
+    display: none;
+}
+
+form[name="omer_teambundle_team"] input[type="text"] {
+    margin: 10px 0px 10px 0px;
+}
+
+form[name="omer_teambundle_team"] .btn {
+    margin: 10px 0px 10px 0px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+form[name="omer_teambundle_team"] .btn-danger {
+    float: right;
+}
+
+form[name="omer_teambundle_team"] .btn.collection-action {
+    width: 100%;
+}
+
+form[name="omer_teambundle_team"] #create-team {
+    text-transform: uppercase;
+    font-size: 16px;
+    width: 50%;
+    height: 40px;
+    margin-top: 20px;
+}
+
+video#bgvid {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url("../images/main_bg.png") no-repeat;
+    background-size: cover;
+}
+
+.main-form {
+    background-color: rgba(0,0,0, 0.3);
+    padding: 30px;
+    border-radius: 5px;
+}
+
+.main-form .login-text {
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-form input[type="email"],
+.main-form input[type="password"] {
+    background-color: rgba(0,0,0, 0.5);
+    height: 40px;
+    border: none;
+}
+
+.main-form .login-btn,
+.main-form .register-team-btn {
+    height: 40px;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.main-logo-lead {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    text-align: center;
+}
+
+.main-logo-lead a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.main-logo {
+    height: 30vh;
+    display: inline;
+    float:left;
+    vertical-align: middle;
+    margin-right: 40px;
+}
+
+.main-lead {
+    font-size: 80px;
+    color: white;
+    text-transform: uppercase;
+    display: inline;
+    vertical-align: middle;
+    text-align: left;
+    font-weight: bold;
+}
+
+.main-lead:hover {
+    cursor: pointer;
 }

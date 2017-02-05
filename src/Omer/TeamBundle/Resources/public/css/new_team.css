@@ -141,9 +141,7 @@ video#bgvid {
 }
 
 .main-form input[type="text"],
-.main-form input[type="password"],
-.main-form input[type="text"]:-webkit-autofill,
-.main-form input[type="password"]:-webkit-autofill {
+.main-form input[type="password"]{
     background-color: rgba(0,0,0, 0.5) !important;
     height: 40px;
     border: none;
@@ -204,4 +202,12 @@ video#bgvid {
     display: inline-block;
     vertical-align: middle;
     font-weight: bold;
+}
+
+.main-form input:-webkit-autofill,
+.main-form input:-webkit-autofill:hover,
+.main-form input:-webkit-autofill:focus,
+.main-form input:-webkit-autofill:active {
+    -webkit-text-fill-color: #bbb !important;
+    transition: background-color 5000s ease-in-out 0s;
 }

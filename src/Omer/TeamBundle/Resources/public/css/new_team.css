@@ -45,6 +45,11 @@ body {
 
 .nav>li:hover {
     background-color: rgba(0,0,0,0.6);
+    transition: color 0.2s ease 0s, background-color 0.3s ease 0s;
+    transition-property: color, background-color;
+    transition-duration: 0.2s, 0.2s;
+    transition-timing-function: ease, ease;
+    transition-delay: 0s, 0s;
 }
 
 .registration-bg {
@@ -86,7 +91,7 @@ div[id*="omer_teambundle_team_members"] > label.required {
 }
 
 form[name="omer_teambundle_team"] {
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
     padding: 40px;
     font-weight: bold;
@@ -106,6 +111,10 @@ form[name="omer_teambundle_team"] .btn {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: bold;
+    color: #dddddd;
+    border-radius: 15px;
+    border: 1px solid #dddddd;
+    background: transparent;
 }
 
 form[name="omer_teambundle_team"] .btn-danger {
@@ -182,7 +191,8 @@ video#bgvid {
 .main-form .login-btn:active,
 .main-form .register-team-btn:hover,
 .main-form .register-team-btn:focus,
-.main-form .register-team-btn:active {
+.main-form .register-team-btn:active,
+form[name="omer_teambundle_team"] .btn:hover {
     transition: background-color .15s ease,border-color .15s ease,color .15s ease;
     transition-property: background-color, border-color, color;
     transition-duration: 0.15s, 0.15s, 0.15s;
@@ -192,7 +202,15 @@ video#bgvid {
     color: #0a0a0a !important;
 }
 
+form[name="omer_teambundle_team"] .btn.collection-action:hover {
+    background-color: rgba(105, 228, 105, 0.8) !important;
+    border-color: rgba(105, 228, 105, 0.8) !important;
+}
 
+form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
+    background-color: rgba(234, 70, 70, 0.8) !important;
+    border-color: rgba(234, 70, 70, 0.8) !important;
+}
 
 .main-form.logged-in .login-btn {
     margin-top: 15px;

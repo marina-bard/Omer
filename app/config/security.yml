@@ -3,8 +3,7 @@
 security:
 
     encoders:
-#        FOS\UserBundle\Model\UserInterface: bcrypt
-        FOS\UserBundle\Model\UserInterface: plaintext
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
         ROLE_COACH:

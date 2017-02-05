@@ -21,7 +21,6 @@ class SecurityController extends BaseController
             $template = sprintf('OmerUserBundle:Security:login_admin.html.twig');
             return $this->get('templating')->renderResponse($template, $data);
         }
-
         return parent::renderLogin($data);
     }
 }

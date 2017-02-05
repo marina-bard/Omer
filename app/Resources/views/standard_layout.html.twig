@@ -8,7 +8,7 @@
 
 {% block logo %}
     {% spaceless %}
-        <a class="logo" href="{{ path('team_new') }}">
+        <a class="logo" href="{{ path('omer_team_default_index') }}">
             {% if 'single_image' == sonata_admin.adminPool.getOption('title_mode') or 'both' == sonata_admin.adminPool.getOption('title_mode') %}
                 <img src="{{ asset('bundles/omerteam/images/logo.jpg') }}" alt="{{ 'title'|trans() }}">
             {% endif %}

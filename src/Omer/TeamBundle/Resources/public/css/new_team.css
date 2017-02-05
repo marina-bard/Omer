@@ -175,7 +175,6 @@ video#bgvid {
 .main-logo {
     height: 20vh;
     display: inline;
-    float:left;
     vertical-align: middle;
     margin-right: 20px;
 }

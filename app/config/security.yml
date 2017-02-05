@@ -54,7 +54,7 @@ security:
                 provider: fos_userbundle
                 login_path: /admin/login
                 failure_path: /
-                default_target_path: /admin/dashboard
+                default_target_path: /
                 csrf_token_generator: security.csrf.token_manager
             anonymous: true
             logout: true

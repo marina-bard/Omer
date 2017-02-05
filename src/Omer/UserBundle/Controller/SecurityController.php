@@ -17,12 +17,11 @@ class SecurityController extends BaseController
     {
         $requestAttributes = $this->get('request_stack')->getCurrentRequest()->attributes;
 
-//        if ('admin_login' === $requestAttributes->get('_route')) {
+        if ('admin_login' === $requestAttributes->get('_route')) {
             $template = sprintf('OmerUserBundle:Security:login_admin.html.twig');
-//        } else {
-//            $template = sprintf('FOSUserBundle:Security:login.html.twig');
-//        }
+            return $this->get('templating')->renderResponse($template, $data);
+        }
 
-        return $this->get('templating')->renderResponse($template, $data);
+        return parent::renderLogin($data);
     }
 }

@@ -56,6 +56,7 @@ body {
     height: 100%;
     width: 100%;
     position: fixed;
+    filter: grayscale(40%);
 
     background-repeat: no-repeat;
     background-position: center;
@@ -70,7 +71,7 @@ body {
 .registration-bg h3 {
     text-align: center;
     text-transform: uppercase;
-    color: #fff;
+    color: whitesmoke;
 }
 
 .registration-bg input[type="text"],
@@ -92,7 +93,7 @@ div[id*="omer_teambundle_team_members"] > label.required {
 
 form[name="omer_teambundle_team"] {
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 40px;
     font-weight: bold;
     margin-bottom: 50px;
@@ -266,6 +267,7 @@ form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-.h1 {
+.h1,
+.h3 {
     color: whitesmoke;
 }

@@ -8,9 +8,9 @@
 
 {% block logo %}
     {% spaceless %}
-        <a class="logo" href="{{ path('team_new') }}">
+        <a class="logo" href="{{ path('omer_team_default_index') }}">
             {% if 'single_image' == sonata_admin.adminPool.getOption('title_mode') or 'both' == sonata_admin.adminPool.getOption('title_mode') %}
-                <img src="{{ asset('bundles/omerteam/images/logo.jpg') }}" alt="{{ 'title'|trans() }}">
+                <img src="{{ asset('bundles/omerteam/images/logo.png') }}" alt="{{ 'title'|trans() }}">
             {% endif %}
             {% if 'single_text' == sonata_admin.adminPool.getOption('title_mode') or 'both' == sonata_admin.adminPool.getOption('title_mode') %}
                 <span>{{ 'title'|trans() }}</span>

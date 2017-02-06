@@ -3,8 +3,7 @@
 security:
 
     encoders:
-#        FOS\UserBundle\Model\UserInterface: bcrypt
-        FOS\UserBundle\Model\UserInterface: plaintext
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
         ROLE_COACH:
@@ -53,15 +52,18 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
-                login_path: /login                #change to /admin/login
+                login_path: /admin/login
                 failure_path: /
-                default_target_path: /admin/dashboard
+                default_target_path: /
                 csrf_token_generator: security.csrf.token_manager
             anonymous: true
             logout: true
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+
+        - { path: ^/admin/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/efconnect, role: ROLE_USER }
+        - { path: ^/elfinder, role: ROLE_USER }

@@ -10,7 +10,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="main-form logged-in wow fadeInUp" data-wow-delay="0.1s">
-                            <p class="login-text">{{ 'email.request_send'|trans() }}</p>
+                            <p class="login-text">{{ 'email.request_send'|trans({'%email%' : email})|nl2br }}</p>
                         </div>
                     </div>
                 </div>

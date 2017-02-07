@@ -101,8 +101,8 @@ class TeamController extends Controller
         $team = $em->getRepository("OmerTeamBundle:Team")->find([ 'id' => $request->get('id') ]);
         $coach = $team->getCoach();
 
-        return $this->render('OmerTeamBundle:team:email_request_send.html.twig', [
-            'coach' => $coach,
+        return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
+            'email' => $coach->getEmail(),
         ]);
     }
 
@@ -122,7 +122,7 @@ class TeamController extends Controller
         $coach = $team->getCoach();
 
         $body = $this->get('templating')
-            ->render('OmerTeamBundle:email:registration_letter.html.twig', [
+            ->render('@OmerTeam/email/email_registration_letter.html.twig', [
                 'name' => $coach,
                 'username' => $coach->getUsername(),
                 'password' => $password
@@ -138,12 +138,16 @@ class TeamController extends Controller
             ->setBody(
                 $body, 'text/html'
             )
-            ->attach(\Swift_Attachment::fromPath($this->get('kernel')->getRootDir().'/'.self::TEAM_INFO_FILEPATH));
+            ->attach(\Swift_Attachment::fromPath($this->getTeamInfoFile()));
         ;
 
         $this->get('mailer')->send($message);
     }
 
+    public function getTeamInfoFile()
+    {
+        return $this->get('kernel')->getRootDir().'/'.self::TEAM_INFO_FILEPATH;
+    }
 
     public function renderExcelTeamInfo(Team $team)
     {
@@ -159,13 +163,7 @@ class TeamController extends Controller
         $objectExcel->setActiveSheetIndex(0);
 
         $writer = PHPExcel_IOFactory::createWriter($objectExcel, 'Excel5');
-        $writer->save($this->get('kernel')->getRootDir().'/'.self::TEAM_INFO_FILEPATH);
-
-//        $response = $this->get('phpexcel')->createStreamedResponse($writer);
-//        $response->headers->set('Content-Type', 'application/vnd.ms-excel');
-//        $response->headers->set('Content-Disposition', 'attachment;filename="01simple.xls');
-//        $response->headers->set('Last-Modified: ', gmdate('D, d M Y H:i:s'));
-
+        $writer->save($this->getTeamInfoFile());
     }
 
     public function createTeamSheet(Team $team,PHPExcel $excel)

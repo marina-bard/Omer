@@ -43,7 +43,8 @@ body {
     color: whitesmoke !important;
 }
 
-.nav>li:hover {
+.nav>li:hover,
+.navbar-header:hover{
     background-color: rgba(0,0,0,0.6);
     transition: color 0.2s ease 0s, background-color 0.3s ease 0s;
     transition-property: color, background-color;
@@ -270,4 +271,8 @@ form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
 .h1,
 .h3 {
     color: whitesmoke;
+}
+
+.registration-bg .main-form {
+    margin-top: 40%;
 }

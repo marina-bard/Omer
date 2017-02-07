@@ -8,7 +8,8 @@ use Omer\UserBundle\Entity\CoachUser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Team controller.
@@ -60,7 +61,7 @@ class TeamController extends Controller
 
             $this->sendEmail($team);
 
-            return $this->redirectToRoute('team_email_request', [ 'id' => $team->getId() ]);
+            return $this->redirectToRoute('team_email_request', [ 'id' => 1 ]);
         }
 
         return $this->render('OmerTeamBundle:team:new.html.twig', [
@@ -110,6 +111,7 @@ class TeamController extends Controller
         $body = $this->get('templating')
             ->render('OmerTeamBundle:email:registration_letter.html.twig', [
                 'name' => $coach,
+                'username' => $coach->getUsername(),
                 'password' => $password
             ]);
 
@@ -120,7 +122,8 @@ class TeamController extends Controller
             ->setTo($coach->getUsername())
             ->setBody(
                 $body, 'text/html'
-            );
+            )
+        ;
 
         $this->get('mailer')->send($message);
     }

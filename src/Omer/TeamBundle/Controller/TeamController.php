@@ -27,13 +27,15 @@ class TeamController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $teams = $em->getRepository('OmerTeamBundle:Team')->findAll();
-
-        return $this->render('OmerTeamBundle:team:index.html.twig', [
-            'teams' => $teams,
-        ]);
+        $this->sendEmail();
+        return $this->redirectToRoute('homepage');
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $teams = $em->getRepository('OmerTeamBundle:Team')->findAll();
+//
+//        return $this->render('OmerTeamBundle:team:index.html.twig', [
+//            'teams' => $teams,
+//        ]);
     }
 
     /**
@@ -58,7 +60,9 @@ class TeamController extends Controller
             $em->persist($team);
             $em->flush();
 
-            return $this->redirectToRoute('team_show', ['id' => $team->getId()]);
+//            $this->sendEmail($team);
+
+//            return $this->redirectToRoute('team_show', ['id' => $team->getId()]);
         }
 
         return $this->render('OmerTeamBundle:team:new.html.twig', [
@@ -89,5 +93,30 @@ class TeamController extends Controller
         return $this->render('OmerTeamBundle:team:show.html.twig', [
             'team' => $team,
         ]);
+    }
+
+    public function sendEmail()
+    {
+//        die();
+        $em = $this->getDoctrine()->getManager();
+        $team = $em->getRepository("OmerTeamBundle:Team")->find(1);
+        $coach = $team->getCoach();
+        $body = $this->get('templating')
+            ->render('OmerTeamBundle:email:registration_letter.html.twig', [
+                'name' => $coach
+            ]);
+
+        $translator = $this->get('translator');
+        $message = \Swift_Message::newInstance()
+            ->setSubject($translator->trans('title', [], 'OmerTeamBundle'))
+            ->setFrom($this->get('swiftmailer'))
+            ->setTo($coach->getUsername())
+            ->setBody(
+                $body, 'text/html'
+            );
+
+        $this->get('mailer')->send($message);
+
+//        $this->redirectToRoute('homepage');
     }
 }

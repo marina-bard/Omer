@@ -7,10 +7,13 @@ use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
 use Omer\UserBundle\Entity\CoachUser;
 use Omer\UserBundle\Traits\CurrentUserTrait;
+use Omer\UserBundle\Traits\RandomPasswordTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use PHPExcel;
@@ -26,8 +29,8 @@ use Swift_Message;
 class TeamController extends Controller
 {
     use CurrentUserTrait;
+    use RandomPasswordTrait;
 
-    const ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     const TEAM_INFO_FILEPATH = '/../web/temp/team_info.xls';
     const TRANS_DOMAIN = [
         'team' => 'OmerTeamBundle',
@@ -63,7 +66,7 @@ class TeamController extends Controller
         $coach = new CoachUser();
         $team->setCoach($coach);
 
-        $password = $this->randomPassword();
+        $password = $this->getPassword();
         $coach->setPlainPassword($password);
 
         $em = $this->getDoctrine()->getManager();
@@ -104,17 +107,6 @@ class TeamController extends Controller
         return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
             'email' => $coach->getEmail(),
         ]);
-    }
-
-    public function randomPassword()
-    {
-        $pass = [];
-        $alphaLength = strlen(self::ALPHABET) - 1;
-        for ($i = 0; $i < 8; $i++) {
-            $n = rand(0, $alphaLength);
-            $pass[] = self::ALPHABET[$n];
-        }
-        return implode($pass);
     }
 
     public function sendEmail(Team $team, $password)

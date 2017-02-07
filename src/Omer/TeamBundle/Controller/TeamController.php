@@ -27,15 +27,13 @@ class TeamController extends Controller
      */
     public function indexAction()
     {
-        $this->sendEmail();
-        return $this->redirectToRoute('homepage');
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $teams = $em->getRepository('OmerTeamBundle:Team')->findAll();
-//
-//        return $this->render('OmerTeamBundle:team:index.html.twig', [
-//            'teams' => $teams,
-//        ]);
+        $em = $this->getDoctrine()->getManager();
+
+        $teams = $em->getRepository('OmerTeamBundle:Team')->findAll();
+
+        return $this->render('OmerTeamBundle:team:index.html.twig', [
+            'teams' => $teams,
+        ]);
     }
 
     /**
@@ -60,9 +58,9 @@ class TeamController extends Controller
             $em->persist($team);
             $em->flush();
 
-//            $this->sendEmail($team);
+            $this->sendEmail($team);
 
-//            return $this->redirectToRoute('team_show', ['id' => $team->getId()]);
+            return $this->redirectToRoute('team_email_request', [ 'id' => $team->getId() ]);
         }
 
         return $this->render('OmerTeamBundle:team:new.html.twig', [
@@ -85,38 +83,45 @@ class TeamController extends Controller
     /**
      * Finds and displays a team entity.
      *
-     * @Route("/{id}", name="team_show")
+     * @Route("/{id}/email_request", name="team_email_request")
      * @Method("GET")
      */
-    public function showAction(Team $team)
+    public function showAction(Request $request)
     {
-        return $this->render('OmerTeamBundle:team:show.html.twig', [
-            'team' => $team,
+        $em = $this->getDoctrine()->getManager();
+        $team = $em->getRepository("OmerTeamBundle:Team")->find([ 'id' => $request->get('id') ]);
+        $coach = $team->getCoach();
+
+        return $this->render('OmerTeamBundle:team:email_request_send.html.twig', [
+            'coach' => $coach,
         ]);
     }
 
-    public function sendEmail()
+    public function sendEmail($team)
     {
-//        die();
-        $em = $this->getDoctrine()->getManager();
-        $team = $em->getRepository("OmerTeamBundle:Team")->find(1);
         $coach = $team->getCoach();
+        $password = $this->randomPassword();
+        $coach->setPlainPassword($password);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($coach);
+        $em->flush();
+
         $body = $this->get('templating')
             ->render('OmerTeamBundle:email:registration_letter.html.twig', [
-                'name' => $coach
+                'name' => $coach,
+                'password' => $password
             ]);
 
         $translator = $this->get('translator');
         $message = \Swift_Message::newInstance()
             ->setSubject($translator->trans('title', [], 'OmerTeamBundle'))
-            ->setFrom($this->get('swiftmailer'))
+            ->setFrom($this->getParameter('mailer_user'))
             ->setTo($coach->getUsername())
             ->setBody(
                 $body, 'text/html'
             );
 
         $this->get('mailer')->send($message);
-
-//        $this->redirectToRoute('homepage');
     }
 }

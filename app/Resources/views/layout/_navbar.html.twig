@@ -9,18 +9,21 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('bundles/omerteam/images/logo.jpg') }}" alt="{{ 'title'|trans() }}">
+                <img src="{{ asset('bundles/omerteam/images/logo.png') }}" alt="{{ 'title'|trans() }}">
                 <label class="navbar-title">{{ 'title' | trans() }}</label>
             </a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
+                <li><a href="#">Новости <span class="sr-only">(current)</span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">{{ 'label.login' | trans() }}</a></li>
+                {% if (not is_granted('ROLE_ADMIN')) %}
+                    <li><a href="#" onclick="$('form').submit()">{{ 'label.login' | trans() }}</a></li>
+                {% else %}
+                    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'label.logout' | trans() }}</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

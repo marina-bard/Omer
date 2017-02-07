@@ -8,13 +8,16 @@
     src: url("../fonts/TrebuchetMS.ttf");
 }
 
+@font-face {font-family: "ITC Beesknees Cyrillic";
+    src: url("../fonts/ITC.otf");
+}
 
 body {
     font-family: "Trebuchet MS", serif;
 }
 
 .navbar {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .team-registration {
@@ -28,12 +31,32 @@ body {
 
 .navbar-brand .navbar-title {
     display: inline;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.navbar-default {
+    border: none;
+}
+
+.nav>li>a {
+    color: whitesmoke !important;
+}
+
+.nav>li:hover {
+    background-color: rgba(0,0,0,0.6);
+    transition: color 0.2s ease 0s, background-color 0.3s ease 0s;
+    transition-property: color, background-color;
+    transition-duration: 0.2s, 0.2s;
+    transition-timing-function: ease, ease;
+    transition-delay: 0s, 0s;
 }
 
 .registration-bg {
     height: 100%;
     width: 100%;
     position: fixed;
+    filter: grayscale(40%);
 
     background-repeat: no-repeat;
     background-position: center;
@@ -48,7 +71,7 @@ body {
 .registration-bg h3 {
     text-align: center;
     text-transform: uppercase;
-    color: #fff;
+    color: whitesmoke;
 }
 
 .registration-bg input[type="text"],
@@ -69,8 +92,8 @@ div[id*="omer_teambundle_team_members"] > label.required {
 }
 
 form[name="omer_teambundle_team"] {
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: none;
+    border-radius: 10px;
     padding: 40px;
     font-weight: bold;
     margin-bottom: 50px;
@@ -89,6 +112,10 @@ form[name="omer_teambundle_team"] .btn {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: bold;
+    color: #dddddd;
+    border-radius: 15px;
+    border: 1px solid #dddddd;
+    background: transparent;
 }
 
 form[name="omer_teambundle_team"] .btn-danger {
@@ -126,8 +153,8 @@ video#bgvid {
 
 .main-form {
     background-color: rgba(0,0,0, 0.3);
-    padding: 30px;
-    border-radius: 5px;
+    padding: 25px;
+    border-radius: 10px;
 }
 
 .main-form .login-text {
@@ -135,13 +162,17 @@ video#bgvid {
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 30px;
+    margin-top: 10px;
 }
 
-.main-form input[type="email"],
-.main-form input[type="password"] {
-    background-color: rgba(0,0,0, 0.5);
+.main-form input[type="text"],
+.main-form input[type="password"]{
+    background-color: rgba(0,0,0, 0.5) !important;
     height: 40px;
     border: none;
+    color: #bbb !important;
+    text-align: center;
+    border-radius: 15px;
 }
 
 .main-form .login-btn,
@@ -150,11 +181,45 @@ video#bgvid {
     width: 100%;
     text-transform: uppercase;
     font-size: 16px;
+    color: #dddddd;
+    border-radius: 15px;
+    border: 1px solid #dddddd;
+    background: transparent;
+}
+
+.main-form .login-btn:hover,
+.main-form .login-btn:focus,
+.main-form .login-btn:active,
+.main-form .register-team-btn:hover,
+.main-form .register-team-btn:focus,
+.main-form .register-team-btn:active,
+form[name="omer_teambundle_team"] .btn:hover {
+    transition: background-color .15s ease,border-color .15s ease,color .15s ease;
+    transition-property: background-color, border-color, color;
+    transition-duration: 0.15s, 0.15s, 0.15s;
+    transition-timing-function: ease, ease, ease;
+    background-color: whitesmoke !important;
+    border-color: whitesmoke !important;
+    color: #0a0a0a !important;
+}
+
+form[name="omer_teambundle_team"] .btn.collection-action:hover {
+    background-color: rgba(105, 228, 105, 0.8) !important;
+    border-color: rgba(105, 228, 105, 0.8) !important;
+}
+
+form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
+    background-color: rgba(234, 70, 70, 0.8) !important;
+    border-color: rgba(234, 70, 70, 0.8) !important;
+}
+
+.main-form.logged-in .login-btn {
+    margin-top: 15px;
 }
 
 .main-logo-lead {
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+    margin-top: 12vh;
+    margin-bottom: 5vh;
     text-align: center;
 }
 
@@ -164,23 +229,45 @@ video#bgvid {
 }
 
 .main-logo {
-    height: 30vh;
+    height: 20vh;
     display: inline;
-    float:left;
     vertical-align: middle;
-    margin-right: 40px;
+    margin-right: 20px;
 }
 
 .main-lead {
-    font-size: 80px;
+    font-size: 55px;
+    font-family: "ITC Beesknees Cyrillic";
     color: white;
     text-transform: uppercase;
-    display: inline;
+    display: inline-block;
     vertical-align: middle;
-    text-align: left;
     font-weight: bold;
 }
 
 .main-lead:hover {
     cursor: pointer;
+}
+
+.main-sub-lead {
+    font-size: 32px;
+    font-style: italic;
+    font-family: -webkit-body;
+    color: white;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.main-form input:-webkit-autofill,
+.main-form input:-webkit-autofill:hover,
+.main-form input:-webkit-autofill:focus,
+.main-form input:-webkit-autofill:active {
+    -webkit-text-fill-color: #bbb !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.h1,
+.h3 {
+    color: whitesmoke;
 }

@@ -6,6 +6,7 @@ Team Member List: Список членов команды
 Action:           Действия
 team_info:        Регистрация команды
 title:            Одиссея Разума
+title_en:         Odyssey of The Mind
 
 label:
     registration:   Регистрация команды
@@ -38,6 +39,7 @@ label:
         create:     Создать
         login:      Войти
         logout:     Выйти
+        login_to_profile:       Войти в профиль
 
     form:
         title:      Вход

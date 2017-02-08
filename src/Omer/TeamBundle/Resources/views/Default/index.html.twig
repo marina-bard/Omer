@@ -3,33 +3,34 @@
 {% trans_default_domain 'OmerTeamBundle' %}
 
 {% block content %}
-    <video playsinline autoplay muted loop poster="{{ asset('bundles/omerteam/images/main_bg.png') }}" id="bgvid">
-        <source src="{{  asset('bundles/omerteam/videos/OOTM.mp4') }}" type="video/mp4">
-    </video>
+    <section id="main-header">
+        <video playsinline autoplay muted loop poster="{{ asset('bundles/omerteam/images/main_bg.png') }}" id="bgvid">
+            <source src="{{  asset('bundles/omerteam/videos/OOTM.mp4') }}" type="video/mp4">
+        </video>
 
-    <div class="container">
-        <div class="row main-logo-lead wow fadeInDown" data-wow-delay="0.5s">
-            <div class="col-md-12">
-                {#<div class="col-md-1"></div>#}
-                <div class="col-md-2">
-                    <img src="{{ asset('bundles/omerteam/images/omer_by.png') }}" alt="Omer" class="main-logo">
+        <div class="container">
+            <div class="row main-logo-lead wow fadeInDown" data-wow-delay="0.5s">
+                <div class="col-md-12">
+                    {#<div class="col-md-1"></div>#}
+                    <div class="col-md-2">
+                        <img src="{{ asset('bundles/omerteam/images/omer_by.png') }}" alt="Omer" class="main-logo">
+                    </div>
+                    <div class="col-md-8">
+                        <a href="">
+                            <label for="" class="main-lead">{{ 'title'|trans() }}</label>
+                            <label for="" class="main-sub-lead">{{ 'title_en'|trans() }}</label>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="{{ asset('bundles/omerteam/images/omer.png') }}" alt="Omer" class="main-logo">
+                    </div>
+                    {#<div class="col-md-1"></div>#}
                 </div>
-                <div class="col-md-8">
-                    <a href="">
-                        <label for="" class="main-lead">{{ 'title'|trans() }}</label>
-                        <label for="" class="main-sub-lead">{{ 'title_en'|trans() }}</label>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <img src="{{ asset('bundles/omerteam/images/omer.png') }}" alt="Omer" class="main-logo">
-                </div>
-                {#<div class="col-md-1"></div>#}
             </div>
-        </div>
 
-        {% block fos_user_content %}
-            <div class="col-md-12">
-                <div class="col-md-3"></div>
+            {% block fos_user_content %}
+                <div class="col-md-12">
+                    <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <div class="row">
                             {% if (not is_granted('ROLE_ADMIN')) %}
@@ -51,10 +52,13 @@
                                 </div>
                             {% endif %}
                         </div>
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="col-md-3"></div>
-            </div>
-        {% endblock fos_user_content %}
-    </div>
+            {% endblock fos_user_content %}
+        </div>
+    </section>
+
+    {% include 'OmerTeamBundle:Default:_news.html.twig' %}
 {% endblock %}
 

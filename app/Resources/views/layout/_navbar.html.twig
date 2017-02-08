@@ -20,7 +20,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if (not is_granted('ROLE_ADMIN')) %}
-                    <li><a href="#" onclick="$('form').submit()">{{ 'label.login' | trans() }}</a></li>
+                    <li><a href="#" onclick="loginClick()">{{ 'label.login' | trans() }}</a></li>
                 {% else %}
                     <li><a href="{{ path('fos_user_security_logout') }}">{{ 'label.logout' | trans() }}</a></li>
                 {% endif %}
@@ -28,3 +28,13 @@
         </div>
     </div>
 </nav>
+
+<script>
+    function loginClick() {
+        var form = $('.main-form form');
+        if(form.length > 0)
+            form.submit();
+        else
+            window.location.href = "/";
+    }
+</script>

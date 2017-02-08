@@ -280,7 +280,8 @@ form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
 }
 
 input:focus,
-input:active {
+input:active,
+button:focus {
     outline: none !important;
 }
 

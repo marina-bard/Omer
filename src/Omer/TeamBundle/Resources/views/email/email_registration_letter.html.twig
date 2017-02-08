@@ -1,0 +1,5 @@
+{% trans_default_domain 'OmerTeamBundle' %}
+
+{% autoescape false %}
+{{ 'email.letter'|trans({'%name%': name, '%login%': username, '%password%': password})|nl2br }}
+{% endautoescape %}

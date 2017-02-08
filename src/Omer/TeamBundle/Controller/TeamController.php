@@ -2,13 +2,25 @@
 
 namespace Omer\TeamBundle\Controller;
 
+use Doctrine\ORM\PersistentCollection;
+use Omer\TeamBundle\Builder\TeamExcelBuilder;
 use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
 use Omer\UserBundle\Entity\CoachUser;
+use Omer\UserBundle\Traits\CurrentUserTrait;
+use Omer\UserBundle\Traits\RandomPasswordTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use PHPExcel;
+use PHPExcel_IOFactory;
+use PHPExcel_Worksheet;
+use Swift_Message;
 
 /**
  * Team controller.
@@ -17,7 +29,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class TeamController extends Controller
 {
-    const ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    use CurrentUserTrait;
+    use RandomPasswordTrait;
+
+    const TRANS_DOMAIN = [
+        'team' => 'OmerTeamBundle',
+        'user' => 'OmerUserBundle'
+    ];
 
     /**
      * Lists all team entities.
@@ -47,7 +65,9 @@ class TeamController extends Controller
         $team = new Team();
         $coach = new CoachUser();
         $team->setCoach($coach);
-        $coach->setPlainPassword($this->randomPassword());
+
+        $password = $this->getPassword();
+        $coach->setPlainPassword($password);
 
         $em = $this->getDoctrine()->getManager();
 
@@ -58,7 +78,10 @@ class TeamController extends Controller
             $em->persist($team);
             $em->flush();
 
-            return $this->redirectToRoute('team_show', ['id' => $team->getId()]);
+            return $this->redirectToRoute('team_email_request', [
+                'id' => $team->getId(),
+                'password' => $password
+            ]);
         }
 
         return $this->render('OmerTeamBundle:team:new.html.twig', [
@@ -67,27 +90,50 @@ class TeamController extends Controller
         ]);
     }
 
-    public function randomPassword()
-    {
-        $pass = [];
-        $alphaLength = strlen(self::ALPHABET) - 1;
-        for ($i = 0; $i < 8; $i++) {
-            $n = rand(0, $alphaLength);
-            $pass[] = self::ALPHABET[$n];
-        }
-        return implode($pass);
-    }
-
     /**
-     * Finds and displays a team entity.
+     * Finds and displa{id}/ys a team entity.
      *
-     * @Route("/{id}", name="team_show")
+     * @Route("/{id}/email_request", name="team_email_request")
      * @Method("GET")
      */
-    public function showAction(Team $team)
+    public function sendEmailRequestAction(Request $request)
     {
-        return $this->render('OmerTeamBundle:team:show.html.twig', [
-            'team' => $team,
+        $em = $this->getDoctrine()->getManager();
+        $team = $em->getRepository("OmerTeamBundle:Team")->find([ 'id' => $request->get('id') ]);
+        $coach = $team->getCoach();
+
+        $this->sendEmail($team, $request->get('password'));
+
+        return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
+            'email' => $coach->getEmail(),
         ]);
+    }
+
+    public function sendEmail(Team $team, $password)
+    {
+        $coach = $team->getCoach();
+
+        $body = $this->get('templating')
+            ->render('@OmerTeam/email/email_registration_letter.html.twig', [
+                'name' => $coach,
+                'username' => $coach->getUsername(),
+                'password' => $password
+            ]);
+
+        $translator = $this->get('translator');
+
+        $filepath = $this->get('builder.team_excel_builder')->buildTeamExcel($team);
+
+        $message = Swift_Message::newInstance()
+            ->setSubject($translator->trans('title', [], 'OmerTeamBundle'))
+            ->setFrom($this->getParameter('mailer_user'))
+            ->setTo($coach->getUsername())
+            ->setBody(
+                $body, 'text/html'
+            )
+            ->attach(\Swift_Attachment::fromPath($filepath));
+        ;
+
+        $this->get('mailer')->send($message);
     }
 }

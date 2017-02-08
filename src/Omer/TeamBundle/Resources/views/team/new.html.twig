@@ -1,11 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'OmerTeamBundle:team:layout_registration.html.twig' %}
 
 {% trans_default_domain 'OmerTeamBundle' %}
 
-{% block content %}
-    {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig'
-    %}
-    <div class="registration-bg" style="background-image: url({{ asset('bundles/omerteam/images/registration_bg.jpg') }});">
+{% block registration %}
+    {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig' %}
         <div class="container team-registration wow fadeInDown" data-wow-delay="0.5s">
             <div class="row">
                 <div class="col-md-12 ">
@@ -69,8 +67,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    {#{% trans_default_domain "OmerTeamBundle" %}#}
 
 {% endblock %}
 

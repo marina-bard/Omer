@@ -4,7 +4,8 @@
 
 {% block registration %}
     {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig' %}
-        <div class="container team-registration wow fadeInDown" data-wow-delay="0.5s">
+    {% form_theme form.coaches 'OmerTeamBundle::jquery.collection.html.twig' %}
+    <div class="container team-registration wow fadeInDown" data-wow-delay="0.5s">
             <div class="row">
                 <div class="col-md-12 ">
                     {{ form_start(form, { 'action':path('team_new'), 'method':'POST'}, {'attr':{'class':'form-group'}}) }}
@@ -15,6 +16,8 @@
                     </div>
 
                     <div class="row">
+                        <div class="col-md-3">
+                        </div>
                         <div class="col-md-6">
                             <h3>{{ 'label.register.team_info'|trans() }}</h3>
 
@@ -28,24 +31,44 @@
                             {{ form_row(form.educationDepartmentAddress, {'attr':{'class':'form-control'}}) }}
                             {{ form_row(form.headOfEduFullName, {'attr':{'class':'form-control'}}) }}
                         </div>
-
-                        <div class="col-md-6">
-                            <h3>{{ 'Coach'|trans() }}</h3>
-
-                            {{ form_row(form.coach) }}
-                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <h3>{{ 'Team members'|trans() }}</h3>
+                        {#<div class="row">#}
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8">
+                                <h3>{{ 'Coach'|trans() }}</h3>
+                                {{ (form_row(form.coaches)) }}
+                            </div>
+                        {#</div>#}
 
+                        <script type="text/javascript">
+                            $('.collection_coaches').collection({
+                                add: '<button type="button" class="btn btn-success">{{ 'label.actions.add' | trans() }}</button>',
+                                remove: '<button type="button" class="btn btn-danger">{{ 'label.actions.delete' | trans() }}</button>',
+                                allow_add: true,
+                                allow_remove: true,
+                                add_at_the_end: true,
+                                allow_up: false,
+                                allow_down: false,
+                                max: 2
+                            });
+                        </script>
+
+                    </div>
+
+                    <div class="row">
+                        <h3>{{ 'Team members'|trans() }}</h3>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-8">
                             {{ (form_row(form.members)) }}
                         </div>
                     </div>
 
                     <script type="text/javascript">
-                        $('.collection').collection({
+                        $('.collection_members').collection({
                             add: '<button type="button" class="btn btn-success">{{ 'label.actions.add' | trans() }}</button>',
                             remove: '<button type="button" class="btn btn-danger">{{ 'label.actions.delete' | trans() }}</button>',
                             allow_add: true,
@@ -53,7 +76,7 @@
                             add_at_the_end: true,
                             allow_up: false,
                             allow_down: false,
-                            max: 8
+                            max: 7
                         });
                     </script>
 

@@ -57,7 +57,7 @@ class TeamExcelBuilder
 
     public function buildTeamExcel(Team $team)
     {
-        $coach = $team->getCoach();
+        $coach = $team->getMainCoach();
         $members = $team->getMembers();
 
         $this->excel = new PHPExcel();

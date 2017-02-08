@@ -12,6 +12,10 @@
     src: url("../fonts/ITC.otf");
 }
 
+@font-face {font-family: "CCZoinks";
+    src: url("../fonts/9914.ttf");
+}
+
 body {
     font-family: "Trebuchet MS", serif;
 }
@@ -154,6 +158,7 @@ video#bgvid {
     background-color: rgba(0,0,0, 0.3);
     padding: 25px;
     border-radius: 10px;
+    margin-bottom: 7vh;
 }
 
 .main-form .login-text {
@@ -235,13 +240,14 @@ form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
 }
 
 .main-lead {
-    font-size: 55px;
-    font-family: "ITC Beesknees Cyrillic";
+    font-size: 9vh;
+    font-family: "CCZoinks";
     color: white;
     text-transform: uppercase;
     display: inline-block;
     vertical-align: middle;
     font-weight: bold;
+    letter-spacing: 5px;
 }
 
 .main-lead:hover {
@@ -268,4 +274,9 @@ form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
 
 .h1 {
     color: whitesmoke;
+}
+
+input:focus,
+input:active{
+    outline: none !important;
 }

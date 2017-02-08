@@ -29,6 +29,9 @@ label:
         age:        Возраст
         allergy:    Аллергии
         full_name:  ФИО
+        latin_surname:    Фамилия латиницей
+        latin_name:       Имя латиницей
+        latin_patronymic: Отчество латиницей
 
     register:
         team_info:    Информация о команде

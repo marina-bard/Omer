@@ -11,6 +11,7 @@ namespace Omer\TeamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Omer\UserBundle\Traits\FullNameTrait;
+use Omer\UserBundle\Traits\PassportDataTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -20,6 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class TeamMember
 {
     use FullNameTrait;
+    use PassportDataTrait;
 
     /**
      * @ORM\Id
@@ -83,6 +85,8 @@ class TeamMember
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id", onDelete="cascade")
      */
     private $team;
+
+    private $passportDataLabel;
 
     /**
      * Get id

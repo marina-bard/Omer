@@ -36,6 +36,15 @@ class TeamMemberAdmin extends AbstractAdmin
             ->add('patronymic', TextType::class, [
                 'label' => 'label.team_member.patronymic'
             ])
+            ->add('latinSurname', TextType::class, [
+                'label' => 'label.team_member.latin_surname'
+            ])
+            ->add('latinName', TextType::class, [
+                'label' => 'label.team_member.latin_name'
+            ])
+            ->add('latinPatronymic', TextType::class, [
+                'label' => 'label.team_member.latin_patronymic'
+            ])
             ->add('age', NumberType::class, [
                 'label' => 'label.team_member.age'
             ])

@@ -2,24 +2,15 @@
 
 namespace Omer\TeamBundle\Controller;
 
-use Doctrine\ORM\PersistentCollection;
-use Omer\TeamBundle\Builder\TeamExcelBuilder;
 use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
 use Omer\UserBundle\Entity\CoachUser;
 use Omer\UserBundle\Traits\CurrentUserTrait;
 use Omer\UserBundle\Traits\RandomPasswordTrait;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use PHPExcel;
-use PHPExcel_IOFactory;
-use PHPExcel_Worksheet;
 use Swift_Message;
 
 /**
@@ -38,23 +29,6 @@ class TeamController extends Controller
     ];
 
     /**
-     * Lists all team entities.
-     *
-     * @Route("/", name="team_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $teams = $em->getRepository('OmerTeamBundle:Team')->findAll();
-
-        return $this->render('OmerTeamBundle:team:index.html.twig', [
-            'teams' => $teams,
-        ]);
-    }
-
-    /**
      * Creates a new team entity.
      *
      * @Route("/new", name="team_new")
@@ -63,8 +37,14 @@ class TeamController extends Controller
     public function newAction(Request $request)
     {
         $team = new Team();
+
         $coach = new CoachUser();
-        $team->setCoach($coach);
+        $team->addCoach($coach);
+        $coach->addTeam($team);
+        $coach->setIsMain(true);
+
+        $teamMember = new TeamMember();
+        $team->addMember($teamMember);
 
         $password = $this->getPassword();
         $coach->setPlainPassword($password);
@@ -100,7 +80,7 @@ class TeamController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $team = $em->getRepository("OmerTeamBundle:Team")->find([ 'id' => $request->get('id') ]);
-        $coach = $team->getCoach();
+        $coach = $team->getMainCoach();
 
         $this->sendEmail($team, $request->get('password'));
 
@@ -111,7 +91,7 @@ class TeamController extends Controller
 
     public function sendEmail(Team $team, $password)
     {
-        $coach = $team->getCoach();
+        $coach = $team->getMainCoach();
 
         $body = $this->get('templating')
             ->render('@OmerTeam/email/email_registration_letter.html.twig', [

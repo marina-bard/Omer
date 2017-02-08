@@ -10,6 +10,7 @@ namespace Omer\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Omer\UserBundle\Traits\FullNameTrait;
+use Omer\UserBundle\Traits\PassportDataTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -19,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CoachUser extends User
 {
     use FullNameTrait;
+    use PassportDataTrait;
 
     /**
      * @ORM\Id
@@ -72,9 +74,14 @@ class CoachUser extends User
     protected $phone;
 
     /**
-     * @ORM\OneToMany(targetEntity="Omer\TeamBundle\Entity\Team", mappedBy="coach", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="Omer\TeamBundle\Entity\Team", mappedBy="coaches")
      */
     protected $teams;
+
+    /**
+     * @ORM\Column(name="is_main", type="boolean", nullable=true)
+     */
+    protected $isMain;
 
     public function __construct()
     {
@@ -185,6 +192,15 @@ class CoachUser extends User
         return $this->phone;
     }
 
+    public function __toString()
+    {
+        return $this->getFullName([
+            $this->surname,
+            $this->name,
+            $this->patronymic
+        ]);
+    }
+
     /**
      * Add team
      *
@@ -219,12 +235,27 @@ class CoachUser extends User
         return $this->teams;
     }
 
-    public function __toString()
+    /**
+     * Set isMain
+     *
+     * @param boolean $isMain
+     *
+     * @return CoachUser
+     */
+    public function setIsMain($isMain)
     {
-        return $this->getFullName([
-            $this->surname,
-            $this->name,
-            $this->patronymic
-        ]);
+        $this->isMain = $isMain;
+
+        return $this;
+    }
+
+    /**
+     * Get isMain
+     *
+     * @return boolean
+     */
+    public function getIsMain()
+    {
+        return $this->isMain;
     }
 }

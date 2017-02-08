@@ -110,10 +110,11 @@ class Team
     private $headOfEduFullName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Omer\UserBundle\Entity\CoachUser", inversedBy="teams", cascade={"persist"})
-     * @ORM\JoinColumn(name="coach_id", referencedColumnName="id", onDelete="cascade")
+     * Many Users have Many Groups.
+     * @ORM\ManyToMany(targetEntity="Omer\UserBundle\Entity\CoachUser", inversedBy="teams", cascade={"all"})
+     * @ORM\JoinTable(name="coaches_teams")
      */
-    private $coach;
+    private $coaches;
 
     /**
      * @ORM\OneToMany(targetEntity="Omer\TeamBundle\Entity\TeamMember", mappedBy="team", cascade={"all"})
@@ -328,32 +329,7 @@ class Team
     {
         return $this->headOfEduFullName;
     }
-
-    /**
-     * Set coach
-     *
-     * @param \Omer\UserBundle\Entity\CoachUser $coach
-     *
-     * @return Team
-     */
-    public function setCoach(\Omer\UserBundle\Entity\CoachUser $coach = null)
-    {
-        $this->coach = $coach;
-        $coach->addTeam($this);
-
-        return $this;
-    }
-
-    /**
-     * Get coach
-     *
-     * @return \Omer\UserBundle\Entity\CoachUser
-     */
-    public function getCoach()
-    {
-        return $this->coach;
-    }
-
+    
     /**
      * Add member
      *
@@ -416,5 +392,48 @@ class Team
     public function __toString()
     {
         return $this->nativeTeamName;
+    }
+
+    /**
+     * Add coach
+     *
+     * @param \Omer\UserBundle\Entity\CoachUser $coach
+     *
+     * @return Team
+     */
+    public function addCoach(\Omer\UserBundle\Entity\CoachUser $coach)
+    {
+        $this->coaches[] = $coach;
+
+        return $this;
+    }
+
+    /**
+     * Remove coach
+     *
+     * @param \Omer\UserBundle\Entity\CoachUser $coach
+     */
+    public function removeCoach(\Omer\UserBundle\Entity\CoachUser $coach)
+    {
+        $this->coaches->removeElement($coach);
+    }
+
+    /**
+     * Get coaches
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCoaches()
+    {
+        return $this->coaches;
+    }
+
+    public function getMainCoach()
+    {
+        foreach ($this->coaches as $coach) {
+            if ($coach->getIsMain()) {
+                return $coach;
+            }
+        }
     }
 }

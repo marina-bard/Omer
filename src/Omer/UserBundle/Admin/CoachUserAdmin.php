@@ -37,6 +37,15 @@ class CoachUserAdmin extends AbstractAdmin
             ->add('patronymic', TextType::class, [
                 'label' => 'label.patronymic'
             ])
+            ->add('latinSurname', TextType::class, [
+                'label' => 'label.latin_surname'
+            ])
+            ->add('latinName', TextType::class, [
+                'label' => 'label.latin_name'
+            ])
+            ->add('latinPatronymic', TextType::class, [
+                'label' => 'label.latin_patronymic'
+            ])
             ->add('phone', NumberType::class, [
                 'label' => 'label.phone'
             ])

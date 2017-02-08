@@ -17,9 +17,9 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
-homepage:
-    path: /
-    defaults: { _controller: OmerTeamBundle:Default:index }
+#homepage:
+#    path: /
+#    defaults: { _controller: OmerTeamBundle:Default:index }
 
 admin_login:
     path:  /admin/login

@@ -22,3 +22,7 @@ services:
         calls:
             - [ setTranslationDomain, [OmerTeamBundle] ]
             - [ setTokenStorage, ['@security.token_storage'] ]
+
+    builder.team_excel_builder:
+        class: Omer\TeamBundle\Builder\TeamExcelBuilder
+        arguments: ['@service_container']

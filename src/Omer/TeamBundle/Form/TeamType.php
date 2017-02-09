@@ -81,9 +81,6 @@ class TeamType extends AbstractType
                     'placeholder' => 'label.team.head_edu_name'
                 ]
             ])
-//            ->add('coaches', CoachUserType::class, [
-//                'label' => false
-//            ])
             ->add('coaches',  CollectionType::class, [
                 'label'         => false,
                 'entry_type'    => CoachUserType::class,

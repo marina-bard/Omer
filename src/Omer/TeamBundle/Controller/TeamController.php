@@ -6,7 +6,6 @@ use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
 use Omer\UserBundle\Entity\CoachUser;
 use Omer\UserBundle\Traits\CurrentUserTrait;
-use Omer\UserBundle\Traits\RandomPasswordTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -21,7 +20,6 @@ use Swift_Message;
 class TeamController extends Controller
 {
     use CurrentUserTrait;
-    use RandomPasswordTrait;
 
     const TRANS_DOMAIN = [
         'team' => 'OmerTeamBundle',
@@ -46,7 +44,7 @@ class TeamController extends Controller
         $teamMember = new TeamMember();
         $team->addMember($teamMember);
 
-        $password = $this->getPassword();
+        $password = $coach->generatePassword();
         $coach->setPlainPassword($password);
 
         $em = $this->getDoctrine()->getManager();

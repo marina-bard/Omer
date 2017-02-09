@@ -86,8 +86,6 @@ class TeamMember
      */
     private $team;
 
-    private $passportDataLabel;
-
     /**
      * Get id
      *

@@ -242,11 +242,11 @@ form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
     height: 20vh;
     display: inline;
     vertical-align: middle;
-    margin-right: 20px;
+    margin-left: 10px;
 }
 
 .main-lead {
-    font-size: 9vh;
+    font-size: 10vh;
     font-family: "CCZoinks";
     color: white;
     text-transform: uppercase;

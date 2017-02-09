@@ -9,9 +9,9 @@
 namespace Omer\UserBundle\Traits;
 
 
-trait RandomPasswordTrait
+trait PasswordGeneratorTrait
 {
-    public function getPassword()
+    public function generatePassword()
     {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 

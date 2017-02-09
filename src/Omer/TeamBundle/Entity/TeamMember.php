@@ -86,8 +86,6 @@ class TeamMember
      */
     private $team;
 
-    private $passportDataLabel;
-
     /**
      * Get id
      *
@@ -249,5 +247,14 @@ class TeamMember
            $this->name,
            $this->patronymic
        ]);
+    }
+
+    public function getLatinFullName()
+    {
+        return $this->getFullName([
+            $this->latinSurname,
+            $this->latinName,
+            $this->latinPatronymic
+        ]);
     }
 }

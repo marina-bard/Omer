@@ -46,7 +46,7 @@ class CoachUserAdmin extends AbstractAdmin
             ->add('latinPatronymic', TextType::class, [
                 'label' => 'label.latin_patronymic'
             ])
-            ->add('phone', NumberType::class, [
+            ->add('phone', TextType::class, [
                 'label' => 'label.phone'
             ])
             ->add('email', EmailType::class, [
@@ -107,7 +107,9 @@ class CoachUserAdmin extends AbstractAdmin
 
         if($this->getCurrentUser()->hasRole('ROLE_COACH')){
             $query
-                ->andWhere($query->getRootAlias() . '.username LIKE :user')
+                ->innerJoin($query->getRootAlias().'.teams', 't')
+                ->innerJoin('t.coaches', 'c')
+                ->andWhere('c.username LIKE :user')
                 ->setParameter('user', $this->getCurrentUser()->getUsername());
         }
 

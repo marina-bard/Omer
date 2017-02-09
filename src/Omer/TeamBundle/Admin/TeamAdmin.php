@@ -116,9 +116,10 @@ class TeamAdmin extends AbstractAdmin
          */
         $query = parent::createQuery($context);
 
-        if($this->getCurrentUser()->hasRole('ROLE_COACH')){
+        if($this->getCurrentUser()->hasRole('ROLE_COACH')) {
             $query
-                ->innerJoin($query->getRootAlias().'.coach', 'c')
+                ->innerJoin($query->getRootAlias().'.coaches', 'c')
+                ->innerJoin('c.teams', 't')
                 ->andWhere('c.username LIKE :user')
                 ->setParameter('user', $this->getCurrentUser()->getUsername());
         }

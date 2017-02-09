@@ -107,7 +107,7 @@ class TeamMemberAdmin extends AbstractAdmin
         if($this->getCurrentUser()->hasRole('ROLE_COACH')){
             $query
                 ->innerJoin($query->getRootAlias().'.team', 't')
-                ->innerJoin('t.coach', 'c')
+                ->innerJoin('t.coaches', 'c')
                 ->andWhere('c.username LIKE :user')
                 ->setParameter('user', $this->getCurrentUser()->getUsername());
         }

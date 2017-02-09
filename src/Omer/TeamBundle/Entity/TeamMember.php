@@ -248,4 +248,13 @@ class TeamMember
            $this->patronymic
        ]);
     }
+
+    public function getLatinFullName()
+    {
+        return $this->getFullName([
+            $this->latinSurname,
+            $this->latinName,
+            $this->latinPatronymic
+        ]);
+    }
 }

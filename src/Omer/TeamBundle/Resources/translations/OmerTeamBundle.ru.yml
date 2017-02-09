@@ -7,6 +7,7 @@ Action:           Действия
 team_info:        Регистрация команды
 title:            Одиссея Разума
 title_en:         Odyssey of The Mind
+coaches:          Тренеры команды
 
 label:
     registration:   Регистрация команды
@@ -32,6 +33,7 @@ label:
         latin_surname:    Фамилия латиницей
         latin_name:       Имя латиницей
         latin_patronymic: Отчество латиницей
+        latin_full_name:  ФИО латиницей
 
     register:
         team_info:    Информация о команде

@@ -9,6 +9,8 @@
 
 namespace Omer\TeamBundle\Admin;
 
+use Doctrine\ORM\EntityRepository;
+use Omer\UserBundle\OmerUserBundle;
 use Omer\UserBundle\Traits\CurrentUserTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -57,8 +59,15 @@ class TeamAdmin extends AbstractAdmin
             ->add('headOfEduFullName', TextType::class, [
                 'label' => 'label.team.head_edu_name'
             ])
-            ->add('coach', EntityType::class, [
-                'class' => CoachUser::class
+            ->add('coaches', EntityType::class, [
+                'label' => 'coaches',
+                'class' => 'Omer\UserBundle\Entity\CoachUser',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->innerJoin('u.teams', 't')
+                        ->andWhere('t.memberNumber = :memberNumber')
+                        ->setParameter('memberNumber', $this->getSubject()->getMemberNumber());
+                },
             ])
             ->add('members', 'sonata_type_collection', [
                     'required' => false,

@@ -66,6 +66,7 @@ class TeamAdmin extends AbstractAdmin
                     return $er->createQueryBuilder('u')
                         ->innerJoin('u.teams', 't')
                         ->andWhere('t.memberNumber = :memberNumber')
+                        ->andWhere('u.isMain = 1')
                         ->setParameter('memberNumber', $this->getSubject()->getMemberNumber());
                 },
             ])

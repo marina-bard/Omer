@@ -56,9 +56,10 @@ class TeamController extends Controller
             $em->persist($team);
             $em->flush();
 
-            return $this->redirectToRoute('team_email_request', [
-                'id' => $team->getId(),
-                'password' => $password
+            $this->sendEmail($team, $password);
+
+            return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
+                'email' => $coach->getEmail(),
             ]);
         }
 
@@ -67,25 +68,25 @@ class TeamController extends Controller
             'form' => $form->createView(),
         ]);
     }
-
-    /**
-     * Finds and displa{id}/ys a team entity.
-     *
-     * @Route("/{id}/email_request", name="team_email_request")
-     * @Method("GET")
-     */
-    public function sendEmailRequestAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $team = $em->getRepository("OmerTeamBundle:Team")->find([ 'id' => $request->get('id') ]);
-        $coach = $team->getMainCoach();
-
-        $this->sendEmail($team, $request->get('password'));
-
-        return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
-            'email' => $coach->getEmail(),
-        ]);
-    }
+//
+//    /**
+//     * Finds and displa{id}/ys a team entity.
+//     *
+//     * @Route("/{id}/email_request", name="team_email_request")
+//     * @Method("GET")
+//     */
+//    public function sendEmailRequestAction(Request $request)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $team = $em->getRepository("OmerTeamBundle:Team")->find([ 'id' => $request->get('id') ]);
+//        $coach = $team->getMainCoach();
+//
+//        $this->sendEmail($team, $request->get('password'));
+//
+//        return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
+//            'email' => $coach->getEmail(),
+//        ]);
+//    }
 
     public function sendEmail(Team $team, $password)
     {

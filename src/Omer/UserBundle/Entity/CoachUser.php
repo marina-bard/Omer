@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CoachUser extends User
 {
-    use FullNameTrait;
+//    use FullNameTrait;
     use PassportDataTrait;
     use PasswordGeneratorTrait;
 
@@ -197,11 +197,7 @@ class CoachUser extends User
 
     public function __toString()
     {
-        return $this->getFullName([
-            $this->surname,
-            $this->name,
-            $this->patronymic
-        ]);
+        return $this->getFullName($this);
     }
 
     /**
@@ -260,5 +256,10 @@ class CoachUser extends User
     public function getIsMain()
     {
         return $this->isMain;
+    }
+
+    public function getFullName()
+    {
+        return $this->surname.' '.$this->name.' '.$this->patronymic;
     }
 }

@@ -9,6 +9,8 @@
 
 namespace Omer\TeamBundle\Entity;
 
+use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -394,6 +396,15 @@ class Team
         return $this->nativeTeamName;
     }
 
+    public function getMainCoach()
+    {
+        foreach ($this->coaches as $coach) {
+            if ($coach->getIsMain()) {
+                return $coach;
+            }
+        }
+    }
+
     /**
      * Add coach
      *
@@ -428,12 +439,14 @@ class Team
         return $this->coaches;
     }
 
-    public function getMainCoach()
+    public function setCoaches($coaches)
     {
-        foreach ($this->coaches as $coach) {
-            if ($coach->getIsMain()) {
-                return $coach;
+        $this->coaches = new ArrayCollection();
+        if (count($coaches) > 0) {
+            foreach ($coaches as $coach) {
+                $this->addCoach($coach);
             }
         }
+        return $this;
     }
 }

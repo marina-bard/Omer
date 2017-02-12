@@ -12,6 +12,7 @@ namespace Omer\TeamBundle\Admin;
 use Doctrine\ORM\EntityRepository;
 use Omer\UserBundle\OmerUserBundle;
 use Omer\UserBundle\Traits\CurrentUserTrait;
+use Omer\UserBundle\Traits\FullNameTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -28,6 +29,7 @@ use Sonata\AdminBundle\Form\Type\CollectionType;
 class TeamAdmin extends AbstractAdmin
 {
     use CurrentUserTrait;
+    use FullNameTrait;
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -59,16 +61,10 @@ class TeamAdmin extends AbstractAdmin
             ->add('headOfEduFullName', TextType::class, [
                 'label' => 'label.team.head_edu_name'
             ])
-            ->add('coaches', EntityType::class, [
+            ->add('coaches', 'sonata_type_model', [
                 'label' => 'coaches',
-                'class' => 'Omer\UserBundle\Entity\CoachUser',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->innerJoin('u.teams', 't')
-                        ->andWhere('t.memberNumber = :memberNumber')
-                        ->andWhere('u.isMain = 1')
-                        ->setParameter('memberNumber', $this->getSubject()->getMemberNumber());
-                },
+                'property' => 'full_name',
+                'multiple' => true,
             ])
             ->add('members', 'sonata_type_collection', [
                     'required' => false,
@@ -135,5 +131,10 @@ class TeamAdmin extends AbstractAdmin
         }
 
         return $query;
+    }
+
+    public function preUpdate($team)
+    {
+        $team->setCoaches($team->getCoaches());
     }
 }

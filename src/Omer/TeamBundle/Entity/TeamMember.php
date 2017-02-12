@@ -242,19 +242,11 @@ class TeamMember
 
     public function __toString()
     {
-       return $this->getFullName([
-           $this->surname,
-           $this->name,
-           $this->patronymic
-       ]);
+       return $this->getFullName($this);
     }
 
     public function getLatinFullName()
     {
-        return $this->getFullName([
-            $this->latinSurname,
-            $this->latinName,
-            $this->latinPatronymic
-        ]);
+        return $this->latinSurname.' '.$this->latinName.' '.$this->latinPatronymic;
     }
 }

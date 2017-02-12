@@ -10,8 +10,8 @@ namespace Omer\UserBundle\Traits;
 
 trait FullNameTrait
 {
-    public function getFullName($items)
+    public function getFullName($person)
     {
-        return $items[0].' '.$items[1].' '.$items[2];
+        return $person->getSurname().' '.$person->getName().' '.$person->getPatronymic();
     }
 }

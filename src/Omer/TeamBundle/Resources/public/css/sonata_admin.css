@@ -1,0 +1,65 @@
+.main-header .logo {
+    width: 270px;
+}
+
+.main-header > .navbar {
+    margin-left: 270px;
+}
+
+.main-sidebar,.left-side {
+    width: 270px;
+}
+
+.sidebar-collapse .content {
+    padding-left: 15px;
+}
+
+.content {
+    padding-left: 55px;
+}
+
+.sonata-ba-list-field-header-batch {
+    text-align: left;
+}
+
+@media (max-width: 767px) {
+    .main-sidebar, .left-side {
+        -webkit-transform: translate(-270px, 0);
+        -ms-transform: translate(-270px, 0);
+        -o-transform: translate(-270px, 0);
+        transform: translate(-270px, 0);
+    }
+}
+
+@media (min-width: 768px) {
+    .sidebar-collapse .main-sidebar,
+    .sidebar-collapse .left-side {
+        -webkit-transform: translate(-270px, 0);
+        -ms-transform: translate(-270px, 0);
+        -o-transform: translate(-270px, 0);
+        transform: translate(-270px, 0);
+    }
+
+    .content-header {
+        position: relative;
+        padding: 15px 15px 0 55px;
+    }
+
+    .sidebar-collapse .content-header {
+        position: relative;
+        padding: 15px 15px 0 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .control-sidebar-open .content-wrapper,
+    .control-sidebar-open .right-side,
+    .control-sidebar-open .main-footer {
+        margin-right: 270px;
+    }
+
+    .navbar-right {
+        float: right !important;
+        margin-right: 15px;
+    }
+}

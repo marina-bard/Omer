@@ -1,0 +1,24 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="main-form wow fadeInUp" data-wow-delay="0.5s">
+                        <h1 class="login-text">{{ 'reset_password'|trans }}</h1>
+                        {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'no-bg' } }) }}
+                        {{ form_widget(form) }}
+
+                        <div class="form-group">
+                            <input class="btn btn-success login-btn wow pulse" type="submit" id="_submit" name="_submit"
+                                   data-wow-delay="1.25s" value="{{  'resetting.reset.submit'|trans }}">
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

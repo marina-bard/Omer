@@ -16,6 +16,7 @@
     {% for stylesheet in sonata_admin.adminPool.getOption('stylesheets', []) %}
         <link rel="stylesheet" href="{{ asset(stylesheet) }}">
     {% endfor %}
+    <link rel="stylesheet" href="{{ asset('bundles/omerteam/css/sonata_admin.css') }}">
 {% endblock %}
 
 {% block side_bar_after_nav_content %}

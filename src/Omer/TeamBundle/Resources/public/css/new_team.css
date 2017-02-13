@@ -76,6 +76,10 @@ body {
     background: rgba(0, 0, 0, 0.5);
 }
 
+.registration-bg form.no-bg {
+    background: transparent;
+}
+
 .registration-bg .registration-lead,
 .registration-bg h3 {
     text-align: center;
@@ -227,6 +231,15 @@ form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
     margin-top: 15px;
 }
 
+.main-form .forgot-password a{
+    color: white;
+}
+
+.main-form .forgot-password a:hover {
+    color: #ccc;
+    text-decoration: none;
+}
+
 .main-logo-lead {
     margin-top: 12vh;
     margin-bottom: 5vh;
@@ -246,7 +259,7 @@ form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
 }
 
 .main-lead {
-    font-size: 10vh;
+    font-size: 8vh;
     font-family: "CCZoinks";
     color: white;
     text-transform: uppercase;
@@ -291,4 +304,16 @@ button:focus {
 
 .registration-bg .main-form {
     margin-top: 40%;
+}
+
+
+@media screen and (min-width: 320px)
+and (max-width: 1024px) {
+    .main-logo {
+        height: 10vh;
+    }
+
+    .main-lead {
+        font-size: 5vh;
+    }
 }

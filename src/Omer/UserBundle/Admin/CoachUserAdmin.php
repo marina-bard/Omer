@@ -96,11 +96,6 @@ class CoachUserAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('create');
-    }
-
     public function createQuery($context = 'list')
     {
         $query = parent::createQuery($context);

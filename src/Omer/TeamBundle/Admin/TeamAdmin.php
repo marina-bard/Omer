@@ -108,13 +108,6 @@ class TeamAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection
-            ->remove('create')
-            ->remove('delete');
-    }
-
     public function createQuery($context = 'list')
     {
         /**

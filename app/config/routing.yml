@@ -1,3 +1,8 @@
+omer_competition:
+    resource: "@OmerCompetitionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 omer_team:
     resource: "@OmerTeamBundle/Controller/"
     type:     annotation

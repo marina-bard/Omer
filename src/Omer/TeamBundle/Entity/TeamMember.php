@@ -11,7 +11,7 @@ namespace Omer\TeamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Omer\UserBundle\Traits\FullNameTrait;
-use Omer\UserBundle\Traits\PassportDataTrait;
+use Omer\UserBundle\Traits\PersonalDataTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class TeamMember
 {
     use FullNameTrait;
-    use PassportDataTrait;
+    use PersonalDataTrait;
 
     /**
      * @ORM\Id

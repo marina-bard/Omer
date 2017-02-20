@@ -11,28 +11,28 @@ namespace Omer\UserBundle\Traits;
 use Doctrine\ORM\Mapping as ORM;
 use Omer\UserBundle\Entity\CoachUser;
 
-trait PassportDataTrait
+trait PersonalDataTrait
 {
     /**
      * @var string
      *
-     * @ORM\Column(name="latin_surname", type="string", nullable=true)
+     * @ORM\Column(name="surname", type="string", nullable=true)
      */
-    protected $latinSurname;
+    protected $surname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="latin_name", type="string", nullable=true)
+     * @ORM\Column(name="name", type="string", nullable=true)
      */
-    protected $latinName;
+    protected $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="latin_patronymic", type="string", nullable=true)
+     * @ORM\Column(name="patronymic", type="string", nullable=true)
      */
-    protected $latinPatronymic;
+    protected $patronymic;
 
     public function setLatinSurname($latinSurname)
     {

@@ -10,7 +10,7 @@ namespace Omer\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Omer\UserBundle\Traits\FullNameTrait;
-use Omer\UserBundle\Traits\PassportDataTrait;
+use Omer\UserBundle\Traits\PersonalDataTrait;
 use Omer\UserBundle\Traits\PasswordGeneratorTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CoachUser extends User
 {
 //    use FullNameTrait;
-    use PassportDataTrait;
+    use PersonalDataTrait;
     use PasswordGeneratorTrait;
 
     /**

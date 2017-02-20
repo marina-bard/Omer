@@ -26,7 +26,7 @@ use Omer\UserBundle\Entity\CoachUser;
 use Sonata\AdminBundle\Form\Type\CollectionType;
 
 
-class TeamAdmin extends AbstractAdmin
+class BaseTeamAdmin extends AbstractAdmin
 {
     use CurrentUserTrait;
     use FullNameTrait;
@@ -34,32 +34,14 @@ class TeamAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('nativeTeamName', TextType::class, [
-                'label' => 'label.team.native_team_name'
-            ])
             ->add('englishTeamName', TextType::class, [
                 'label' => 'label.team.english_team_name'
             ])
             ->add('memberNumber', NumberType::class, [
                 'label' => 'label.team.member_number'
             ])
-            ->add('guo', TextType::class, [
-                'label' => 'label.team.guo'
-            ])
-            ->add('guoAddress', TextType::class, [
-                'label' => 'label.team.guo_address'
-            ])
-            ->add('principalFullName', TextType::class, [
-                'label' => 'label.team.principal_name'
-            ])
-            ->add('educationDepartment', TextType::class, [
-                'label' => 'label.team.edu_dep'
-            ])
-            ->add('educationDepartmentAddress', TextType::class, [
-                'label' => 'label.team.edu_dep_address'
-            ])
-            ->add('headOfEduFullName', TextType::class, [
-                'label' => 'label.team.head_edu_name'
+            ->add('city', TextType::class, [
+                'label' => 'label.team.city'
             ])
             ->add('coaches', 'sonata_type_model', [
                 'label' => 'coaches',
@@ -81,11 +63,8 @@ class TeamAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('nativeTeamName', null, [
-                'label' => 'label.team.native_team_name'
-            ])
-            ->add('guo', null, [
-                'label' => 'label.team.guo'
+            ->add('englishTeamName', null, [
+                'label' => 'label.team.english_team_name'
             ])
         ;
     }
@@ -93,11 +72,14 @@ class TeamAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('nativeTeamName', null, [
-                'label' => 'label.team.native_team_name'
+            ->addIdentifier('englishTeamName.php', null, [
+                'label' => 'label.team.english_team_name'
             ])
-            ->add('guo', null, [
-                'label' => 'label.team.native_team_name'
+            ->add('country', null, [
+                'label' => 'label.team.country'
+            ])
+            ->add('city', null, [
+                'label' => 'label.team.city'
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -128,6 +110,7 @@ class TeamAdmin extends AbstractAdmin
 
     public function preUpdate($team)
     {
-        $team->setCoaches($team->getCoaches());
+//        $team->setCoaches($team->getCoaches());
+        $team->setMembers($team->getMembers());
     }
 }

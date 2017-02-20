@@ -76,7 +76,7 @@ class CoachUser extends User
     protected $phone;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Omer\TeamBundle\Entity\Team", mappedBy="coaches")
+     * @ORM\ManyToMany(targetEntity="Omer\TeamBundle\Entity\BaseTeam", mappedBy="coaches")
      */
     protected $teams;
 

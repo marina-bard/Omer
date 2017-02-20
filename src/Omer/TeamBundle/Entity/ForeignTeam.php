@@ -86,7 +86,6 @@ class ForeignTeam extends BaseTeam
      */
     protected $dateOfDeparture;
 
-
     /**
      * @ORM\Column(name="concerns", type="string", nullable=true)
      *

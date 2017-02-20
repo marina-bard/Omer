@@ -16,58 +16,36 @@ trait PersonalDataTrait
     /**
      * @var string
      *
-     * @ORM\Column(name="surname", type="string", nullable=true)
+     * @ORM\Column(name="passport_surname", type="string", nullable=true)
      */
-    protected $surname;
+    protected $passportSurname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", nullable=true)
+     * @ORM\Column(name="first_name", type="string", nullable=true)
      */
     protected $firstName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="patronymic", type="string", nullable=true)
-     */
-    protected $patronymic;
-
-    public function setLatinSurname($latinSurname)
+    public function setPassportSurname($passportSurname)
     {
-        $this->latinSurname = $latinSurname;
-
+        $this->passportSurname = $passportSurname;
         return $this;
     }
 
-    public function getLatinSurname()
+    public function getPassportSurname()
     {
-        return $this->latinSurname;
+        return $this->passportSurname;
     }
 
-    public function setLatinName($latinName)
+    public function setFirstName($firstName)
     {
-        $this->latinName = $latinName;
-
+        $this->firstName = $firstName;
         return $this;
     }
 
-    public function getLatinName()
+    public function getFirstName()
     {
-        return $this->latinName;
+        return $this->firstName;
     }
-
-    public function setLatinPatronymic($latinPatronymic)
-    {
-        $this->latinPatronymic = $latinPatronymic;
-
-        return $this;
-    }
-
-    public function getLatinPatronymic()
-    {
-        return $this->latinPatronymic;
-    }
-
 }

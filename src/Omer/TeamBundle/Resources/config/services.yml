@@ -1,6 +1,6 @@
 services:
-    sonata.admin.team:
-        class: Omer\TeamBundle\Admin\TeamAdmin
+    sonata.admin.native_team:
+        class: Omer\TeamBundle\Admin\NativeTeamAdmin
         arguments:
             - ~
             - Omer\TeamBundle\Entity\Team
@@ -10,6 +10,15 @@ services:
         calls:
             - [ setTranslationDomain, [OmerTeamBundle] ]
             - [ setTokenStorage, ['@security.token_storage'] ]
+
+    sonata.admin.foreing_team:
+        class: Omer\TeamBundle\Admin\ForeignTeamAdmin
+        arguments:
+            - ~
+            - ~
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Team info", label: "Native Team"}
 
     sonata.admin.team_member:
         class: Omer\TeamBundle\Admin\TeamMemberAdmin

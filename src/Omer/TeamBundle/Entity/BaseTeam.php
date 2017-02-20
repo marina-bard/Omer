@@ -79,7 +79,8 @@ abstract class BaseTeam
      */
     public function __construct()
     {
-        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->members = new ArrayCollection();
+        $this->coaches = new ArrayCollection();
     }
 
     /**

@@ -81,7 +81,7 @@ class TeamMember
     private $allergy;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Omer\TeamBundle\Entity\Team", inversedBy="members")
+     * @ORM\ManyToOne(targetEntity="Omer\TeamBundle\Entity\BaseTeam", inversedBy="members")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id", onDelete="cascade")
      */
     private $team;

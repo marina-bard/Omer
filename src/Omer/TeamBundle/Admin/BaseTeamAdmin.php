@@ -12,7 +12,6 @@ namespace Omer\TeamBundle\Admin;
 use Doctrine\ORM\EntityRepository;
 use Omer\UserBundle\OmerUserBundle;
 use Omer\UserBundle\Traits\CurrentUserTrait;
-use Omer\UserBundle\Traits\FullNameTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -29,7 +28,6 @@ use Sonata\AdminBundle\Form\Type\CollectionType;
 class BaseTeamAdmin extends AbstractAdmin
 {
     use CurrentUserTrait;
-    use FullNameTrait;
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -39,6 +37,12 @@ class BaseTeamAdmin extends AbstractAdmin
             ])
             ->add('memberNumber', NumberType::class, [
                 'label' => 'label.team.member_number'
+            ])
+            ->add('country', TextType::class, [
+                'label' => 'label.team.country'
+            ])
+            ->add('district', TextType::class, [
+                'label' => 'label.team.district'
             ])
             ->add('city', TextType::class, [
                 'label' => 'label.team.city'

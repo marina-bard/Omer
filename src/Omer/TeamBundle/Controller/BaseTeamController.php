@@ -2,6 +2,7 @@
 
 namespace Omer\TeamBundle\Controller;
 
+use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
 use Omer\UserBundle\Entity\CoachUser;
@@ -17,7 +18,7 @@ use Swift_Message;
  *
  * @Route("team")
  */
-class TeamController extends Controller
+class BaseTeamController extends Controller
 {
     use CurrentUserTrait;
 
@@ -34,7 +35,7 @@ class TeamController extends Controller
      */
     public function newAction(Request $request)
     {
-        $team = new Team();
+        $team = new ForeignTeam();
 
         $coach = new CoachUser();
         $team->addCoach($coach);
@@ -49,18 +50,18 @@ class TeamController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm('Omer\TeamBundle\Form\TeamType', $team);
+        $form = $this->createForm('Omer\TeamBundle\Form\ForeignTeamType', $team);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($team);
             $em->flush();
 
-            $this->sendEmail($team, $password);
+//            $this->sendEmail($team, $password);
 
-            return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
-                'email' => $coach->getEmail(),
-            ]);
+//            return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
+//                'email' => $coach->getEmail(),
+//            ]);
         }
 
         return $this->render('OmerTeamBundle:team:new.html.twig', [
@@ -88,7 +89,7 @@ class TeamController extends Controller
 //        ]);
 //    }
 
-    public function sendEmail(Team $team, $password)
+    public function sendEmail($team, $password)
     {
         $coach = $team->getMainCoach();
 

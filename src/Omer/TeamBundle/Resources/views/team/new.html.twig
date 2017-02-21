@@ -5,6 +5,7 @@
 {% block registration %}
     {% form_theme form.members 'OmerTeamBundle::jquery.collection.html.twig' %}
     {% form_theme form.coaches 'OmerTeamBundle::jquery.collection.html.twig' %}
+    {% form_theme form.otherPeople 'OmerTeamBundle::jquery.collection.html.twig' %}
     <div class="container team-registration wow fadeInDown" data-wow-delay="0.5s">
             <div class="row">
                 <div class="col-md-12">
@@ -21,15 +22,20 @@
                         <div class="col-md-6">
                             <h3>{{ 'label.register.team_info'|trans() }}</h3>
 
-                            {{ form_row(form.nativeTeamName, {'attr':{'class':'form-control'}}) }}
                             {{ form_row(form.englishTeamName, {'attr':{'class':'form-control'}}) }}
                             {{ form_row(form.memberNumber, {'attr':{'class':'form-control'}}) }}
-                            {{ form_row(form.guo, {'attr':{'class':'form-control'}}) }}
-                            {{ form_row(form.guoAddress, {'attr':{'class':'form-control'}}) }}
-                            {{ form_row(form.principalFullName, {'attr':{'class':'form-control'}}) }}
-                            {{ form_row(form.educationDepartment, {'attr':{'class':'form-control'}}) }}
-                            {{ form_row(form.educationDepartmentAddress, {'attr':{'class':'form-control'}}) }}
-                            {{ form_row(form.headOfEduFullName, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.school, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.country, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.district, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.city, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.address, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.problem, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.division, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.dateOfArrival, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.dateOfDeparture, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.concerns, {'attr':{'class':'form-control'}}) }}
+                            {{ form_row(form.paymentCurrency, {'attr':{'class':'form-control'}}) }}
+
                         </div>
                     </div>
 
@@ -75,6 +81,28 @@
                             allow_up: false,
                             allow_down: false,
                             max: 7
+                        });
+                    </script>
+
+                    <div class="row">
+                        <h3>{{ 'Other people'|trans() }}</h3>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            {{ (form_row(form.otherPeople)) }}
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        $('.collection_other').collection({
+                            add: '<button type="button" class="btn btn-success">{{ 'label.actions.add' | trans() }}</button>',
+                            remove: '<button type="button" class="btn btn-danger">{{ 'label.actions.delete' | trans() }}</button>',
+                            allow_add: true,
+                            allow_remove: true,
+                            add_at_the_end: true,
+                            allow_up: false,
+                            allow_down: false,
+                            max: 2
                         });
                     </script>
 

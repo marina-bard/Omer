@@ -1,10 +1,9 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: marina
- * Date: 21.01.17
- * Time: 21:26
+ * Date: 21.02.17
+ * Time: 22:11
  */
 
 namespace Omer\TeamBundle\Entity;
@@ -13,11 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Omer\UserBundle\Traits\PersonalDataTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity
- * @ORM\Table(name="team_member")
+ * @ORM\Table(name="personal_data")
  */
-class TeamMember
+class OtherPeople
 {
     use PersonalDataTrait;
 
@@ -27,6 +27,18 @@ class TeamMember
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     * @ORM\Column(name="team_role", type="string", nullable=true)
+     */
+    private $teamRole;
+
+    /**
+     * @var string
+     * @ORM\Column(name="email", type="string", nullable=true)
+     */
+    private $email;
 
     /**
      * @var string
@@ -52,6 +64,7 @@ class TeamMember
      */
     private $team;
 
+
     /**
      * Get id
      *
@@ -63,27 +76,51 @@ class TeamMember
     }
 
     /**
-     * Set team
+     * Set teamRole
      *
-     * @param \Omer\TeamBundle\Entity\BaseTeam $team
+     * @param string $teamRole
      *
-     * @return TeamMember
+     * @return OtherPeople
      */
-    public function setTeam(\Omer\TeamBundle\Entity\BaseTeam $team = null)
+    public function setTeamRole($teamRole)
     {
-        $this->team = $team;
+        $this->teamRole = $teamRole;
 
         return $this;
     }
 
     /**
-     * Get team
+     * Get teamRole
      *
-     * @return \Omer\TeamBundle\Entity\BaseTeam
+     * @return string
      */
-    public function getTeam()
+    public function getTeamRole()
     {
-        return $this->team;
+        return $this->teamRole;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return OtherPeople
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**
@@ -91,7 +128,7 @@ class TeamMember
      *
      * @param string $dietaryConcerns
      *
-     * @return TeamMember
+     * @return OtherPeople
      */
     public function setDietaryConcerns($dietaryConcerns)
     {
@@ -115,7 +152,7 @@ class TeamMember
      *
      * @param string $medicalConcerns
      *
-     * @return TeamMember
+     * @return OtherPeople
      */
     public function setMedicalConcerns($medicalConcerns)
     {
@@ -139,7 +176,7 @@ class TeamMember
      *
      * @param string $address
      *
-     * @return TeamMember
+     * @return OtherPeople
      */
     public function setAddress($address)
     {
@@ -159,26 +196,26 @@ class TeamMember
     }
 
     /**
-     * Set citizenship
+     * Set team
      *
-     * @param \DateTime $citizenship
+     * @param \Omer\TeamBundle\Entity\BaseTeam $team
      *
-     * @return TeamMember
+     * @return OtherPeople
      */
-    public function setCitizenship($citizenship)
+    public function setTeam(\Omer\TeamBundle\Entity\BaseTeam $team = null)
     {
-        $this->citizenship = $citizenship;
+        $this->team = $team;
 
         return $this;
     }
 
     /**
-     * Get citizenship
+     * Get team
      *
-     * @return \DateTime
+     * @return \Omer\TeamBundle\Entity\BaseTeam
      */
-    public function getCitizenship()
+    public function getTeam()
     {
-        return $this->citizenship;
+        return $this->team;
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
-namespace Omer\UserBundle\Form;
+namespace Omer\TeamBundle\Form;
 
+use Omer\TeamBundle\OmerTeamBundle;
+use Omer\UserBundle\Form\PassportDataType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -9,8 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Date;
 
-class CoachUserType extends AbstractType
+class OtherPeopleType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -37,6 +40,13 @@ class CoachUserType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.team_member.t_shirt_size'
+                ]
+            ])
+            ->add('teamRole', TextType::class, [
+                'label' => 'label.team_member.team_role',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team_member.team_role'
                 ]
             ])
             ->add('email', EmailType::class, [
@@ -109,15 +119,15 @@ class CoachUserType extends AbstractType
             ])
         ;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Omer\UserBundle\Entity\CoachUser',
-            'translation_domain' => 'OmerUserBundle'
+            'data_class' => 'Omer\TeamBundle\Entity\OtherPeople',
+            'translation_domain' => 'OmerTeamBundle'
         ));
     }
 
@@ -126,6 +136,7 @@ class CoachUserType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'omer_userbundle_coachuser';
+        return 'omer_teambundle_teammember';
     }
+
 }

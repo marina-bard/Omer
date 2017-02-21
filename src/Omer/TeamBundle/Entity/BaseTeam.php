@@ -9,10 +9,8 @@
 
 namespace Omer\TeamBundle\Entity;
 
-use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Query\Expr\Base;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -23,7 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\DiscriminatorColumn(name="team_type", type="string")
  * @ORM\DiscriminatorMap({"native_team" = "NativeTeam", "foreign_team" = "ForeignTeam"})
  */
-
 abstract class BaseTeam
 {
     use ORMBehaviors\Timestampable\Timestampable;
@@ -66,6 +63,11 @@ abstract class BaseTeam
     protected $members;
 
     /**
+     * @ORM\OneToMany(targetEntity="Omer\TeamBundle\Entity\OtherPeople", mappedBy="team", cascade={"all"})
+     */
+    protected $otherPeople;
+
+    /**
      * @ORM\Column(name="city", type="string", nullable=true)
      *
      * @Assert\NotBlank(
@@ -75,12 +77,31 @@ abstract class BaseTeam
     protected $city;
 
     /**
+     * @ORM\Column(name="country", type="string", nullable=true)
+     *
+     * @Assert\NotBlank(
+     *     message="value is invalid(field must be non empty)",
+     *     )
+     */
+    protected $country;
+
+    /**
+     * @ORM\Column(name="district", type="string", nullable=true)
+     *
+     * @Assert\NotBlank(
+     *     message="value is invalid(field must be non empty)",
+     *     )
+     */
+    protected $district;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->members = new ArrayCollection();
         $this->coaches = new ArrayCollection();
+        $this->otherPeople = new ArrayCollection();
     }
 
     /**
@@ -262,5 +283,99 @@ abstract class BaseTeam
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return BaseTeam
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Add otherPerson
+     *
+     * @param \Omer\TeamBundle\Entity\OtherPeople $otherPerson
+     *
+     * @return BaseTeam
+     */
+    public function addOtherPerson(\Omer\TeamBundle\Entity\OtherPeople $otherPerson)
+    {
+        $this->otherPeople[] = $otherPerson;
+        $otherPerson->setTeam($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove otherPerson
+     *
+     * @param \Omer\TeamBundle\Entity\OtherPeople $otherPerson
+     */
+    public function removeOtherPerson(\Omer\TeamBundle\Entity\OtherPeople $otherPerson)
+    {
+        $this->otherPeople->removeElement($otherPerson);
+    }
+
+    /**
+     * Get otherPeople
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOtherPeople()
+    {
+        return $this->otherPeople;
+    }
+
+    public function setOtherPeople($other)
+    {
+        $this->otherPeople = new ArrayCollection();
+        if (count($other) > 0) {
+            foreach ($other as $item) {
+                $this->addMember($item);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Set district
+     *
+     * @param string $district
+     *
+     * @return BaseTeam
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
+
+        return $this;
+    }
+
+    /**
+     * Get district
+     *
+     * @return string
+     */
+    public function getDistrict()
+    {
+        return $this->district;
     }
 }

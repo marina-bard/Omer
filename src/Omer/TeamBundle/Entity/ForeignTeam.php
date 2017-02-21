@@ -36,15 +36,6 @@ class ForeignTeam extends BaseTeam
     protected $school;
 
     /**
-     * @ORM\Column(name="country", type="string", nullable=true)
-     *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
-     */
-    protected $country;
-
-    /**
      * @ORM\Column(name="address", type="string", nullable=true)
      *
      * @Assert\NotBlank(
@@ -93,6 +84,13 @@ class ForeignTeam extends BaseTeam
     protected $concerns;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="payment_currency", type="date", nullable=true)
+     */
+    protected $paymentCurrency;
+
+    /**
      * Set school
      *
      * @param string $school
@@ -114,30 +112,6 @@ class ForeignTeam extends BaseTeam
     public function getSchool()
     {
         return $this->school;
-    }
-
-    /**
-     * Set country
-     *
-     * @param string $country
-     *
-     * @return ForeignTeam
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
     }
 
     /**
@@ -282,5 +256,77 @@ class ForeignTeam extends BaseTeam
     public function getProblem()
     {
         return $this->problem;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return ForeignTeam
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set dictrict
+     *
+     * @param string $dictrict
+     *
+     * @return ForeignTeam
+     */
+    public function setDictrict($dictrict)
+    {
+        $this->dictrict = $dictrict;
+
+        return $this;
+    }
+
+    /**
+     * Get dictrict
+     *
+     * @return string
+     */
+    public function getDictrict()
+    {
+        return $this->dictrict;
+    }
+
+    /**
+     * Set paymentCurrency
+     *
+     * @param \DateTime $paymentCurrency
+     *
+     * @return ForeignTeam
+     */
+    public function setPaymentCurrency($paymentCurrency)
+    {
+        $this->paymentCurrency = $paymentCurrency;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentCurrency
+     *
+     * @return \DateTime
+     */
+    public function getPaymentCurrency()
+    {
+        return $this->paymentCurrency;
     }
 }

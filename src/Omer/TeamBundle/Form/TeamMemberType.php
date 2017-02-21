@@ -5,10 +5,12 @@ namespace Omer\TeamBundle\Form;
 use Omer\TeamBundle\OmerTeamBundle;
 use Omer\UserBundle\Form\PassportDataType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Date;
 
 class TeamMemberType extends AbstractType
 {
@@ -18,6 +20,13 @@ class TeamMemberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('firstName', TextType::class, [
+                'label' => 'label.team_member.first_name',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team_member.first_name'
+                ]
+            ])
             ->add('surname', TextType::class, [
                 'label' => 'label.team_member.surname',
                 'attr' => [
@@ -25,59 +34,74 @@ class TeamMemberType extends AbstractType
                     'placeholder' => 'label.team_member.surname'
                 ]
             ])
-            ->add('latinSurname', TextType::class, [
-                'label' => 'label.team_member.latin_surname',
+            ->add('T_shirtSize', TextType::class, [
+                'label' => 'label.team_member.t_shirt_size',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.latin_surname'
+                    'placeholder' => 'label.team_member.t_shirt_size'
                 ]
             ])
-            ->add('name', TextType::class, [
-                'label' => 'label.team_member.name',
+            ->add('dateOfBirth', DateType::class, [
+                'label' => 'label.team_member.date_of_birth',
+                'placeholder' => [
+                    'year' => 'Year',
+                    'month' => 'Month',
+                    'day' => 'Day'
+                ],
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.name'
                 ]
             ])
-            ->add('latinName', TextType::class, [
-                'label' => 'label.team_member.latin_name',
+            ->add('passportNumber', TextType::class, [
+                'label' => 'label.team_member.passport_number',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.latin_name'
+                    'placeholder' => 'label.team_member.passport_number'
                 ]
             ])
-            ->add('patronymic', TextType::class, [
-                'label' => 'label.team_member.patronymic',
+            ->add('dateOfIssue', DateType::class, [
+                'label' => 'label.team_member.date_of_issue',
+                'placeholder' => [
+                    'year' => 'Year',
+                    'month' => 'Month',
+                    'day' => 'Day'
+                ],
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.patronymic'
                 ]
             ])
-            ->add('latinPatronymic', TextType::class, [
-                'label' => 'label.team_member.latin_patronymic',
+            ->add('dateOfExpiry', DateType::class, [
+                'label' => 'label.team_member.date_of_expiry',
+                'placeholder' => [
+                    'year' => 'Year',
+                    'month' => 'Month',
+                    'day' => 'Day'
+                ],
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.latin_patronymic'
                 ]
             ])
-            ->add('age', TextType::class, [
-                'label' => 'label.team_member.age',
+            ->add('address', TextType::class, [
+                'label' => 'label.team_member.address',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.age'
+                    'placeholder' => 'label.team_member.address'
                 ]
             ])
-            ->add('allergy', TextareaType::class, [
-                'label' => 'label.team_member.allergy',
+            ->add('dietaryConcerns', TextareaType::class, [
+                'label' => 'label.team_member.dietary_concerns',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.allergy'
+                    'placeholder' => 'label.team_member.dietary_concerns'
                 ]
             ])
-//            ->add('passportDataLabel', PassportDataType::class, [
-//                'data_class' => 'Omer\TeamBundle\Entity\TeamMember',
-//                ''
-//            ])
+            ->add('medicalConcerns', TextareaType::class, [
+                'label' => 'label.team_member.medical_concerns',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.team_member.medical_concerns'
+                ]
+            ])
         ;
     }
     

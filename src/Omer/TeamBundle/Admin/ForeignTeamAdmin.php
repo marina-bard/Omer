@@ -20,6 +20,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,27 +33,61 @@ class ForeignTeamAdmin extends BaseTeamAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('nativeTeamName', TextType::class, [
-                'label' => 'label.team.native_team_name'
+            ->add('school', TextType::class, [
+                'label' => 'label.team.school'
             ])
-            ->add('guo', TextType::class, [
-                'label' => 'label.team.guo'
+            ->add('address', TextType::class, [
+                'label' => 'label.team.address'
             ])
-            ->add('guoAddress', TextType::class, [
-                'label' => 'label.team.guo_address'
+            ->add('problem', 'sonata_type_model', [
+                'label' => 'label.team.problem',
+                'multiple' => false
             ])
-            ->add('principalFullName', TextType::class, [
-                'label' => 'label.team.principal_name'
+            ->add('division', NumberType::class, [
+                'label' => 'label.team.division'
             ])
-            ->add('educationDepartment', TextType::class, [
+            ->add('dateOfArrival', TextType::class, [
                 'label' => 'label.team.edu_dep'
             ])
-            ->add('educationDepartmentAddress', TextType::class, [
+            ->add('DateOfDeparture', TextType::class, [
                 'label' => 'label.team.edu_dep_address'
             ])
-            ->add('headOfEduFullName', TextType::class, [
-                'label' => 'label.team.head_edu_name'
+            ->add('concerns', TextareaType::class, [
+                'label' => 'label.team.concerns'
             ])
+        ;
+    }
+
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('nativeTeamName', null, [
+                'label' => 'label.team.native_team_name'
+            ])
+            ->add('guo', null, [
+                'label' => 'label.team.guo'
+            ])
+        ;
+    }
+
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->addIdentifier('nativeTeamName', null, [
+                'label' => 'label.team.native_team_name'
+            ])
+            ->add('city', null, [
+                'label' => 'label.team.city'
+            ])
+            ->add('guo', null, [
+                'label' => 'label.team.guo'
+            ])
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                )
+            ))
         ;
     }
 }

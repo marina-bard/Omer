@@ -47,7 +47,7 @@ trait PersonalDataTrait
     /**
      * @var string
      *
-     * @ORM\Column(name="date_of_birth", type="date", nullable=true)
+     * @ORM\Column(name="date_of_birth", type="datetime", nullable=true)
      */
     protected $dateOfBirth;
 
@@ -61,14 +61,14 @@ trait PersonalDataTrait
     /**
      * @var string
      *
-     * @ORM\Column(name="date_of_issue", type="date", nullable=true)
+     * @ORM\Column(name="date_of_issue", type="datetime", nullable=true)
      */
     protected $dateOfIssue;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="date_of_expiry", type="date", nullable=true)
+     * @ORM\Column(name="date_of_expiry", type="datetime", nullable=true)
      */
     protected $dateOfExpiry;
 

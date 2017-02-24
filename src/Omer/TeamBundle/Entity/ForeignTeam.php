@@ -44,14 +44,21 @@ class ForeignTeam extends BaseTeam
      */
     protected $address;
 
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Problem", inversedBy="teams", cascade={"all"})
+//     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id")
+//     */
     /**
-     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Problem", inversedBy="teams", cascade={"all"})
-     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id")
+     * @ORM\Column(name="problem", type="string", nullable=true)
+     *
+     * @Assert\NotBlank(
+     *     message="value is invalid(field must be non empty)",
+     *     )
      */
     protected $problem;
 
     /**
-     * @ORM\Column(name="problem", type="string", nullable=true)
+     * @ORM\Column(name="division", type="string", nullable=true)
      *
      * @Assert\NotBlank(
      *     message="value is invalid(field must be non empty)",
@@ -86,7 +93,7 @@ class ForeignTeam extends BaseTeam
     /**
      * @var string
      *
-     * @ORM\Column(name="payment_currency", type="date", nullable=true)
+     * @ORM\Column(name="payment_currency", type="datetime", nullable=true)
      */
     protected $paymentCurrency;
 
@@ -235,30 +242,6 @@ class ForeignTeam extends BaseTeam
     }
 
     /**
-     * Set problem
-     *
-     * @param \Omer\CompetitionBundle\Entity\Problem $problem
-     *
-     * @return ForeignTeam
-     */
-    public function setProblem(\Omer\CompetitionBundle\Entity\Problem $problem = null)
-    {
-        $this->problem = $problem;
-
-        return $this;
-    }
-
-    /**
-     * Get problem
-     *
-     * @return \Omer\CompetitionBundle\Entity\Problem
-     */
-    public function getProblem()
-    {
-        return $this->problem;
-    }
-
-    /**
      * Set country
      *
      * @param string $country
@@ -301,9 +284,9 @@ class ForeignTeam extends BaseTeam
      *
      * @return string
      */
-    public function getDictrict()
+    public function getDistrict()
     {
-        return $this->dictrict;
+        return $this->district;
     }
 
     /**
@@ -328,5 +311,29 @@ class ForeignTeam extends BaseTeam
     public function getPaymentCurrency()
     {
         return $this->paymentCurrency;
+    }
+
+    /**
+     * Set problem
+     *
+     * @param string $problem
+     *
+     * @return ForeignTeam
+     */
+    public function setProblem($problem)
+    {
+        $this->problem = $problem;
+
+        return $this;
+    }
+
+    /**
+     * Get problem
+     *
+     * @return string
+     */
+    public function getProblem()
+    {
+        return $this->problem;
     }
 }

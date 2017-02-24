@@ -3,10 +3,8 @@
 namespace Omer\TeamBundle\Form;
 
 use Omer\UserBundle\Form\CoachUserType;
-use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

@@ -115,4 +115,12 @@ class TeamController extends Controller
 
         $this->get('mailer')->send($message);
     }
+
+    /**
+     * @Route("/abort", name="team_new_abort")
+     */
+    public function indexAction()
+    {
+        return $this->render('OmerTeamBundle:team:registration_abort.html.twig');
+    }
 }

@@ -117,7 +117,8 @@ form[name="omer_teambundle_team"] label {
     display: none;
 }
 
-form[name="omer_teambundle_team"] input[type="text"] {
+form[name="omer_teambundle_team"] input[type="text"],
+form[name="omer_teambundle_team"] textarea {
     margin: 10px 0px 10px 0px;
 }
 

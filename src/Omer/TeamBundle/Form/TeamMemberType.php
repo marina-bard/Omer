@@ -5,7 +5,7 @@ namespace Omer\TeamBundle\Form;
 use Omer\TeamBundle\OmerTeamBundle;
 use Omer\UserBundle\Form\PassportDataType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,7 +41,7 @@ class TeamMemberType extends AbstractType
                     'placeholder' => 'label.team_member.t_shirt_size'
                 ]
             ])
-            ->add('dateOfBirth', DateType::class, [
+            ->add('dateOfBirth', DateTimeType::class, [
                 'label' => 'label.team_member.date_of_birth',
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
@@ -60,7 +60,7 @@ class TeamMemberType extends AbstractType
                     'placeholder' => 'label.team_member.passport_number'
                 ]
             ])
-            ->add('dateOfIssue', DateType::class, [
+            ->add('dateOfIssue', DateTimeType::class, [
                 'label' => 'label.team_member.date_of_issue',
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
@@ -72,7 +72,7 @@ class TeamMemberType extends AbstractType
                     'placeholder' => 'label.team_member.date_of_issue'
                 ]
             ])
-            ->add('dateOfExpiry', DateType::class, [
+            ->add('dateOfExpiry', DateTimeType::class, [
                 'label' => 'label.team_member.date_of_expiry',
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',

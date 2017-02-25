@@ -29,18 +29,12 @@ class ForeignTeam extends BaseTeam
     /**
      * @ORM\Column(name="school", type="string", nullable=true)
      *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
      */
     protected $school;
 
     /**
      * @ORM\Column(name="address", type="string", nullable=true)
      *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
      */
     protected $address;
 
@@ -51,36 +45,24 @@ class ForeignTeam extends BaseTeam
     /**
      * @ORM\Column(name="problem", type="string", nullable=true)
      *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
      */
     protected $problem;
 
     /**
      * @ORM\Column(name="division", type="string", nullable=true)
      *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
      */
     protected $division;
 
     /**
      * @ORM\Column(name="date_of_arrival", type="datetime", nullable=true)
      *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
+     *
      */
     protected $dateOfArrival;
 
     /**
      * @ORM\Column(name="date_of_departure", type="datetime", nullable=true)
-     *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
      */
     protected $dateOfDeparture;
 
@@ -93,7 +75,7 @@ class ForeignTeam extends BaseTeam
     /**
      * @var string
      *
-     * @ORM\Column(name="payment_currency", type="datetime", nullable=true)
+     * @ORM\Column(name="payment_currency", type="string", nullable=true)
      */
     protected $paymentCurrency;
 
@@ -179,6 +161,7 @@ class ForeignTeam extends BaseTeam
     public function setDateOfArrival($dateOfArrival)
     {
         $this->dateOfArrival = $dateOfArrival;
+        $this->dateOfArrival->format('d-m-Y');
 
         return $this;
     }
@@ -203,6 +186,7 @@ class ForeignTeam extends BaseTeam
     public function setDateOfDeparture($dateOfDeparture)
     {
         $this->dateOfDeparture = $dateOfDeparture;
+        $this->dateOfDeparture->format('d-m-Y');
 
         return $this;
     }
@@ -290,30 +274,6 @@ class ForeignTeam extends BaseTeam
     }
 
     /**
-     * Set paymentCurrency
-     *
-     * @param \DateTime $paymentCurrency
-     *
-     * @return ForeignTeam
-     */
-    public function setPaymentCurrency($paymentCurrency)
-    {
-        $this->paymentCurrency = $paymentCurrency;
-
-        return $this;
-    }
-
-    /**
-     * Get paymentCurrency
-     *
-     * @return \DateTime
-     */
-    public function getPaymentCurrency()
-    {
-        return $this->paymentCurrency;
-    }
-
-    /**
      * Set problem
      *
      * @param string $problem
@@ -335,5 +295,29 @@ class ForeignTeam extends BaseTeam
     public function getProblem()
     {
         return $this->problem;
+    }
+
+    /**
+     * Set paymentCurrency
+     *
+     * @param string $paymentCurrency
+     *
+     * @return ForeignTeam
+     */
+    public function setPaymentCurrency($paymentCurrency)
+    {
+        $this->paymentCurrency = $paymentCurrency;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentCurrency
+     *
+     * @return string
+     */
+    public function getPaymentCurrency()
+    {
+        return $this->paymentCurrency;
     }
 }

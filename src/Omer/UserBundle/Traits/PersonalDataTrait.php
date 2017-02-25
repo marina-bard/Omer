@@ -29,10 +29,6 @@ trait PersonalDataTrait
     /**
      * @var string
      *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
-     *
      * @ORM\Column(name="patronymic", type="string", nullable=true)
      */
     protected $patronymic;
@@ -195,6 +191,7 @@ trait PersonalDataTrait
     public function setDateOfBirth($dateOfBirth)
     {
         $this->dateOfBirth = $dateOfBirth;
+        $this->dateOfBirth->format('d-m-Y');
 
         return $this;
     }
@@ -243,6 +240,7 @@ trait PersonalDataTrait
     public function setDateOfIssue($dateOfIssue)
     {
         $this->dateOfIssue = $dateOfIssue;
+        $this->dateOfIssue->format('d-m-Y');
 
         return $this;
     }
@@ -267,6 +265,7 @@ trait PersonalDataTrait
     public function setDateOfExpiry($dateOfExpiry)
     {
         $this->dateOfExpiry = $dateOfExpiry;
+        $this->dateOfExpiry->format('d-m-Y');
 
         return $this;
     }

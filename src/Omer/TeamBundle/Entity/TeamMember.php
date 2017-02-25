@@ -157,28 +157,4 @@ class TeamMember
     {
         return $this->address;
     }
-
-    /**
-     * Set citizenship
-     *
-     * @param \DateTime $citizenship
-     *
-     * @return TeamMember
-     */
-    public function setCitizenship($citizenship)
-    {
-        $this->citizenship = $citizenship;
-
-        return $this;
-    }
-
-    /**
-     * Get citizenship
-     *
-     * @return \DateTime
-     */
-    public function getCitizenship()
-    {
-        return $this->citizenship;
-    }
 }

@@ -59,9 +59,9 @@ class BaseTeamController extends Controller
 
 //            $this->sendEmail($team, $password);
 
-//            return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
-//                'email' => $coach->getEmail(),
-//            ]);
+            return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
+                'email' => $coach->getEmail(),
+            ]);
         }
 
         return $this->render('OmerTeamBundle:team:new.html.twig', [

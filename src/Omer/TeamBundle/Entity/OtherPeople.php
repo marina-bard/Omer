@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="personal_data")
+ * @ORM\Table(name="other_people")
  */
 class OtherPeople
 {

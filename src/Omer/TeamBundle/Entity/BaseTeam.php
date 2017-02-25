@@ -149,15 +149,6 @@ abstract class BaseTeam
         return $this->members;
     }
 
-    public function getMainCoach()
-    {
-        foreach ($this->coaches as $coach) {
-            if ($coach->getIsMain()) {
-                return $coach;
-            }
-        }
-    }
-
     /**
      * Add coach
      *
@@ -349,7 +340,7 @@ abstract class BaseTeam
         $this->otherPeople = new ArrayCollection();
         if (count($other) > 0) {
             foreach ($other as $item) {
-                $this->addMember($item);
+                $this->addOtherPerson($item);
             }
         }
         return $this;

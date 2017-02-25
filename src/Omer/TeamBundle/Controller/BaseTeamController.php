@@ -40,7 +40,6 @@ class BaseTeamController extends Controller
         $coach = new CoachUser();
         $team->addCoach($coach);
         $coach->addTeam($team);
-        $coach->setIsMain(true);
 
         $teamMember = new TeamMember();
         $team->addMember($teamMember);

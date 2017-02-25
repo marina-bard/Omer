@@ -63,11 +63,6 @@ class CoachUser extends User
      */
     protected $teams;
 
-    /**
-     * @ORM\Column(name="is_main", type="boolean", nullable=true)
-     */
-    protected $isMain;
-
     public function __construct()
     {
         parent::__construct();
@@ -114,30 +109,6 @@ class CoachUser extends User
     public function getTeams()
     {
         return $this->teams;
-    }
-
-    /**
-     * Set isMain
-     *
-     * @param boolean $isMain
-     *
-     * @return CoachUser
-     */
-    public function setIsMain($isMain)
-    {
-        $this->isMain = $isMain;
-
-        return $this;
-    }
-
-    /**
-     * Get isMain
-     *
-     * @return boolean
-     */
-    public function getIsMain()
-    {
-        return $this->isMain;
     }
 
     /**

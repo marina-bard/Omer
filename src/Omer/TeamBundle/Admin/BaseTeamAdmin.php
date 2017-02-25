@@ -56,10 +56,19 @@ class BaseTeamAdmin extends AbstractAdmin
                     'required' => false,
                     'label' => 'label.team.members',
                     'translation_domain' => 'OmerTeamBundle',
-                    'btn_add' => 'Add'
+                    'btn_add' => 'label.actions.add'
                 ], [
                     'edit' => 'inline',
                     'inline' => 'table',
+            ])
+            ->add('otherPeople', 'sonata_type_collection', [
+                'required' => false,
+                'label' => 'label.team.other_people',
+                'translation_domain' => 'OmerTeamBundle',
+                'btn_add' => 'label.actions.add'
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
             ])
         ;
     }

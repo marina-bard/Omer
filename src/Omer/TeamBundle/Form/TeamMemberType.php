@@ -83,6 +83,13 @@ class TeamMemberType extends AbstractType
                 ],
                 'translation_domain' => 'OmerUserBundle'
             ])
+            ->add('citizenship', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.personal_data.citizenship'
+                ],
+                'translation_domain' => 'OmerUserBundle'
+            ])
             ->add('address', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',

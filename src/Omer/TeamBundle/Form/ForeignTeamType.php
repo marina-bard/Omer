@@ -84,24 +84,30 @@ class ForeignTeamType extends AbstractType
             ])
             ->add('dateOfArrival', DateType::class, [
                 'label' => 'label.team.date_of_arrival',
-                'placeholder' => [
-                    'year' => 'Year',
-                    'month' => 'Month',
-                    'day' => 'Day'
-                ],
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'days',
+                    'data-date-start-date' => '23-04-2017',
+                    'data-date-end-date' => '28-04-2017',
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.team.date_of_arrival'
                 ]
             ])
             ->add('dateOfDeparture', DateType::class, [
                 'label' => 'label.team.date_of_departure',
-                'placeholder' => [
-                    'year' => 'Year',
-                    'month' => 'Month',
-                    'day' => 'Day'
-                ],
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'days',
+                    'data-date-start-date' => '23-04-2017',
+                    'data-date-end-date' => '28-04-2017',
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.team.date_of_departure'
                 ]
             ])
             ->add('paymentCurrency', TextType::class, [

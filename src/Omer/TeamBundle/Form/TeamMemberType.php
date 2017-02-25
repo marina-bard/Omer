@@ -43,13 +43,14 @@ class TeamMemberType extends AbstractType
             ])
             ->add('dateOfBirth', DateType::class, [
                 'label' => 'label.team_member.date_of_birth',
-                'placeholder' => [
-                    'year' => 'Year',
-                    'month' => 'Month',
-                    'day' => 'Day'
-                ],
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'years',
+                    'data-date-locale' => 'label.team_member.locale',
+                    'placeholder' => 'label.team_member.date_of_birth',
                 ]
             ])
             ->add('passportNumber', TextType::class, [
@@ -61,24 +62,26 @@ class TeamMemberType extends AbstractType
             ])
             ->add('dateOfIssue', DateType::class, [
                 'label' => 'label.team_member.date_of_issue',
-                'placeholder' => [
-                    'year' => 'Year',
-                    'month' => 'Month',
-                    'day' => 'Day'
-                ],
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'years',
+                    'data-date-locale' => 'label.team_member.locale',
+                    'placeholder' => 'label.team_member.date_of_issue'
                 ]
             ])
             ->add('dateOfExpiry', DateType::class, [
                 'label' => 'label.team_member.date_of_expiry',
-                'placeholder' => [
-                    'year' => 'Year',
-                    'month' => 'Month',
-                    'day' => 'Day'
-                ],
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'years',
+                    'data-date-locale' => 'label.team_member.locale',
+                    'placeholder' => 'label.team_member.date_of_expiry'
                 ]
             ])
             ->add('address', TextType::class, [

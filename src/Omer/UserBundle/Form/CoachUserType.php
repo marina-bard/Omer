@@ -86,7 +86,6 @@ class CoachUserType extends AbstractType
                     'class' => 'form-control',
                     'placeholder' => 'label.personal_data.citizenship'
                 ],
-                'translation_domain' => 'OmerUserBundle'
             ])
             ->add('address', TextType::class, [
                 'attr' => [

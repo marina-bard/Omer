@@ -32,6 +32,7 @@ class ForeignTeamAdmin extends BaseTeamAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        parent::configureFormFields($formMapper);
         $formMapper
             ->add('school', TextType::class, [
                 'label' => 'label.team.school'
@@ -49,11 +50,13 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ->add('division', NumberType::class, [
                 'label' => 'label.team.division'
             ])
-            ->add('dateOfArrival', TextType::class, [
-                'label' => 'label.team.edu_dep'
+            ->add('dateOfArrival','sonata_type_datetime_picker',[
+                'label' => 'label.team.date_of_arrival',
+                'format' => 'dd.MM.yyyy',
             ])
-            ->add('DateOfDeparture', TextType::class, [
-                'label' => 'label.team.edu_dep_address'
+            ->add('dateOfDeparture', 'sonata_type_datetime_picker', [
+                'label' => 'label.team.date_of_departure',
+                'format' => 'dd.MM.yyyy',
             ])
             ->add('concerns', TextareaType::class, [
                 'label' => 'label.team.concerns'
@@ -64,11 +67,8 @@ class ForeignTeamAdmin extends BaseTeamAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('nativeTeamName', null, [
-                'label' => 'label.team.native_team_name'
-            ])
-            ->add('guo', null, [
-                'label' => 'label.team.guo'
+            ->add('englishTeamName', null, [
+                'label' => 'label.team.english_team_name'
             ])
         ;
     }
@@ -76,18 +76,21 @@ class ForeignTeamAdmin extends BaseTeamAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('nativeTeamName', null, [
-                'label' => 'label.team.native_team_name'
+            ->addIdentifier('englishTeamName', null, [
+                'label' => 'label.team.english_team_name'
             ])
-            ->add('city', null, [
-                'label' => 'label.team.city'
+            ->add('country', null, [
+                'label' => 'label.team.country'
             ])
-            ->add('guo', null, [
-                'label' => 'label.team.guo'
+            ->add('problem', null, [
+                'label' => 'label.team.problem'
+            ])
+            ->add('division', null, [
+                'label' => 'label.team.division'
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
+//                    'show' => array(),
                     'edit' => array(),
                 )
             ))

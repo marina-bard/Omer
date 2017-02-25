@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="base_team")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="team_type", type="string")
- * @ORM\DiscriminatorMap({"native_team" = "NativeTeam", "foreign_team" = "ForeignTeam"})
+ * @ORM\DiscriminatorMap({"foreign_team" = "ForeignTeam"})
  */
 abstract class BaseTeam
 {
@@ -368,5 +368,10 @@ abstract class BaseTeam
     public function getDistrict()
     {
         return $this->district;
+    }
+
+    public function __toString()
+    {
+        return $this->englishTeamName;
     }
 }

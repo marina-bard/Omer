@@ -6,7 +6,7 @@ services:
             - Omer\UserBundle\Entity\CoachUser
             - ~
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'label.group.personal_info' , label: 'label.group_label.coaches' }
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.personal_info' , label: 'admin.group_label.coaches' }
         calls:
             - [ setTranslationDomain, [OmerUserBundle] ]
             - [ setTokenStorage, ['@security.token_storage'] ]

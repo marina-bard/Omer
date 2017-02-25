@@ -16,4 +16,10 @@ label:
         date_of_issue:    Date of Issue
         date_of_expiry:   Date of Expiry
         citizenship:      Citizenship
+        full_name:        Full Name
+        t_shirt_size:     T-shirt Size
+
+admin:
+    group_label:
+        coaches:  Coaches
 

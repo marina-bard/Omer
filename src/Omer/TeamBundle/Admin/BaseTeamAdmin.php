@@ -52,23 +52,17 @@ class BaseTeamAdmin extends AbstractAdmin
                 'property' => 'full_name',
                 'multiple' => true,
             ])
-            ->add('members', 'sonata_type_collection', [
-                    'required' => false,
-                    'label' => 'label.team.members',
-                    'translation_domain' => 'OmerTeamBundle',
-                    'btn_add' => 'label.actions.add'
-                ], [
-                    'edit' => 'inline',
-                    'inline' => 'table',
+            ->add('members', 'sonata_type_model', [
+                'label' => 'label.team.members',
+                'property' => 'full_name',
+                'multiple' => true,
+                'btn_delete' => true,
             ])
-            ->add('otherPeople', 'sonata_type_collection', [
-                'required' => false,
+            ->add('otherPeople', 'sonata_type_model', [
                 'label' => 'label.team.other_people',
-                'translation_domain' => 'OmerTeamBundle',
-                'btn_add' => 'label.actions.add'
-            ], [
-                'edit' => 'inline',
-                'inline' => 'table',
+                'property' => 'full_name',
+                'multiple' => true,
+                'btn_delete' => true,
             ])
         ;
     }
@@ -85,7 +79,7 @@ class BaseTeamAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('englishTeamName.php', null, [
+            ->addIdentifier('englishTeamName', null, [
                 'label' => 'label.team.english_team_name'
             ])
             ->add('country', null, [
@@ -123,7 +117,7 @@ class BaseTeamAdmin extends AbstractAdmin
 
     public function preUpdate($team)
     {
-//        $team->setCoaches($team->getCoaches());
         $team->setMembers($team->getMembers());
+        $team->setOtherPeople($team->getOtherPeople());
     }
 }

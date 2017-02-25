@@ -27,9 +27,9 @@
                 {#{% endif %}#}
 
                 {% if (not is_granted('ROLE_ADMIN')) %}
-                    <li><a href="#" onclick="loginClick()">{{ 'label.login' | trans() }}</a></li>
+                    <li><a href="#" onclick="loginClick()">{{ 'label.actions.login' | trans() }}</a></li>
                 {% else %}
-                    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'label.logout' | trans() }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'label.actions.logout' | trans() }}</a></li>
                 {% endif %}
             </ul>
         </div>

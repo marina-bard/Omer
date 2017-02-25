@@ -1,0 +1,19 @@
+label:
+    locale:       en
+    coach_user:
+        t_shirt_size:     T-shirt Size
+        email:            E-mail
+        address:          Address
+        dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
+        medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
+
+    personal_data:
+        surname:          Surname
+        first_name:       First Name
+        patronymic:       Patronymic
+        date_of_birth:    Date of Birth
+        passport_number:  Passport Number
+        date_of_issue:    Date of Issue
+        date_of_expiry:   Date of Expiry
+        citizenship:      Citizenship
+

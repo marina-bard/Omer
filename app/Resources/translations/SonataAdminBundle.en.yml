@@ -1,0 +1,19 @@
+title:          Odyssey of the Mind
+en:             En
+ru:             Ru
+
+label:
+    side_bar_after_nav_content: Odyssey of the Mind
+
+    group:
+        personal_info:  Personal information
+        team_info:      Team information
+
+    group_label:
+        team:         Team
+        team_members: Team Members
+        coaches:      Coaches
+
+    actions:
+        login:  Log In
+        logout: Log Out

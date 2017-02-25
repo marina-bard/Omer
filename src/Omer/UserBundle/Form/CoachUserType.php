@@ -19,95 +19,84 @@ class CoachUserType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'label.team_member.first_name',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.first_name'
+                    'placeholder' => 'label.personal_data.first_name'
                 ]
             ])
             ->add('surname', TextType::class, [
-                'label' => 'label.team_member.surname',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.surname'
+                    'placeholder' => 'label.personal_data.surname'
                 ]
             ])
             ->add('T_shirtSize', TextType::class, [
-                'label' => 'label.team_member.t_shirt_size',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.t_shirt_size'
+                    'placeholder' => 'label.coach_user.t_shirt_size'
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'label.team_member.email',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.email'
+                    'placeholder' => 'label.coach_user.email'
                 ]
             ])
             ->add('dateOfBirth', DateTimeType::class, [
-                'label' => 'label.team_member.date_of_birth',
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
                 'attr' => [
                     'class' => 'form-control input-inline datepicker',
                     'data-date-format' => 'DD-MM-YYYY',
                     'data-date-view-mode' => 'years',
-                    'data-date-locale' => 'label.team_member.locale',
-                    'placeholder' => 'label.team_member.date_of_birth'
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.personal_data.date_of_birth'
                 ]
             ])
             ->add('passportNumber', TextType::class, [
-                'label' => 'label.team_member.passport_number',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.passport_number'
+                    'placeholder' => 'label.personal_data.passport_number'
                 ]
             ])
             ->add('dateOfIssue', DateTimeType::class, [
-                'label' => 'label.team_member.date_of_issue',
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
                 'attr' => [
                     'class' => 'form-control input-inline datepicker',
                     'data-date-format' => 'DD-MM-YYYY',
                     'data-date-view-mode' => 'years',
-                    'data-date-locale' => 'label.team_member.locale',
-                    'placeholder' => 'label.team_member.date_of_issue'
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.personal_data.date_of_issue'
                 ]
             ])
             ->add('dateOfExpiry', DateTimeType::class, [
-                'label' => 'label.team_member.date_of_expiry',
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
                 'attr' => [
                     'class' => 'form-control input-inline datepicker',
                     'data-date-format' => 'DD-MM-YYYY',
                     'data-date-view-mode' => 'years',
-                    'data-date-locale' => 'label.team_member.locale',
-                    'placeholder' => 'label.team_member.date_of_expiry'
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.personal_data.date_of_expiry'
                 ]
             ])
             ->add('address', TextType::class, [
-                'label' => 'label.team_member.address',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.address'
+                    'placeholder' => 'label.coach_user.address'
                 ]
             ])
             ->add('dietaryConcerns', TextareaType::class, [
-                'label' => 'label.team_member.dietary_concerns',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.dietary_concerns'
+                    'placeholder' => 'label.coach_user.dietary_concerns'
                 ]
             ])
             ->add('medicalConcerns', TextareaType::class, [
-                'label' => 'label.team_member.medical_concerns',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.medical_concerns'
+                    'placeholder' => 'label.coach_user.medical_concerns'
                 ]
             ])
         ;

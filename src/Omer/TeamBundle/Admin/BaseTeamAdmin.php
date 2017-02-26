@@ -56,13 +56,12 @@ class BaseTeamAdmin extends AbstractAdmin
                 'label' => 'label.team.members',
                 'property' => 'full_name',
                 'multiple' => true,
-                'btn_delete' => true,
+                'choices' => null
             ])
             ->add('otherPeople', 'sonata_type_model', [
                 'label' => 'label.team.other_people',
                 'property' => 'full_name',
                 'multiple' => true,
-                'btn_delete' => true,
             ])
         ;
     }
@@ -90,7 +89,7 @@ class BaseTeamAdmin extends AbstractAdmin
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
+//                    'show' => array(),
                     'edit' => array(),
                 )
             ))
@@ -119,5 +118,11 @@ class BaseTeamAdmin extends AbstractAdmin
     {
         $team->setMembers($team->getMembers());
         $team->setOtherPeople($team->getOtherPeople());
+    }
+
+    public function configureRoutes(RouteCollection $collection)
+    {
+        parent::configureRoutes($collection);
+        $collection->remove('add');
     }
 }

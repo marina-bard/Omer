@@ -137,6 +137,7 @@ abstract class BaseTeam
     public function removeMember(\Omer\TeamBundle\Entity\TeamMember $member)
     {
         $this->members->removeElement($member);
+        $member->setTeam(null);
     }
 
     /**
@@ -323,6 +324,7 @@ abstract class BaseTeam
     public function removeOtherPerson(\Omer\TeamBundle\Entity\OtherPeople $otherPerson)
     {
         $this->otherPeople->removeElement($otherPerson);
+        $otherPerson->setTeam(null);
     }
 
     /**

@@ -75,6 +75,8 @@ trait PersonalDataTrait
      */
     protected $citizenship;
 
+    public $personalDataLabel;
+
     public function getFullName()
     {
         return $this->firstName . ' ' . $this->surname;

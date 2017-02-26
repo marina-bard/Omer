@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,13 +34,13 @@ class OtherPeopleAdmin extends PersonalDataAdmin
         parent::configureFormFields($formMapper);
         $formMapper
             ->add('teamRole', TextType::class, [
-                'label' => 'label.other_people.address'
+                'label' => 'label.other_people.team_role'
             ])
             ->add('address', TextType::class, [
                 'label' => 'label.other_people.address'
             ])
             ->add('email', EmailType::class, [
-                'label' => 'label.other_people.address'
+                'label' => 'label.other_people.email'
             ])
             ->add('dietaryConcerns', TextareaType::class, [
                 'label' => 'label.dietary_concerns'
@@ -47,6 +48,10 @@ class OtherPeopleAdmin extends PersonalDataAdmin
             ->add('medicalConcerns', TextareaType::class, [
                 'label' => 'label.medical_concerns'
             ])
+//            ->add('team', ChoiceType::class, [
+//                'label' => 'label.other_people_team',
+////                'choices' => $this->getCurrentUser()->getTeams()
+//            ])
         ;
     }
 

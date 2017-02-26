@@ -10,13 +10,16 @@
 namespace Omer\TeamBundle\Admin;
 
 use Omer\UserBundle\Admin\PersonalDataAdmin;
+use Omer\UserBundle\Form\PersonalDataType;
 use Omer\UserBundle\Traits\CurrentUserTrait;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -25,9 +28,12 @@ class TeamMemberAdmin extends PersonalDataAdmin
 {
     use CurrentUserTrait;
 
+//    protected $translationDomain = 'OmerUserBundle';
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
+
         $formMapper
             ->add('address', TextType::class, [
                 'label' => 'label.team_member.address'

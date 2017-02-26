@@ -47,7 +47,7 @@ class ForeignTeamAdmin extends BaseTeamAdmin
 //                'label' => 'label.team.problem',
 //                'multiple' => false
 //            ])
-            ->add('division', NumberType::class, [
+            ->add('division', TextType::class, [
                 'label' => 'label.team.division'
             ])
             ->add('dateOfArrival','sonata_type_datetime_picker',[
@@ -61,39 +61,6 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ->add('concerns', TextareaType::class, [
                 'label' => 'label.team.concerns'
             ])
-        ;
-    }
-
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('englishTeamName', null, [
-                'label' => 'label.team.english_team_name'
-            ])
-        ;
-    }
-
-    protected function configureListFields(ListMapper $listMapper)
-    {
-        $listMapper
-            ->addIdentifier('englishTeamName', null, [
-                'label' => 'label.team.english_team_name'
-            ])
-            ->add('country', null, [
-                'label' => 'label.team.country'
-            ])
-            ->add('problem', null, [
-                'label' => 'label.team.problem'
-            ])
-            ->add('division', null, [
-                'label' => 'label.team.division'
-            ])
-            ->add('_action', 'actions', array(
-                'actions' => array(
-//                    'show' => array(),
-                    'edit' => array(),
-                )
-            ))
         ;
     }
 }

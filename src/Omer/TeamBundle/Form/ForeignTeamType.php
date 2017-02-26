@@ -175,6 +175,4 @@ class ForeignTeamType extends AbstractType
     {
         return 'omer_teambundle_team';
     }
-
-
 }

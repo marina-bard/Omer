@@ -10,4 +10,3 @@ services:
         calls:
             - [ setTranslationDomain, [OmerUserBundle] ]
             - [ setTokenStorage, ['@security.token_storage'] ]
-

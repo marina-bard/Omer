@@ -1,19 +1,20 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: marina
+ * Date: 26.02.17
+ * Time: 14:00
+ */
 
-namespace Omer\TeamBundle\Form;
+namespace Omer\UserBundle\Form;
 
-use Omer\TeamBundle\OmerTeamBundle;
-use Omer\UserBundle\Form\PassportDataType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Date;
 
-class OtherPeopleType extends AbstractType
+class PersonalDataType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -39,19 +40,6 @@ class OtherPeopleType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.other_people.t_shirt_size'
-                ]
-            ])
-            ->add('teamRole', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.other_people.team_role'
-                ]
-            ])
-            ->add('email', EmailType::class, [
-                'label' => 'label.team_member.email',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.other_people.email'
                 ]
             ])
             ->add('dateOfBirth', DateTimeType::class, [
@@ -104,36 +92,14 @@ class OtherPeopleType extends AbstractType
                 ],
                 'translation_domain' => 'OmerUserBundle'
             ])
-            ->add('address', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.other_people.address'
-                ]
-            ])
-            ->add('dietaryConcerns', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.dietary_concerns'
-                ]
-            ])
-            ->add('medicalConcerns', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.medical_concerns'
-                ]
-            ])
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Omer\TeamBundle\Entity\OtherPeople',
-            'translation_domain' => 'OmerTeamBundle'
-        ));
+        $resolver->setDefaults([
+            'translation_domain' => 'OmerUserBundle',
+        ]);
     }
 
     /**
@@ -141,7 +107,7 @@ class OtherPeopleType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'omer_teambundle_otherpeople';
+        return 'omer_userbundle_personaldata';
     }
 
 }

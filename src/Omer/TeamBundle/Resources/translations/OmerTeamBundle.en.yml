@@ -1,0 +1,86 @@
+title:            Odyssey of the Mind
+title_en:         Odyssey of The Mind
+coaches:          Coaches
+
+label:
+    locale:           en
+    registration:     Team registration
+    dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
+    medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
+
+    team:
+        english_team_name:  English Team Name
+        member_number:      Member Number
+        school:             School
+        country:            Country
+        district:           District
+        city:               City
+        address:            Address
+        problem:            Problem
+        division:           Division
+        date_of_arrival:    Date of Arrival
+        date_of_departure:  Date of Departure
+        payment_currency:   Payment Currency
+        concerns:           Special Scheduling Concerns
+        members:            Team Members
+        coaches:            Coaches
+        other_people:       Other People
+
+    team_member:
+        address:        Address
+        team:           Team
+
+    other_people:
+        team_role:      Role
+        email:          E-mail
+        address:        Address
+        team:           Team
+
+    actions:
+        login:      Log in
+        logout:     Log out
+        add:        Add
+        delete:     Delete
+        create:     Create
+        login_to_profile:  Your Profile
+
+    form:
+        title:      Log in
+        login:      login
+        password:   password
+        forgot_password: Reset password
+
+    personal_data:
+        surname:          Surname
+        first_name:       First Name
+        patronymic:       Patronymic
+        date_of_birth:    Date of Birth
+        passport_number:  Passport Number
+        date_of_issue:    Date of Issue
+        date_of_expiry:   Date of Expiry
+        citizenship:      Citizenship
+        full_name:        Full Name
+        t_shirt_size:     T-shirt Size
+
+admin:
+    group_label:
+        team:         Team
+        team_members: Team Members
+        other_people: Other People
+
+email:
+    request_send: |
+        Your team is successfully registered!
+        A letter with the details is sent on email %email%.
+
+    letter: |
+        Hello, %name%!
+
+        Login: %login%
+        Password: %password%
+
+        Your team is successfully registered!
+        You will find a registration information on your website's profile, and in the document attached.
+
+        Wish you success in the competition,
+        Odyssey of the Mind team.

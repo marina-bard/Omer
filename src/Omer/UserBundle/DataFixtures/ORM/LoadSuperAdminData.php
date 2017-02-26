@@ -21,7 +21,7 @@ class LoadSuperAdminData implements FixtureInterface
 
         $user->setEmail('admin');
         $user->setPlainPassword('admin');
-        $user->setName('Admin');
+        $user->setFirstName('Admin');
         $user->setSurname('Admin');
         $user->setPatronymic('Admin');
         $user->setRoles(array('ROLE_SUPER_ADMIN'));

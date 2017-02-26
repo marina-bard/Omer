@@ -10,7 +10,6 @@
 namespace Omer\TeamBundle\Admin;
 
 use Omer\UserBundle\Admin\PersonalDataAdmin;
-use Omer\UserBundle\Form\PersonalDataType;
 use Omer\UserBundle\Traits\CurrentUserTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -19,24 +18,29 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Validator\Constraints\Email;
 
-class TeamMemberAdmin extends PersonalDataAdmin
+class OtherPeopleAdmin extends PersonalDataAdmin
 {
     use CurrentUserTrait;
-
-//    protected $translationDomain = 'OmerUserBundle';
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
-
         $formMapper
+            ->add('teamRole', TextType::class, [
+                'label' => 'label.other_people.team_role'
+            ])
             ->add('address', TextType::class, [
-                'label' => 'label.team_member.address'
+                'label' => 'label.other_people.address'
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'label.other_people.email'
             ])
             ->add('dietaryConcerns', TextareaType::class, [
                 'label' => 'label.dietary_concerns'
@@ -44,6 +48,10 @@ class TeamMemberAdmin extends PersonalDataAdmin
             ->add('medicalConcerns', TextareaType::class, [
                 'label' => 'label.medical_concerns'
             ])
+//            ->add('team', ChoiceType::class, [
+//                'label' => 'label.other_people_team',
+////                'choices' => $this->getCurrentUser()->getTeams()
+//            ])
         ;
     }
 
@@ -51,7 +59,7 @@ class TeamMemberAdmin extends PersonalDataAdmin
     {
         $datagridMapper
             ->add('surname', null, [
-                'label' => 'label.team_member.surname'
+                'label' => 'label.other_name.surname'
             ])
         ;
     }
@@ -63,12 +71,15 @@ class TeamMemberAdmin extends PersonalDataAdmin
                 'label' => 'label.personal_data.full_name',
                 'translation_domain' => 'OmerUserBundle'
             ])
+            ->add('teamRole', null, [
+                'label' => 'label.other_people.team_role'
+            ])
             ->add('team', null, [
-                'label' => 'label.team_member.team'
+                'label' => 'label.other_people.team'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-//                    'show' => [],
+//                    'show' => array(),
                     'edit' => [],
                     'delete' => []
                 ]
@@ -83,8 +94,11 @@ class TeamMemberAdmin extends PersonalDataAdmin
                 'label' => 'label.personal_data.full_name',
                 'translation_domain' => 'OmerUserBundle'
             ])
+            ->add('teamRole', null, [
+                'label' => 'label.other_people.team_role'
+            ])
             ->add('team', null, [
-                'label' => 'label.team_member.team'
+                'label' => 'label.other_people.team'
             ])
         ;
     }

@@ -9,6 +9,7 @@
 
 namespace Omer\TeamBundle\Builder;
 
+use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
 use Omer\UserBundle\Entity\CoachUser;
@@ -55,10 +56,11 @@ class TeamExcelBuilder
         return $this->container->get('kernel')->getRootDir().'/'.self::TEAM_INFO_FILEPATH;
     }
 
-    public function buildTeamExcel(Team $team)
+    public function buildTeamExcel(ForeignTeam $team)
     {
         $coaches = $team->getCoaches();
         $members = $team->getMembers();
+        $other = $team->getOtherPeople();
 
         $this->excel = new PHPExcel();
         $this->sheet = $this->excel->setActiveSheetIndex(0);

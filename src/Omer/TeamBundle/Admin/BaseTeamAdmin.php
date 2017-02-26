@@ -12,7 +12,6 @@ namespace Omer\TeamBundle\Admin;
 use Doctrine\ORM\EntityRepository;
 use Omer\UserBundle\OmerUserBundle;
 use Omer\UserBundle\Traits\CurrentUserTrait;
-use Omer\UserBundle\Traits\FullNameTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -26,54 +25,43 @@ use Omer\UserBundle\Entity\CoachUser;
 use Sonata\AdminBundle\Form\Type\CollectionType;
 
 
-class TeamAdmin extends AbstractAdmin
+class BaseTeamAdmin extends AbstractAdmin
 {
     use CurrentUserTrait;
-    use FullNameTrait;
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('nativeTeamName', TextType::class, [
-                'label' => 'label.team.native_team_name'
-            ])
             ->add('englishTeamName', TextType::class, [
                 'label' => 'label.team.english_team_name'
             ])
             ->add('memberNumber', NumberType::class, [
                 'label' => 'label.team.member_number'
             ])
-            ->add('guo', TextType::class, [
-                'label' => 'label.team.guo'
+            ->add('country', TextType::class, [
+                'label' => 'label.team.country'
             ])
-            ->add('guoAddress', TextType::class, [
-                'label' => 'label.team.guo_address'
+            ->add('district', TextType::class, [
+                'label' => 'label.team.district'
             ])
-            ->add('principalFullName', TextType::class, [
-                'label' => 'label.team.principal_name'
-            ])
-            ->add('educationDepartment', TextType::class, [
-                'label' => 'label.team.edu_dep'
-            ])
-            ->add('educationDepartmentAddress', TextType::class, [
-                'label' => 'label.team.edu_dep_address'
-            ])
-            ->add('headOfEduFullName', TextType::class, [
-                'label' => 'label.team.head_edu_name'
+            ->add('city', TextType::class, [
+                'label' => 'label.team.city'
             ])
             ->add('coaches', 'sonata_type_model', [
                 'label' => 'coaches',
                 'property' => 'full_name',
                 'multiple' => true,
             ])
-            ->add('members', 'sonata_type_collection', [
-                    'required' => false,
-                    'label' => 'label.team.members',
-                    'translation_domain' => 'OmerTeamBundle',
-                    'btn_add' => 'Add'
-                ], [
-                    'edit' => 'inline',
-                    'inline' => 'table',
+            ->add('members', 'sonata_type_model', [
+                'label' => 'label.team.members',
+                'property' => 'full_name',
+                'multiple' => true,
+                'choices' => null
+            ])
+            ->add('otherPeople', 'sonata_type_model', [
+                'label' => 'label.team.other_people',
+                'property' => 'full_name',
+                'multiple' => true,
             ])
         ;
     }
@@ -81,11 +69,8 @@ class TeamAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('nativeTeamName', null, [
-                'label' => 'label.team.native_team_name'
-            ])
-            ->add('guo', null, [
-                'label' => 'label.team.guo'
+            ->add('englishTeamName', null, [
+                'label' => 'label.team.english_team_name'
             ])
         ;
     }
@@ -93,15 +78,18 @@ class TeamAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('nativeTeamName', null, [
-                'label' => 'label.team.native_team_name'
+            ->addIdentifier('englishTeamName', null, [
+                'label' => 'label.team.english_team_name'
             ])
-            ->add('guo', null, [
-                'label' => 'label.team.native_team_name'
+            ->add('country', null, [
+                'label' => 'label.team.country'
+            ])
+            ->add('city', null, [
+                'label' => 'label.team.city'
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
+//                    'show' => array(),
                     'edit' => array(),
                 )
             ))
@@ -128,6 +116,13 @@ class TeamAdmin extends AbstractAdmin
 
     public function preUpdate($team)
     {
-        $team->setCoaches($team->getCoaches());
+        $team->setMembers($team->getMembers());
+        $team->setOtherPeople($team->getOtherPeople());
+    }
+
+    public function configureRoutes(RouteCollection $collection)
+    {
+        parent::configureRoutes($collection);
+        $collection->remove('add');
     }
 }

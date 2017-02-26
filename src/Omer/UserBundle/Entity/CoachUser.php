@@ -9,8 +9,7 @@
 namespace Omer\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Omer\UserBundle\Traits\FullNameTrait;
-use Omer\UserBundle\Traits\PassportDataTrait;
+use Omer\UserBundle\Traits\PersonalDataTrait;
 use Omer\UserBundle\Traits\PasswordGeneratorTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,8 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CoachUser extends User
 {
-    use PassportDataTrait;
     use PasswordGeneratorTrait;
+    use PersonalDataTrait;
 
     /**
      * @ORM\Id
@@ -37,52 +36,32 @@ class CoachUser extends User
      *     message="value is invalid(field must be non empty)",
      *     )
      *
-     * @ORM\Column(name="surname", type="string", nullable=true)
+     * @ORM\Column(name="email", type="string", nullable=true)
      */
-    protected $surname;
+    protected $email;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
-     *
-     * @ORM\Column(name="name", type="string", nullable=true)
+     * @ORM\Column(name="dietary_concerns", type="string", nullable=true)
      */
-    protected $name;
+    private $dietaryConcerns;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
-     *
-     * @ORM\Column(name="patronymic", type="string", nullable=true)
+     * @ORM\Column(name="medical_concerns", type="string", nullable=true)
      */
-    protected $patronymic;
+    private $medicalConcerns;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
-     *
-     * @ORM\Column(name="phone", type="string", nullable=true)
+     * @ORM\Column(name="address", type="string", nullable=true)
      */
-    protected $phone;
+    private $address;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Omer\TeamBundle\Entity\Team", mappedBy="coaches")
+     * @ORM\ManyToMany(targetEntity="Omer\TeamBundle\Entity\BaseTeam", mappedBy="coaches")
      */
     protected $teams;
-
-    /**
-     * @ORM\Column(name="is_main", type="boolean", nullable=true)
-     */
-    protected $isMain;
 
     public function __construct()
     {
@@ -101,114 +80,13 @@ class CoachUser extends User
     }
 
     /**
-     * Set surname
-     *
-     * @param string $surname
-     *
-     * @return CoachUser
-     */
-    public function setSurname($surname)
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    /**
-     * Get surname
-     *
-     * @return string
-     */
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return CoachUser
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set patronymic
-     *
-     * @param string $patronymic
-     *
-     * @return CoachUser
-     */
-    public function setPatronymic($patronymic)
-    {
-        $this->patronymic = $patronymic;
-
-        return $this;
-    }
-
-    /**
-     * Get patronymic
-     *
-     * @return string
-     */
-    public function getPatronymic()
-    {
-        return $this->patronymic;
-    }
-
-    /**
-     * Set phone
-     *
-     * @param string $phone
-     *
-     * @return CoachUser
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    public function __toString()
-    {
-        return $this->getFullName($this);
-    }
-
-    /**
      * Add team
      *
      * @param \Omer\TeamBundle\Entity\Team $team
      *
      * @return CoachUser
      */
-    public function addTeam(\Omer\TeamBundle\Entity\Team $team)
+    public function addTeam(\Omer\TeamBundle\Entity\BaseTeam $team)
     {
         $this->teams[] = $team;
 
@@ -220,7 +98,7 @@ class CoachUser extends User
      *
      * @param \Omer\TeamBundle\Entity\Team $team
      */
-    public function removeTeam(\Omer\TeamBundle\Entity\Team $team)
+    public function removeTeam(\Omer\TeamBundle\Entity\BaseTeam $team)
     {
         $this->teams->removeElement($team);
     }
@@ -236,31 +114,74 @@ class CoachUser extends User
     }
 
     /**
-     * Set isMain
+     * Set dietaryConcerns
      *
-     * @param boolean $isMain
+     * @param string $dietaryConcerns
      *
      * @return CoachUser
      */
-    public function setIsMain($isMain)
+    public function setDietaryConcerns($dietaryConcerns)
     {
-        $this->isMain = $isMain;
+        $this->dietaryConcerns = $dietaryConcerns;
 
         return $this;
     }
 
     /**
-     * Get isMain
+     * Get dietaryConcerns
      *
-     * @return boolean
+     * @return string
      */
-    public function getIsMain()
+    public function getDietaryConcerns()
     {
-        return $this->isMain;
+        return $this->dietaryConcerns;
     }
 
-    public function getFullName()
+    /**
+     * Set medicalConcerns
+     *
+     * @param string $medicalConcerns
+     *
+     * @return CoachUser
+     */
+    public function setMedicalConcerns($medicalConcerns)
     {
-        return $this->surname.' '.$this->name.' '.$this->patronymic;
+        $this->medicalConcerns = $medicalConcerns;
+
+        return $this;
+    }
+
+    /**
+     * Get medicalConcerns
+     *
+     * @return string
+     */
+    public function getMedicalConcerns()
+    {
+        return $this->medicalConcerns;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return CoachUser
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

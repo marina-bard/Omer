@@ -37,7 +37,7 @@ class TeamMemberType extends AbstractType
             ->add('T_shirtSize', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.t_shirt_size'
+                    'placeholder' => 'label.personal_data.t_shirt_size'
                 ]
             ])
             ->add('dateOfBirth', DateTimeType::class, [

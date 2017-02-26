@@ -75,7 +75,7 @@ class CoachUserAdmin extends PersonalDataAdmin
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
+//                    'show' => array(),
                     'edit' => array(),
                 )
             ))

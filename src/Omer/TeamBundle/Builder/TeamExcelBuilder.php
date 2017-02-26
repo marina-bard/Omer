@@ -9,7 +9,9 @@
 
 namespace Omer\TeamBundle\Builder;
 
+use Omer\TeamBundle\Entity\BaseTeam;
 use Omer\TeamBundle\Entity\ForeignTeam;
+use Omer\TeamBundle\Entity\OtherPeople;
 use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
 use Omer\UserBundle\Entity\CoachUser;
@@ -17,6 +19,8 @@ use PHPExcel;
 use PHPExcel_IOFactory;
 use PHPExcel_Worksheet;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class TeamExcelBuilder
 {
@@ -60,7 +64,7 @@ class TeamExcelBuilder
     {
         $coaches = $team->getCoaches();
         $members = $team->getMembers();
-        $other = $team->getOtherPeople();
+        $others = $team->getOtherPeople();
 
         $this->excel = new PHPExcel();
         $this->sheet = $this->excel->setActiveSheetIndex(0);
@@ -73,10 +77,13 @@ class TeamExcelBuilder
 
         $this->sheet = $this->addCoaches($this->sheet, $coaches, ++$this->label_row);
 
-        $this->sheet = $this->addTeamMembers($this->sheet, $members, ++$this->label_row, $this->translator->trans('Team members', [], 'OmerTeamBundle'));
+        $this->sheet = $this->addTeamMembers($this->sheet, $members, $this->label_row);
 
-        foreach(range('A','E') as $columnID) {
+        $this->sheet = $this->addOtherPeople($this->sheet, $others, $this->label_row);
+
+        foreach(range('A','M') as $columnID) {
             $this->sheet->getColumnDimension($columnID)->setAutoSize(true);
+
         }
 
         $writer = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
@@ -85,7 +92,7 @@ class TeamExcelBuilder
         return $this->getTeamExcelFile();
     }
 
-    public function addTeam(PHPExcel_Worksheet $sheet, Team $team, $label_row)
+    public function addTeam(PHPExcel_Worksheet $sheet, ForeignTeam $team, $label_row)
     {
         $align_left = [
             'alignment' => [
@@ -95,30 +102,35 @@ class TeamExcelBuilder
 
         $value_row = $label_row;
         $sheet
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.native_team_name', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.english_team_name', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.member_number', [], 'OmerTeamBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.guo', [], 'OmerTeamBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.guo_address', [], 'OmerTeamBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.principal_name', [], 'OmerTeamBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.edu_dep', [], 'OmerTeamBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.edu_dep_address', [], 'OmerTeamBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.head_edu_name', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.school', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.country', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.district', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.address', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.problem', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.division', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.date_of_arrival', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.date_of_departure', [], 'OmerTeamBundle'))            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.date_of_arrival', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.concerns', [], 'OmerTeamBundle'))
         ;
 
        $sheet
-            ->setCellValue('C'.(++$value_row), $team->getNativeTeamName())
             ->setCellValue('C'.(++$value_row), $team->getEnglishTeamName())
-            ->setCellValue('C'.(++$value_row), ($team->getMemberNumber()))
-            ->getStyle('C'.$value_row)->applyFromArray($align_left);
-       $sheet
-            ->setCellValue('C'.(++$value_row), $team->getGuo())
-            ->setCellValue('C'.(++$value_row), $team->getGuoAddress())
-            ->setCellValue('C'.(++$value_row), $team->getPrincipalFullName())
-            ->setCellValue('C'.(++$value_row), $team->getEducationDepartment())
-            ->setCellValue('C'.(++$value_row), $team->getEducationDepartmentAddress())
-            ->setCellValue('C'.(++$value_row), $team->getHeadOfEduFullName())
-        ;
+            ->setCellValue('C'.(++$value_row), $team->getMemberNumber())
+           ->getStyle('C'.$value_row)->applyFromArray($align_left);
+        $sheet
+            ->setCellValue('C'.(++$value_row), $team->getSchool())
+            ->setCellValue('C'.(++$value_row), $team->getCountry())
+            ->setCellValue('C'.(++$value_row), $team->getDistrict())
+            ->setCellValue('C'.(++$value_row), $team->getCity())
+            ->setCellValue('C'.(++$value_row), $team->getAddress())
+            ->setCellValue('C'.(++$value_row), $team->getProblem())
+            ->setCellValue('C'.(++$value_row), $team->getDivision())
+            ->setCellValue('C'.(++$value_row), $team->getDateOfArrival())
+            ->setCellValue('C'.(++$value_row), $team->getDateOfDeparture())
+            ->setCellValue('C'.(++$value_row), $team->getConcerns())
+       ;
 
         $this->label_row = $label_row;
         $this->value_row = $value_row;
@@ -131,85 +143,143 @@ class TeamExcelBuilder
         $this->sheet = $this->setHeader($this->sheet, ++$label_row, $this->translator->trans('coaches', [], 'OmerTeamBundle'));
 
         $value_row = $label_row;
+        $number = 0;
+
+        $sheet
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.first_name', [], 'OmerUserBundle'))
+            ->setCellValue('C'.($label_row), $this->translator->trans('label.personal_data.surname', [], 'OmerUserBundle'))
+            ->setCellValue('D'.($label_row), $this->translator->trans('label.personal_data.t_shirt_size', [], 'OmerUserBundle'))
+            ->setCellValue('E'.($label_row), $this->translator->trans('label.coach_user.email', [], 'OmerUserBundle'))
+            ->setCellValue('F'.($label_row), $this->translator->trans('label.personal_data.date_of_birth', [], 'OmerUserBundle'))
+            ->setCellValue('G'.($label_row), $this->translator->trans('label.personal_data.passport_number', [], 'OmerUserBundle'))
+            ->setCellValue('H'.($label_row), $this->translator->trans('label.personal_data.date_of_issue', [], 'OmerUserBundle'))
+            ->setCellValue('I'.($label_row), $this->translator->trans('label.personal_data.date_of_expiry', [], 'OmerUserBundle'))
+            ->setCellValue('J'.($label_row), $this->translator->trans('label.coach_user.address', [], 'OmerUserBundle'))
+            ->setCellValue('K'.($label_row), $this->translator->trans('label.coach_user.dietary_concerns', [], 'OmerUserBundle'))
+            ->setCellValue('L'.($label_row), $this->translator->trans('label.coach_user.medical_concerns', [], 'OmerUserBundle'))
+        ;
+
         /**
          * @var CoachUser $coach
          */
+        $value_row = $label_row;
         foreach ($coaches as $coach) {
+            $number++;
             $sheet
-                ->setCellValue('B'.(++$label_row), $this->translator->trans('label.surname', [], 'OmerUserBundle'))
-                ->setCellValue('B'.(++$label_row), $this->translator->trans('label.name', [], 'OmerUserBundle'))
-                ->setCellValue('B'.(++$label_row), $this->translator->trans('label.patronymic', [], 'OmerUserBundle'))
-                ->setCellValue('B'.(++$label_row), $this->translator->trans('label.latin_surname', [], 'OmerUserBundle'))
-                ->setCellValue('B'.(++$label_row), $this->translator->trans('label.latin_name', [], 'OmerUserBundle'))
-                ->setCellValue('B'.(++$label_row), $this->translator->trans('label.latin_patronymic', [], 'OmerUserBundle'))
-                ->setCellValue('B'.(++$label_row), $this->translator->trans('label.phone', [], 'OmerUserBundle'))
-                ->setCellValue('B'.(++$label_row), $this->translator->trans('label.email', [], 'OmerUserBundle'))
+                ->setCellValue('A'.(++$value_row), $number)
+                ->setCellValue('B'.($value_row), $coach->getFirstName())
+                ->setCellValue('C'.($value_row), $coach->getSurname())
+                ->setCellValue('D'.($value_row), $coach->getTShirtSize())
+                ->setCellValue('E'.($value_row), $coach->getEmail())
+                ->setCellValue('F'.($value_row), $coach->getDateOfBirth())
+                ->setCellValue('G'.($value_row), $coach->getPassportNumber())
+                ->setCellValue('H'.($value_row), $coach->getDateOfIssue())
+                ->setCellValue('I'.($value_row), $coach->getDateOfExpiry())
+                ->setCellValue('J'.($value_row), $coach->getAddress())
+                ->setCellValue('K'.($value_row), $coach->getDietaryConcerns())
+                ->setCellValue('L'.($value_row), $coach->getMedicalConcerns())
             ;
-            $label_row++;
-
-            $sheet
-                ->setCellValue('C'.(++$value_row), $coach->getSurname())
-                ->setCellValue('C'.(++$value_row), $coach->getName())
-                ->setCellValue('C'.(++$value_row), $coach->getPatronymic())
-                ->setCellValue('C'.(++$value_row), $coach->getLatinSurname())
-                ->setCellValue('C'.(++$value_row), $coach->getLatinName())
-                ->setCellValue('C'.(++$value_row), $coach->getLatinPatronymic())
-                ->setCellValue('C'.(++$value_row), $coach->getPhone())
-                ->setCellValue('C'.(++$value_row), $coach->getEmail())
-            ;
-            $value_row++;
         }
 
-        $this->label_row = $label_row;
+        $this->label_row = ++$value_row;
         $this->value_row = $value_row;
 
         return $sheet;
     }
 
-    public function addTeamMembers(PHPExcel_Worksheet $sheet, $members, $label_row, $title)
+    public function addTeamMembers(PHPExcel_Worksheet $sheet, $coaches, $label_row)
     {
-        $sheet->setCellValue('B'.$label_row, $title);
-        $sheet->getCell('B'.$label_row)->getStyle()->getFont()->setBold(true);
-        $sheet->mergeCells('B'.$label_row.':I'.$label_row);
-        $style = [
-            'alignment' => [
-                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-            ]
-        ];
+        $this->sheet = $this->setHeader($this->sheet, ++$label_row, $this->translator->trans('label.team.members', [], 'OmerTeamBundle'));
 
-        $sheet->getStyle('A'.$label_row.':E'.$label_row)->applyFromArray($style);
+        $value_row = $label_row;
+        $number = 0;
 
         $sheet
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team_member.full_name', [], 'OmerTeamBundle'))
-            ->setCellValue('C'.($label_row), $this->translator->trans('label.team_member.latin_full_name', [], 'OmerTeamBundle'))
-            ->setCellValue('D'.($label_row), $this->translator->trans('label.team_member.age', [], 'OmerTeamBundle'))
-            ->setCellValue('E'.($label_row), $this->translator->trans('label.team_member.allergy', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.first_name', [], 'OmerUserBundle'))
+            ->setCellValue('C'.($label_row), $this->translator->trans('label.personal_data.surname', [], 'OmerUserBundle'))
+            ->setCellValue('D'.($label_row), $this->translator->trans('label.personal_data.t_shirt_size', [], 'OmerUserBundle'))
+            ->setCellValue('E'.($label_row), $this->translator->trans('label.personal_data.date_of_birth', [], 'OmerUserBundle'))
+            ->setCellValue('F'.($label_row), $this->translator->trans('label.personal_data.passport_number', [], 'OmerUserBundle'))
+            ->setCellValue('G'.($label_row), $this->translator->trans('label.personal_data.date_of_issue', [], 'OmerUserBundle'))
+            ->setCellValue('H'.($label_row), $this->translator->trans('label.personal_data.date_of_expiry', [], 'OmerUserBundle'))
+            ->setCellValue('I'.($label_row), $this->translator->trans('label.coach_user.address', [], 'OmerUserBundle'))
+            ->setCellValue('J'.($label_row), $this->translator->trans('label.coach_user.dietary_concerns', [], 'OmerUserBundle'))
+            ->setCellValue('K'.($label_row), $this->translator->trans('label.coach_user.medical_concerns', [], 'OmerUserBundle'))
         ;
-        $sheet->getStyle('A'.$label_row.':E'.$label_row)->applyFromArray($style);
-        $sheet->getStyle('A'.$label_row.':E'.$label_row)->getFont()->setBold(true);
 
-        $i = 0;
+        /**
+         * @var TeamMember $coach
+         */
         $value_row = $label_row;
-        $align_left = [
-            'alignment' => [
-                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
-            ]
-        ];
-
-        foreach ($members as $member) {
+        foreach ($coaches as $coach) {
+            $number++;
             $sheet
-                ->setCellValue('A'.(++$value_row), ++$i)
-                ->setCellValue('B'.($value_row), $member)
-                ->setCellValue('C'.($value_row), $member->getLatinFullName())
-                ->setCellValue('D'.($value_row), $member->getAge())
-                ->getStyle('D'.$value_row)->applyFromArray($align_left);
-            $sheet
-                ->setCellValue('E'.($value_row), $member->getAllergy())
+                ->setCellValue('A'.(++$value_row), $number)
+                ->setCellValue('B'.($value_row), $coach->getFirstName())
+                ->setCellValue('C'.($value_row), $coach->getSurname())
+                ->setCellValue('D'.($value_row), $coach->getTShirtSize())
+                ->setCellValue('E'.($value_row), $coach->getDateOfBirth())
+                ->setCellValue('F'.($value_row), $coach->getPassportNumber())
+                ->setCellValue('G'.($value_row), $coach->getDateOfIssue())
+                ->setCellValue('H'.($value_row), $coach->getDateOfExpiry())
+                ->setCellValue('I'.($value_row), $coach->getAddress())
+                ->setCellValue('G'.($value_row), $coach->getDietaryConcerns())
+                ->setCellValue('K'.($value_row), $coach->getMedicalConcerns())
             ;
-            $sheet->getStyle('A'.$value_row.':E'.$value_row)->applyFromArray($align_left);
         }
 
-        $this->label_row = $label_row;
+        $this->label_row = ++$value_row;
+        $this->value_row = $value_row;
+
+        return $sheet;
+    }
+
+    public function addOtherPeople(PHPExcel_Worksheet $sheet, $coaches, $label_row)
+    {
+        $this->sheet = $this->setHeader($this->sheet, ++$label_row, $this->translator->trans('label.team.other_people', [], 'OmerTeamBundle'));
+
+        $value_row = $label_row;
+        $number = 0;
+
+        $sheet
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.first_name', [], 'OmerUserBundle'))
+            ->setCellValue('C'.($label_row), $this->translator->trans('label.personal_data.surname', [], 'OmerUserBundle'))
+            ->setCellValue('D'.($label_row), $this->translator->trans('label.personal_data.t_shirt_size', [], 'OmerUserBundle'))
+            ->setCellValue('E'.($label_row), $this->translator->trans('label.other_people.team_role', [], 'OmerTeamBundle'))
+            ->setCellValue('F'.($label_row), $this->translator->trans('label.other_people.email', [], 'OmerTeamBundle'))
+            ->setCellValue('G'.($label_row), $this->translator->trans('label.personal_data.date_of_birth', [], 'OmerUserBundle'))
+            ->setCellValue('H'.($label_row), $this->translator->trans('label.personal_data.passport_number', [], 'OmerUserBundle'))
+            ->setCellValue('I'.($label_row), $this->translator->trans('label.personal_data.date_of_issue', [], 'OmerUserBundle'))
+            ->setCellValue('J'.($label_row), $this->translator->trans('label.personal_data.date_of_expiry', [], 'OmerUserBundle'))
+            ->setCellValue('K'.($label_row), $this->translator->trans('label.other_people.address', [], 'OmerTeamBundle'))
+            ->setCellValue('L'.($label_row), $this->translator->trans('label.dietary_concerns', [], 'OmerTeamBundle'))
+            ->setCellValue('M'.($label_row), $this->translator->trans('label.medical_concerns', [], 'OmerTeamBundle'))
+        ;
+
+        /**
+         * @var OtherPeople $coach
+         */
+        $value_row = $label_row;
+        foreach ($coaches as $coach) {
+            $number++;
+            $sheet
+                ->setCellValue('A'.(++$value_row), $number)
+                ->setCellValue('B'.($value_row), $coach->getFirstName())
+                ->setCellValue('C'.($value_row), $coach->getSurname())
+                ->setCellValue('D'.($value_row), $coach->getTShirtSize())
+                ->setCellValue('E'.($value_row), $coach->getTeamRole())
+                ->setCellValue('F'.($value_row), $coach->getEmail())
+                ->setCellValue('G'.($value_row), $coach->getDateOfBirth())
+                ->setCellValue('H'.($value_row), $coach->getPassportNumber())
+                ->setCellValue('I'.($value_row), $coach->getDateOfIssue())
+                ->setCellValue('J'.($value_row), $coach->getDateOfExpiry())
+                ->setCellValue('K'.($value_row), $coach->getAddress())
+                ->setCellValue('L'.($value_row), $coach->getDietaryConcerns())
+                ->setCellValue('M'.($value_row), $coach->getMedicalConcerns())
+            ;
+        }
+
+        $this->label_row = ++$value_row;
         $this->value_row = $value_row;
 
         return $sheet;

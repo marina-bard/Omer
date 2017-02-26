@@ -4,7 +4,7 @@ coaches:          Coaches
 
 label:
     locale:           en
-    registration:     Team registration
+    registration:     Team's registration
     dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
     medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
 
@@ -71,7 +71,7 @@ admin:
 email:
     request_send: |
         Your team is successfully registered!
-        A letter with the details is sent on email %email%.
+        A letter with the details is sent on the coach email.
 
     letter: |
         Hello, %name%!

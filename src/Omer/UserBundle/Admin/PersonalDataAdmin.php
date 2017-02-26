@@ -40,24 +40,30 @@ class PersonalDataAdmin extends AbstractAdmin
                 'label' => 'label.personal_data.t_shirt_size',
                 'translation_domain' => 'OmerUserBundle'
             ])
-            ->add('dateOfBirth', 'sonata_type_datetime_picker', [
+            ->add('dateOfBirth', 'sonata_type_date_picker', [
                 'format' => 'dd.MM.yyyy',
+                'dp_view_mode' => 'years',
                 'label' => 'label.personal_data.date_of_birth',
-                'translation_domain' => 'OmerUserBundle'
+                'translation_domain' => 'OmerUserBundle',
+                'attr' => ['readonly' => true]
             ])
             ->add('passportNumber', TextType::class, [
                 'label' => 'label.personal_data.passport_number',
                 'translation_domain' => 'OmerUserBundle'
             ])
-            ->add('dateOfIssue', 'sonata_type_datetime_picker', [
+            ->add('dateOfIssue', 'sonata_type_date_picker', [
                 'format' => 'dd.MM.yyyy',
+                'dp_view_mode' => 'years',
                 'label' => 'label.personal_data.date_of_issue',
-                'translation_domain' => 'OmerUserBundle'
+                'translation_domain' => 'OmerUserBundle',
+                'attr' => ['readonly' => true]
             ])
-            ->add('dateOfExpiry', 'sonata_type_datetime_picker', [
+            ->add('dateOfExpiry', 'sonata_type_date_picker', [
                 'format' => 'dd.MM.yyyy',
+                'dp_view_mode' => 'years',
                 'label' => 'label.personal_data.date_of_expiry',
-                'translation_domain' => 'OmerUserBundle'
+                'translation_domain' => 'OmerUserBundle',
+                'attr' => ['readonly' => true]
             ])
             ->add('citizenship', TextType::class, [
                 'label' => 'label.personal_data.citizenship',

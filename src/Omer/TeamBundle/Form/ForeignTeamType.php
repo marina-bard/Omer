@@ -2,10 +2,13 @@
 
 namespace Omer\TeamBundle\Form;
 
+use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\UserBundle\Form\CoachUserType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -110,8 +113,9 @@ class ForeignTeamType extends AbstractType
                     'placeholder' => 'label.team.date_of_departure'
                 ]
             ])
-            ->add('paymentCurrency', TextType::class, [
+            ->add('paymentCurrency', ChoiceType::class, [
                 'label' => 'label.team.payment_currency',
+                'choices' => array_flip(ForeignTeam::PAYMENT_CURRENCY),
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.team.payment_currency'
@@ -119,6 +123,7 @@ class ForeignTeamType extends AbstractType
             ])
             ->add('concerns', TextareaType::class, [
                 'label' => 'label.team.concerns',
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.team.concerns'

@@ -19,6 +19,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ForeignTeam extends BaseTeam
 {
+    const PAYMENT_CURRENCY = [
+        'BYN',
+        'RUB',
+        'EUR',
+        'USD'
+    ];
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

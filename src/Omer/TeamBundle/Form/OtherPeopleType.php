@@ -38,8 +38,9 @@ class OtherPeopleType extends AbstractType
             ->add('T_shirtSize', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.other_people.t_shirt_size'
-                ]
+                    'placeholder' => 'label.personal_data.t_shirt_size'
+                ],
+                'translation_domain' => 'OmerUserBundle'
             ])
             ->add('teamRole', TextType::class, [
                 'attr' => [

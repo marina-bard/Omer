@@ -5,10 +5,12 @@ namespace Omer\TeamBundle\Form;
 use Omer\TeamBundle\OmerTeamBundle;
 use Omer\UserBundle\Form\PassportDataType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Date;
 
 class TeamMemberType extends AbstractType
 {
@@ -18,66 +20,94 @@ class TeamMemberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('firstName', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.personal_data.first_name'
+                ],
+                'translation_domain' => 'OmerUserBundle'
+            ])
             ->add('surname', TextType::class, [
-                'label' => 'label.team_member.surname',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.surname'
-                ]
+                    'placeholder' => 'label.personal_data.surname'
+                ],
+                'translation_domain' => 'OmerUserBundle'
             ])
-            ->add('latinSurname', TextType::class, [
-                'label' => 'label.team_member.latin_surname',
+            ->add('T_shirtSize', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.latin_surname'
+                    'placeholder' => 'label.personal_data.t_shirt_size'
                 ]
             ])
-            ->add('name', TextType::class, [
-                'label' => 'label.team_member.name',
+            ->add('dateOfBirth', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                'attr' => [
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'years',
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.personal_data.date_of_birth',
+                ],
+                'translation_domain' => 'OmerUserBundle'
+            ])
+            ->add('passportNumber', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.name'
-                ]
+                    'placeholder' => 'label.personal_data.passport_number'
+                ],
+                'translation_domain' => 'OmerUserBundle'
             ])
-            ->add('latinName', TextType::class, [
-                'label' => 'label.team_member.latin_name',
+            ->add('dateOfIssue', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                'attr' => [
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'years',
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.personal_data.date_of_issue'
+                ],
+                'translation_domain' => 'OmerUserBundle'
+            ])
+            ->add('dateOfExpiry', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                'attr' => [
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'years',
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.personal_data.date_of_expiry'
+                ],
+                'translation_domain' => 'OmerUserBundle'
+            ])
+            ->add('citizenship', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.latin_name'
-                ]
+                    'placeholder' => 'label.personal_data.citizenship'
+                ],
+                'translation_domain' => 'OmerUserBundle'
             ])
-            ->add('patronymic', TextType::class, [
-                'label' => 'label.team_member.patronymic',
+            ->add('address', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.patronymic'
+                    'placeholder' => 'label.team_member.address'
                 ]
             ])
-            ->add('latinPatronymic', TextType::class, [
-                'label' => 'label.team_member.latin_patronymic',
+            ->add('dietaryConcerns', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.latin_patronymic'
+                    'placeholder' => 'label.dietary_concerns'
                 ]
             ])
-            ->add('age', TextType::class, [
-                'label' => 'label.team_member.age',
+            ->add('medicalConcerns', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.team_member.age'
+                    'placeholder' => 'label.medical_concerns'
                 ]
             ])
-            ->add('allergy', TextareaType::class, [
-                'label' => 'label.team_member.allergy',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.team_member.allergy'
-                ]
-            ])
-//            ->add('passportDataLabel', PassportDataType::class, [
-//                'data_class' => 'Omer\TeamBundle\Entity\TeamMember',
-//                ''
-//            ])
         ;
     }
     

@@ -9,48 +9,40 @@
 
 namespace Omer\TeamBundle\Admin;
 
+use Omer\UserBundle\Admin\PersonalDataAdmin;
+use Omer\UserBundle\Form\PersonalDataType;
 use Omer\UserBundle\Traits\CurrentUserTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
-class TeamMemberAdmin extends AbstractAdmin
+class TeamMemberAdmin extends PersonalDataAdmin
 {
     use CurrentUserTrait;
 
+//    protected $translationDomain = 'OmerUserBundle';
+
     protected function configureFormFields(FormMapper $formMapper)
     {
+        parent::configureFormFields($formMapper);
+
         $formMapper
-            ->add('surname', TextType::class, [
-                'label' => 'label.team_member.surname'
+            ->add('address', TextType::class, [
+                'label' => 'label.team_member.address'
             ])
-            ->add('name', TextType::class, [
-                'label' => 'label.team_member.name'
+            ->add('dietaryConcerns', TextareaType::class, [
+                'label' => 'label.dietary_concerns'
             ])
-            ->add('patronymic', TextType::class, [
-                'label' => 'label.team_member.patronymic'
-            ])
-            ->add('latinSurname', TextType::class, [
-                'label' => 'label.team_member.latin_surname'
-            ])
-            ->add('latinName', TextType::class, [
-                'label' => 'label.team_member.latin_name'
-            ])
-            ->add('latinPatronymic', TextType::class, [
-                'label' => 'label.team_member.latin_patronymic'
-            ])
-            ->add('age', NumberType::class, [
-                'label' => 'label.team_member.age'
-            ])
-            ->add('allergy', TextareaType::class, [
-                'required' => false,
-                'label' => 'label.team_member.allergy'
+            ->add('medicalConcerns', TextareaType::class, [
+                'label' => 'label.medical_concerns'
             ])
         ;
     }
@@ -67,18 +59,20 @@ class TeamMemberAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('surname', null, [
-                'label' => 'label.team_member.surname'
+            ->add('fullName', null, [
+                'label' => 'label.personal_data.full_name',
+                'translation_domain' => 'OmerUserBundle'
             ])
-            ->add('name', null, [
-                'label' => 'label.team_member.name'
+            ->add('team', null, [
+                'label' => 'label.team_member.team'
             ])
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                )
-            ))
+            ->add('_action', 'actions', [
+                'actions' => [
+//                    'show' => [],
+                    'edit' => [],
+                    'delete' => []
+                ]
+            ])
         ;
     }
 
@@ -86,13 +80,11 @@ class TeamMemberAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('fullName', null, [
-                'label' => 'label.team_member.name'
+                'label' => 'label.personal_data.full_name',
+                'translation_domain' => 'OmerUserBundle'
             ])
-            ->add('age', null, [
-                'label' => 'label.team_member.age'
-            ])
-            ->add('allergy', null, [
-                'label' => 'label.team_member.allergy'
+            ->add('team', null, [
+                'label' => 'label.team_member.team'
             ])
         ;
     }
@@ -107,11 +99,17 @@ class TeamMemberAdmin extends AbstractAdmin
         if($this->getCurrentUser()->hasRole('ROLE_COACH')){
             $query
                 ->innerJoin($query->getRootAlias().'.team', 't')
-                ->innerJoin('t.coach', 'c')
+                ->innerJoin('t.coaches', 'c')
                 ->andWhere('c.username LIKE :user')
                 ->setParameter('user', $this->getCurrentUser()->getUsername());
         }
 
         return $query;
+    }
+
+    public function configureRoutes(RouteCollection $collection)
+    {
+        parent::configureRoutes($collection);
+        $collection->remove('add');
     }
 }

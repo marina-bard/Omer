@@ -16,9 +16,20 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#news">Новости <span class="sr-only">(current)</span></a></li>
+                <li><a href="#about" class="page-scroll">About Eurofest </a></li>
+                <li><a href="#schedule" class="page-scroll">Schedule</a></li>
+                <li><a href="#accomodation" class="page-scroll">Accomodation</a></li>
+                <li><a href="#fee" class="page-scroll">Fee</a></li>
+                <li><a href="#committe" class="page-scroll">Organisation committe</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+
+                {#{% if ( _locale  == 'ru') %}#}
+                    <li><a href="{{ path('omer_user_default_index', {'_locale': 'en'}) }}">{{ 'en' | trans() }}</a></li>
+                {#{% else %}#}
+                    {#<li><a href="{{ path('omer_user_default_index', {'_locale': 'ru'}) }}">{{ 'ru' | trans() }}</a></li>#}
+                {#{% endif %}#}
+
                 {% if (not is_granted('ROLE_ADMIN')) %}
                     <li><a href="#" onclick="loginClick()">{{ 'label.login' | trans() }}</a></li>
                 {% else %}

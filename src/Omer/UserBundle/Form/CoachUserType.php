@@ -3,7 +3,9 @@
 namespace Omer\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,60 +18,91 @@ class CoachUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('firstName', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.personal_data.first_name'
+                ]
+            ])
             ->add('surname', TextType::class, [
-                'label' => 'label.surname',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.surname'
+                    'placeholder' => 'label.personal_data.surname'
                 ]
             ])
-            ->add('latinSurname', TextType::class, [
-                'label' => 'label.latin_surname',
+            ->add('T_shirtSize', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.latin_surname'
-                ]
-            ])
-            ->add('name', TextType::class, [
-                'label' => 'label.name',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.name'
-                ]
-            ])
-            ->add('latinName', TextType::class, [
-                'label' => 'label.latin_name',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.latin_name'
-                ]
-            ])
-            ->add('patronymic', TextType::class, [
-                'label' => 'label.patronymic',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.patronymic'
-                ]
-            ])
-            ->add('latinPatronymic', TextType::class, [
-                'label' => 'label.latin_patronymic',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.latin_patronymic'
-                ]
-            ])
-            ->add('phone', TextType::class, [
-                'label' => 'label.phone',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.phone'
+                    'placeholder' => 'label.coach_user.t_shirt_size'
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'label.email',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.email'
+                    'placeholder' => 'label.coach_user.email'
+                ]
+            ])
+            ->add('dateOfBirth', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                'attr' => [
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'years',
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.personal_data.date_of_birth'
+                ]
+            ])
+            ->add('passportNumber', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.personal_data.passport_number'
+                ]
+            ])
+            ->add('dateOfIssue', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                'attr' => [
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'years',
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.personal_data.date_of_issue'
+                ]
+            ])
+            ->add('dateOfExpiry', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                'attr' => [
+                    'class' => 'form-control input-inline datepicker',
+                    'data-date-format' => 'DD-MM-YYYY',
+                    'data-date-view-mode' => 'years',
+                    'data-date-locale' => 'label.locale',
+                    'placeholder' => 'label.personal_data.date_of_expiry'
+                ]
+            ])
+            ->add('citizenship', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.personal_data.citizenship'
+                ],
+            ])
+            ->add('address', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.coach_user.address'
+                ]
+            ])
+            ->add('dietaryConcerns', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.coach_user.dietary_concerns'
+                ]
+            ])
+            ->add('medicalConcerns', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.coach_user.medical_concerns'
                 ]
             ])
         ;

@@ -1,12 +1,12 @@
 services:
     sonata.admin.team:
-        class: Omer\TeamBundle\Admin\TeamAdmin
+        class: Omer\TeamBundle\Admin\ForeignTeamAdmin
         arguments:
             - ~
-            - Omer\TeamBundle\Entity\Team
-            - ~
+            - Omer\TeamBundle\Entity\BaseTeam
+            - OmerTeamBundle:BaseTeamAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Team info" , label: "Team" }
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.team_info' , label: 'admin.group_label.team' }
         calls:
             - [ setTranslationDomain, [OmerTeamBundle] ]
             - [ setTokenStorage, ['@security.token_storage'] ]
@@ -16,9 +16,21 @@ services:
         arguments:
             - ~
             - Omer\TeamBundle\Entity\TeamMember
-            - ~
+            - OmerTeamBundle:TeamMemberAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Team info" , label: "Team members" }
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.team_info' , label: 'admin.group_label.team_members' }
+        calls:
+            - [ setTranslationDomain, [OmerTeamBundle] ]
+            - [ setTokenStorage, ['@security.token_storage'] ]
+
+    sonata.admin.other_people:
+        class: Omer\TeamBundle\Admin\OtherPeopleAdmin
+        arguments:
+            - ~
+            - Omer\TeamBundle\Entity\OtherPeople
+            - OmerTeamBundle:OtherPeopleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.team_info' , label: 'admin.group_label.other_people' }
         calls:
             - [ setTranslationDomain, [OmerTeamBundle] ]
             - [ setTokenStorage, ['@security.token_storage'] ]

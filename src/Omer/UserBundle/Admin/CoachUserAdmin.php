@@ -16,50 +16,39 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
-class CoachUserAdmin extends AbstractAdmin
+class CoachUserAdmin extends PersonalDataAdmin
 {
     use CurrentUserTrait;
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        parent::configureFormFields($formMapper);
         $formMapper
-            ->add('surname', TextType::class, [
-                'label' => 'label.surname'
-            ])
-            ->add('name', TextType::class, [
-                'label' => 'label.name'
-            ])
-            ->add('patronymic', TextType::class, [
-                'label' => 'label.patronymic'
-            ])
-            ->add('latinSurname', TextType::class, [
-                'label' => 'label.latin_surname'
-            ])
-            ->add('latinName', TextType::class, [
-                'label' => 'label.latin_name'
-            ])
-            ->add('latinPatronymic', TextType::class, [
-                'label' => 'label.latin_patronymic'
-            ])
-            ->add('phone', NumberType::class, [
-                'label' => 'label.phone'
+            ->add('address', TextType::class, [
+                'label' => 'label.coach_user.address'
             ])
             ->add('email', EmailType::class, [
-                'label' => 'label.email'
+                'label' => 'label.coach_user.email'
             ])
-            ->add('plainPassword', RepeatedType::class, array(
+            ->add('dietaryConcerns', TextareaType::class, [
+                'label' => 'label.coach_user.dietary_concerns'
+            ])
+            ->add('medicalConcerns', TextareaType::class, [
+                'label' => 'label.coach_user.medical_concerns'
+            ])
+            ->add('plainPassword', RepeatedType::class, [
                 'required' => false,
                 'type' => 'password',
-                'options' => array('translation_domain' => 'FOSUserBundle'),
-                'first_options' => array('label' => 'form.password'),
-                'second_options' => array('label' => 'form.password_confirmation'),
+                'options' => ['translation_domain' => 'FOSUserBundle'],
+                'first_options' => ['label' => 'form.password'],
+                'second_options' => ['label' => 'form.password_confirmation'],
                 'invalid_message' => 'fos_user.password.mismatch'
-            ))
+            ]);
         ;
     }
 
@@ -67,10 +56,10 @@ class CoachUserAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('email', null, [
-                'label' => 'label.email'
+                'label' => 'label.coach_user.email'
             ])
             ->add('surname', null, [
-                'label' => 'label.surname'
+                'label' => 'label.coach_user.surname'
             ])
         ;
     }
@@ -78,27 +67,19 @@ class CoachUserAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('surname', null, [
-                'label' => 'label.surname'
+            ->add('fullName', null, [
+                'label' => 'label.personal_data.full_name'
             ])
-            ->add('name', null, [
-                'label' => 'label.name'
-            ])
-            ->add('patronymic', null,[
-                'label' => 'label.patronymic'
+            ->add('email', null, [
+                'label' => 'label.personal_data.email'
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
+//                    'show' => array(),
                     'edit' => array(),
                 )
             ))
         ;
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('create');
     }
 
     public function createQuery($context = 'list')
@@ -107,7 +88,9 @@ class CoachUserAdmin extends AbstractAdmin
 
         if($this->getCurrentUser()->hasRole('ROLE_COACH')){
             $query
-                ->andWhere($query->getRootAlias() . '.username LIKE :user')
+                ->innerJoin($query->getRootAlias().'.teams', 't')
+                ->innerJoin('t.coaches', 'c')
+                ->andWhere('c.username LIKE :user')
                 ->setParameter('user', $this->getCurrentUser()->getUsername());
         }
 
@@ -118,5 +101,11 @@ class CoachUserAdmin extends AbstractAdmin
         $um = $this->getConfigurationPool()->getContainer()->get('fos_user.user_manager');
         $um->updateCanonicalFields($object);
         $um->updatePassword($object);
+    }
+
+    public function configureRoutes(RouteCollection $collection)
+    {
+        parent::configureRoutes($collection);
+        $collection->remove('add');
     }
 }

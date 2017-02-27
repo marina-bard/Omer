@@ -2,11 +2,11 @@
 
 namespace Omer\TeamBundle\Controller;
 
+use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
 use Omer\UserBundle\Entity\CoachUser;
 use Omer\UserBundle\Traits\CurrentUserTrait;
-use Omer\UserBundle\Traits\RandomPasswordTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,10 +18,9 @@ use Swift_Message;
  *
  * @Route("team")
  */
-class TeamController extends Controller
+class BaseTeamController extends Controller
 {
     use CurrentUserTrait;
-    use RandomPasswordTrait;
 
     const TRANS_DOMAIN = [
         'team' => 'OmerTeamBundle',
@@ -36,31 +35,31 @@ class TeamController extends Controller
      */
     public function newAction(Request $request)
     {
-        $team = new Team();
+        $team = new ForeignTeam();
 
         $coach = new CoachUser();
         $team->addCoach($coach);
         $coach->addTeam($team);
-        $coach->setIsMain(true);
 
         $teamMember = new TeamMember();
         $team->addMember($teamMember);
 
-        $password = $this->getPassword();
+        $password = $coach->generatePassword();
         $coach->setPlainPassword($password);
 
         $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm('Omer\TeamBundle\Form\TeamType', $team);
+        $form = $this->createForm('Omer\TeamBundle\Form\ForeignTeamType', $team);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($team);
             $em->flush();
 
-            return $this->redirectToRoute('team_email_request', [
-                'id' => $team->getId(),
-                'password' => $password
+//            $this->sendEmail($team, $password);
+
+            return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
+                'email' => $coach->getEmail(),
             ]);
         }
 
@@ -69,27 +68,27 @@ class TeamController extends Controller
             'form' => $form->createView(),
         ]);
     }
+//
+//    /**
+//     * Finds and displa{id}/ys a team entity.
+//     *
+//     * @Route("/{id}/email_request", name="team_email_request")
+//     * @Method("GET")
+//     */
+//    public function sendEmailRequestAction(Request $request)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $team = $em->getRepository("OmerTeamBundle:Team")->find([ 'id' => $request->get('id') ]);
+//        $coach = $team->getMainCoach();
+//
+//        $this->sendEmail($team, $request->get('password'));
+//
+//        return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
+//            'email' => $coach->getEmail(),
+//        ]);
+//    }
 
-    /**
-     * Finds and displa{id}/ys a team entity.
-     *
-     * @Route("/{id}/email_request", name="team_email_request")
-     * @Method("GET")
-     */
-    public function sendEmailRequestAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $team = $em->getRepository("OmerTeamBundle:Team")->find([ 'id' => $request->get('id') ]);
-        $coach = $team->getMainCoach();
-
-        $this->sendEmail($team, $request->get('password'));
-
-        return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
-            'email' => $coach->getEmail(),
-        ]);
-    }
-
-    public function sendEmail(Team $team, $password)
+    public function sendEmail($team, $password)
     {
         $coach = $team->getMainCoach();
 
@@ -115,5 +114,13 @@ class TeamController extends Controller
         ;
 
         $this->get('mailer')->send($message);
+    }
+
+    /**
+     * @Route("/abort", name="team_new_abort")
+     */
+    public function indexAction()
+    {
+        return $this->render('OmerTeamBundle:team:registration_abort.html.twig');
     }
 }

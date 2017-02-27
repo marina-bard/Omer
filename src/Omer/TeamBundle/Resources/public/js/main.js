@@ -27,4 +27,17 @@ $(document).ready(function ($) {
             $('.bootstrap-datetimepicker-widget').hide();
         });
     });
+
+    $('a.page-scroll').bind('click', function (event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top - 50
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    });
+
+//убрать после появления рабочих ссылок
+    $('#schedule a').on('click', function (e) {
+        e.preventDefault();
+    });
 });

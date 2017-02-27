@@ -19,6 +19,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ForeignTeam extends BaseTeam
 {
+    const PAYMENT_CURRENCY = [
+        'BYN',
+        'RUB',
+        'EUR',
+        'USD'
+    ];
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -55,14 +62,14 @@ class ForeignTeam extends BaseTeam
     protected $division;
 
     /**
-     * @ORM\Column(name="date_of_arrival", type="datetime", nullable=true)
+     * @ORM\Column(name="date_of_arrival", type="date", nullable=true)
      *
      *
      */
     protected $dateOfArrival;
 
     /**
-     * @ORM\Column(name="date_of_departure", type="datetime", nullable=true)
+     * @ORM\Column(name="date_of_departure", type="date", nullable=true)
      */
     protected $dateOfDeparture;
 

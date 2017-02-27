@@ -90,8 +90,8 @@ class ForeignTeamType extends AbstractType
                     'class' => 'form-control input-inline datepicker',
                     'data-date-format' => 'DD-MM-YYYY',
                     'data-date-view-mode' => 'days',
-                    'data-date-start-date' => '23-04-2017',
-                    'data-date-end-date' => '28-04-2017',
+                    'data-date-start-date' => '18-04-2017',
+                    'data-date-end-date' => '02-05-2017',
                     'data-date-locale' => 'label.locale',
                     'placeholder' => 'label.team.date_of_arrival'
                 ]
@@ -104,8 +104,8 @@ class ForeignTeamType extends AbstractType
                     'class' => 'form-control input-inline datepicker',
                     'data-date-format' => 'DD-MM-YYYY',
                     'data-date-view-mode' => 'days',
-                    'data-date-start-date' => '23-04-2017',
-                    'data-date-end-date' => '28-04-2017',
+                    'data-date-start-date' => '18-04-2017',
+                    'data-date-end-date' => '02-05-2017',
                     'data-date-locale' => 'label.locale',
                     'placeholder' => 'label.team.date_of_departure'
                 ]

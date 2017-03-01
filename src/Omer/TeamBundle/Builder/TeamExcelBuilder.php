@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class TeamExcelBuilder
 {
-    const TEAM_INFO_FILEPATH = '/../web/temp/team_excel.xls';
+    const TEAM_INFO_FILEPATH = '/../web/uploads/teams/';
 
     /**
      * @var ContainerInterface $container
@@ -55,9 +55,9 @@ class TeamExcelBuilder
         $this->value_row = 0;
     }
 
-    public function getTeamExcelFile()
+    private function getTeamExcelFile($teamName)
     {
-        return $this->container->get('kernel')->getRootDir().'/'.self::TEAM_INFO_FILEPATH;
+        return $this->container->get('kernel')->getRootDir().'/'.self::TEAM_INFO_FILEPATH.$teamName.'.xls';
     }
 
     public function buildTeamExcel(ForeignTeam $team)
@@ -87,18 +87,15 @@ class TeamExcelBuilder
         }
 
         $writer = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $writer->save($this->getTeamExcelFile());
+        $teamName = $team->getEnglishTeamName();
+        $writer->save($this->getTeamExcelFile($teamName));
 
-        return $this->getTeamExcelFile();
+        return $this->getTeamExcelFile($teamName);
     }
 
-    public function addTeam(PHPExcel_Worksheet $sheet, ForeignTeam $team, $label_row)
+    private function addTeam(PHPExcel_Worksheet $sheet, ForeignTeam $team, $label_row)
     {
-        $align_left = [
-            'alignment' => [
-                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
-            ]
-        ];
+
 
         $value_row = $label_row;
         $sheet
@@ -107,26 +104,31 @@ class TeamExcelBuilder
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.school', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.country', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.district', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.city', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.address', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.problem', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.division', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.date_of_arrival', [], 'OmerTeamBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.date_of_departure', [], 'OmerTeamBundle'))            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.date_of_arrival', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.date_of_departure', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.concerns', [], 'OmerTeamBundle'))
         ;
 
        $sheet
             ->setCellValue('C'.(++$value_row), $team->getEnglishTeamName())
             ->setCellValue('C'.(++$value_row), $team->getMemberNumber())
-           ->getStyle('C'.$value_row)->applyFromArray($align_left);
-        $sheet
+            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+       $sheet
             ->setCellValue('C'.(++$value_row), $team->getSchool())
             ->setCellValue('C'.(++$value_row), $team->getCountry())
             ->setCellValue('C'.(++$value_row), $team->getDistrict())
             ->setCellValue('C'.(++$value_row), $team->getCity())
             ->setCellValue('C'.(++$value_row), $team->getAddress())
             ->setCellValue('C'.(++$value_row), $team->getProblem())
+            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+       $sheet
             ->setCellValue('C'.(++$value_row), $team->getDivision())
+            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+       $sheet
             ->setCellValue('C'.(++$value_row), $team->getDateOfArrival())
             ->setCellValue('C'.(++$value_row), $team->getDateOfDeparture())
             ->setCellValue('C'.(++$value_row), $team->getConcerns())
@@ -138,11 +140,10 @@ class TeamExcelBuilder
         return $sheet;
     }
 
-    public function addCoaches(PHPExcel_Worksheet $sheet, $coaches, $label_row)
+    private function addCoaches(PHPExcel_Worksheet $sheet, $coaches, $label_row)
     {
         $this->sheet = $this->setHeader($this->sheet, ++$label_row, $this->translator->trans('coaches', [], 'OmerTeamBundle'));
 
-        $value_row = $label_row;
         $number = 0;
 
         $sheet
@@ -173,6 +174,8 @@ class TeamExcelBuilder
                 ->setCellValue('E'.($value_row), $coach->getEmail())
                 ->setCellValue('F'.($value_row), $coach->getDateOfBirth())
                 ->setCellValue('G'.($value_row), $coach->getPassportNumber())
+                ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+            $sheet
                 ->setCellValue('H'.($value_row), $coach->getDateOfIssue())
                 ->setCellValue('I'.($value_row), $coach->getDateOfExpiry())
                 ->setCellValue('J'.($value_row), $coach->getAddress())
@@ -187,11 +190,10 @@ class TeamExcelBuilder
         return $sheet;
     }
 
-    public function addTeamMembers(PHPExcel_Worksheet $sheet, $coaches, $label_row)
+    private function addTeamMembers(PHPExcel_Worksheet $sheet, $coaches, $label_row)
     {
         $this->sheet = $this->setHeader($this->sheet, ++$label_row, $this->translator->trans('label.team.members', [], 'OmerTeamBundle'));
 
-        $value_row = $label_row;
         $number = 0;
 
         $sheet
@@ -220,6 +222,8 @@ class TeamExcelBuilder
                 ->setCellValue('D'.($value_row), $coach->getTShirtSize())
                 ->setCellValue('E'.($value_row), $coach->getDateOfBirth())
                 ->setCellValue('F'.($value_row), $coach->getPassportNumber())
+                ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+            $sheet
                 ->setCellValue('G'.($value_row), $coach->getDateOfIssue())
                 ->setCellValue('H'.($value_row), $coach->getDateOfExpiry())
                 ->setCellValue('I'.($value_row), $coach->getAddress())
@@ -234,11 +238,10 @@ class TeamExcelBuilder
         return $sheet;
     }
 
-    public function addOtherPeople(PHPExcel_Worksheet $sheet, $coaches, $label_row)
+    private function addOtherPeople(PHPExcel_Worksheet $sheet, $coaches, $label_row)
     {
         $this->sheet = $this->setHeader($this->sheet, ++$label_row, $this->translator->trans('label.team.other_people', [], 'OmerTeamBundle'));
 
-        $value_row = $label_row;
         $number = 0;
 
         $sheet
@@ -271,6 +274,8 @@ class TeamExcelBuilder
                 ->setCellValue('F'.($value_row), $coach->getEmail())
                 ->setCellValue('G'.($value_row), $coach->getDateOfBirth())
                 ->setCellValue('H'.($value_row), $coach->getPassportNumber())
+                ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+            $sheet
                 ->setCellValue('I'.($value_row), $coach->getDateOfIssue())
                 ->setCellValue('J'.($value_row), $coach->getDateOfExpiry())
                 ->setCellValue('K'.($value_row), $coach->getAddress())
@@ -285,7 +290,7 @@ class TeamExcelBuilder
         return $sheet;
     }
 
-    public function setHeader(PHPExcel_Worksheet $sheet, $row, $title)
+    private function setHeader(PHPExcel_Worksheet $sheet, $row, $title)
     {
         /**
          * @var PHPExcel_Worksheet $sheet
@@ -302,6 +307,15 @@ class TeamExcelBuilder
         $sheet->getStyle('B'.$row.':C'.$row)->applyFromArray($style);
 
         return $sheet;
+    }
+
+    private function getAlignLeft()
+    {
+        return $align_left = [
+            'alignment' => [
+                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
     }
 
 }

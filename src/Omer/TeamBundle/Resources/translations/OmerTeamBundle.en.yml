@@ -84,3 +84,9 @@ email:
 
         Wish you success in the competition,
         Odyssey of the Mind team.
+
+    for_boss: |
+        Team '%team_name%' has just successfully registered!
+        You will find the details in the document attached.
+
+        Odyssey of the Mind team.

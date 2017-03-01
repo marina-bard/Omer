@@ -56,7 +56,7 @@ class BaseTeamController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->sendEmailToCoaches($team);
+            $this->generateEmail($team);
             $this->em->persist($team);
             $this->em->flush();
 
@@ -70,7 +70,7 @@ class BaseTeamController extends Controller
         ]);
     }
 
-    private function sendEmailToCoaches($team)
+    private function generateEmail($team)
     {
         $filepath = $this->get('builder.team_excel_builder')->buildTeamExcel($team);
 
@@ -87,6 +87,13 @@ class BaseTeamController extends Controller
                 ]);
 
             $this->sendEmail($filepath, $body, $coach->getUsername());
+
+            $body = $this->get('templating')
+                ->render('@OmerTeam/email/email_registration_for_boss.html.twig', [
+                    'teamName' => $team->getEnglishTeamName()
+                ]);
+
+            $this->sendEmail($filepath, $body, $this->getParameter('mailer_user'));
         }
     }
 

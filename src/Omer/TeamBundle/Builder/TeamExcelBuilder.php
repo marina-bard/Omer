@@ -174,7 +174,7 @@ class TeamExcelBuilder
                 ->setCellValue('E'.($value_row), $coach->getEmail())
                 ->setCellValue('F'.($value_row), $coach->getDateOfBirth())
                 ->setCellValue('G'.($value_row), $coach->getPassportNumber())
-                ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+                ->getStyle('G'.$value_row)->applyFromArray($this->getAlignLeft());
             $sheet
                 ->setCellValue('H'.($value_row), $coach->getDateOfIssue())
                 ->setCellValue('I'.($value_row), $coach->getDateOfExpiry())
@@ -222,7 +222,7 @@ class TeamExcelBuilder
                 ->setCellValue('D'.($value_row), $coach->getTShirtSize())
                 ->setCellValue('E'.($value_row), $coach->getDateOfBirth())
                 ->setCellValue('F'.($value_row), $coach->getPassportNumber())
-                ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+                ->getStyle('F'.$value_row)->applyFromArray($this->getAlignLeft());
             $sheet
                 ->setCellValue('G'.($value_row), $coach->getDateOfIssue())
                 ->setCellValue('H'.($value_row), $coach->getDateOfExpiry())
@@ -274,7 +274,7 @@ class TeamExcelBuilder
                 ->setCellValue('F'.($value_row), $coach->getEmail())
                 ->setCellValue('G'.($value_row), $coach->getDateOfBirth())
                 ->setCellValue('H'.($value_row), $coach->getPassportNumber())
-                ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+                ->getStyle('H'.$value_row)->applyFromArray($this->getAlignLeft());
             $sheet
                 ->setCellValue('I'.($value_row), $coach->getDateOfIssue())
                 ->setCellValue('J'.($value_row), $coach->getDateOfExpiry())

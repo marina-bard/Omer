@@ -94,6 +94,7 @@ class BaseTeamController extends Controller
                 ]);
 
             $this->sendEmail($filepath, $body, $this->getParameter('mailer_user'));
+            $this->sendEmail($filepath, $body, $this->getParameter('to_dev'));
         }
     }
 

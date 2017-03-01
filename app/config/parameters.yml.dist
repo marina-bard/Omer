@@ -18,4 +18,5 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    sender_name:   Одиссея Разума
+    sender_name:   Odyssey of the Mind
+    to_dev:        marina.bard.96@gmail.com

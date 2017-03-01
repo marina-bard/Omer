@@ -18,4 +18,4 @@
 *.php~
 /bower_components/
 /web/assets/
-/web/temp/
+/web/uploads/teams/

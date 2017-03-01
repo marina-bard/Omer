@@ -1,0 +1,5 @@
+{% trans_default_domain 'OmerTeamBundle' %}
+
+{% autoescape false %}
+    {{ 'email.for_boss'|trans({'%team_name%': teamName})|nl2br }}
+{% endautoescape %}

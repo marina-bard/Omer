@@ -8,9 +8,8 @@
 
 namespace Omer\TeamBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use Omer\TravelBundle\Entity\TravelInfo;
 
 /**
  * @ORM\Entity
@@ -62,18 +61,6 @@ class ForeignTeam extends BaseTeam
     protected $division;
 
     /**
-     * @ORM\Column(name="date_of_arrival", type="date", nullable=true)
-     *
-     *
-     */
-    protected $dateOfArrival;
-
-    /**
-     * @ORM\Column(name="date_of_departure", type="date", nullable=true)
-     */
-    protected $dateOfDeparture;
-
-    /**
      * @ORM\Column(name="concerns", type="string", nullable=true)
      *
      */
@@ -85,6 +72,26 @@ class ForeignTeam extends BaseTeam
      * @ORM\Column(name="payment_currency", type="string", nullable=true)
      */
     protected $paymentCurrency;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Omer\TravelBundle\Entity\TravelInfo", mappedBy="team", cascade={"all"})
+     */
+    protected $travelAttributes;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->createTravelAttribute(TravelInfo::TYPE['arrivals']);
+        $this->createTravelAttribute(TravelInfo::TYPE['departures']);
+    }
+
+    public function createTravelAttribute($type)
+    {
+        $attr = new TravelInfo();
+        $attr->setType($type);
+        $attr->setTeam($this);
+        $this->addTravelAttribute($attr);
+    }
 
     /**
      * Set school
@@ -279,52 +286,36 @@ class ForeignTeam extends BaseTeam
     }
 
     /**
-     * Set dateOfArrival
+     * Add travelAttribute
      *
-     * @param \DateTime $dateOfArrival
+     * @param \Omer\TravelBundle\Entity\TravelInfo $travelAttribute
      *
      * @return ForeignTeam
      */
-    public function setDateOfArrival($dateOfArrival)
+    public function addTravelAttribute(\Omer\TravelBundle\Entity\TravelInfo $travelAttribute)
     {
-        $this->dateOfArrival = $dateOfArrival;
-        $this->dateOfArrival->format('d.m.Y');
+        $this->travelAttributes[] = $travelAttribute;
 
         return $this;
     }
 
     /**
-     * Get dateOfArrival
+     * Remove travelAttribute
      *
-     * @return \DateTime
+     * @param \Omer\TravelBundle\Entity\TravelInfo $travelAttribute
      */
-    public function getDateOfArrival()
+    public function removeTravelAttribute(\Omer\TravelBundle\Entity\TravelInfo $travelAttribute)
     {
-        return $this->dateOfArrival;
+        $this->travelAttributes->removeElement($travelAttribute);
     }
 
     /**
-     * Set dateOfDeparture
+     * Get travelAttributes
      *
-     * @param \DateTime $dateOfDeparture
-     *
-     * @return ForeignTeam
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setDateOfDeparture($dateOfDeparture)
+    public function getTravelAttributes()
     {
-        $this->dateOfDeparture = $dateOfDeparture;
-        $this->dateOfDeparture->format('d.m.Y');
-
-        return $this;
-    }
-
-    /**
-     * Get dateOfDeparture
-     *
-     * @return \DateTime
-     */
-    public function getDateOfDeparture()
-    {
-        return $this->dateOfDeparture;
+        return $this->travelAttributes;
     }
 }

@@ -17,15 +17,15 @@ use Doctrine\ORM\Mapping as ORM;
 class TravelInfo
 {
     const TYPE = [
-        'arrival_info',
-        'departure_info'
+        'arrivals' => 0,
+        'departures' => 1
     ];
 
     const TRANSPORT = [
-        'avia',
-        'train',
-        'bus',
-        'own'
+        'label.transport.plane',
+        'label.transport.train',
+        'label.transport.bus',
+        'label.transport.own'
     ];
 
     /**
@@ -46,9 +46,9 @@ class TravelInfo
     private $goBy;
 
     /**
-     * @ORM\Column(name="transport", type="integer", nullable=true)
+     * @ORM\Column(name="transport_number", type="string", nullable=true)
      */
-    private $transport;
+    private $transportNumber;
 
     /**
      * @ORM\Column(name="station_from", type="string", nullable=true)
@@ -61,9 +61,20 @@ class TravelInfo
     private $stationTo;
 
     /**
-     * @ORM\Column(name="time", type="time", nullable=true)
+     * @ORM\Column(name="time", type="string", nullable=true)
      */
     private $time;
+
+    /**
+     * @ORM\Column(name="type", type="string", nullable=true)
+     */
+    private $type;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Omer\TeamBundle\Entity\ForeignTeam", inversedBy="travelAttributes")
+     * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     */
+    private $team;
 
 
     /**
@@ -125,30 +136,6 @@ class TravelInfo
     }
 
     /**
-     * Set transport
-     *
-     * @param integer $transport
-     *
-     * @return TravelInfo
-     */
-    public function setTransport($transport)
-    {
-        $this->transport = $transport;
-
-        return $this;
-    }
-
-    /**
-     * Get transport
-     *
-     * @return integer
-     */
-    public function getTransport()
-    {
-        return $this->transport;
-    }
-
-    /**
      * Set stationFrom
      *
      * @param string $stationFrom
@@ -197,9 +184,81 @@ class TravelInfo
     }
 
     /**
+     * Set team
+     *
+     * @param \Omer\TeamBundle\Entity\ForeignTeam $team
+     *
+     * @return TravelInfo
+     */
+    public function setTeam(\Omer\TeamBundle\Entity\ForeignTeam $team = null)
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Omer\TeamBundle\Entity\ForeignTeam
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return TravelInfo
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set transportNumber
+     *
+     * @param string $transportNumber
+     *
+     * @return TravelInfo
+     */
+    public function setTransportNumber($transportNumber)
+    {
+        $this->transportNumber = $transportNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get transportNumber
+     *
+     * @return string
+     */
+    public function getTransportNumber()
+    {
+        return $this->transportNumber;
+    }
+
+    /**
      * Set time
      *
-     * @param \DateTime $time
+     * @param string $time
      *
      * @return TravelInfo
      */
@@ -213,7 +272,7 @@ class TravelInfo
     /**
      * Get time
      *
-     * @return \DateTime
+     * @return string
      */
     public function getTime()
     {

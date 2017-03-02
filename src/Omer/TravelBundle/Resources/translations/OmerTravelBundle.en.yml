@@ -1,0 +1,13 @@
+
+label:
+    transport:
+        plane:  Plane
+        train:  Train
+        bus:    Bus
+        own:    Own transport
+
+    transport_number: Plane/Train Number
+    station_from:     Travel from
+    station_to:       Arrive to
+
+

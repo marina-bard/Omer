@@ -31,11 +31,23 @@
                             {{ form_row(form.address, {'attr':{'class':'form-control'}}) }}
                             {{ form_row(form.problem, {'attr':{'class':'form-control'}}) }}
                             {{ form_row(form.division, {'attr':{'class':'form-control'}}) }}
-                            {{ form_row(form.dateOfArrival, {'attr':{'class':'datepicker'}}) }}
-                            {{ form_row(form.dateOfDeparture, {'attr':{'class':'datepicker'}}) }}
+                            {#{{ form_row(form.dateOfArrival, {'attr':{'class':'datepicker'}}) }}#}
+                            {#{{ form_row(form.dateOfDeparture, {'attr':{'class':'datepicker'}}) }}#}
                             {{ form_row(form.concerns, {'attr':{'class':'form-control'}}) }}
                             {{ form_row(form.paymentCurrency, {'attr':{'class':'form-control'}}) }}
 
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                            {{ (form_row(form.travelAttributes[0])) }}
+                        </div>
+
+                        <div class="col-md-3">
+                            {{ (form_row(form.travelAttributes[1])) }}
                         </div>
                     </div>
 
@@ -59,7 +71,6 @@
                                 max: 2
                             });
                         </script>
-
                     </div>
 
                     <div class="row">
@@ -102,7 +113,7 @@
                             add_at_the_end: true,
                             allow_up: false,
                             allow_down: false,
-                            max: 2
+                            max: 10
                         });
                     </script>
 

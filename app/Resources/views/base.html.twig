@@ -13,6 +13,7 @@
             <link type="text/css" rel="stylesheet" href="{{ asset('bundles/omerteam/css/new_team.css') }}">
             <link type="text/css" rel="stylesheet" href="{{ asset('bundles/omerteam/css/animate.css') }}">
             <link type="text/css" rel="stylesheet" href="{{ asset('bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}">
+            <link type="text/css" rel="stylesheet" href="{{ asset('bundles/omerteam/css/font-awesome/css/font-awesome.min.css') }}">
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('bundles/omerteam/images/favicon/favicon.ico') }}" type="image/x-icon" />
         <link rel="apple-touch-icon" href="{{ asset('bundles/omerteam/images/favicon/apple-touch-icon.png') }}" />
@@ -47,7 +48,7 @@
             {% endblock %}
 
             {% block footer %}
-                {#{% include 'OmerTeamBundle:Default:_footer.html.twig' %}#}
+                {% include 'OmerTeamBundle:Default:_footer.html.twig' %}
             {% endblock %}
 
         {% endblock %}

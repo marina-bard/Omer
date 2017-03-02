@@ -16,8 +16,8 @@ label:
         district:           District
         city:               City
         address:            Address
-        problem:            Problem
-        division:           Division
+        problem:            Long-Term Problem
+        division:           Age Division
         date_of_arrival:    Date of Arrival
         date_of_departure:  Date of Departure
         payment_currency:   Payment Currency

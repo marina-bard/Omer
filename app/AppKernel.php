@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Omer\UserBundle\OmerUserBundle(),
             new Omer\TeamBundle\OmerTeamBundle(),
             new Omer\CompetitionBundle\OmerCompetitionBundle(),
+            new Omer\TravelBundle\OmerTravelBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

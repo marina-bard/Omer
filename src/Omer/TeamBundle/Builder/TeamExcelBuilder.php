@@ -111,7 +111,7 @@ class TeamExcelBuilder
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.date_of_arrival', [], 'OmerTravelBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.go_by', [], 'OmerTravelBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.transport_number', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.travel_from', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.depart_from', [], 'OmerTravelBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrive_to', [], 'OmerTravelBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrival_time', [], 'OmerTravelBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.date_of_departure', [], 'OmerTravelBundle'))

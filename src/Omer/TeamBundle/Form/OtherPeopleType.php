@@ -112,12 +112,14 @@ class OtherPeopleType extends AbstractType
                 ]
             ])
             ->add('dietaryConcerns', TextareaType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.dietary_concerns'
                 ]
             ])
             ->add('medicalConcerns', TextareaType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.medical_concerns'

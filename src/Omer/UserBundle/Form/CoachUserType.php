@@ -94,12 +94,14 @@ class CoachUserType extends AbstractType
                 ]
             ])
             ->add('dietaryConcerns', TextareaType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.coach_user.dietary_concerns'
                 ]
             ])
             ->add('medicalConcerns', TextareaType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.coach_user.medical_concerns'

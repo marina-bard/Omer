@@ -1,13 +1,19 @@
+travel_info:  Travel Information
 
 label:
     transport:
         plane:  Plane
         train:  Train
         bus:    Bus
-        own:    Own transport
+        own:    Own Transport
 
-    transport_number: Plane/Train Number
-    station_from:     Travel from
-    station_to:       Arrive to
+    go_by:              Go by
+    date_of_arrival:    Date of Arrival
+    date_of_departure:  Date of Departure
+    transport_number:   Plane/Train Number
+    station_from:       Travel from
+    station_to:         Arrive to
+    arrival_time:       Time of Arrival
+    departure_time:     Departure Time
 
 

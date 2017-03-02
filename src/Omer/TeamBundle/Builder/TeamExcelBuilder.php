@@ -14,6 +14,7 @@ use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\TeamBundle\Entity\OtherPeople;
 use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
+use Omer\TravelBundle\Entity\TravelInfo;
 use Omer\UserBundle\Entity\CoachUser;
 use PHPExcel;
 use PHPExcel_IOFactory;
@@ -75,6 +76,10 @@ class TeamExcelBuilder
 
         $this->sheet = $this->addTeam($this->sheet, $team, $this->label_row);
 
+        $this->sheet = $this->setHeader($this->sheet, ++$this->label_row, $this->translator->trans('travel_info', [], 'OmerTravelBundle'));
+
+        $this->sheet = $this->addTravelInfo($this->sheet,$team, $this->label_row);
+
         $this->sheet = $this->addCoaches($this->sheet, $coaches, ++$this->label_row);
 
         $this->sheet = $this->addTeamMembers($this->sheet, $members, $this->label_row);
@@ -93,10 +98,58 @@ class TeamExcelBuilder
         return $this->getTeamExcelFile($teamName);
     }
 
-    private function addTeam(PHPExcel_Worksheet $sheet, ForeignTeam $team, $label_row)
+    private function addTravelInfo(PHPExcel_Worksheet $sheet, ForeignTeam $team, $label_row)
     {
+        $travels = $team->getTravelAttributes();
+        /**
+         * @var TravelInfo $arrival
+         */
+        $arrival = $travels[0];
+        $departures = $travels[1];
+        $value_row = $label_row;
+        $sheet
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.date_of_arrival', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.go_by', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.transport_number', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.travel_from', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrive_to', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrival_time', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.date_of_departure', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.go_by', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.transport_number', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.depart_from', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrive_to', [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrival_time', [], 'OmerTravelBundle'))
+        ;
 
+       $sheet
+            ->setCellValue('C'.(++$value_row), date_format($arrival->getDate(), 'd-m-Y'))
+            ->setCellValue('C'.(++$value_row), $this->translator->trans($arrival->getGoBy(), [], 'OmerTravelBundle'))
+            ->setCellValue('C'.(++$value_row), $arrival->getTransportNumber())
+           ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+       $sheet
+            ->setCellValue('C'.(++$value_row), $arrival->getStationFrom())
+            ->setCellValue('C'.(++$value_row), $arrival->getStationTo())
+            ->setCellValue('C'.(++$value_row), $arrival->getTime());
+       $sheet
+            ->setCellValue('C'.(++$value_row), date_format($departures->getDate(), 'd-m-Y'))
+            ->setCellValue('C'.(++$value_row), $this->translator->trans($departures->getGoBy(), [], 'OmerTravelBundle'))
+            ->setCellValue('C'.(++$value_row), $departures->getTransportNumber())
+            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+       $sheet
+            ->setCellValue('C'.(++$value_row), $departures->getStationFrom())
+            ->setCellValue('C'.(++$value_row), $departures->getStationTo())
+            ->setCellValue('C'.(++$value_row), $departures->getTime())
+       ;
 
+        $this->label_row = $label_row;
+        $this->value_row = $value_row;
+
+        return $sheet;
+    }
+
+    private function addTeam(PHPExcel_Worksheet $sheet, $team, $label_row)
+    {
         $value_row = $label_row;
         $sheet
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.english_team_name', [], 'OmerTeamBundle'))
@@ -108,16 +161,15 @@ class TeamExcelBuilder
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.address', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.problem', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.division', [], 'OmerTeamBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.date_of_arrival', [], 'OmerTeamBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.date_of_departure', [], 'OmerTeamBundle'))
+            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.payment_currency', [], 'OmerTeamBundle'))
             ->setCellValue('B'.(++$label_row), $this->translator->trans('label.team.concerns', [], 'OmerTeamBundle'))
         ;
 
-       $sheet
+        $sheet
             ->setCellValue('C'.(++$value_row), $team->getEnglishTeamName())
             ->setCellValue('C'.(++$value_row), $team->getMemberNumber())
             ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
-       $sheet
+        $sheet
             ->setCellValue('C'.(++$value_row), $team->getSchool())
             ->setCellValue('C'.(++$value_row), $team->getCountry())
             ->setCellValue('C'.(++$value_row), $team->getDistrict())
@@ -125,14 +177,13 @@ class TeamExcelBuilder
             ->setCellValue('C'.(++$value_row), $team->getAddress())
             ->setCellValue('C'.(++$value_row), $team->getProblem())
             ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
-       $sheet
+        $sheet
             ->setCellValue('C'.(++$value_row), $team->getDivision())
             ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
-       $sheet
-            ->setCellValue('C'.(++$value_row), $team->getDateOfArrival())
-            ->setCellValue('C'.(++$value_row), $team->getDateOfDeparture())
+        $sheet
+            ->setCellValue('C'.(++$value_row), $team->getPaymentCurrency())
             ->setCellValue('C'.(++$value_row), $team->getConcerns())
-       ;
+        ;
 
         $this->label_row = $label_row;
         $this->value_row = $value_row;
@@ -172,12 +223,12 @@ class TeamExcelBuilder
                 ->setCellValue('C'.($value_row), $coach->getSurname())
                 ->setCellValue('D'.($value_row), $coach->getTShirtSize())
                 ->setCellValue('E'.($value_row), $coach->getEmail())
-                ->setCellValue('F'.($value_row), $coach->getDateOfBirth())
+                ->setCellValue('F'.($value_row), date_format($coach->getDateOfBirth(), 'd-m-Y'))
                 ->setCellValue('G'.($value_row), $coach->getPassportNumber())
                 ->getStyle('G'.$value_row)->applyFromArray($this->getAlignLeft());
             $sheet
-                ->setCellValue('H'.($value_row), $coach->getDateOfIssue())
-                ->setCellValue('I'.($value_row), $coach->getDateOfExpiry())
+                ->setCellValue('H'.($value_row), date_format($coach->getDateOfIssue(),'d-m-Y'))
+                ->setCellValue('I'.($value_row), date_format($coach->getDateOfExpiry(),'d-m-Y'))
                 ->setCellValue('J'.($value_row), $coach->getAddress())
                 ->setCellValue('K'.($value_row), $coach->getDietaryConcerns())
                 ->setCellValue('L'.($value_row), $coach->getMedicalConcerns())
@@ -220,12 +271,12 @@ class TeamExcelBuilder
                 ->setCellValue('B'.($value_row), $coach->getFirstName())
                 ->setCellValue('C'.($value_row), $coach->getSurname())
                 ->setCellValue('D'.($value_row), $coach->getTShirtSize())
-                ->setCellValue('E'.($value_row), $coach->getDateOfBirth())
+                ->setCellValue('E'.($value_row), date_format($coach->getDateOfBirth(), 'd-m-Y'))
                 ->setCellValue('F'.($value_row), $coach->getPassportNumber())
                 ->getStyle('F'.$value_row)->applyFromArray($this->getAlignLeft());
             $sheet
-                ->setCellValue('G'.($value_row), $coach->getDateOfIssue())
-                ->setCellValue('H'.($value_row), $coach->getDateOfExpiry())
+                ->setCellValue('G'.($value_row), date_format($coach->getDateOfIssue(), 'd-m-Y'))
+                ->setCellValue('H'.($value_row), date_format($coach->getDateOfExpiry(), 'd-m-Y'))
                 ->setCellValue('I'.($value_row), $coach->getAddress())
                 ->setCellValue('G'.($value_row), $coach->getDietaryConcerns())
                 ->setCellValue('K'.($value_row), $coach->getMedicalConcerns())
@@ -272,12 +323,12 @@ class TeamExcelBuilder
                 ->setCellValue('D'.($value_row), $coach->getTShirtSize())
                 ->setCellValue('E'.($value_row), $coach->getTeamRole())
                 ->setCellValue('F'.($value_row), $coach->getEmail())
-                ->setCellValue('G'.($value_row), $coach->getDateOfBirth())
+                ->setCellValue('G'.($value_row), date_format($coach->getDateOfBirth(), 'd-m-Y'))
                 ->setCellValue('H'.($value_row), $coach->getPassportNumber())
                 ->getStyle('H'.$value_row)->applyFromArray($this->getAlignLeft());
             $sheet
-                ->setCellValue('I'.($value_row), $coach->getDateOfIssue())
-                ->setCellValue('J'.($value_row), $coach->getDateOfExpiry())
+                ->setCellValue('I'.($value_row), date_format($coach->getDateOfIssue(), 'd-m-Y'))
+                ->setCellValue('J'.($value_row), date_format($coach->getDateOfExpiry(), 'd-m-Y'))
                 ->setCellValue('K'.($value_row), $coach->getAddress())
                 ->setCellValue('L'.($value_row), $coach->getDietaryConcerns())
                 ->setCellValue('M'.($value_row), $coach->getMedicalConcerns())

@@ -1,0 +1,58 @@
+<div id="map"></div>
+
+<script>
+    var map, isMarkerInitialized = false;
+    function initMap() {
+        var geocoder;
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            disableDefaultUI: true,
+            draggable: true,
+            disableDoubleClickZoom: false,
+        });
+
+        geocoder = new google.maps.Geocoder();
+
+        google.maps.event.addDomListener(map, 'resize', function() {
+            geocodeAddress(geocoder, map);
+        });
+
+        google.maps.event.addDomListener(window, "resize", function() {
+            var center = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(center);
+        });
+
+        google.maps.event.addListenerOnce(map, 'idle', function(){
+            google.maps.event.trigger(map, 'resize');
+        });
+    }
+
+    function geocodeAddress(geocoder, resultsMap) {
+        var address = "Зубрёнок";
+
+        geocoder.geocode({'address': address}, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                var lat = results[0].geometry.location.lat() + 0.0005,
+                    lng = results[0].geometry.location.lng(),
+                    latlng = new google.maps.LatLng(lat, lng),
+                    myOptions = { center: latlng };
+
+                resultsMap.setOptions(myOptions);
+
+                if (!isMarkerInitialized) {
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+
+                    isMarkerInitialized = true;
+                }
+            }
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBvxBO3_UAx4FB3Y5XyOEEkVTx453IurU&callback=initMap">
+</script>

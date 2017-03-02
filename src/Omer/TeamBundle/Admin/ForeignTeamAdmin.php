@@ -11,15 +11,14 @@ namespace Omer\TeamBundle\Admin;
 
 use Doctrine\ORM\EntityRepository;
 use Omer\TeamBundle\Entity\BaseTeam;
+use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\UserBundle\OmerUserBundle;
-use Omer\UserBundle\Traits\CurrentUserTrait;
-use Omer\UserBundle\Traits\FullNameTrait;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -53,21 +52,26 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ->add('dateOfArrival','sonata_type_date_picker',[
                 'label' => 'label.team.date_of_arrival',
                 'format' => 'dd.MM.yyyy',
-                'dp_min_date' => '23.04.2017',
-                'dp_max_date' => '28.04.2017',
+                'dp_min_date' => '18.04.2017',
+                'dp_max_date' => '02.05.2017',
                 'dp_default_date' => '23.04.2017',
                 'attr' => ['readonly' => true]
             ])
             ->add('dateOfDeparture', 'sonata_type_date_picker', [
                 'label' => 'label.team.date_of_departure',
                 'format' => 'dd.MM.yyyy',
-                'dp_min_date' => '23.04.2017',
-                'dp_max_date' => '28.04.2017',
+                'dp_min_date' => '18.04.2017',
+                'dp_max_date' => '02.04.2017',
                 'dp_default_date' => '23.04.2017',
                 'attr' => ['readonly' => true]
             ])
             ->add('concerns', TextareaType::class, [
-                'label' => 'label.team.concerns'
+                'label' => 'label.team.concerns',
+                'required' => false
+            ])
+            ->add('paymentCurrency', ChoiceType::class, [
+                'label' => 'label.team.payment_currency',
+                'choices' => array_flip(ForeignTeam::PAYMENT_CURRENCY)
             ])
         ;
     }

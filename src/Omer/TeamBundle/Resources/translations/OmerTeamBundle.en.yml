@@ -10,7 +10,7 @@ label:
 
     team:
         english_team_name:  English Team Name
-        member_number:      Member Number
+        member_number:      Membership Number
         school:             School
         country:            Country
         district:           District
@@ -83,4 +83,10 @@ email:
         You will find a registration information on your website's profile, and in the document attached.
 
         Wish you success in the competition,
+        Odyssey of the Mind team.
+
+    for_boss: |
+        Team '%team_name%' has just successfully registered!
+        You will find the details in the document attached.
+
         Odyssey of the Mind team.

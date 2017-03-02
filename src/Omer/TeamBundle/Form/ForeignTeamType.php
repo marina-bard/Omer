@@ -2,10 +2,13 @@
 
 namespace Omer\TeamBundle\Form;
 
+use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\UserBundle\Form\CoachUserType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -90,8 +93,8 @@ class ForeignTeamType extends AbstractType
                     'class' => 'form-control input-inline datepicker',
                     'data-date-format' => 'DD-MM-YYYY',
                     'data-date-view-mode' => 'days',
-                    'data-date-start-date' => '23-04-2017',
-                    'data-date-end-date' => '28-04-2017',
+                    'data-date-start-date' => '18-04-2017',
+                    'data-date-end-date' => '02-05-2017',
                     'data-date-locale' => 'label.locale',
                     'placeholder' => 'label.team.date_of_arrival'
                 ]
@@ -104,14 +107,15 @@ class ForeignTeamType extends AbstractType
                     'class' => 'form-control input-inline datepicker',
                     'data-date-format' => 'DD-MM-YYYY',
                     'data-date-view-mode' => 'days',
-                    'data-date-start-date' => '23-04-2017',
-                    'data-date-end-date' => '28-04-2017',
+                    'data-date-start-date' => '18-04-2017',
+                    'data-date-end-date' => '02-05-2017',
                     'data-date-locale' => 'label.locale',
                     'placeholder' => 'label.team.date_of_departure'
                 ]
             ])
-            ->add('paymentCurrency', TextType::class, [
+            ->add('paymentCurrency', ChoiceType::class, [
                 'label' => 'label.team.payment_currency',
+                'choices' => array_flip(ForeignTeam::PAYMENT_CURRENCY),
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.team.payment_currency'
@@ -119,6 +123,7 @@ class ForeignTeamType extends AbstractType
             ])
             ->add('concerns', TextareaType::class, [
                 'label' => 'label.team.concerns',
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.team.concerns'

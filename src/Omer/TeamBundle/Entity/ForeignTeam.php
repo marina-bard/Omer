@@ -19,6 +19,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ForeignTeam extends BaseTeam
 {
+    const PAYMENT_CURRENCY = [
+        'BYN',
+        'RUB',
+        'EUR',
+        'USD'
+    ];
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -55,14 +62,14 @@ class ForeignTeam extends BaseTeam
     protected $division;
 
     /**
-     * @ORM\Column(name="date_of_arrival", type="datetime", nullable=true)
+     * @ORM\Column(name="date_of_arrival", type="date", nullable=true)
      *
      *
      */
     protected $dateOfArrival;
 
     /**
-     * @ORM\Column(name="date_of_departure", type="datetime", nullable=true)
+     * @ORM\Column(name="date_of_departure", type="date", nullable=true)
      */
     protected $dateOfDeparture;
 
@@ -149,56 +156,6 @@ class ForeignTeam extends BaseTeam
     public function getDivision()
     {
         return $this->division;
-    }
-
-    /**
-     * Set dateOfArrival
-     *
-     * @param \DateTime $dateOfArrival
-     *
-     * @return ForeignTeam
-     */
-    public function setDateOfArrival($dateOfArrival)
-    {
-        $this->dateOfArrival = $dateOfArrival;
-        $this->dateOfArrival->format('d-m-Y');
-
-        return $this;
-    }
-
-    /**
-     * Get dateOfArrival
-     *
-     * @return \DateTime
-     */
-    public function getDateOfArrival()
-    {
-        return $this->dateOfArrival;
-    }
-
-    /**
-     * Set dateOfDeparture
-     *
-     * @param \DateTime $dateOfDeparture
-     *
-     * @return ForeignTeam
-     */
-    public function setDateOfDeparture($dateOfDeparture)
-    {
-        $this->dateOfDeparture = $dateOfDeparture;
-        $this->dateOfDeparture->format('d-m-Y');
-
-        return $this;
-    }
-
-    /**
-     * Get dateOfDeparture
-     *
-     * @return \DateTime
-     */
-    public function getDateOfDeparture()
-    {
-        return $this->dateOfDeparture;
     }
 
     /**
@@ -319,5 +276,55 @@ class ForeignTeam extends BaseTeam
     public function getPaymentCurrency()
     {
         return $this->paymentCurrency;
+    }
+
+    /**
+     * Set dateOfArrival
+     *
+     * @param \DateTime $dateOfArrival
+     *
+     * @return ForeignTeam
+     */
+    public function setDateOfArrival($dateOfArrival)
+    {
+        $this->dateOfArrival = $dateOfArrival;
+        $this->dateOfArrival->format('d.m.Y');
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfArrival
+     *
+     * @return \DateTime
+     */
+    public function getDateOfArrival()
+    {
+        return $this->dateOfArrival;
+    }
+
+    /**
+     * Set dateOfDeparture
+     *
+     * @param \DateTime $dateOfDeparture
+     *
+     * @return ForeignTeam
+     */
+    public function setDateOfDeparture($dateOfDeparture)
+    {
+        $this->dateOfDeparture = $dateOfDeparture;
+        $this->dateOfDeparture->format('d.m.Y');
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfDeparture
+     *
+     * @return \DateTime
+     */
+    public function getDateOfDeparture()
+    {
+        return $this->dateOfDeparture;
     }
 }

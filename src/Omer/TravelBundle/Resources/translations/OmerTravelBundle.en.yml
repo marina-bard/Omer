@@ -7,7 +7,7 @@ label:
         own:    Own transport
 
     transport_number: Plane/Train Number
-    station_from:     Travel from
-    station_to:       Arrive to
+    depart_from:     Depart from
+    arrive_to:       Arrive to
 
 

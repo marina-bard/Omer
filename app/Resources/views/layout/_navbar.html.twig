@@ -15,6 +15,7 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% if (app.request.getSchemeAndHttpHost() ~ app.request.getRequestUri()) == app.request.getSchemeAndHttpHost()~"/" %}
             <ul class="nav navbar-nav">
                 <li><a href="#about" class="page-scroll">About Eurofest </a></li>
                 <li><a href="#schedule" class="page-scroll">Schedule</a></li>
@@ -22,6 +23,15 @@
                 <li><a href="#fee" class="page-scroll">Fee</a></li>
                 <li><a href="#committe" class="page-scroll">Organisation committe</a></li>
             </ul>
+            {% else %}
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ app.request.getSchemeAndHttpHost() }}/#about" class="page-scroll">About Eurofest </a></li>
+                    <li><a href="{{ app.request.getSchemeAndHttpHost() }}/#schedule" class="page-scroll">Schedule</a></li>
+                    <li><a href="{{ app.request.getSchemeAndHttpHost() }}/#accomodation" class="page-scroll">Accomodation</a></li>
+                    <li><a href="{{ app.request.getSchemeAndHttpHost() }}/#fee" class="page-scroll">Fee</a></li>
+                    <li><a href="{{ app.request.getSchemeAndHttpHost() }}/#committe" class="page-scroll">Organisation committe</a></li>
+                </ul>
+            {% endif %}
             <ul class="nav navbar-nav navbar-right">
 
                 {#{% if ( _locale  == 'ru') %}#}

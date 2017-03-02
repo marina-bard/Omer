@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <div class="registration-bg" style="background-image: url({{ asset('bundles/omerteam/images/registration_bg.jpg') }});">
+<div class="reg-bg" style="background-image:
+        url({{ asset('bundles/omerteam/images/registration_bg.jpg') }});"></div>
+
+    <div class="registration-bg">
         {% block registration %}
         {% endblock %}
     </div>

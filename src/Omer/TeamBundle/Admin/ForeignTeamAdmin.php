@@ -49,22 +49,22 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ->add('division', TextType::class, [
                 'label' => 'label.team.division'
             ])
-            ->add('dateOfArrival','sonata_type_date_picker',[
-                'label' => 'label.team.date_of_arrival',
-                'format' => 'dd.MM.yyyy',
-                'dp_min_date' => '18.04.2017',
-                'dp_max_date' => '02.05.2017',
-                'dp_default_date' => '23.04.2017',
-                'attr' => ['readonly' => true]
-            ])
-            ->add('dateOfDeparture', 'sonata_type_date_picker', [
-                'label' => 'label.team.date_of_departure',
-                'format' => 'dd.MM.yyyy',
-                'dp_min_date' => '18.04.2017',
-                'dp_max_date' => '02.04.2017',
-                'dp_default_date' => '23.04.2017',
-                'attr' => ['readonly' => true]
-            ])
+//            ->add('dateOfArrival','sonata_type_date_picker',[
+//                'label' => 'label.team.date_of_arrival',
+//                'format' => 'dd.MM.yyyy',
+//                'dp_min_date' => '18.04.2017',
+//                'dp_max_date' => '02.05.2017',
+//                'dp_default_date' => '23.04.2017',
+//                'attr' => ['readonly' => true]
+//            ])
+//            ->add('dateOfDeparture', 'sonata_type_date_picker', [
+//                'label' => 'label.team.date_of_departure',
+//                'format' => 'dd.MM.yyyy',
+//                'dp_min_date' => '18.04.2017',
+//                'dp_max_date' => '02.04.2017',
+//                'dp_default_date' => '23.04.2017',
+//                'attr' => ['readonly' => true]
+//            ])
             ->add('concerns', TextareaType::class, [
                 'label' => 'label.team.concerns',
                 'required' => false

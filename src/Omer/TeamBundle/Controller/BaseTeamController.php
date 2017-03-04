@@ -13,6 +13,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Swift_Message;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Team controller.
@@ -56,9 +58,9 @@ class BaseTeamController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->generateEmail($team);
-            $this->em->persist($team);
-            $this->em->flush();
+            $this->generateEmailMessage($team);
+//            $this->em->persist($team);
+//            $this->em->flush();
 
             return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
             ]);
@@ -70,7 +72,7 @@ class BaseTeamController extends Controller
         ]);
     }
 
-    private function generateEmail($team)
+    private function generateEmailMessage($team)
     {
         $filepath = $this->get('builder.team_excel_builder')->buildTeamExcel($team);
 
@@ -123,4 +125,27 @@ class BaseTeamController extends Controller
     {
         return $this->render('OmerTeamBundle:team:registration_abort.html.twig');
     }
+
+    /**
+     * @Route("/excel", name="team_excel_form")
+     */
+    public function excelFormAction()
+    {
+        $fileDir = $this->get('kernel')->getBundle('OmerTeamBundle')->getPath().'/Resources/templates/team_excel_template.xls';
+
+        $response = new StreamedResponse();
+        $response->setCallback(function() use($fileDir) {
+            echo file_get_contents($fileDir);
+        });
+
+        $content_type = 'application/vnd.ms-excel';
+
+        $response->headers->set('Content-Type', $content_type);
+        $contentDisposition = $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, basename($fileDir));
+        $response->headers->set('Content-Disposition', $contentDisposition);
+
+        return $response;
+    }
+
+
 }

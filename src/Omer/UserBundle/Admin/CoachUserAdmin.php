@@ -71,7 +71,7 @@ class CoachUserAdmin extends PersonalDataAdmin
                 'label' => 'label.personal_data.full_name'
             ])
             ->add('email', null, [
-                'label' => 'label.personal_data.email'
+                'label' => 'label.coach_user.email'
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(

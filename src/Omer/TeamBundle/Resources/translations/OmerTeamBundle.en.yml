@@ -5,6 +5,7 @@ coaches:          Coaches
 label:
     locale:           en
     registration:     Team's registration
+    excel:            Team's registration excel form
     dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
     medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
 
@@ -90,3 +91,10 @@ email:
         You will find the details in the document attached.
 
         Odyssey of the Mind team.
+
+    sorry_message: |
+        Dear coaches!
+        System errors may occur during your team registration.
+        Mostly it doesn’t mean that the team is not registered.
+        If that occurs, please, fulfil the excel form and sent us to e-mail bel.ef2017@gmail.com.
+         (please, pay attention that the last column where could be information is M)

@@ -43,4 +43,21 @@ $(document).ready(function ($) {
 
     $('input#omer_teambundle_team_travelAttributes_0_date').attr('placeholder', 'Arrival Date');
     $('input#omer_teambundle_team_travelAttributes_1_date').attr('placeholder', 'Departure Date');
+
+    $('input[id$="_time"]').mask('AB:CD', {
+        translation: {
+            'A': {
+                pattern: /[0-2]/
+            },
+            'B': {
+                pattern: /[0-9]/
+            },
+            'C': {
+                pattern: /[0-5]/
+            },
+            'D': {
+                pattern: /[0-9]/
+            }
+        }
+    });
 });

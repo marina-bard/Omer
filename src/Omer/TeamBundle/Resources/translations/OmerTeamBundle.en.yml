@@ -50,6 +50,7 @@ label:
         login:      login
         password:   password
         forgot_password: Reset password
+        registration: Registration
 
     personal_data:
         surname:          Surname

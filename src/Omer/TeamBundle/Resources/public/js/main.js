@@ -43,4 +43,27 @@ $(document).ready(function ($) {
 
     $('input#omer_teambundle_team_travelAttributes_0_date').attr('placeholder', 'Arrival Date');
     $('input#omer_teambundle_team_travelAttributes_1_date').attr('placeholder', 'Departure Date');
+
+    (function () {
+        var mainForm = $('.main-form'),
+            loginTab = mainForm.find('.login'),
+            registrationTab = mainForm.find('.registration'),
+            registrationButtons = mainForm.find('.registration-buttons'),
+            loginFields = mainForm.find('.login-fields');
+
+        loginTab.on('click', function () {
+            $(this).addClass('active');
+            registrationTab.removeClass('active');
+            registrationButtons.hide();
+            loginFields.show();
+        });
+
+        registrationTab.on('click', function () {
+            $(this).addClass('active');
+            loginTab.removeClass('active');
+            loginFields.hide();
+            registrationButtons.show();
+        });
+    })();
+
 });

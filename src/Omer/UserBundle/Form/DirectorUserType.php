@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,25 +38,31 @@ class DirectorUserType extends AbstractType
                 'choices' => array_flip(DirectorUser::GENDER),
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.user_type.gender'
-                ]
-            ])
-            ->add('association', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.user_type.association'
-                ]
-            ])
-            ->add('address', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.user_type.address'
+                    'placeholder' => 'label.user.gender'
                 ]
             ])
             ->add('T_shirtSize', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.user_type.t_shirt_size'
+                    'placeholder' => 'label.personal_data.t_shirt_size'
+                ]
+            ])
+            ->add('association', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.user.association'
+                ]
+            ])
+            ->add('citizenship', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.personal_data.citizenship'
+                ]
+            ])
+            ->add('address', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.user.address'
                 ]
             ])
             ->add('dateOfBirth', DateTimeType::class, [
@@ -83,7 +90,7 @@ class DirectorUserType extends AbstractType
                     'data-date-format' => 'DD-MM-YYYY',
                     'data-date-view-mode' => 'years',
                     'data-date-locale' => 'label.locale',
-                    'placeholder' => 'label.personal_data.date_of_birth'
+                    'placeholder' => 'label.personal_data.date_of_issue'
                 ]
             ])
             ->add('dateOfExpiry', DateTimeType::class, [
@@ -94,33 +101,33 @@ class DirectorUserType extends AbstractType
                     'data-date-format' => 'DD-MM-YYYY',
                     'data-date-view-mode' => 'years',
                     'data-date-locale' => 'label.locale',
-                    'placeholder' => 'label.personal_data.date_of_birth'
-                ]
-            ])
-            ->add('citizenship', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.personal_data.citizenship'
+                    'placeholder' => 'label.personal_data.date_of_expiry'
                 ]
             ])
             ->add('mobilePhone', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.personal_data.mobile_phone'
+                    'placeholder' => 'label.user.mobile_phone'
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.user.email'
                 ]
             ])
             ->add('dietaryConcerns', TextareaType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.user_type.dietary_concerns'
+                    'placeholder' => 'label.dietary_concerns'
                 ]
             ])
             ->add('medicalConcerns', TextareaType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.user_type.medical_concerns'
+                    'placeholder' => 'label.medical_concerns'
                 ]
             ])
             ->add('travelAttributes', CollectionType::class, [

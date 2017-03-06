@@ -17,20 +17,20 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-6">
-                        <h3>{{ 'label.director_user.registration'|trans() }}</h3>
 
                         {{ form_row(form.firstName, {'attr':{'class':'form-control'}}) }}
-                        {{ form_row(form.surname, {'attr':{'class':'form-control'}}) }}                        {{ form_row(form.firstName, {'attr':{'class':'form-control'}}) }}
+                        {{ form_row(form.surname, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.gender, {'attr':{'class':'form-control'}}) }}
-                        {{ form_row(form.association, {'attr':{'class':'form-control'}}) }}
-                        {{ form_row(form.address, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.T_shirtSize, {'attr':{'class':'form-control'}}) }}
+                        {{ form_row(form.association, {'attr':{'class':'form-control'}}) }}
+                        {{ form_row(form.citizenship, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.dateOfBirth, {'attr':{'class':'datepicker'}}) }}
                         {{ form_row(form.passportNumber, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.dateOfIssue, {'attr':{'class':'datepicker'}}) }}
                         {{ form_row(form.dateOfExpiry, {'attr':{'class':'datepicker'}}) }}
-                        {{ form_row(form.citizenship, {'attr':{'class':'form-control'}}) }}
+                        {{ form_row(form.address, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.mobilePhone, {'attr':{'class':'form-control'}}) }}
+                        {{ form_row(form.email, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.dietaryConcerns, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.medicalConcerns, {'attr':{'class':'form-control'}}) }}
                     </div>
@@ -50,7 +50,7 @@
 
                 <div class="row">
                     <div class="col-md-12" style="text-align: center">
-                        <input type="submit" class="btn btn-primary" id="create-team" value="{{ 'label.actions.create'|trans() }}" />
+                        <input type="submit" class="btn btn-primary" id="create-team" value="{{ 'label.actions.confirm'|trans() }}" />
                     </div>
                 </div>
 

@@ -43,6 +43,8 @@ $(document).ready(function ($) {
 
     $('input#omer_teambundle_team_travelAttributes_0_date').attr('placeholder', 'Arrival Date');
     $('input#omer_teambundle_team_travelAttributes_1_date').attr('placeholder', 'Departure Date');
+    $('input#omer_userbundle_directoruser_travelAttributes_0_date').attr('placeholder', 'Arrival Date');
+    $('input#omer_userbundle_directoruser_travelAttributes_1_date').attr('placeholder', 'Departure Date');
 
     (function () {
         var mainForm = $('.main-form'),

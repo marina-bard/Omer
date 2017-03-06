@@ -1,11 +1,13 @@
 label:
     locale:       en
+
+    dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
+    medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
+
     coach_user:
         t_shirt_size:     T-shirt Size
         email:            E-mail
         address:          Address
-        dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
-        medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
 
     personal_data:
         surname:          Surname
@@ -18,6 +20,25 @@ label:
         citizenship:      Citizenship
         full_name:        Full Name
         t_shirt_size:     T-shirt Size
+
+    director_user:
+        registration:   Official Person Registration
+
+    user:
+        gender:       Gender
+        association:  Country Representing / Association
+        address:      Address
+        mobile_phone: Phone for Communication
+        email:        E-mail
+
+    actions:
+        confirm:      Confirm Registration
+
+gender:
+    male:   Male
+    female: Female
+
+
 
 admin:
     group_label:

@@ -25,8 +25,8 @@ class DirectorUser extends User
     use PasswordGeneratorTrait;
 
     const GENDER = [
-        'male',
-        'female'
+        'gender.male',
+        'gender.female'
     ];
 
     /**

@@ -76,6 +76,12 @@ class TravelInfo
      */
     private $team;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Omer\UserBundle\Entity\User", inversedBy="travelAttributes")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
 
     /**
      * Get id
@@ -280,5 +286,29 @@ class TravelInfo
     public function getTime()
     {
         return $this->time;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Omer\UserBundle\Entity\DirectorUser $user
+     *
+     * @return TravelInfo
+     */
+    public function setUser(\Omer\UserBundle\Entity\DirectorUser $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Omer\UserBundle\Entity\DirectorUser
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

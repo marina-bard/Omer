@@ -61,12 +61,12 @@ class DirectorUser extends User
     protected $association;
 
     /**
-     * @ORM\OneToMany(targetEntity="Language", mappedBy="director", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Language", mappedBy="user", cascade={"all"})
      */
     protected $languages;
 
     /**
-     * @ORM\OneToMany(targetEntity="Omer\TravelBundle\Entity\TravelInfo", mappedBy="director", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Omer\TravelBundle\Entity\TravelInfo", mappedBy="user", cascade={"all"})
      */
     protected $travelAttributes;
 
@@ -96,7 +96,7 @@ class DirectorUser extends User
     {
         $attr = new TravelInfo();
         $attr->setType($type);
-        $attr->setTeam($this);
+        $attr->setUser($this);
         $this->addTravelAttribute($attr);
     }
 

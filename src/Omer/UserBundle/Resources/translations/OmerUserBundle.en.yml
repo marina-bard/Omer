@@ -58,9 +58,6 @@ email:
         letter: |
             Hello, %name%!
 
-            Login: %login%
-            Password: %password%
-
             You are successfully registered as a(n) %role%!
             You will find a registration information on your website profile, and in the document attached.
 

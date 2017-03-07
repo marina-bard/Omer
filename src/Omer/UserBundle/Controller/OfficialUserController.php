@@ -56,6 +56,8 @@ class OfficialUserController extends Controller
         
         $password = $user->generatePassword();
         $user->setPlainPassword($password);
+//        $userManager = $this->get('fos_user.user_manager');
+//        $userManager->updatePassword($user);
 
         $body = $this->get('templating')
             ->render('@OmerUser/email/email_person_registration_letter.html.twig', [

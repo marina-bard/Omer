@@ -1,11 +1,15 @@
+title:   Odyssey of the Mind Eurofest 2017
+
 label:
     locale:       en
+
+    dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
+    medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
+
     coach_user:
         t_shirt_size:     T-shirt Size
         email:            E-mail
         address:          Address
-        dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
-        medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
 
     personal_data:
         surname:          Surname
@@ -19,7 +23,50 @@ label:
         full_name:        Full Name
         t_shirt_size:     T-shirt Size
 
+    director_user:
+        registration:   Official Person Registration
+
+    user:
+        gender:       Gender
+        association:  Country Representing / Association
+        address:      Address
+        mobile_phone: Phone for Communication
+        email:        E-mail
+        role:         Role
+
+    actions:
+        confirm:      Confirm Registration
+
+gender:
+    male:   Male
+    female: Female
+
+role:
+    ad:     Association Director
+    judge:  Judge
+
 admin:
     group_label:
         coaches:  Coaches
+
+email:
+    user:
+        request_send: |
+            You are successfully registered as a(n) %role%!
+            A letter with the details is sent on your email %email%.
+
+        letter: |
+            Hello, %name%!
+
+            You are successfully registered as a(n) %role%!
+            You will find a registration information on your website profile, and in the document attached.
+
+            Wish you success,
+            Odyssey of the Mind team.
+
+        for_boss: |
+            %role% '%name%' has just successfully registered!
+            You will find the details in the document attached.
+
+            Odyssey of the Mind team.
 

@@ -4,10 +4,11 @@ coaches:          Coaches
 
 label:
     locale:           en
-    registration:     Team's registration
-    excel:            Team's registration excel form
+    registration:     Team registration
+    excel:            Team registration excel form
     dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
     medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
+    director_registration:  Other Members Registration
 
     team:
         english_team_name:  English Team Name
@@ -50,6 +51,7 @@ label:
         login:      login
         password:   password
         forgot_password: Reset password
+        registration: Registration
 
     personal_data:
         surname:          Surname
@@ -81,7 +83,7 @@ email:
         Password: %password%
 
         Your team is successfully registered!
-        You will find a registration information on your website's profile, and in the document attached.
+        You will find a registration information on your website profile, and in the document attached.
 
         Wish you success in the competition,
         Odyssey of the Mind team.

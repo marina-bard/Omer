@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="user_type", type="string")
  * @ORM\DiscriminatorMap({
  *     "coach_user" = "CoachUser",
+ *     "official_user" = "OfficialUser"
  * })
  */
 abstract class User extends BaseUser

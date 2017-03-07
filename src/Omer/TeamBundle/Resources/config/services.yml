@@ -38,3 +38,7 @@ services:
     builder.team_excel_builder:
         class: Omer\TeamBundle\Builder\TeamExcelBuilder
         arguments: ['@service_container']
+
+    builder.official_user_builder:
+        class: Omer\TeamBundle\Builder\OfficialUserExcelBuilder
+        arguments: ['@service_container']

@@ -109,7 +109,8 @@ div[id*="omer_teambundle_team_members"] > label.required {
     display: none;
 }
 
-form[name="omer_teambundle_team"] {
+form[name="omer_teambundle_team"],
+form[name="omer_userbundle_directoruser"]{
     border: none;
     border-radius: 10px;
     padding: 40px;
@@ -117,16 +118,20 @@ form[name="omer_teambundle_team"] {
     margin-bottom: 50px;
 }
 
-form[name="omer_teambundle_team"] label {
+form[name="omer_teambundle_team"] label,
+form[name="omer_userbundle_directoruser"] label {
     display: none;
 }
 
 form[name="omer_teambundle_team"] input[type="text"],
-form[name="omer_teambundle_team"] textarea {
+form[name="omer_teambundle_team"] textarea,
+form[name="omer_userbundle_directoruser"] input[type="text"],
+form[name="omer_userbundle_directoruser"] textarea {
     margin: 10px 0px 10px 0px;
 }
 
-form[name="omer_teambundle_team"] .btn {
+form[name="omer_teambundle_team"] .btn,
+form[name="omer_userbundle_directoruser"] .btn {
     margin: 10px 0px 10px 0px;
     text-transform: uppercase;
     font-size: 14px;
@@ -137,15 +142,18 @@ form[name="omer_teambundle_team"] .btn {
     background: transparent;
 }
 
-form[name="omer_teambundle_team"] .btn-danger {
+form[name="omer_teambundle_team"] .btn-danger,
+form[name="omer_userbundle_directoruser"] .btn-danger {
     float: right;
 }
 
-form[name="omer_teambundle_team"] .btn.collection-action {
+form[name="omer_teambundle_team"] .btn.collection-action,
+form[name="omer_userbundle_directoruser"] .btn.collection-action {
     width: 100%;
 }
 
-form[name="omer_teambundle_team"] #create-team {
+form[name="omer_teambundle_team"] #create-team,
+form[name="omer_userbundle_directoruser"] #create-team {
     text-transform: uppercase;
     font-size: 16px;
     width: 50%;
@@ -207,13 +215,50 @@ video#bgvid {
     background: transparent;
 }
 
+.main-form .login,
+.main-form .registration {
+    height: 50px;
+    width: 50%;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #dddddd;
+    border: 1px solid #dddddd;
+    background: transparent;
+}
+
+.main-form .registration {
+    border-radius: 15px 0px 0px 15px;
+    float: left;
+}
+
+.main-form .login {
+    border-radius: 0px 15px 15px 0px;
+}
+
+.main-form .registration.active,
+.main-form .login.active,
+.main-form .login:hover,
+.main-form .login:focus,
+.main-form .login:active,
+.main-form .registration:hover,
+.main-form .registration:focus,
+.main-form .registration:active {
+    background-color: whitesmoke !important;
+    color: #0a0a0a !important;
+}
+
+.main-form .login-fields {
+    display: none;
+}
+
 .main-form .login-btn:hover,
 .main-form .login-btn:focus,
 .main-form .login-btn:active,
 .main-form .register-team-btn:hover,
 .main-form .register-team-btn:focus,
 .main-form .register-team-btn:active,
-form[name="omer_teambundle_team"] .btn:hover {
+form[name="omer_teambundle_team"] .btn:hover,
+form[name="omer_userbundle_directoruser"] .btn:hover {
     transition: background-color .15s ease,border-color .15s ease,color .15s ease;
     transition-property: background-color, border-color, color;
     transition-duration: 0.15s, 0.15s, 0.15s;
@@ -223,12 +268,14 @@ form[name="omer_teambundle_team"] .btn:hover {
     color: #0a0a0a !important;
 }
 
-form[name="omer_teambundle_team"] .btn.collection-action:hover {
+form[name="omer_teambundle_team"] .btn.collection-action:hover,
+form[name="omer_userbundle_directoruser"] .btn.collection-action:hover {
     background-color: rgba(105, 228, 105, 0.8) !important;
     border-color: rgba(105, 228, 105, 0.8) !important;
 }
 
-form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
+form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover,
+form[name="omer_userbundle_directoruser"] .btn.collection-action.btn-danger:hover {
     background-color: rgba(234, 70, 70, 0.8) !important;
     border-color: rgba(234, 70, 70, 0.8) !important;
 }
@@ -292,7 +339,8 @@ form[name="omer_teambundle_team"] .btn.collection-action.btn-danger:hover {
 .main-form input:-webkit-autofill,
 .main-form input:-webkit-autofill:hover,
 .main-form input:-webkit-autofill:focus,
-.main-form input:-webkit-autofill:active {
+.main-form input:-webkit-autofill:active,
+.main-form input.hidden-autofill {
     -webkit-text-fill-color: #bbb !important;
     transition: background-color 5000s ease-in-out 0s;
 }

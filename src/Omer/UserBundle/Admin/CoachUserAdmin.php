@@ -36,10 +36,10 @@ class CoachUserAdmin extends PersonalDataAdmin
                 'label' => 'label.coach_user.email'
             ])
             ->add('dietaryConcerns', TextareaType::class, [
-                'label' => 'label.coach_user.dietary_concerns'
+                'label' => 'label.dietary_concerns'
             ])
             ->add('medicalConcerns', TextareaType::class, [
-                'label' => 'label.coach_user.medical_concerns'
+                'label' => 'label.medical_concerns'
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'required' => false,

@@ -50,6 +50,7 @@ label:
         title:      Вход
         login:      Логин
         password:   Пароль
+        registration:   Регистрация
         forgot_password: "Восстановить пароль"
 
 email:

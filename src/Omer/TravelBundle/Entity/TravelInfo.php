@@ -291,11 +291,11 @@ class TravelInfo
     /**
      * Set user
      *
-     * @param \Omer\UserBundle\Entity\DirectorUser $user
+     * @param \Omer\UserBundle\Entity\OfficialUser $user
      *
      * @return TravelInfo
      */
-    public function setUser(\Omer\UserBundle\Entity\DirectorUser $user = null)
+    public function setUser(\Omer\UserBundle\Entity\OfficialUser $user = null)
     {
         $this->user = $user;
 
@@ -305,7 +305,7 @@ class TravelInfo
     /**
      * Get user
      *
-     * @return \Omer\UserBundle\Entity\DirectorUser
+     * @return \Omer\UserBundle\Entity\OfficialUser
      */
     public function getUser()
     {

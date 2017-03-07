@@ -1,3 +1,5 @@
+title:   Odyssey of the Mind Eurofest 2017
+
 label:
     locale:       en
 
@@ -30,6 +32,7 @@ label:
         address:      Address
         mobile_phone: Phone for Communication
         email:        E-mail
+        role:         Role
 
     actions:
         confirm:      Confirm Registration
@@ -38,9 +41,35 @@ gender:
     male:   Male
     female: Female
 
-
+role:
+    ad:     Association Director
+    judge:  Judge
 
 admin:
     group_label:
         coaches:  Coaches
+
+email:
+    user:
+        request_send: |
+            You are successfully registered as a(n) %role%!
+            A letter with the details is sent on your email %email%.
+
+        letter: |
+            Hello, %name%!
+
+            Login: %login%
+            Password: %password%
+
+            You are successfully registered as a(n) %role%!
+            You will find a registration information on your website profile, and in the document attached.
+
+            Wish you success,
+            Odyssey of the Mind team.
+
+        for_boss: |
+            %role% '%name%' has just successfully registered!
+            You will find the details in the document attached.
+
+            Odyssey of the Mind team.
 

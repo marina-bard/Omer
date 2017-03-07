@@ -207,8 +207,8 @@ class TeamExcelBuilder
             ->setCellValue('H'.($label_row), $this->translator->trans('label.personal_data.date_of_issue', [], 'OmerUserBundle'))
             ->setCellValue('I'.($label_row), $this->translator->trans('label.personal_data.date_of_expiry', [], 'OmerUserBundle'))
             ->setCellValue('J'.($label_row), $this->translator->trans('label.coach_user.address', [], 'OmerUserBundle'))
-            ->setCellValue('K'.($label_row), $this->translator->trans('label.coach_user.dietary_concerns', [], 'OmerUserBundle'))
-            ->setCellValue('L'.($label_row), $this->translator->trans('label.coach_user.medical_concerns', [], 'OmerUserBundle'))
+            ->setCellValue('K'.($label_row), $this->translator->trans('label.dietary_concerns', [], 'OmerUserBundle'))
+            ->setCellValue('L'.($label_row), $this->translator->trans('label.medical_concerns', [], 'OmerUserBundle'))
         ;
 
         /**
@@ -256,8 +256,8 @@ class TeamExcelBuilder
             ->setCellValue('G'.($label_row), $this->translator->trans('label.personal_data.date_of_issue', [], 'OmerUserBundle'))
             ->setCellValue('H'.($label_row), $this->translator->trans('label.personal_data.date_of_expiry', [], 'OmerUserBundle'))
             ->setCellValue('I'.($label_row), $this->translator->trans('label.coach_user.address', [], 'OmerUserBundle'))
-            ->setCellValue('J'.($label_row), $this->translator->trans('label.coach_user.dietary_concerns', [], 'OmerUserBundle'))
-            ->setCellValue('K'.($label_row), $this->translator->trans('label.coach_user.medical_concerns', [], 'OmerUserBundle'))
+            ->setCellValue('J'.($label_row), $this->translator->trans('label.dietary_concerns', [], 'OmerUserBundle'))
+            ->setCellValue('K'.($label_row), $this->translator->trans('label.medical_concerns', [], 'OmerUserBundle'))
         ;
 
         /**

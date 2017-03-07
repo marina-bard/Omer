@@ -1,5 +1,5 @@
 omer_user_director_user:
-    resource: "@OmerUserBundle/Controller/DirectorUserController.php"
+    resource: "@OmerUserBundle/Controller/OfficialUserController.php"
     type:     annotation
 
 #omer_travel:

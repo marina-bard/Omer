@@ -68,4 +68,20 @@ $(document).ready(function ($) {
         });
     })();
 
+    $('input[id$="_time"]').mask('AB:CD', {
+        translation: {
+            'A': {
+                pattern: /[0-2]/
+            },
+            'B': {
+                pattern: /[0-9]/
+            },
+            'C': {
+                pattern: /[0-5]/
+            },
+            'D': {
+                pattern: /[0-9]/
+            }
+        }
+    });
 });

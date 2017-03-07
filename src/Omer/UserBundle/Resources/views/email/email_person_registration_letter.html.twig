@@ -1,0 +1,5 @@
+{% trans_default_domain 'OmerUserBundle' %}
+
+{% autoescape false %}
+    {{ 'email.user.letter'|trans({'%name%': name, '%login%': username, '%password%': password, '%role%': role})|nl2br }}
+{% endautoescape %}

@@ -3,7 +3,7 @@
 namespace Omer\UserBundle\Form;
 
 use Omer\TravelBundle\Form\TravelInfoType;
-use Omer\UserBundle\Entity\DirectorUser;
+use Omer\UserBundle\Entity\OfficialUser;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DirectorUserType extends AbstractType
+class OfficialUserType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -22,6 +22,14 @@ class DirectorUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('role', ChoiceType::class, [
+                'choices' => OfficialUser::ROLES,
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.user.gender'
+                ]
+            ])
             ->add('firstName', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -35,7 +43,7 @@ class DirectorUserType extends AbstractType
                 ]
             ])
             ->add('gender', ChoiceType::class, [
-                'choices' => array_flip(DirectorUser::GENDER),
+                'choices' => array_flip(OfficialUser::GENDER),
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.user.gender'
@@ -146,7 +154,7 @@ class DirectorUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Omer\UserBundle\Entity\DirectorUser',
+            'data_class' => 'Omer\UserBundle\Entity\OfficialUser',
             'translation_domain' => 'OmerUserBundle'
         ));
     }

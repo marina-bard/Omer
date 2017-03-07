@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="director_user")
  */
-class DirectorUser extends User
+class OfficialUser extends User
 {
     use PersonalDataTrait;
     use PasswordGeneratorTrait;
@@ -27,6 +27,11 @@ class DirectorUser extends User
     const GENDER = [
         'gender.male',
         'gender.female'
+    ];
+
+    const ROLES = [
+        'role.ad' => 'ROLE_DIRECTOR',
+        'role.judge' => 'ROLE_JUDGE'
     ];
 
     /**
@@ -85,7 +90,6 @@ class DirectorUser extends User
     public function __construct()
     {
         parent::__construct();
-        $this->addRole("ROLE_DIRECTOR");
         $this->setEnabled(true);
         $this->setPlainPassword($this->generatePassword());
         $this->createTravelAttribute(TravelInfo::TYPE['arrivals']);
@@ -113,7 +117,7 @@ class DirectorUser extends User
      *
      * @param integer $gender
      *
-     * @return DirectorUser
+     * @return OfficialUser
      */
     public function setGender($gender)
     {
@@ -129,7 +133,9 @@ class DirectorUser extends User
      */
     public function getGender()
     {
-        return $this->gender;
+        if($this->gender !== null) {
+            return self::GENDER[$this->gender];
+        }
     }
 
     /**
@@ -137,7 +143,7 @@ class DirectorUser extends User
      *
      * @param string $address
      *
-     * @return DirectorUser
+     * @return OfficialUser
      */
     public function setAddress($address)
     {
@@ -161,7 +167,7 @@ class DirectorUser extends User
      *
      * @param string $mobilePhone
      *
-     * @return DirectorUser
+     * @return OfficialUser
      */
     public function setMobilePhone($mobilePhone)
     {
@@ -185,7 +191,7 @@ class DirectorUser extends User
      *
      * @param string $association
      *
-     * @return DirectorUser
+     * @return OfficialUser
      */
     public function setAssociation($association)
     {
@@ -209,7 +215,7 @@ class DirectorUser extends User
      *
      * @param string $dietaryConcerns
      *
-     * @return DirectorUser
+     * @return OfficialUser
      */
     public function setDietaryConcerns($dietaryConcerns)
     {
@@ -233,7 +239,7 @@ class DirectorUser extends User
      *
      * @param string $medicalConcerns
      *
-     * @return DirectorUser
+     * @return OfficialUser
      */
     public function setMedicalConcerns($medicalConcerns)
     {
@@ -257,7 +263,7 @@ class DirectorUser extends User
      *
      * @param \Omer\UserBundle\Entity\Language $language
      *
-     * @return DirectorUser
+     * @return OfficialUser
      */
     public function addLanguage(\Omer\UserBundle\Entity\Language $language)
     {
@@ -291,7 +297,7 @@ class DirectorUser extends User
      *
      * @param \Omer\TravelBundle\Entity\TravelInfo $travelAttribute
      *
-     * @return DirectorUser
+     * @return OfficialUser
      */
     public function addTravelAttribute(\Omer\TravelBundle\Entity\TravelInfo $travelAttribute)
     {
@@ -318,5 +324,10 @@ class DirectorUser extends User
     public function getTravelAttributes()
     {
         return $this->travelAttributes;
+    }
+
+    public function __toString()
+    {
+        return $this->firstName.' '.$this->surname;
     }
 }

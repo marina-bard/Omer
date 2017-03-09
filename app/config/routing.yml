@@ -1,3 +1,8 @@
+omer_default:
+    resource: "@OmerDefaultBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 omer_user_director_user:
     resource: "@OmerUserBundle/Controller/OfficialUserController.php"
     type:     annotation

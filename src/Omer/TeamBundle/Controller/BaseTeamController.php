@@ -3,10 +3,9 @@
 namespace Omer\TeamBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use Omer\TeamBundle\Entity\Coach;
 use Omer\TeamBundle\Entity\ForeignTeam;
-use Omer\TeamBundle\Entity\Team;
 use Omer\TeamBundle\Entity\TeamMember;
-use Omer\UserBundle\Entity\CoachUser;
 use Omer\UserBundle\Traits\CurrentUserTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -45,7 +44,7 @@ class BaseTeamController extends Controller
     {
         $team = new ForeignTeam();
 
-        $coach = new CoachUser();
+        $coach = new Coach();
         $team->addCoach($coach);
         $coach->addTeam($team);
 
@@ -58,9 +57,9 @@ class BaseTeamController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($team);
+            $this->em->flush();
             $this->generateEmailMessage($team);
-//            $this->em->persist($team);
-//            $this->em->flush();
 
             return $this->render('@OmerTeam/email/email_request_send_form.html.twig', [
             ]);
@@ -78,17 +77,12 @@ class BaseTeamController extends Controller
 
         $coaches = $team->getCoaches();
         foreach ($coaches as $coach) {
-            $password = $coach->generatePassword();
-            $coach->setPlainPassword($password);
-
             $body = $this->get('templating')
                 ->render('@OmerTeam/email/email_registration_letter.html.twig', [
                     'name' => $coach,
-                    'username' => $coach->getUsername(),
-                    'password' => $password
                 ]);
 
-            $this->sendEmail($filepath, $body, $coach->getUsername());
+            $this->sendEmail($filepath, $body, $coach->getEmail());
 
             $body = $this->get('templating')
                 ->render('@OmerTeam/email/email_registration_for_boss.html.twig', [

@@ -52,7 +52,7 @@ abstract class BaseTeam
 
     /**
      * Many Users have Many Groups.
-     * @ORM\ManyToMany(targetEntity="Omer\UserBundle\Entity\CoachUser", inversedBy="teams", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="Omer\TeamBundle\Entity\Coach", inversedBy="teams", cascade={"all"})
      * @ORM\JoinTable(name="coaches_teams")
      */
     protected $coaches;
@@ -153,11 +153,11 @@ abstract class BaseTeam
     /**
      * Add coach
      *
-     * @param \Omer\UserBundle\Entity\CoachUser $coach
+     * @param \Omer\TeamBundle\Entity\Coach $coach
      *
      * @return BaseTeam
      */
-    public function addCoach(\Omer\UserBundle\Entity\CoachUser $coach)
+    public function addCoach(\Omer\TeamBundle\Entity\Coach $coach)
     {
         $this->coaches[] = $coach;
 
@@ -167,9 +167,9 @@ abstract class BaseTeam
     /**
      * Remove coach
      *
-     * @param \Omer\UserBundle\Entity\CoachUser $coach
+     * @param \Omer\TeamBundle\Entity\Coach $coach
      */
-    public function removeCoach(\Omer\UserBundle\Entity\CoachUser $coach)
+    public function removeCoach(\Omer\TeamBundle\Entity\Coach $coach)
     {
         $this->coaches->removeElement($coach);
     }

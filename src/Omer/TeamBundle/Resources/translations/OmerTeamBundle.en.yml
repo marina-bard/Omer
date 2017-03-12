@@ -79,9 +79,6 @@ email:
     letter: |
         Hello, %name%!
 
-        Login: %login%
-        Password: %password%
-
         Your team is successfully registered!
         You will find a registration information on your website profile, and in the document attached.
 

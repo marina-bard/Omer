@@ -4,7 +4,7 @@ namespace Omer\TeamBundle\Form;
 
 use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\TravelBundle\Form\TravelInfoType;
-use Omer\UserBundle\Form\CoachUserType;
+use Omer\TeamBundle\Form\CoachType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -114,7 +114,7 @@ class ForeignTeamType extends AbstractType
             ])
             ->add('coaches',  CollectionType::class, [
                 'label'         => false,
-                'entry_type'    => CoachUserType::class,
+                'entry_type'    => CoachType::class,
                 'allow_add'     => true,
                 'allow_delete'  => true,
                 'by_reference'  => false,

@@ -12,12 +12,13 @@ namespace Omer\UserBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Omer\UserBundle\Entity\CoachUser;
+use Omer\UserBundle\Entity\OfficialUser;
 
 class LoadSuperAdminData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $user = new CoachUser();
+        $user = new OfficialUser();
 
         $user->setEmail('admin');
         $user->setPlainPassword('admin');

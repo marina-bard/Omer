@@ -1,6 +1,6 @@
 <?php
 
-namespace Omer\UserBundle\Form;
+namespace Omer\TeamBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CoachUserType extends AbstractType
+class CoachType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -97,14 +97,14 @@ class CoachUserType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.coach_user.dietary_concerns'
+                    'placeholder' => 'label.dietary_concerns'
                 ]
             ])
             ->add('medicalConcerns', TextareaType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'label.coach_user.medical_concerns'
+                    'placeholder' => 'label.medical_concerns'
                 ]
             ])
         ;
@@ -116,7 +116,7 @@ class CoachUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Omer\UserBundle\Entity\CoachUser',
+            'data_class' => 'Omer\TeamBundle\Entity\Coach',
             'translation_domain' => 'OmerUserBundle'
         ));
     }
@@ -126,6 +126,6 @@ class CoachUserType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'omer_userbundle_coachuser';
+        return 'omer_teambundle_coach';
     }
 }

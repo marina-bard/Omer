@@ -106,7 +106,7 @@ class BaseTeamController extends Controller
         $translator = $this->get('translator');
 
         $message = Swift_Message::newInstance()
-            ->setSubject($translator->trans('title', [], 'OmerTeamBundle'))
+            ->setSubject($translator->trans('title', [], 'OmerUserBundle'))
             ->setFrom($this->getParameter('mailer_user'))
             ->setTo($setTo)
             ->setBody(

@@ -161,19 +161,19 @@ class OfficialUserExcelBuilder
         $sheet
             ->setCellValue('C'.(++$value_row), $user->getFirstName())
             ->setCellValue('C'.(++$value_row), $user->getSurname())
-            ->setCellValue('C'.(++$value_row), $user->getGender())
+            ->setCellValue('C'.(++$value_row), $this->translator->trans($user->getGender(), [], 'OmerUserBundle'))
             ->setCellValue('C'.(++$value_row), $user->getTShirtSize())
             ->setCellValue('C'.(++$value_row), $user->getAssociation())
             ->setCellValue('C'.(++$value_row), $user->getCitizenship())
             ->setCellValue('C'.(++$value_row), $user->getAddress())
             ->setCellValue('C'.(++$value_row), date_format($user->getDateOfBirth(), 'd-m-Y'))
             ->setCellValue('C'.(++$value_row), $user->getPassportNumber())
-            ->getStyle('G'.$value_row)->applyFromArray($this->getAlignLeft());
+            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
             ->setCellValue('C'.(++$value_row), date_format($user->getDateOfIssue(),'d-m-Y'))
             ->setCellValue('C'.(++$value_row), date_format($user->getDateOfExpiry(),'d-m-Y'))
             ->setCellValue('C'.(++$value_row), $user->getMobilePhone())
-            ->getStyle('G'.$value_row)->applyFromArray($this->getAlignLeft());
+            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
             ->setCellValue('C'.(++$value_row), $user->getDietaryConcerns())
             ->setCellValue('C'.(++$value_row), $user->getMedicalConcerns())

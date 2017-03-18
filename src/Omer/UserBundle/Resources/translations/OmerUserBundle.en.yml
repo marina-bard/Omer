@@ -10,6 +10,7 @@ label:
         t_shirt_size:     T-shirt Size
         email:            E-mail
         address:          Address
+        team:             Team
 
     personal_data:
         surname:          Surname

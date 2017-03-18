@@ -47,7 +47,7 @@ class TeamMember
     private $address;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Omer\TeamBundle\Entity\BaseTeam", inversedBy="members")
+     * @ORM\ManyToOne(targetEntity="Omer\TeamBundle\Entity\BaseTeam", inversedBy="members", cascade={"persist"})
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id", onDelete="cascade")
      */
     private $team;

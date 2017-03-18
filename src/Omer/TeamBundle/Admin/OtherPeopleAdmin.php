@@ -9,6 +9,7 @@
 
 namespace Omer\TeamBundle\Admin;
 
+use Omer\TeamBundle\Entity\BaseTeam;
 use Omer\UserBundle\Admin\PersonalDataAdmin;
 use Omer\UserBundle\Traits\CurrentUserTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -18,6 +19,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -31,7 +33,16 @@ class OtherPeopleAdmin extends PersonalDataAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $formMapper
+            ->add('team', EntityType::class, [
+                'label' => 'label.team_member.team',
+                'class' => BaseTeam::class,
+                'multiple' => false,
+            ])
+        ;
+
         parent::configureFormFields($formMapper);
+
         $formMapper
             ->add('teamRole', TextType::class, [
                 'label' => 'label.other_people.team_role'
@@ -43,15 +54,13 @@ class OtherPeopleAdmin extends PersonalDataAdmin
                 'label' => 'label.other_people.email'
             ])
             ->add('dietaryConcerns', TextareaType::class, [
-                'label' => 'label.dietary_concerns'
+                'label' => 'label.dietary_concerns',
+                'required' => false
             ])
             ->add('medicalConcerns', TextareaType::class, [
-                'label' => 'label.medical_concerns'
+                'label' => 'label.medical_concerns',
+                'required' => false
             ])
-//            ->add('team', ChoiceType::class, [
-//                'label' => 'label.other_people_team',
-////                'choices' => $this->getCurrentUser()->getTeams()
-//            ])
         ;
     }
 
@@ -121,9 +130,8 @@ class OtherPeopleAdmin extends PersonalDataAdmin
         return $query;
     }
 
-    public function configureRoutes(RouteCollection $collection)
-    {
-        parent::configureRoutes($collection);
-        $collection->remove('add');
-    }
+//    public function configureRoutes(RouteCollection $collection)
+//    {
+//        $collection->remove('add');
+//    }
 }

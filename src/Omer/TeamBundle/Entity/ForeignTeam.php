@@ -321,4 +321,9 @@ class ForeignTeam extends BaseTeam
     {
         return $this->travelAttributes;
     }
+
+    public function __toString()
+    {
+        return $this->englishTeamName;
+    }
 }

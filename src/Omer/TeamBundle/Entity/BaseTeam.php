@@ -100,7 +100,7 @@ abstract class BaseTeam
     public function __construct()
     {
         $this->members = new ArrayCollection();
-        $this->coaches = new ArrayCollection();
+//        $this->coaches = new ArrayCollection();
         $this->otherPeople = new ArrayCollection();
     }
 
@@ -182,16 +182,6 @@ abstract class BaseTeam
     public function getCoaches()
     {
         return $this->coaches;
-    }
-
-    public function setCoaches($coaches)
-    {
-        if (count($coaches) > 0) {
-            foreach ($coaches as $coach) {
-                $this->addCoach($coach);
-            }
-        }
-        return $this;
     }
 
     public function setMembers($members)
@@ -370,10 +360,5 @@ abstract class BaseTeam
     public function getDistrict()
     {
         return $this->district;
-    }
-
-    public function __toString()
-    {
-        return $this->englishTeamName;
     }
 }

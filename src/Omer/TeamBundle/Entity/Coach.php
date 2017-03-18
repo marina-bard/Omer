@@ -8,6 +8,7 @@
 
 namespace Omer\TeamBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Omer\UserBundle\Traits\PersonalDataTrait;
 use Omer\UserBundle\Traits\PasswordGeneratorTrait;
@@ -54,9 +55,17 @@ class Coach
     private $address;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Omer\TeamBundle\Entity\BaseTeam", mappedBy="coaches")
+     * @ORM\ManyToMany(targetEntity="Omer\TeamBundle\Entity\BaseTeam", mappedBy="coaches", cascade={"all"})
      */
     protected $teams;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Add team
@@ -68,6 +77,7 @@ class Coach
     public function addTeam(\Omer\TeamBundle\Entity\BaseTeam $team)
     {
         $this->teams[] = $team;
+        $team->addCoach($this);
 
         return $this;
     }
@@ -91,12 +101,16 @@ class Coach
     {
         return $this->teams;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
+
+    public function setTeams($teams)
     {
-        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->teams = new ArrayCollection();
+        if (count($teams) > 0) {
+            foreach ($teams as $team) {
+                $this->addTeam($team);
+            }
+        }
+        return $this;
     }
 
     /**

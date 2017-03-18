@@ -83,15 +83,15 @@ class BaseTeamController extends Controller
                 ]);
 
             $this->sendEmail($filepath, $body, $coach->getEmail());
-
-            $body = $this->get('templating')
-                ->render('@OmerTeam/email/email_registration_for_boss.html.twig', [
-                    'teamName' => $team->getEnglishTeamName()
-                ]);
-
-            $this->sendEmail($filepath, $body, $this->getParameter('mailer_user'));
-            $this->sendEmail($filepath, $body, $this->getParameter('to_dev'));
         }
+
+        $body = $this->get('templating')
+            ->render('@OmerTeam/email/email_registration_for_boss.html.twig', [
+                'teamName' => $team->getEnglishTeamName()
+            ]);
+
+        $this->sendEmail($filepath, $body, $this->getParameter('mailer_user'));
+        $this->sendEmail($filepath, $body, $this->getParameter('to_dev'));
     }
 
 

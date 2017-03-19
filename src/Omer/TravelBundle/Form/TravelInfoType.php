@@ -59,7 +59,7 @@ class TravelInfoType extends AbstractType
             ->add('time', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => '00:00'
+                    'placeholder' => 'placeholder.time'
                 ]
             ])
         ;

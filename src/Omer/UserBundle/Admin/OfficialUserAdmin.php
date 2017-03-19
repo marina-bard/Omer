@@ -9,6 +9,9 @@
 namespace Omer\UserBundle\Admin;
 
 use Omer\TeamBundle\Entity\BaseTeam;
+use Omer\TravelBundle\Entity\TravelInfo;
+use Omer\TravelBundle\Form\TravelAttributesType;
+use Omer\TravelBundle\Form\TravelInfoType;
 use Omer\UserBundle\Admin\PersonalDataAdmin;
 use Omer\UserBundle\Entity\OfficialUser;
 use Omer\UserBundle\Traits\CurrentUserTrait;
@@ -42,7 +45,9 @@ class OfficialUserAdmin extends PersonalDataAdmin
                     'multiple' => true,
                     'translation_domain' => 'OmerUserBundle',
                     'attr' => ['readonly' => true]
-                ])
+                ]);
+
+            $formMapper
                 ->add('firstName', TextType::class, [
                     'label' => 'label.personal_data.first_name',
                     'translation_domain' => 'OmerUserBundle'
@@ -68,7 +73,7 @@ class OfficialUserAdmin extends PersonalDataAdmin
                     'translation_domain' => 'OmerUserBundle'
                 ])
                 ->add('address', TextType::class, [
-                    'label' => 'label.other_people.address'
+                    'label' => 'label.user.address'
                 ])
                 ->add('dateOfBirth', 'sonata_type_date_picker', [
                     'format' => 'dd.MM.yyyy',
@@ -99,7 +104,7 @@ class OfficialUserAdmin extends PersonalDataAdmin
                     'label' => 'label.user.mobile_phone',
                 ])
                 ->add('email', EmailType::class, [
-                    'label' => 'label.other_people.email'
+                    'label' => 'label.user.email'
                 ])
                 ->add('dietaryConcerns', TextareaType::class, [
                     'label' => 'label.dietary_concerns',
@@ -109,6 +114,15 @@ class OfficialUserAdmin extends PersonalDataAdmin
                     'label' => 'label.medical_concerns',
                     'required' => false
                 ])
+                ->add('travelAttributes', 'sonata_type_collection', [
+                    'label' => $this->getTranslator()
+                        ->trans('travel_info', [], 'OmerTravelBundle'),
+                    'translation_domain' => 'OmerTravelBundle',
+                    'btn_add' => false
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ])
             ;
         }
     }
@@ -116,6 +130,10 @@ class OfficialUserAdmin extends PersonalDataAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('roles', null, [], ChoiceType::class, [
+                'choices' => OfficialUser::ROLES,
+                'translation_domain' => 'OmerUserBundle'
+            ])
             ->add('association', null,[
                 'label' => 'label.user.association'
             ])
@@ -127,8 +145,6 @@ class OfficialUserAdmin extends PersonalDataAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        dump($this->getBaseRouteName());
-        dump($this->getBaseRoutePattern());
         $listMapper
             ->add('fullName', null,[
                 'label' => 'label.personal_data.full_name'
@@ -158,16 +174,17 @@ class OfficialUserAdmin extends PersonalDataAdmin
          */
         $query = parent::createQuery($context);
 
-        if ($this->getCurrentUser()->hasRole('ROLE_MAIN_ADMIN')) {
-            $query
-                ->andWhere($query->getRootAlias().'.roles NOT LIKE :role')
-                ->setParameter('role', '%ROLE_SUPER_ADMIN%')
-            ;
-        }
-        elseif (!$this->getCurrentUser()->hasRole('ROLE_SUPER_ADMIN')) {
+        if (!$this->getCurrentUser()->hasRole('ROLE_SUPER_ADMIN')
+            && !$this->getCurrentUser()->hasRole('ROLE_MAIN_ADMIN')) {
             $query
                 ->andWhere($query->getRootAlias().'.email = :email')
                 ->setParameter('email', $this->getCurrentUser()->getEmail())
+            ;
+        }
+        else {
+            $query
+                ->andWhere($query->getRootAlias().'.roles NOT LIKE :role')
+                ->setParameter('role', '%ADMIN%')
             ;
         }
 

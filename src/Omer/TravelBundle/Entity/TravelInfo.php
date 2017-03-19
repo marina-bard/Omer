@@ -138,10 +138,7 @@ class TravelInfo
      */
     public function getGoBy()
     {
-        $key = $this->goBy;
-        if ($key !== null) {
-            return self::TRANSPORT[$key];
-        }
+        return $this->goBy;
     }
 
     /**

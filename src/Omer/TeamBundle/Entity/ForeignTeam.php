@@ -282,10 +282,7 @@ class ForeignTeam extends BaseTeam
      */
     public function getPaymentCurrency()
     {
-        $key = $this->paymentCurrency;
-        if ($key !== null) {
-            return self::PAYMENT_CURRENCY[$key];
-        }
+        return $this->paymentCurrency;
     }
 
     /**

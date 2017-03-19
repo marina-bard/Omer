@@ -8,6 +8,7 @@ label:
     group:
         personal_info:  Personal information
         team_info:      Team information
+        official_member:    Official Member
 
     login:  Log In
     logout: Log Out

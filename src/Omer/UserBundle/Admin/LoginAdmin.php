@@ -8,12 +8,12 @@
 
 namespace Omer\UserBundle\Admin;
 
-use Doctrine\DBAL\Types\TextType;
 use Omer\UserBundle\Traits\CurrentUserTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class LoginAdmin extends AbstractAdmin
 {
@@ -25,7 +25,7 @@ class LoginAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        if ($this->getCurrentUser()->hasRole('ROLE_SUPER_ADMIN')
+        if ($this->getSubject()->hasRole('ROLE_SUPER_ADMIN')
             || $this->getSubject()->hasRole('ROLE_MAIN_ADMIN')
         ) {
             $formMapper

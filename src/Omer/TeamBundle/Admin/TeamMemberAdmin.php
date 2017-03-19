@@ -115,8 +115,8 @@ class TeamMemberAdmin extends PersonalDataAdmin
         return $query;
     }
 
-//    public function configureRoutes(RouteCollection $collection)
-//    {
-//        $collection->remove('add');
-//    }
+    public function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('add');
+    }
 }

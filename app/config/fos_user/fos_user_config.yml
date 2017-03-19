@@ -3,7 +3,7 @@ fos_user:
     firewall_name: main
     user_class: Omer\UserBundle\Entity\User
     from_email: # Use this node only if you don't want the global email address for the confirmation email
-        address:        "%mailer_user%"
+        address:       "%mailer_user%"
         sender_name:   "%sender_name%"
 #        registration:
 #            confirmation:

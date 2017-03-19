@@ -16,22 +16,45 @@ use Omer\UserBundle\Entity\OfficialUser;
 
 class LoadSuperAdminData implements FixtureInterface
 {
+    /**
+     * @var OfficialUser
+     */
+    private $user;
+
     public function load(ObjectManager $manager)
     {
-        if (!$manager->getRepository('OmerUserBundle:official')->findBy(['username' => 'admin'])) {
-            $user = new OfficialUser();
-
-            $user->setUsername('admin');
-            $user->setEmail('admin');
-            $user->setPlainPassword('admin');
-            $user->setFirstName('Admin');
-            $user->setSurname('Admin');
-            $user->setPatronymic('Admin');
-            $user->setRoles(array('ROLE_SUPER_ADMIN'));
-            $user->setEnabled(true);
-
-            $manager->persist($user);
-        }
+        $this->createUser($manager, true, 'super_admin');
+        $this->createUser($manager, 'ROLE_MAIN_ADMIN', 'admin');
         $manager->flush();
+    }
+
+    private function createUser(ObjectManager $manager, $role, $username)
+    {
+        $this->user = $manager->getRepository('OmerUserBundle:OfficialUser')->findOneBy(['username' => $username]);
+        if (!$this->user) {
+            $this->user = new OfficialUser();
+            $this->user->setUsername($username);
+            $this->user->setEmail($username);
+            $this->user->setPlainPassword($username);
+            $this->user->setFirstName($username);
+            $this->user->setSurname($username);
+            $this->user->setPatronymic($username);
+            $this->setRoles($role);
+            $this->user->setEnabled(true);
+        }
+        else {
+            $this->setRoles($role);
+        }
+
+        $manager->persist($this->user);
+    }
+
+    private function setRoles($role) {
+        if ($role === (true || false)) {
+            $this->user->setSuperAdmin($role);
+        }
+        else {
+            $this->user->setRoles(array($role));
+        }
     }
 }

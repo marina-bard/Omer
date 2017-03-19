@@ -35,7 +35,7 @@ services:
             - [ setTranslationDomain, [OmerTeamBundle] ]
             - [ setTokenStorage, ['@security.token_storage'] ]
 
-    sonata.admin.coach_user:
+    sonata.admin.coach:
         class: Omer\TeamBundle\Admin\CoachAdmin
         arguments:
             - ~

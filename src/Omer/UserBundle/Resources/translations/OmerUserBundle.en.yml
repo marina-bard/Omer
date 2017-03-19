@@ -49,6 +49,7 @@ role:
 admin:
     group_label:
         coaches:  Coaches
+        personal_info: Personal Information
 
 email:
     user:

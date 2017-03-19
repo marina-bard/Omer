@@ -62,10 +62,17 @@ class LoginAdmin extends AbstractAdmin
     {
         $query = parent::createQuery($context);
 
-        if (!$this->getCurrentUser()->hasRole('ROLE_SUPER_ADMIN')) {
+        if (!$this->getCurrentUser()->hasRole('ROLE_SUPER_ADMIN')
+            && !$this->getCurrentUser()->hasRole('ROLE_MAIN_ADMIN')) {
             $query
                 ->andWhere($query->getRootAlias().'.email = :email')
                 ->setParameter('email', $this->getCurrentUser()->getEmail())
+            ;
+        }
+        elseif ($this->getCurrentUser()->hasRole('ROLE_MAIN_ADMIN')) {
+            $query
+                ->andWhere($query->getRootAlias().'.roles not like :role')
+                ->setParameter('role', '%ROLE_SUPER_ADMIN%')
             ;
         }
 

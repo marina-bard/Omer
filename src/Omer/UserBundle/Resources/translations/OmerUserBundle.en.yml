@@ -50,6 +50,8 @@ admin:
     group_label:
         coaches:  Coaches
         personal_info: Personal Information
+        registration_info:  Registration Information
+        login_info:         Login Information
 
 email:
     user:

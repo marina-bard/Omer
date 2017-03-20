@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="{{ asset('bundles/omerteam/css/sonata_admin.css') }}">
 {% endblock %}
 
+{% block sonata_javascript_pool %}
+    {% for javascript in sonata_admin.adminPool.getOption('javascripts', []) %}
+        <script src="{{ asset(javascript) }}"></script>
+    {% endfor %}
+    <script src="{{ asset('bundles/omeruser/js/admin.js') }}"></script>
+{% endblock %}
+
 {% block side_bar_after_nav_content %}
     <a href="/" rel="noreferrer">{{ 'label.side_bar_after_nav_content'|trans() }}</a>
 {% endblock %}

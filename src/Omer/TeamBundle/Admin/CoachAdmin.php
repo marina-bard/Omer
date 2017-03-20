@@ -43,6 +43,7 @@ class CoachAdmin extends PersonalDataAdmin
                 'label' => 'label.coach_user.team',
                 'class' => BaseTeam::class,
                 'multiple' => true,
+                'attr' => ['disabled' => true]
             ])
         ;
 

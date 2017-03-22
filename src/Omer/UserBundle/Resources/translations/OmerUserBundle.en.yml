@@ -50,6 +50,10 @@ admin:
         coaches:  Coaches
 
 email:
+    already_used: |
+        This email is alredy used.
+        If you want to change registration details, please, contact us on bel.ef2017@gmail.com.
+
     user:
         request_send: |
             You are successfully registered as a(n) %role%!

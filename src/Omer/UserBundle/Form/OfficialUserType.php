@@ -155,7 +155,10 @@ class OfficialUserType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Omer\UserBundle\Entity\OfficialUser',
-            'translation_domain' => 'OmerUserBundle'
+            'translation_domain' => 'OmerUserBundle',
+            'validation_groups' => [
+                'Registration'
+            ]
         ));
     }
 

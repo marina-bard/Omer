@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
@@ -20,6 +21,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="team_type", type="string")
  * @ORM\DiscriminatorMap({"foreign_team" = "ForeignTeam"})
+ * @UniqueEntity(
+ *     fields = {"memberNumber"},
+ *     errorPath = "memberNumber",
+ *     message = "base_team.member_number.already_used",
+ * )
  */
 abstract class BaseTeam
 {

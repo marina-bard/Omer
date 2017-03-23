@@ -49,10 +49,6 @@ abstract class BaseTeam
 
     /**
      * @ORM\Column(name="member_number", type="integer", nullable=true)
-     *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
      */
     protected $memberNumber;
 
@@ -84,19 +80,11 @@ abstract class BaseTeam
 
     /**
      * @ORM\Column(name="country", type="string", nullable=true)
-     *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
      */
     protected $country;
 
     /**
      * @ORM\Column(name="district", type="string", nullable=true)
-     *
-     * @Assert\NotBlank(
-     *     message="value is invalid(field must be non empty)",
-     *     )
      */
     protected $district;
 
@@ -106,7 +94,7 @@ abstract class BaseTeam
     public function __construct()
     {
         $this->members = new ArrayCollection();
-//        $this->coaches = new ArrayCollection();
+        $this->coaches = new ArrayCollection();
         $this->otherPeople = new ArrayCollection();
     }
 
@@ -166,6 +154,7 @@ abstract class BaseTeam
     public function addCoach(\Omer\TeamBundle\Entity\Coach $coach)
     {
         $this->coaches[] = $coach;
+        $coach->addTeam($this);
 
         return $this;
     }
@@ -196,6 +185,17 @@ abstract class BaseTeam
         if (count($members) > 0) {
             foreach ($members as $member) {
                 $this->addMember($member);
+            }
+        }
+        return $this;
+    }
+
+    public function setCoaches($coaches)
+    {
+        $this->coaches = new ArrayCollection();
+        if (count($coaches) > 0) {
+            foreach ($coaches as $coach) {
+                $this->addMember($coach);
             }
         }
         return $this;

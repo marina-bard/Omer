@@ -84,6 +84,9 @@ class BaseTeamAdmin extends AbstractAdmin
             ->addIdentifier('englishTeamName', null, [
                 'label' => 'label.team.english_team_name'
             ])
+            ->add('memberNumber', null, [
+                'label' => 'label.team.member_number'
+            ])
             ->add('country', null, [
                 'label' => 'label.team.country'
             ])
@@ -92,7 +95,6 @@ class BaseTeamAdmin extends AbstractAdmin
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
-//                    'show' => array(),
                     'edit' => array(),
                 )
             ))

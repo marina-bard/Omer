@@ -77,7 +77,6 @@ class Coach
     public function addTeam(\Omer\TeamBundle\Entity\BaseTeam $team)
     {
         $this->teams[] = $team;
-        $team->addCoach($this);
 
         return $this;
     }

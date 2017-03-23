@@ -3,6 +3,7 @@
 namespace Omer\TeamBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use Omer\TeamBundle\Entity\BaseTeam;
 use Omer\TeamBundle\Entity\Coach;
 use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\TeamBundle\Entity\TeamMember;
@@ -46,7 +47,6 @@ class BaseTeamController extends Controller
 
         $coach = new Coach();
         $team->addCoach($coach);
-        $coach->addTeam($team);
 
         $teamMember = new TeamMember();
         $team->addMember($teamMember);
@@ -57,6 +57,7 @@ class BaseTeamController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->coachAlreadyExistsCheck($team);
             $this->em->persist($team);
             $this->em->flush();
             $this->generateEmailMessage($team);
@@ -69,6 +70,21 @@ class BaseTeamController extends Controller
             'team' => $team,
             'form' => $form->createView(),
         ]);
+    }
+
+    private function coachAlreadyExistsCheck(BaseTeam $team)
+    {
+        $coaches = $team->getCoaches();
+        foreach ($coaches as $coach) {
+            $coachExists = $this->em->getRepository('OmerTeamBundle:Coach')->findOneBy([
+                'passportNumber' => $coach->getPassportNumber(),
+                'surname' => $coach->getSurname()
+            ]);
+            if ($coachExists) {
+                $team->removeCoach($coach);
+                $team->addCoach($coachExists);
+            }
+        }
     }
 
     private function generateEmailMessage($team)

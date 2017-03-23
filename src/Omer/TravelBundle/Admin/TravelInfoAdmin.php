@@ -27,7 +27,7 @@ class TravelInfoAdmin extends AbstractAdmin
                 'label' => 'label.type',
                 'choices' => TravelInfo::TYPE,
                 'attr' => [
-                    'readonly' => true
+                    'disabled' => true
                 ]
             ])
             ->add('date', 'sonata_type_date_picker', [

@@ -36,7 +36,9 @@ class TravelInfoAdmin extends AbstractAdmin
                 'dp_min_date' => '18.04.2017',
                 'dp_max_date' => '02.04.2017',
                 'dp_default_date' => '23.04.2017',
-                'attr' => ['readonly' => true]
+                'attr' => [
+                    'readonly' => true
+                ]
             ])
             ->add('goBy', ChoiceType::class, [
                 'label' => 'label.go_by',

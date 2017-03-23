@@ -29,15 +29,6 @@ class CoachAdmin extends PersonalDataAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-//        $formMapper
-//            ->add('teams', 'sonata_type_model', [
-//                'multiple' => true,
-//                'by_reference' => false,
-//                'btn_add' => false
-//            ])
-//        ;
-
-        // set field ad readonly
         $formMapper
             ->add('teams', null, [
                 'label' => 'label.coach_user.team',
@@ -93,7 +84,6 @@ class CoachAdmin extends PersonalDataAdmin
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
-//                    'show' => array(),
                     'edit' => array(),
                 )
             ))

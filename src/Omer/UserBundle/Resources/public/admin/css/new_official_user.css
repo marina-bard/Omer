@@ -2,3 +2,9 @@ form[name="omer_userbundle_directoruser"] div ul li {
     color: whitesmoke;
     text-transform: uppercase;
 }
+
+form[name="omer_userbundle_directoruser"] h5 {
+    color: whitesmoke;
+    text-transform: uppercase;
+    text-align: center;
+}

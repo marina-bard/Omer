@@ -10,6 +10,7 @@ namespace Omer\UserBundle\Entity;
 
 
 use Omer\TravelBundle\Entity\TravelInfo;
+use Omer\UserBundle\Traits\NativeFullName;
 use Omer\UserBundle\Traits\PasswordGeneratorTrait;
 use Omer\UserBundle\Traits\PersonalDataTrait;
 
@@ -23,6 +24,7 @@ class OfficialUser extends User
 {
     use PersonalDataTrait;
     use PasswordGeneratorTrait;
+    use NativeFullName;
 
     const GENDER = [
         'gender.male',

@@ -145,6 +145,27 @@ class OfficialUserType extends AbstractType
                 'allow_delete'  => false,
                 'by_reference'  => false,
             ])
+            ->add('nativeFirstName', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.native.first_name'
+                ]
+            ])
+            ->add('nativeSurname', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.native.surname'
+                ]
+            ])
+            ->add('nativePatronymic', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.native.patronymic'
+                ]
+            ])
         ;
     }
     

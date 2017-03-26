@@ -73,7 +73,7 @@ class OfficialUserExcelBuilder
 
         $this->sheet = $this->addTravelInfo($this->sheet, $user, $this->label_row);
 
-        foreach(range('A','C') as $columnID) {
+        foreach(range('A','B') as $columnID) {
             $this->sheet->getColumnDimension($columnID)->setAutoSize(true);
 
         }
@@ -95,38 +95,38 @@ class OfficialUserExcelBuilder
         $departures = $travels[1];
         $value_row = $label_row;
         $sheet
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.date_of_arrival', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.go_by', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.transport_number', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.depart_from', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrive_to', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrival_time', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.date_of_departure', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.go_by', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.transport_number', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.depart_from', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrive_to', [], 'OmerTravelBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.arrival_time', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.date_of_arrival', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.go_by', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.transport_number', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.depart_from', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.arrive_to', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.arrival_time', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.date_of_departure', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.go_by', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.transport_number', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.depart_from', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.arrive_to', [], 'OmerTravelBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.arrival_time', [], 'OmerTravelBundle'))
         ;
 
         $sheet
-            ->setCellValue('C'.(++$value_row), date_format($arrival->getDate(), 'd-m-Y'))
-            ->setCellValue('C'.(++$value_row), $this->translator->trans($arrival->getGoBy(), [], 'OmerTravelBundle'))
-            ->setCellValue('C'.(++$value_row), $arrival->getTransportNumber())
-            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+            ->setCellValue('B'.(++$value_row), date_format($arrival->getDate(), 'd-m-Y'))
+            ->setCellValue('B'.(++$value_row), $this->translator->trans($arrival->getGoBy(), [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$value_row), $arrival->getTransportNumber())
+            ->getStyle('B'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
-            ->setCellValue('C'.(++$value_row), $arrival->getStationFrom())
-            ->setCellValue('C'.(++$value_row), $arrival->getStationTo())
-            ->setCellValue('C'.(++$value_row), $arrival->getTime());
+            ->setCellValue('B'.(++$value_row), $arrival->getStationFrom())
+            ->setCellValue('B'.(++$value_row), $arrival->getStationTo())
+            ->setCellValue('B'.(++$value_row), $arrival->getTime());
         $sheet
-            ->setCellValue('C'.(++$value_row), date_format($departures->getDate(), 'd-m-Y'))
-            ->setCellValue('C'.(++$value_row), $this->translator->trans($departures->getGoBy(), [], 'OmerTravelBundle'))
-            ->setCellValue('C'.(++$value_row), $departures->getTransportNumber())
-            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+            ->setCellValue('B'.(++$value_row), date_format($departures->getDate(), 'd-m-Y'))
+            ->setCellValue('B'.(++$value_row), $this->translator->trans($departures->getGoBy(), [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$value_row), $departures->getTransportNumber())
+            ->getStyle('B'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
-            ->setCellValue('C'.(++$value_row), $departures->getStationFrom())
-            ->setCellValue('C'.(++$value_row), $departures->getStationTo())
-            ->setCellValue('C'.(++$value_row), $departures->getTime())
+            ->setCellValue('B'.(++$value_row), $departures->getStationFrom())
+            ->setCellValue('B'.(++$value_row), $departures->getStationTo())
+            ->setCellValue('B'.(++$value_row), $departures->getTime())
         ;
 
         $this->label_row = $label_row;
@@ -137,47 +137,55 @@ class OfficialUserExcelBuilder
 
     private function addMainInfo(PHPExcel_Worksheet $sheet, OfficialUser $user, $label_row)
     {
-        $number = 0;
-
         $value_row = $label_row;
 
         $sheet
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.first_name', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.surname', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.user.gender', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.t_shirt_size', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.user.association', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.citizenship', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.user.address', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.date_of_birth', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.passport_number', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.date_of_issue', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.personal_data.date_of_expiry', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.user.mobile_phone', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.dietary_concerns', [], 'OmerUserBundle'))
-            ->setCellValue('B'.(++$label_row), $this->translator->trans('label.medical_concerns', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.first_name', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.surname', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.gender', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.t_shirt_size', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.association', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.citizenship', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.address', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.date_of_birth', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.passport_number', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.date_of_issue', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.date_of_expiry', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.mobile_phone', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.dietary_concerns', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.medical_concerns', [], 'OmerUserBundle'))
         ;
 
         $sheet
-            ->setCellValue('C'.(++$value_row), $user->getFirstName())
-            ->setCellValue('C'.(++$value_row), $user->getSurname())
-            ->setCellValue('C'.(++$value_row), $this->translator->trans($user->getGender(), [], 'OmerUserBundle'))
-            ->setCellValue('C'.(++$value_row), $user->getTShirtSize())
-            ->setCellValue('C'.(++$value_row), $user->getAssociation())
-            ->setCellValue('C'.(++$value_row), $user->getCitizenship())
-            ->setCellValue('C'.(++$value_row), $user->getAddress())
-            ->setCellValue('C'.(++$value_row), date_format($user->getDateOfBirth(), 'd-m-Y'))
-            ->setCellValue('C'.(++$value_row), $user->getPassportNumber())
-            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+            ->setCellValue('B'.(++$value_row), $user->getFirstName())
+            ->setCellValue('B'.(++$value_row), $user->getSurname())
+            ->setCellValue('B'.(++$value_row), $this->translator->trans($user->getGender(), [], 'OmerUserBundle'))
+            ->setCellValue('B'.(++$value_row), $user->getTShirtSize())
+            ->setCellValue('B'.(++$value_row), $user->getAssociation())
+            ->setCellValue('B'.(++$value_row), $user->getCitizenship())
+            ->setCellValue('B'.(++$value_row), $user->getAddress())
+            ->setCellValue('B'.(++$value_row), date_format($user->getDateOfBirth(), 'd-m-Y'))
+            ->setCellValue('B'.(++$value_row), $user->getPassportNumber())
+            ->getStyle('B'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
-            ->setCellValue('C'.(++$value_row), date_format($user->getDateOfIssue(),'d-m-Y'))
-            ->setCellValue('C'.(++$value_row), date_format($user->getDateOfExpiry(),'d-m-Y'))
-            ->setCellValue('C'.(++$value_row), $user->getMobilePhone())
-            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+            ->setCellValue('B'.(++$value_row), date_format($user->getDateOfIssue(),'d-m-Y'))
+            ->setCellValue('B'.(++$value_row), date_format($user->getDateOfExpiry(),'d-m-Y'))
+            ->setCellValue('B'.(++$value_row), $user->getMobilePhone())
+            ->getStyle('B'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
-            ->setCellValue('C'.(++$value_row), $user->getDietaryConcerns())
-            ->setCellValue('C'.(++$value_row), $user->getMedicalConcerns())
+            ->setCellValue('B'.(++$value_row), $user->getDietaryConcerns())
+            ->setCellValue('B'.(++$value_row), $user->getMedicalConcerns())
         ;
+
+        if ($user->getNativeFirstName()) {
+            $sheet
+                ->setCellValue('C2', $this->translator->trans('label.native.surname',[],'OmerUserBundle'))
+                ->setCellValue('C3', $this->translator->trans('label.native.first_name',[],'OmerUserBundle'))
+                ->setCellValue('C4', $this->translator->trans('label.native.patronymic',[],'OmerUserBundle'))
+                ->setCellValue('D2', $user->getNativeSurname())
+                ->setCellValue('D3', $user->getNativeFirstName())
+                ->setCellValue('D4', $user->getNativePatronymic());
+        }
 
         $this->label_row = ++$value_row;
         $this->value_row = $value_row;
@@ -190,16 +198,16 @@ class OfficialUserExcelBuilder
         /**
          * @var PHPExcel_Worksheet $sheet
          */
-        $sheet->setCellValue('B'.$row, $title);
-        $sheet->getCell('B'.$row)->getStyle()->getFont()->setBold(true);
-        $sheet->mergeCells('B'.$row.':C'.$row);
+        $sheet->setCellValue('A'.$row, $title);
+        $sheet->getCell('A'.$row)->getStyle()->getFont()->setBold(true);
+        $sheet->mergeCells('A'.$row.':C'.$row);
         $style = [
             'alignment' => [
                 'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
             ]
         ];
 
-        $sheet->getStyle('B'.$row.':C'.$row)->applyFromArray($style);
+        $sheet->getStyle('A'.$row.':C'.$row)->applyFromArray($style);
 
         return $sheet;
     }

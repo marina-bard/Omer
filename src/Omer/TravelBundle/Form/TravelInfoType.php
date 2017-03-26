@@ -39,24 +39,28 @@ class TravelInfoType extends AbstractType
                 ]
             ])
             ->add('transportNumber', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.transport_number'
                 ]
             ])
             ->add('stationFrom', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.depart_from'
                 ]
             ])
             ->add('stationTo', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.arrive_to'
                 ]
             ])
             ->add('time', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => '00:00'

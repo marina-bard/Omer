@@ -45,7 +45,6 @@ label:
         surname:      Фамилия
         patronymic:   Отчество
 
-
 gender:
     male:   Male
     female: Female
@@ -68,6 +67,7 @@ email:
             You are successfully registered as a(n) %role%!
             A letter with the details is sent on your email %email%.
 
+            You can contact us on bel.ef2017@gmail.com.
         letter: |
             Hello, %name%!
 

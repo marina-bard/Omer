@@ -47,7 +47,7 @@ class TransferTeamsCommand extends ContainerAwareCommand
             $team->setEnglishTeamName($sheet->getCell('C2')->getValue());
             $team->setSchool($sheet->getCell('C4')->getValue());
             $team->setCountry($sheet->getCell('C5')->getValue());
-            $team->setDictrict($sheet->getCell('C6')->getValue());
+            $team->setDistrict($sheet->getCell('C6')->getValue());
             $team->setCity($sheet->getCell('C7')->getValue());
             $team->setAddress($sheet->getCell('C8')->getValue());
             $team->setProblem($sheet->getCell('C9')->getValue());
@@ -63,7 +63,8 @@ class TransferTeamsCommand extends ContainerAwareCommand
             foreach ($team->getTravelAttributes() as $travelAttribute) {
                 $date = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('C'.(++$row))->getValue());
                 $travelAttribute->setDate($date);
-                $travelAttribute->setGoBy($sheet->getCell('C'.(++$row))->getValue());
+                $goBy = $sheet->getCell('C'.(++$row))->getValue();
+                $travelAttribute->setGoBy(array_search($goBy, $this->transArray(TravelInfo::TRANSPORT)));
                 $travelAttribute->setTransportNumber($sheet->getCell('C'.(++$row))->getValue());
                 $travelAttribute->setStationFrom($sheet->getCell('C'.(++$row))->getValue());
                 $travelAttribute->setStationTo($sheet->getCell('C'.(++$row))->getValue());
@@ -71,13 +72,23 @@ class TransferTeamsCommand extends ContainerAwareCommand
             }
 
             $em->persist($team);
-            break;
         }
         $em->flush();
+        
         //get file
         //create command
         //parse file
         //insert team fields, travel, coaches, team members, other people
+    }
+
+    private function transArray($array)
+    {
+        $result = [];
+        foreach ($array as $item) {
+            $result[] = $this->getContainer()->get('translator')->trans($item, [], 'OmerTravelBundle');
+        }
+
+        return $result;
     }
 
 }

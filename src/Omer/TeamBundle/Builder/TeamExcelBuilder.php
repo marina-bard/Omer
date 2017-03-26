@@ -92,10 +92,10 @@ class TeamExcelBuilder
         }
 
         $writer = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $teamName = $team->getEnglishTeamName();
-        $writer->save($this->getTeamExcelFile($teamName));
+        $filename = $team->getCountry() . ' - ' . $team->getEnglishTeamName() . ' - ' . date('Y-m-d H:i:s');
+        $writer->save($this->getTeamExcelFile($filename));
 
-        return $this->getTeamExcelFile($teamName);
+        return $this->getTeamExcelFile($filename);
     }
 
     private function addTravelInfo(PHPExcel_Worksheet $sheet, ForeignTeam $team, $label_row)

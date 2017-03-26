@@ -15,6 +15,7 @@ use PHPExcel;
 use PHPExcel_IOFactory;
 use PHPExcel_Worksheet;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class OfficialUserExcelBuilder
 {
@@ -79,7 +80,8 @@ class OfficialUserExcelBuilder
         }
 
         $writer = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $fileName = $user->getAssociation() . ' - ' . $role . ' - ' . $user->getFirstName() . ' ' . $user->getSurname();
+
+        $fileName = $user->getAssociation() . ' - ' . $role . ' - ' . $user->getFirstName() . ' ' . $user->getSurname() . ' - ' . date('d-m-Y H:i:s');
         $writer->save($this->getUserExcelFile($fileName));
 
         return $this->getUserExcelFile($fileName);

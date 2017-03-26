@@ -79,7 +79,7 @@ class OfficialUserExcelBuilder
         }
 
         $writer = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-        $fileName = $role.' - '.$user->getSurname();
+        $fileName = $user->getAssociation() . ' - ' . $role . ' - ' . $user->getFirstName() . ' ' . $user->getSurname();
         $writer->save($this->getUserExcelFile($fileName));
 
         return $this->getUserExcelFile($fileName);

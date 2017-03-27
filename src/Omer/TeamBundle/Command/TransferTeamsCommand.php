@@ -10,7 +10,9 @@ namespace Omer\TeamBundle\Command;
 
 
 use Omer\TeamBundle\Builder\TeamExcelBuilder;
+use Omer\TeamBundle\Entity\Coach;
 use Omer\TeamBundle\Entity\ForeignTeam;
+use Omer\TeamBundle\Entity\TeamMember;
 use Omer\TravelBundle\Entity\TravelInfo;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,11 +40,10 @@ class TransferTeamsCommand extends ContainerAwareCommand
 
             $membershipNumber = $sheet->getCell('C3')->getValue();
             $team = $em->getRepository('OmerTeamBundle:ForeignTeam')->findOneBy(['memberNumber' => $membershipNumber]);
-            if ($team) {
-                continue;
+            if (!$team) {
+                $team = new ForeignTeam();
             }
 
-            $team = new ForeignTeam();
             $team->setMemberNumber($membershipNumber);
             $team->setEnglishTeamName($sheet->getCell('C2')->getValue());
             $team->setSchool($sheet->getCell('C4')->getValue());
@@ -61,8 +62,10 @@ class TransferTeamsCommand extends ContainerAwareCommand
              * @var TravelInfo $travelAttribute
              */
             foreach ($team->getTravelAttributes() as $travelAttribute) {
-                $date = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('C'.(++$row))->getValue());
-                $travelAttribute->setDate($date);
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('C'.(++$row))->getValue());
+                if ($value) {
+                    $travelAttribute->setDate($value);
+                }
                 $goBy = $sheet->getCell('C'.(++$row))->getValue();
                 $travelAttribute->setGoBy(array_search($goBy, $this->transArray(TravelInfo::TRANSPORT)));
                 $travelAttribute->setTransportNumber($sheet->getCell('C'.(++$row))->getValue());
@@ -71,10 +74,80 @@ class TransferTeamsCommand extends ContainerAwareCommand
                 $travelAttribute->setTime($sheet->getCell('C'.(++$row))->getValue());
             }
 
+            //B29
+            $row = 29;
+            while ($sheet->getCell('B'.$row)->getValue()) {
+                $passportNumber = $sheet->getCell('G'.$row)->getValue();
+                $coach = $em->getRepository('OmerTeamBundle:Coach')->findOneBy(['passportNumber' => $passportNumber]);
+                if(!$coach) {
+                    $coach = new Coach();
+                    $team->addCoach($coach);
+                    $coach->setPassportNumber($passportNumber);
+                }
+                $coach->setFirstName($sheet->getCell('B'.$row)->getValue());
+                $coach->setSurname($sheet->getCell('C'.$row)->getValue());
+                $coach->setTShirtSize($sheet->getCell('D'.$row)->getValue());
+                $coach->setEmail($sheet->getCell('E'.$row)->getValue());
+
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('F'.$row)->getValue());
+                if ($value) {
+                    $coach->setDateOfBirth($value);
+                }
+
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('H'.$row)->getValue());
+                if ($value) {
+                    $coach->setDateOfIssue($value);
+                }
+
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('I'.$row)->getValue());
+                if ($value) {
+                    $coach->setDateOfExpiry($value);
+                }
+
+                $coach->setAddress($sheet->getCell('J'.$row)->getValue());
+                $coach->setDietaryConcerns($sheet->getCell('K'.$row)->getValue());
+                $coach->setMedicalConcerns($sheet->getCell('L'.$row)->getValue());
+                $row++;
+            }
+
+            $row += 3;
+            while ($sheet->getCell('B'.$row)->getValue()) {
+                $passportNumber = $sheet->getCell('F'.$row)->getValue();
+                $teamMember = $em->getRepository('OmerTeamBundle:TeamMember')->findOneBy(['passportNumber' => $passportNumber]);
+                if(!$teamMember) {
+                    $teamMember = new TeamMember();
+                    $team->addMember($teamMember);
+                    $teamMember->setPassportNumber($passportNumber);
+                }
+                $teamMember->setFirstName($sheet->getCell('B'.$row)->getValue());
+                $teamMember->setSurname($sheet->getCell('C'.$row)->getValue());
+                $teamMember->setTShirtSize($sheet->getCell('D'.$row)->getValue());
+
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('E'.$row)->getValue());
+                if ($value) {
+                    $teamMember->setDateOfBirth($value);
+                }
+
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('G'.$row)->getValue());
+                if ($value) {
+                    $teamMember->setDateOfIssue($value);
+                }
+
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('H'.$row)->getValue());
+                if ($value) {
+                    $teamMember->setDateOfExpiry($value);
+                }
+
+                $teamMember->setAddress($sheet->getCell('I'.$row)->getValue());
+                $teamMember->setDietaryConcerns($sheet->getCell('J'.$row)->getValue());
+                $teamMember->setMedicalConcerns($sheet->getCell('K'.$row)->getValue());
+                $row++;
+            }
+
             $em->persist($team);
         }
+
         $em->flush();
-        
         //get file
         //create command
         //parse file

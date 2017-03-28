@@ -40,9 +40,7 @@ class TransferTeamsCommand extends ContainerAwareCommand
             $sheet = $object->getActiveSheet();
 
             $membershipNumber = $sheet->getCell('C3')->getValue();
-            dump($membershipNumber);
             $team = $em->getRepository('OmerTeamBundle:ForeignTeam')->findOneBy(['memberNumber' => $membershipNumber]);
-            dump($team);
             if (!$team) {
                 $team = new ForeignTeam();
             }

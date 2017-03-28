@@ -12,6 +12,7 @@ namespace Omer\TeamBundle\Command;
 use Omer\TeamBundle\Builder\TeamExcelBuilder;
 use Omer\TeamBundle\Entity\Coach;
 use Omer\TeamBundle\Entity\ForeignTeam;
+use Omer\TeamBundle\Entity\OtherPeople;
 use Omer\TeamBundle\Entity\TeamMember;
 use Omer\TravelBundle\Entity\TravelInfo;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -39,7 +40,9 @@ class TransferTeamsCommand extends ContainerAwareCommand
             $sheet = $object->getActiveSheet();
 
             $membershipNumber = $sheet->getCell('C3')->getValue();
+            dump($membershipNumber);
             $team = $em->getRepository('OmerTeamBundle:ForeignTeam')->findOneBy(['memberNumber' => $membershipNumber]);
+            dump($team);
             if (!$team) {
                 $team = new ForeignTeam();
             }
@@ -144,14 +147,47 @@ class TransferTeamsCommand extends ContainerAwareCommand
                 $row++;
             }
 
+            $row += 3;
+            while ($sheet->getCell('B'.$row)->getValue()) {
+                $passportNumber = $sheet->getCell('H'.$row)->getValue();
+                $otherMember = $em->getRepository('OmerTeamBundle:OtherPeople')->findOneBy(['passportNumber' => $passportNumber]);
+                if(!$otherMember) {
+                    $otherMember = new OtherPeople();
+                    $team->addOtherPerson($otherMember);
+                    $otherMember->setPassportNumber($passportNumber);
+                }
+                $otherMember->setFirstName($sheet->getCell('B'.$row)->getValue());
+                $otherMember->setSurname($sheet->getCell('C'.$row)->getValue());
+                $otherMember->setTShirtSize($sheet->getCell('D'.$row)->getValue());
+                $otherMember->setTeamRole($sheet->getCell('E'.$row)->getValue());
+                $otherMember->setEmail($sheet->getCell('F'.$row)->getValue());
+
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('G'.$row)->getValue());
+                if ($value) {
+                    $otherMember->setDateOfBirth($value);
+                }
+
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('I'.$row)->getValue());
+                if ($value) {
+                    $otherMember->setDateOfIssue($value);
+                }
+
+                $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('J'.$row)->getValue());
+                if ($value) {
+                    $otherMember->setDateOfExpiry($value);
+                }
+
+                $otherMember->setAddress($sheet->getCell('K'.$row)->getValue());
+                $otherMember->setDietaryConcerns($sheet->getCell('L'.$row)->getValue());
+                $otherMember->setMedicalConcerns($sheet->getCell('M'.$row)->getValue());
+                $row++;
+            }
+
             $em->persist($team);
+            $output->writeln('Updated ' . $team->getEnglishTeamName());
         }
 
         $em->flush();
-        //get file
-        //create command
-        //parse file
-        //insert team fields, travel, coaches, team members, other people
     }
 
     private function transArray($array)

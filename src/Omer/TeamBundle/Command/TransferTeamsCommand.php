@@ -42,11 +42,18 @@ class TransferTeamsCommand extends ContainerAwareCommand
             $sheet = $object->getActiveSheet();
 
             $membershipNumber = $sheet->getCell('C3')->getValue();
-            $team = $this->em->getRepository('OmerTeamBundle:ForeignTeam')->findOneBy(['memberNumber' => $membershipNumber]);
-            if (!$team) {
+            $teams = $this->em->getRepository('OmerTeamBundle:ForeignTeam')->findBy(['memberNumber' => $membershipNumber]);
+
+            if (!$teams) {
                 $team = new ForeignTeam();
                 $team->setMemberNumber($membershipNumber);
-
+            }
+            else {
+                foreach ($teams as $item) {
+                    if (!strcmp($this->transformString($item->getEnglishTeamName()), $this->transformString($sheet->getCell('C2')->getValue()))) {
+                        $team = $item;
+                    }
+                }
             }
 
             if ($sheet->getCell('B13')->getValue() === 'Travel Information') {
@@ -215,12 +222,12 @@ class TransferTeamsCommand extends ContainerAwareCommand
         $team->setDivision($sheet->getCell('C10')->getValue());
         $team->setConcerns($sheet->getCell('C13')->getValue());
 
-        $value = \DateTime::createFromFormat('Y-d-m', $sheet->getCell('C11')->getValue());
+        $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('C11')->getValue(), 0, 10));
         if ($value) {
             $team->getTravelAttributes()[0]->setDate($value);
         }
 
-        $value = \DateTime::createFromFormat('Y-d-m', $sheet->getCell('C12')->getValue());
+        $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('C12')->getValue(), 0, 10));
         if ($value) {
             $team->getTravelAttributes()[1]->setDate($value);
         }
@@ -240,17 +247,17 @@ class TransferTeamsCommand extends ContainerAwareCommand
             $coach->setTShirtSize($sheet->getCell('D'.$row)->getValue());
             $coach->setEmail($sheet->getCell('E'.$row)->getValue());
 
-            $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('F'.$row)->getValue());
+            $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('F'.$row)->getValue(), 0, 10));
             if ($value) {
                 $coach->setDateOfBirth($value);
             }
 
-            $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('H'.$row)->getValue());
+            $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('H'.$row)->getValue(), 0, 10));
             if ($value) {
                 $coach->setDateOfIssue($value);
             }
 
-            $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('I'.$row)->getValue());
+            $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('I'.$row)->getValue(), 0, 10));
             if ($value) {
                 $coach->setDateOfExpiry($value);
             }
@@ -274,17 +281,17 @@ class TransferTeamsCommand extends ContainerAwareCommand
             $teamMember->setSurname($sheet->getCell('C'.$row)->getValue());
             $teamMember->setTShirtSize($sheet->getCell('D'.$row)->getValue());
 
-            $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('E'.$row)->getValue());
+            $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('E'.$row)->getValue(), 0, 10));
             if ($value) {
                 $teamMember->setDateOfBirth($value);
             }
 
-            $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('G'.$row)->getValue());
+            $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('G'.$row)->getValue(), 0, 10));
             if ($value) {
                 $teamMember->setDateOfIssue($value);
             }
 
-            $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('H'.$row)->getValue());
+            $value = \DateTime::createFromFormat('Y-m-d',substr($sheet->getCell('H'.$row)->getValue(), 0, 10));
             if ($value) {
                 $teamMember->setDateOfExpiry($value);
             }
@@ -310,17 +317,17 @@ class TransferTeamsCommand extends ContainerAwareCommand
             $otherMember->setTeamRole($sheet->getCell('E'.$row)->getValue());
             $otherMember->setEmail($sheet->getCell('F'.$row)->getValue());
 
-            $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('G'.$row)->getValue());
+            $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('G'.$row)->getValue(), 0, 10));
             if ($value) {
                 $otherMember->setDateOfBirth($value);
             }
 
-            $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('I'.$row)->getValue());
+            $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('I'.$row)->getValue(), 0, 10));
             if ($value) {
                 $otherMember->setDateOfIssue($value);
             }
-
-            $value = \DateTime::createFromFormat('d-m-Y', $sheet->getCell('J'.$row)->getValue());
+            
+            $value = \DateTime::createFromFormat('Y-m-d', substr($sheet->getCell('J'.$row)->getValue(), 0, 10));
             if ($value) {
                 $otherMember->setDateOfExpiry($value);
             }
@@ -332,6 +339,11 @@ class TransferTeamsCommand extends ContainerAwareCommand
         }
 
         return $team;
+    }
+
+    private function transformString($string)
+    {
+        return strtolower(preg_replace('/\s+/', '', $string));
     }
 
     private function transArray($array)

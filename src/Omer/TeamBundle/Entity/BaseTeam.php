@@ -22,8 +22,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\DiscriminatorColumn(name="team_type", type="string")
  * @ORM\DiscriminatorMap({"foreign_team" = "ForeignTeam"})
  * @UniqueEntity(
- *     fields = {"memberNumber"},
- *     errorPath = "memberNumber",
+ *     fields = {"memberNumber", "englishTeamName"},
+ *     errorPath = "englishTeamName",
  *     message = "base_team.member_number.already_used",
  * )
  */

@@ -33,9 +33,9 @@ class TravelInfoAdmin extends AbstractAdmin
             ->add('date', 'sonata_type_date_picker', [
                 'label' => 'label.date',
                 'format' => 'dd.MM.yyyy',
-                'dp_min_date' => '18.04.2017',
-                'dp_max_date' => '02.04.2017',
                 'dp_default_date' => '23.04.2017',
+                'dp_min_date' => '18.04.2017',
+                'dp_max_date' => '02.05.2017',
                 'attr' => [
                     'readonly' => true
                 ]

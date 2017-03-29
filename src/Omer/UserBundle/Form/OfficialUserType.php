@@ -145,6 +145,27 @@ class OfficialUserType extends AbstractType
                 'allow_delete'  => false,
                 'by_reference'  => false,
             ])
+            ->add('nativeSurname', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.native.surname'
+                ]
+            ])
+            ->add('nativeFirstName', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.native.first_name'
+                ]
+            ])
+            ->add('nativePatronymic', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.native.patronymic'
+                ]
+            ])
         ;
     }
     
@@ -155,7 +176,10 @@ class OfficialUserType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Omer\UserBundle\Entity\OfficialUser',
-            'translation_domain' => 'OmerUserBundle'
+            'translation_domain' => 'OmerUserBundle',
+            'validation_groups' => [
+                'Registration'
+            ]
         ));
     }
 

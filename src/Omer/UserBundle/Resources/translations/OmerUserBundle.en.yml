@@ -26,6 +26,9 @@ label:
 
     director_user:
         registration:   Official Person Registration
+        native_full_name:
+            block: for Russian-speaking countries only
+            help:  Введите Ваше ФИО на русском языке
 
     user:
         gender:       Gender
@@ -37,6 +40,11 @@ label:
 
     actions:
         confirm:      Confirm Registration
+
+    native:
+        first_name:   Имя
+        surname:      Фамилия
+        patronymic:   Отчество
 
 gender:
     male:   Male
@@ -54,11 +62,16 @@ admin:
         login_info:         Login Information
 
 email:
+    already_used: |
+        This email is alredy used.
+        If you want to change registration details, please, contact us on bel.ef2017@gmail.com.
+
     user:
         request_send: |
             You are successfully registered as a(n) %role%!
             A letter with the details is sent on your email %email%.
 
+            You can contact us on bel.ef2017@gmail.com.
         letter: |
             Hello, %name%!
 

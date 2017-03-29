@@ -47,21 +47,24 @@ class BaseTeamAdmin extends AbstractAdmin
             ->add('city', TextType::class, [
                 'label' => 'label.team.city'
             ])
+//            ->add('coaches')
             ->add('coaches', 'sonata_type_model', [
                 'label' => 'coaches',
                 'property' => 'full_name',
                 'multiple' => true,
+                'by_reference' => false,
             ])
             ->add('members', 'sonata_type_model', [
                 'label' => 'label.team.members',
                 'property' => 'full_name',
                 'multiple' => true,
-                'choices' => null
+                'by_reference' => false,
             ])
             ->add('otherPeople', 'sonata_type_model', [
                 'label' => 'label.team.other_people',
                 'property' => 'full_name',
                 'multiple' => true,
+                'by_reference' => false,
             ])
         ;
     }
@@ -81,6 +84,9 @@ class BaseTeamAdmin extends AbstractAdmin
             ->addIdentifier('englishTeamName', null, [
                 'label' => 'label.team.english_team_name'
             ])
+            ->add('memberNumber', null, [
+                'label' => 'label.team.member_number'
+            ])
             ->add('country', null, [
                 'label' => 'label.team.country'
             ])
@@ -89,7 +95,6 @@ class BaseTeamAdmin extends AbstractAdmin
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
-//                    'show' => array(),
                     'edit' => array(),
                 )
             ))
@@ -122,7 +127,6 @@ class BaseTeamAdmin extends AbstractAdmin
 
     public function configureRoutes(RouteCollection $collection)
     {
-        parent::configureRoutes($collection);
         $collection->remove('add');
     }
 }

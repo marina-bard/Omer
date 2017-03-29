@@ -363,6 +363,11 @@ button:focus {
 #main-header {
     height: 100vh;
 }
+
+form[name="omer_teambundle_team"] div ul li {
+    color: whitesmoke;
+    text-transform: uppercase;
+}
 /*===================== NEWS ==========================*/
 #news {
     padding-top: 5em;

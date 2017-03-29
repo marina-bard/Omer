@@ -1,4 +1,12 @@
 services:
-#    omer_travel.example:
-#        class: Omer\TravelBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    sonata.admin.travel_info:
+        class: Omer\TravelBundle\Admin\TravelInfoAdmin
+        arguments:
+            - ~
+            - Omer\TravelBundle\Entity\TravelInfo
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.team', show_in_dashboard: false }
+        calls:
+            - [ setTranslationDomain, [OmerUserBundle] ]
+            - [ setTokenStorage, ['@security.token_storage'] ]

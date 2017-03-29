@@ -1,0 +1,4 @@
+base_team:
+    member_number:
+        already_used: 'The team with the name and membership number below is already registered.
+                       If you want to change registration details, contact us on bel.ef2017@gmail.com.'

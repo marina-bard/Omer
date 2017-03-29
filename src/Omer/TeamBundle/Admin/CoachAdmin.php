@@ -7,27 +7,39 @@
  * Time: 23:00
  */
 
-namespace Omer\UserBundle\Admin;
+namespace Omer\TeamBundle\Admin;
 
+use Omer\TeamBundle\Entity\BaseTeam;
+use Omer\UserBundle\Admin\PersonalDataAdmin;
 use Omer\UserBundle\Traits\CurrentUserTrait;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
-class CoachUserAdmin extends PersonalDataAdmin
+class CoachAdmin extends PersonalDataAdmin
 {
     use CurrentUserTrait;
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $formMapper
+            ->add('teams', null, [
+                'label' => 'label.coach_user.team',
+                'class' => BaseTeam::class,
+                'multiple' => true,
+                'attr' => ['disabled' => true]
+            ])
+        ;
+
         parent::configureFormFields($formMapper);
+
         $formMapper
             ->add('address', TextType::class, [
                 'label' => 'label.coach_user.address'
@@ -36,19 +48,13 @@ class CoachUserAdmin extends PersonalDataAdmin
                 'label' => 'label.coach_user.email'
             ])
             ->add('dietaryConcerns', TextareaType::class, [
-                'label' => 'label.dietary_concerns'
+                'label' => 'label.dietary_concerns',
+                'required' => false
             ])
             ->add('medicalConcerns', TextareaType::class, [
-                'label' => 'label.medical_concerns'
+                'label' => 'label.medical_concerns',
+                'required' => false
             ])
-            ->add('plainPassword', RepeatedType::class, [
-                'required' => false,
-                'type' => 'password',
-                'options' => ['translation_domain' => 'FOSUserBundle'],
-                'first_options' => ['label' => 'form.password'],
-                'second_options' => ['label' => 'form.password_confirmation'],
-                'invalid_message' => 'fos_user.password.mismatch'
-            ]);
         ;
     }
 
@@ -59,7 +65,10 @@ class CoachUserAdmin extends PersonalDataAdmin
                 'label' => 'label.coach_user.email'
             ])
             ->add('surname', null, [
-                'label' => 'label.coach_user.surname'
+                'label' => 'label.personal_data.surname'
+            ])
+            ->add('teams', null, [
+                'label' => 'label.coach_user.team'
             ])
         ;
     }
@@ -75,7 +84,6 @@ class CoachUserAdmin extends PersonalDataAdmin
             ])
             ->add('_action', 'actions', array(
                 'actions' => array(
-//                    'show' => array(),
                     'edit' => array(),
                 )
             ))
@@ -97,15 +105,8 @@ class CoachUserAdmin extends PersonalDataAdmin
         return $query;
     }
 
-    public function preUpdate($object) {
-        $um = $this->getConfigurationPool()->getContainer()->get('fos_user.user_manager');
-        $um->updateCanonicalFields($object);
-        $um->updatePassword($object);
-    }
-
     public function configureRoutes(RouteCollection $collection)
     {
-        parent::configureRoutes($collection);
         $collection->remove('add');
     }
 }

@@ -10,6 +10,7 @@ label:
         t_shirt_size:     T-shirt Size
         email:            E-mail
         address:          Address
+        team:             Team
 
     personal_data:
         surname:          Surname
@@ -56,6 +57,9 @@ role:
 admin:
     group_label:
         coaches:  Coaches
+        personal_info: Personal Information
+        registration_info:  Registration Information
+        login_info:         Login Information
 
 email:
     already_used: |

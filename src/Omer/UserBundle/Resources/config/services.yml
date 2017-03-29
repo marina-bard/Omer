@@ -1,12 +1,24 @@
 services:
-    sonata.admin.coach_user:
-        class: Omer\UserBundle\Admin\CoachUserAdmin
+    sonata.admin.login:
+        class: Omer\UserBundle\Admin\LoginAdmin
         arguments:
             - ~
-            - Omer\UserBundle\Entity\CoachUser
+            - Omer\UserBundle\Entity\OfficialUser
             - ~
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'label.group.personal_info' , label: 'admin.group_label.coaches' }
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.personal_info', label: 'admin.group_label.login_info' }
+        calls:
+            - [ setTranslationDomain, [OmerUserBundle] ]
+            - [ setTokenStorage, ['@security.token_storage'] ]
+
+    sonata.admin.official_user:
+        class: Omer\UserBundle\Admin\OfficialUserAdmin
+        arguments:
+            - ~
+            - Omer\UserBundle\Entity\OfficialUser
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.official_member', label: 'admin.group_label.registration_info' }
         calls:
             - [ setTranslationDomain, [OmerUserBundle] ]
             - [ setTokenStorage, ['@security.token_storage'] ]

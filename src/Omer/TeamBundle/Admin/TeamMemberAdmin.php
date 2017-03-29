@@ -9,6 +9,7 @@
 
 namespace Omer\TeamBundle\Admin;
 
+use Omer\TeamBundle\Entity\BaseTeam;
 use Omer\UserBundle\Admin\PersonalDataAdmin;
 use Omer\UserBundle\Form\PersonalDataType;
 use Omer\UserBundle\Traits\CurrentUserTrait;
@@ -18,7 +19,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,10 +28,16 @@ class TeamMemberAdmin extends PersonalDataAdmin
 {
     use CurrentUserTrait;
 
-//    protected $translationDomain = 'OmerUserBundle';
-
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $formMapper
+            ->add('team', EntityType::class, [
+                'label' => 'label.team_member.team',
+                'class' => BaseTeam::class,
+                'multiple' => false,
+            ])
+        ;
+
         parent::configureFormFields($formMapper);
 
         $formMapper
@@ -39,10 +45,12 @@ class TeamMemberAdmin extends PersonalDataAdmin
                 'label' => 'label.team_member.address'
             ])
             ->add('dietaryConcerns', TextareaType::class, [
-                'label' => 'label.dietary_concerns'
+                'label' => 'label.dietary_concerns',
+                'required' => false
             ])
             ->add('medicalConcerns', TextareaType::class, [
-                'label' => 'label.medical_concerns'
+                'label' => 'label.medical_concerns',
+                'required' => false
             ])
         ;
     }
@@ -109,7 +117,6 @@ class TeamMemberAdmin extends PersonalDataAdmin
 
     public function configureRoutes(RouteCollection $collection)
     {
-        parent::configureRoutes($collection);
         $collection->remove('add');
     }
 }

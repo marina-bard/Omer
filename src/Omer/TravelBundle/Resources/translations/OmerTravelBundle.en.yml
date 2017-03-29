@@ -1,4 +1,6 @@
 travel_info:  Travel Information
+arrivals:           Arrivals
+departures:         Departures
 
 label:
     transport:
@@ -15,5 +17,13 @@ label:
     departure_time:     Departure Time
     depart_from:        Depart from
     arrive_to:          Arrive to
+    type:               Type
+    from:               From
+    to:                 To
+    time:               At
+    date:               Date
+
+placeholder:
+    time:     00:00
 
 

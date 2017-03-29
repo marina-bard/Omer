@@ -135,9 +135,7 @@ class OfficialUser extends User
      */
     public function getGender()
     {
-        if($this->gender !== null) {
-            return self::GENDER[$this->gender];
-        }
+        return $this->gender;
     }
 
     /**

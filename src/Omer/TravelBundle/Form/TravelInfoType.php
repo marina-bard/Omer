@@ -63,7 +63,7 @@ class TravelInfoType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => '00:00'
+                    'placeholder' => 'placeholder.time'
                 ]
             ])
         ;

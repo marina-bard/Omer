@@ -17,7 +17,7 @@ use Omer\UserBundle\Traits\PersonalDataTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Omer\UserBundle\Repository\OfficialUserRepository")
  * @ORM\Table(name="director_user")
  */
 class OfficialUser extends User

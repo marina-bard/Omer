@@ -16,9 +16,13 @@ services:
         arguments:
             - ~
             - Omer\UserBundle\Entity\OfficialUser
-            - ~
+            - OmerUserBundle:OfficialUserAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'label.group.official_member', label: 'admin.group_label.registration_info' }
         calls:
             - [ setTranslationDomain, [OmerUserBundle] ]
             - [ setTokenStorage, ['@security.token_storage'] ]
+
+    user.builder.summary_excel:
+        class: Omer\UserBundle\Builder\SummaryExcelBuilder
+        arguments: ['@service_container']

@@ -113,7 +113,7 @@ class OfficialUserExcelBuilder
 
         $sheet
             ->setCellValue('B'.(++$value_row), date_format($arrival->getDate(), 'd-m-Y'))
-            ->setCellValue('B'.(++$value_row), $this->translator->trans($arrival->getGoBy(), [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$arrival->getGoBy()], [], 'OmerTravelBundle'))
             ->setCellValue('B'.(++$value_row), $arrival->getTransportNumber())
             ->getStyle('B'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
@@ -122,7 +122,7 @@ class OfficialUserExcelBuilder
             ->setCellValue('B'.(++$value_row), $arrival->getTime());
         $sheet
             ->setCellValue('B'.(++$value_row), date_format($departures->getDate(), 'd-m-Y'))
-            ->setCellValue('B'.(++$value_row), $this->translator->trans($departures->getGoBy(), [], 'OmerTravelBundle'))
+            ->setCellValue('B'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$departures->getGoBy()], [], 'OmerTravelBundle'))
             ->setCellValue('B'.(++$value_row), $departures->getTransportNumber())
             ->getStyle('B'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
@@ -161,7 +161,7 @@ class OfficialUserExcelBuilder
         $sheet
             ->setCellValue('B'.(++$value_row), $user->getFirstName())
             ->setCellValue('B'.(++$value_row), $user->getSurname())
-            ->setCellValue('B'.(++$value_row), $this->translator->trans($user->getGender(), [], 'OmerUserBundle'))
+            ->setCellValue('B'.(++$value_row), $this->translator->trans(OfficialUser::GENDER[$user->getGender()], [], 'OmerUserBundle'))
             ->setCellValue('B'.(++$value_row), $user->getTShirtSize())
             ->setCellValue('B'.(++$value_row), $user->getAssociation())
             ->setCellValue('B'.(++$value_row), $user->getCitizenship())

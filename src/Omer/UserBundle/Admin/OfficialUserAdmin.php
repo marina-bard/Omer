@@ -8,27 +8,19 @@
 
 namespace Omer\UserBundle\Admin;
 
-use Omer\TeamBundle\Entity\BaseTeam;
-use Omer\TravelBundle\Entity\TravelInfo;
-use Omer\TravelBundle\Form\TravelAttributesType;
-use Omer\TravelBundle\Form\TravelInfoType;
-use Omer\UserBundle\Admin\PersonalDataAdmin;
 use Omer\UserBundle\Entity\OfficialUser;
 use Omer\UserBundle\Traits\CurrentUserTrait;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Validator\Constraints\Email;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class OfficialUserAdmin extends PersonalDataAdmin
 {
@@ -197,5 +189,30 @@ class OfficialUserAdmin extends PersonalDataAdmin
         ) {
             $object->setUsername($object->getEmail());
         }
+    }
+
+    protected function configureTabMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        $admin = $this;
+
+        $roles = $this->getCurrentUser()->getRoles();
+        if(strstr(reset($roles), 'ADMIN')) {
+            if (array_key_exists("roles", $this->getFilterParameters())) {
+                $role = $this->getFilterParameters()['roles']['value'];
+            }
+            else {
+                $role = null;
+            }
+
+            $menu->addChild('admin.tab_menu.summary', array('uri' => $admin->generateUrl('getSummaryTable', [
+                'role' => $role
+            ])));
+        }
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        parent::configureRoutes($collection);
+        $collection->add('getSummaryTable');
     }
 }

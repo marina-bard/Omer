@@ -60,6 +60,11 @@ admin:
         personal_info: Personal Information
         registration_info:  Registration Information
         login_info:         Login Information
+    tab_menu:
+        summary:  Summary Table
+
+file_name:
+    summary_table:  Summary Table
 
 email:
     already_used: |

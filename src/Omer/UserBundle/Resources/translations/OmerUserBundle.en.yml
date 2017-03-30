@@ -5,7 +5,8 @@ label:
 
     dietary_concerns: Dietary Concerns (Indicate vegetarians, diabetics, any food allergies, etc.)
     medical_concerns: Medical Concerns (Indicate wheelchair access needs, disabilities, medicine allergies, etc.)
-
+    dietary_concerns_short: Dietary Concerns
+    medical_concerns_short: Medical Concerns
     coach_user:
         t_shirt_size:     T-shirt Size
         email:            E-mail

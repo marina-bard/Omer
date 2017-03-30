@@ -59,8 +59,8 @@ class SummaryExcelBuilder
             ->setCellValue(($column++).$row, $this->translator->trans('label.personal_data.date_of_issue', [], 'OmerUserBundle'))
             ->setCellValue(($column++).$row, $this->translator->trans('label.personal_data.date_of_expiry', [], 'OmerUserBundle'))
             ->setCellValue(($column++).$row, $this->translator->trans('label.user.mobile_phone', [], 'OmerUserBundle'))
-            ->setCellValue(($column++).$row, $this->translator->trans('label.dietary_concerns', [], 'OmerUserBundle'))
-            ->setCellValue(($column++).$row, $this->translator->trans('label.medical_concerns', [], 'OmerUserBundle'))
+            ->setCellValue(($column++).$row, $this->translator->trans('label.dietary_concerns_short', [], 'OmerUserBundle'))
+            ->setCellValue(($column++).$row, $this->translator->trans('label.medical_concerns_short', [], 'OmerUserBundle'))
 
             ->setCellValue(($column++).$row, $this->translator->trans('label.native.surname', [], 'OmerUserBundle'))
             ->setCellValue(($column++).$row, $this->translator->trans('label.native.first_name', [], 'OmerUserBundle'))
@@ -134,8 +134,12 @@ class SummaryExcelBuilder
         $sheet->getStyle('A1:'. $column . $row)->applyFromArray($this->getAlignLeft());
         $sheet->getStyle('A1:'. $column . $row)->applyFromArray($this->setTableBorder());
 
-        foreach(range('A',$column) as $columnID) {
+        foreach(range('A', 'Z') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
+
+        foreach(range('A', 'F') as $columnID) {
+            $sheet->getColumnDimension('A'.$columnID)->setAutoSize(true);
         }
 
         return $excel;

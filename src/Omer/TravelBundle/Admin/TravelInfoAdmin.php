@@ -20,15 +20,19 @@ class TravelInfoAdmin extends AbstractAdmin
 {
     use CurrentUserTrait;
 
+
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $type = $this->getSubject()->getType();
+        $data = $this->getTranslator()->trans(array_search($type,TravelInfo::TYPE), [], 'OmerTravelBundle');
         $formMapper
-            ->add('type', ChoiceType::class, [
+            ->add('type', null, [
                 'label' => 'label.type',
-                'choices' => TravelInfo::TYPE,
+                'data' => $data,
+                'mapped' => false,
                 'attr' => [
-                    'disabled' => true
-                ]
+                    'readonly' => true
+                ],
             ])
             ->add('date', 'sonata_type_date_picker', [
                 'label' => 'label.date',
@@ -45,16 +49,20 @@ class TravelInfoAdmin extends AbstractAdmin
                 'choices' => array_flip(TravelInfo::TRANSPORT)
             ])
             ->add('transportNumber', TextType::class, [
-                'label' => 'label.transport_number'
+                'label' => 'label.transport_number',
+                'required' => false
             ])
             ->add('stationFrom', TextType::class, [
-                'label' => 'label.from'
+                'label' => 'label.from',
+                'required' => false
             ])
             ->add('stationTo', TextType::class, [
-                'label' => 'label.to'
+                'label' => 'label.to',
+                'required' => false
             ])
             ->add('time', TextType::class, [
                 'label' => 'label.time',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'placeholder.time'
                 ]

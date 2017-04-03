@@ -44,15 +44,11 @@ class ForeignTeam extends BaseTeam
      */
     protected $address;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Problem", inversedBy="teams", cascade={"all"})
-//     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id")
-//     */
     /**
      * @ORM\Column(name="problem", type="string", nullable=true)
      *
      */
-    protected $problem;
+    protected $problem_t;
 
     /**
      * @ORM\Column(name="division", type="string", nullable=true)
@@ -238,30 +234,6 @@ class ForeignTeam extends BaseTeam
     }
 
     /**
-     * Set problem
-     *
-     * @param string $problem
-     *
-     * @return ForeignTeam
-     */
-    public function setProblem($problem)
-    {
-        $this->problem = $problem;
-
-        return $this;
-    }
-
-    /**
-     * Get problem
-     *
-     * @return string
-     */
-    public function getProblem()
-    {
-        return $this->problem;
-    }
-
-    /**
      * Set paymentCurrency
      *
      * @param string $paymentCurrency
@@ -322,5 +294,29 @@ class ForeignTeam extends BaseTeam
     public function __toString()
     {
         return $this->englishTeamName;
+    }
+
+    /**
+     * Set problemT
+     *
+     * @param string $problemT
+     *
+     * @return ForeignTeam
+     */
+    public function setProblemT($problemT)
+    {
+        $this->problem_t = $problemT;
+
+        return $this;
+    }
+
+    /**
+     * Get problemT
+     *
+     * @return string
+     */
+    public function getProblemT()
+    {
+        return $this->problem_t;
     }
 }

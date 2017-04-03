@@ -38,13 +38,12 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ->add('address', TextType::class, [
                 'label' => 'label.team.address'
             ])
-            ->add('problem', TextType::class, [
+            ->add('problem_t', TextType::class, [
                 'label' => 'label.team.problem',
             ])
-//            ->add('problem', 'sonata_type_model', [
-//                'label' => 'label.team.problem',
-//                'multiple' => false
-//            ])
+            ->add('problem', null, [
+                'label' => 'label.team.problem',
+            ])
             ->add('division', TextType::class, [
                 'label' => 'label.team.division'
             ])

@@ -89,6 +89,12 @@ abstract class BaseTeam
     protected $district;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Problem", inversedBy="teams")
+     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id")
+     */
+    protected $problem;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -366,5 +372,29 @@ abstract class BaseTeam
     public function getDistrict()
     {
         return $this->district;
+    }
+
+    /**
+     * Set problem
+     *
+     * @param \Omer\CompetitionBundle\Entity\Problem $problem
+     *
+     * @return BaseTeam
+     */
+    public function setProblem(\Omer\CompetitionBundle\Entity\Problem $problem = null)
+    {
+        $this->problem = $problem;
+
+        return $this;
+    }
+
+    /**
+     * Get problem
+     *
+     * @return \Omer\CompetitionBundle\Entity\Problem
+     */
+    public function getProblem()
+    {
+        return $this->problem;
     }
 }

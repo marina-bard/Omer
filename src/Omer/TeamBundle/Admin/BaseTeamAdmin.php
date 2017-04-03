@@ -47,7 +47,6 @@ class BaseTeamAdmin extends AbstractAdmin
             ->add('city', TextType::class, [
                 'label' => 'label.team.city'
             ])
-//            ->add('coaches')
             ->add('coaches', 'sonata_type_model', [
                 'label' => 'coaches',
                 'property' => 'full_name',

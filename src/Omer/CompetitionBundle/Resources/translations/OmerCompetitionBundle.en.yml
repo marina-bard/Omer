@@ -1,0 +1,9 @@
+admin:
+    group_label:
+        problem:  Problems
+
+label:
+    problem:
+        type:         Problem Type
+        title:        Title
+        description:  Description

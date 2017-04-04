@@ -192,7 +192,11 @@ class OfficialUserExcelBuilder
         ;
 
         if ($this->role == 'ROLE_JUDGE') {
-            $sheet->setCellValue('B'.(++$value_row), $user->getPreferences());
+            $prefs = "";
+            foreach ($user->getPreferences() as $item) {
+                $prefs .= $this->translator->trans(array_search($item,OfficialUser::PREFERENCES), [], 'OmerUserBundle') . ", ";
+            }
+            $sheet->setCellValue('B'.(++$value_row), $prefs);
         }
 
         if ($user->getNativeFirstName()) {

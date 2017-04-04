@@ -140,6 +140,12 @@ class OfficialUserType extends AbstractType
                     'placeholder' => 'label.user.email'
                 ]
             ])
+            ->add('preferences', ChoiceType::class, [
+                'choices' => OfficialUser::PREFERENCES,
+                'required' => true,
+                'expanded' => true,
+                'multiple' => true
+            ])
             ->add('dietaryConcerns', TextareaType::class, [
                 'required' => false,
                 'attr' => [
@@ -152,13 +158,6 @@ class OfficialUserType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.medical_concerns'
-                ]
-            ])
-            ->add('preferences', TextType::class, [
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'label.user.preferences'
                 ]
             ])
             ->add('travelAttributes', CollectionType::class, [

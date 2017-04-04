@@ -123,6 +123,19 @@ form[name="omer_userbundle_directoruser"] label {
     display: none;
 }
 
+div[id="omer_userbundle_directoruser_preferences"] > label {
+    display: inline-block !important;
+    color: whitesmoke;
+    float: left;
+    zoom: 1.1;
+}
+
+div[id="omer_userbundle_directoruser_preferences"] > input[type="checkbox"] {
+    float: left;
+    clear: left;
+    width: 6%;
+}
+
 form[name="omer_teambundle_team"] input[type="text"],
 form[name="omer_teambundle_team"] textarea,
 form[name="omer_userbundle_directoruser"] input[type="text"],

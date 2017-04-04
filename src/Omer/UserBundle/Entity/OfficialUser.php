@@ -38,16 +38,12 @@ class OfficialUser extends User
     ];
 
     const PREFERENCES = [
-        'preferences.problem' => 0,
-        'preferences.spontaneous' => 1
-    ];
-
-    const PROBLEM_PREFERENCES = [
-        'problem.vehicle' => 2,
-        'problem.technical' => 3,
-        'problem.classics' => 4,
-        'problem.structure' => 5,
-        'problem.performance' => 6
+        'problem.vehicle' => 1,
+        'problem.technical' => 2,
+        'problem.classics' => 3,
+        'problem.structure' => 4,
+        'problem.performance' => 5,
+        'preferences.spontaneous' => 0
     ];
 
     /**
@@ -116,8 +112,7 @@ class OfficialUser extends User
     protected $position;
 
     /**
-     * @var string
-     * @ORM\Column(name="preferences", type="integer", nullable=true)
+     * @ORM\Column(name="preferences", type="array", nullable=true)
      */
     protected $preferences;
 
@@ -414,7 +409,7 @@ class OfficialUser extends User
     /**
      * Set preferences
      *
-     * @param integer $preferences
+     * @param array $preferences
      *
      * @return OfficialUser
      */
@@ -428,7 +423,7 @@ class OfficialUser extends User
     /**
      * Get preferences
      *
-     * @return integer
+     * @return array
      */
     public function getPreferences()
     {

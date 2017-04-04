@@ -2,9 +2,12 @@
 
 namespace Omer\TeamBundle\Form;
 
+use Omer\CompetitionBundle\Entity\Problem;
+use Omer\CompetitionBundle\Entity\ProblemType;
 use Omer\TeamBundle\Entity\ForeignTeam;
 use Omer\TravelBundle\Form\TravelInfoType;
 use Omer\TeamBundle\Form\CoachType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -72,8 +75,17 @@ class ForeignTeamType extends AbstractType
                     'placeholder' => 'label.team.address'
                 ]
             ])
-            ->add('problem', TextType::class, [
+//            ->add('problem', EntityType::class, [
+//                'label' => 'label.team.problem',
+//                'class' => Problem::class,
+//                'choice_label' => 'title',
+//                'expanded' => true,
+//                'multiple' => false
+//            ])
+            ->add('problem', EntityType::class, [
                 'label' => 'label.team.problem',
+                'class' => Problem::class,
+                'multiple' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.team.problem'

@@ -124,7 +124,7 @@ class TeamExcelBuilder
 
        $sheet
             ->setCellValue('C'.(++$value_row), date_format($arrival->getDate(), 'd-m-Y'))
-            ->setCellValue('C'.(++$value_row), $this->translator->trans($arrival->getGoBy(), [], 'OmerTravelBundle'))
+            ->setCellValue('C'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$arrival->getGoBy()], [], 'OmerTravelBundle'))
             ->setCellValue('C'.(++$value_row), $arrival->getTransportNumber())
            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
        $sheet
@@ -133,7 +133,7 @@ class TeamExcelBuilder
             ->setCellValue('C'.(++$value_row), $arrival->getTime());
        $sheet
             ->setCellValue('C'.(++$value_row), date_format($departures->getDate(), 'd-m-Y'))
-            ->setCellValue('C'.(++$value_row), $this->translator->trans($departures->getGoBy(), [], 'OmerTravelBundle'))
+            ->setCellValue('C'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$departures->getGoBy()], [], 'OmerTravelBundle'))
             ->setCellValue('C'.(++$value_row), $departures->getTransportNumber())
             ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
        $sheet
@@ -181,7 +181,7 @@ class TeamExcelBuilder
             ->setCellValue('C'.(++$value_row), $team->getDivision())
             ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
-            ->setCellValue('C'.(++$value_row), $team->getPaymentCurrency())
+            ->setCellValue('C'.(++$value_row), ForeignTeam::PAYMENT_CURRENCY[$team->getPaymentCurrency()])
             ->setCellValue('C'.(++$value_row), $team->getConcerns())
         ;
 

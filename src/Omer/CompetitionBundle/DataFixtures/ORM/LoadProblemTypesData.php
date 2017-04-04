@@ -16,12 +16,12 @@ use Omer\CompetitionBundle\Entity\ProblemType;
 class LoadProblemTypesData implements FixtureInterface
 {
     private $types = [
-        '#1 Vehicle',
-        '#2 Technical',
-        '#3 Classics',
-        '#4 Structure',
-        '#5 Performance',
-        'Primary'
+        'Problem #1',
+        'Problem #2',
+        'Problem #3',
+        'Problem #4',
+        'Problem #5',
+        'Problem #6'
     ];
 
     public function load(ObjectManager $manager)

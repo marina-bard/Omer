@@ -46,6 +46,11 @@ class ProblemAdmin extends AbstractAdmin
         $listMapper
             ->add('type')
             ->add('title')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'edit' => array(),
+                )
+            ))
         ;
     }
 }

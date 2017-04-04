@@ -42,6 +42,8 @@ class OfficialUserExcelBuilder
 
     private $value_row;
 
+    private $role;
+
     public function __construct($container)
     {
         $this->container = $container;
@@ -60,9 +62,9 @@ class OfficialUserExcelBuilder
         $this->excel = new PHPExcel();
         $this->sheet = $this->excel->setActiveSheetIndex(0);
 
-        $role = $user->getRoles()[0];
+        $this->role = $user->getRoles()[0];
 
-        $role = $this->translator->trans(array_search($role, OfficialUser::ROLES), [], 'OmerUserBundle');
+        $role = $this->translator->trans(array_search($this->role, OfficialUser::ROLES), [], 'OmerUserBundle');
 
         $this->sheet->setTitle($this->translator->trans($role, [], 'OmerUserBundle'));
         $this->sheet = $this->setHeader($this->sheet, ++$this->label_row, $this->translator->trans($role, [], 'OmerUserBundle'));
@@ -148,15 +150,22 @@ class OfficialUserExcelBuilder
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.t_shirt_size', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.association', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.citizenship', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.job', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.position', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.address', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.date_of_birth', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.passport_number', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.date_of_issue', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.personal_data.date_of_expiry', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.mobile_phone', [], 'OmerUserBundle'))
+            ->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.email', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.dietary_concerns', [], 'OmerUserBundle'))
             ->setCellValue('A'.(++$label_row), $this->translator->trans('label.medical_concerns', [], 'OmerUserBundle'))
         ;
+
+        if ($this->role == 'ROLE_JUDGE') {
+            $sheet->setCellValue('A'.(++$label_row), $this->translator->trans('label.user.preferences', [], 'OmerUserBundle'));
+        }
 
         $sheet
             ->setCellValue('B'.(++$value_row), $user->getFirstName())
@@ -165,6 +174,8 @@ class OfficialUserExcelBuilder
             ->setCellValue('B'.(++$value_row), $user->getTShirtSize())
             ->setCellValue('B'.(++$value_row), $user->getAssociation())
             ->setCellValue('B'.(++$value_row), $user->getCitizenship())
+            ->setCellValue('B'.(++$value_row), $user->getJob())
+            ->setCellValue('B'.(++$value_row), $user->getPosition())
             ->setCellValue('B'.(++$value_row), $user->getAddress())
             ->setCellValue('B'.(++$value_row), date_format($user->getDateOfBirth(), 'd-m-Y'))
             ->setCellValue('B'.(++$value_row), $user->getPassportNumber())
@@ -175,9 +186,18 @@ class OfficialUserExcelBuilder
             ->setCellValue('B'.(++$value_row), $user->getMobilePhone())
             ->getStyle('B'.$value_row)->applyFromArray($this->getAlignLeft());
         $sheet
+            ->setCellValue('B'.(++$value_row), $user->getEmail())
             ->setCellValue('B'.(++$value_row), $user->getDietaryConcerns())
             ->setCellValue('B'.(++$value_row), $user->getMedicalConcerns())
         ;
+
+        if ($this->role == 'ROLE_JUDGE') {
+            $prefs = "";
+            foreach ($user->getPreferences() as $item) {
+                $prefs .= $this->translator->trans(array_search($item,OfficialUser::PREFERENCES), [], 'OmerUserBundle') . ", ";
+            }
+            $sheet->setCellValue('B'.(++$value_row), $prefs);
+        }
 
         if ($user->getNativeFirstName()) {
             $sheet

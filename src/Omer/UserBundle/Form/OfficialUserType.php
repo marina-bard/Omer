@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OfficialUserType extends AbstractType
@@ -67,7 +69,21 @@ class OfficialUserType extends AbstractType
                     'placeholder' => 'label.personal_data.citizenship'
                 ]
             ])
+            ->add('job', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.user.job'
+                ]
+            ])
+            ->add('position', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'label.user.position'
+                ]
+            ])
             ->add('address', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.user.address'
@@ -123,6 +139,12 @@ class OfficialUserType extends AbstractType
                     'class' => 'form-control',
                     'placeholder' => 'label.user.email'
                 ]
+            ])
+            ->add('preferences', ChoiceType::class, [
+                'choices' => OfficialUser::PREFERENCES,
+                'required' => true,
+                'expanded' => true,
+                'multiple' => true
             ])
             ->add('dietaryConcerns', TextareaType::class, [
                 'required' => false,

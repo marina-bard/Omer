@@ -17,7 +17,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-6">
-
+                        {#{{ dump(form) }}#}
                         {{ form_row(form.role, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.firstName, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.surname, {'attr':{'class':'form-control'}}) }}
@@ -29,9 +29,12 @@
                         {{ form_row(form.passportNumber, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.dateOfIssue, {'attr':{'class':'datepicker'}}) }}
                         {{ form_row(form.dateOfExpiry, {'attr':{'class':'datepicker'}}) }}
+                        {{ form_row(form.job, {'attr':{'class':'form-control'}}) }}
+                        {{ form_row(form.position, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.address, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.mobilePhone, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.email, {'attr':{'class':'form-control'}}) }}
+                        {{ form_row(form.preferences, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.dietaryConcerns, {'attr':{'class':'form-control'}}) }}
                         {{ form_row(form.medicalConcerns, {'attr':{'class':'form-control'}}) }}
                     </div>

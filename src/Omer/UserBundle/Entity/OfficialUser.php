@@ -33,7 +33,21 @@ class OfficialUser extends User
 
     const ROLES = [
         'role.ad' => 'ROLE_DIRECTOR',
-        'role.judge' => 'ROLE_JUDGE'
+        'role.judge' => 'ROLE_JUDGE',
+        'role.driver' => 'ROLE_USER'
+    ];
+
+    const PREFERENCES = [
+        'preferences.problem' => 0,
+        'preferences.spontaneous' => 1
+    ];
+
+    const PROBLEM_PREFERENCES = [
+        'problem.vehicle' => 2,
+        'problem.technical' => 3,
+        'problem.classics' => 4,
+        'problem.structure' => 5,
+        'problem.performance' => 6
     ];
 
     /**
@@ -88,6 +102,24 @@ class OfficialUser extends User
      * @ORM\Column(name="medical_concerns", type="string", nullable=true)
      */
     protected $medicalConcerns;
+
+    /**
+     * @var string
+     * @ORM\Column(name="job", type="string", nullable=true)
+     */
+    protected $job;
+
+    /**
+     * @var string
+     * @ORM\Column(name="position", type="string", nullable=true)
+     */
+    protected $position;
+
+    /**
+     * @var string
+     * @ORM\Column(name="preferences", type="integer", nullable=true)
+     */
+    protected $preferences;
 
     public function __construct()
     {
@@ -329,5 +361,77 @@ class OfficialUser extends User
     public function __toString()
     {
         return $this->firstName.' '.$this->surname;
+    }
+
+    /**
+     * Set job
+     *
+     * @param string $job
+     *
+     * @return OfficialUser
+     */
+    public function setJob($job)
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    /**
+     * Get job
+     *
+     * @return string
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
+
+    /**
+     * Set position
+     *
+     * @param string $position
+     *
+     * @return OfficialUser
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set preferences
+     *
+     * @param integer $preferences
+     *
+     * @return OfficialUser
+     */
+    public function setPreferences($preferences)
+    {
+        $this->preferences = $preferences;
+
+        return $this;
+    }
+
+    /**
+     * Get preferences
+     *
+     * @return integer
+     */
+    public function getPreferences()
+    {
+        return $this->preferences;
     }
 }

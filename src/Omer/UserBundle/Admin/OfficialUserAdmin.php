@@ -98,6 +98,23 @@ class OfficialUserAdmin extends PersonalDataAdmin
                 ->add('email', EmailType::class, [
                     'label' => 'label.user.email'
                 ])
+                ->add('job', TextType::class, [
+                    'label' => 'label.user.job'
+                ])
+                ->add('position', TextType::class, [
+                    'label' => 'label.user.position'
+                ])
+            ;
+
+            if ($this->getCurrentUser()->hasRole('ROLE_JUDGE')) {
+                $formMapper
+                    ->add('preferences', TextType::class, [
+                        'label' => 'label.user.position'
+                    ])
+                ;
+            }
+
+            $formMapper
                 ->add('dietaryConcerns', TextareaType::class, [
                     'label' => 'label.dietary_concerns',
                     'required' => false

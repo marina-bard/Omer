@@ -38,6 +38,9 @@ label:
         mobile_phone: Phone for Communication
         email:        E-mail
         role:         Role
+        job:          Job
+        position:     Position
+        preferences:  Preferences
 
     actions:
         confirm:      Confirm Registration
@@ -54,6 +57,7 @@ gender:
 role:
     ad:     Association Director
     judge:  Judge
+    driver: Driver
 
 admin:
     group_label:
@@ -92,4 +96,15 @@ email:
             You will find the details in the document attached.
 
             Odyssey of the Mind team.
+
+preferences:
+    problem:     Long-term Problems
+    spontaneous: Spontaneous
+
+problem:
+    vehicle:      1. Vehicle
+    technical:    2. Technical
+    classics:     3. Classics
+    structure:    4. Structure
+    performance:  5. Performance
 

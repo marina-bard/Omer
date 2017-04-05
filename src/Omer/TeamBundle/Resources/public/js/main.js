@@ -84,4 +84,13 @@ $(document).ready(function ($) {
             }
         }
     });
+
+    var preferencesInJudgementRow = $('div#omer_userbundle_directoruser_preferences').closest('.row');
+    preferencesInJudgementRow.hide();
+    $('#omer_userbundle_directoruser_role').on('change', function(){
+        if($(this).val() === 'ROLE_JUDGE')
+            preferencesInJudgementRow.show();
+        else
+            preferencesInJudgementRow.hide();
+    });
 });

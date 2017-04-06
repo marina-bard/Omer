@@ -18,11 +18,19 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/invite", name="default_invitation")
+     * @Route("/invitation_ru", name="default_invitation_ru")
      */
-    public function invitationAction()
+    public function invitationRuAction()
     {
-        return $this->openPDF('@OmerDefaultBundle/Resources/templates/invitation.pdf');
+        return $this->openPDF('@OmerDefaultBundle/Resources/templates/invitation_ru.pdf');
+    }
+
+    /**
+     * @Route("/invitation_en", name="default_invitation_en")
+     */
+    public function invitationEnAction()
+    {
+        return $this->openPDF('@OmerDefaultBundle/Resources/templates/invitation_en.pdf');
     }
 
     private function openPDF($filepath)

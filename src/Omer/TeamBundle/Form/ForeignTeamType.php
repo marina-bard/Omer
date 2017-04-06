@@ -2,6 +2,7 @@
 
 namespace Omer\TeamBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Omer\CompetitionBundle\Entity\Division;
 use Omer\CompetitionBundle\Entity\Problem;
 use Omer\CompetitionBundle\Entity\ProblemType;
@@ -81,6 +82,9 @@ class ForeignTeamType extends AbstractType
                 'label' => 'label.team.problem',
                 'class' => Problem::class,
                 'multiple' => false,
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('p')->orderBy('p.type');
+                },
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.team.problem'
@@ -90,6 +94,9 @@ class ForeignTeamType extends AbstractType
                 'label' => 'label.team.division',
                 'class' => Division::class,
                 'multiple' => false,
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('d')->orderBy('d.number');
+                },
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.team.division'

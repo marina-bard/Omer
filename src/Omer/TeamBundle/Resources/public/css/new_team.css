@@ -368,6 +368,11 @@ form[name="omer_teambundle_team"] div ul li {
     color: whitesmoke;
     text-transform: uppercase;
 }
+
+div select[id="omer_teambundle_team_division"] {
+    margin-top: 12px;
+}
+
 /*===================== NEWS ==========================*/
 #news {
     padding-top: 5em;

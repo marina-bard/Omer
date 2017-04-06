@@ -33,10 +33,19 @@ class Division
      */
     protected $number;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Omer\TeamBundle\Entity\BaseTeam", mappedBy="division")
+     */
+    protected $teams;
+
+    /**
+     * Constructor
+     */
     public function __construct($title, $number)
     {
         $this->title = $title;
         $this->number = $number;
+        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -100,5 +109,39 @@ class Division
     public function __toString()
     {
         return (string) $this->title;
+    }
+
+    /**
+     * Add team
+     *
+     * @param \Omer\TeamBundle\Entity\BaseTeam $team
+     *
+     * @return Division
+     */
+    public function addTeam(\Omer\TeamBundle\Entity\BaseTeam $team)
+    {
+        $this->teams[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * Remove team
+     *
+     * @param \Omer\TeamBundle\Entity\BaseTeam $team
+     */
+    public function removeTeam(\Omer\TeamBundle\Entity\BaseTeam $team)
+    {
+        $this->teams->removeElement($team);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }

@@ -46,6 +46,14 @@ class Problem
     protected $teams;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -130,13 +138,6 @@ class Problem
     public function __toString()
     {
         return (string) $this->type . '. ' . $this->title;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Omer\TeamBundle\Form;
 
+use Omer\CompetitionBundle\Entity\Division;
 use Omer\CompetitionBundle\Entity\Problem;
 use Omer\CompetitionBundle\Entity\ProblemType;
 use Omer\TeamBundle\Entity\ForeignTeam;
@@ -25,6 +26,7 @@ class ForeignTeamType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        //@toDo Devide into two types: BaseTeamType and ForeignTeamType
         $builder
             ->add('englishTeamName', TextType::class, [
                 'label' => 'label.team.english_team_name',
@@ -75,13 +77,6 @@ class ForeignTeamType extends AbstractType
                     'placeholder' => 'label.team.address'
                 ]
             ])
-//            ->add('problem', EntityType::class, [
-//                'label' => 'label.team.problem',
-//                'class' => Problem::class,
-//                'choice_label' => 'title',
-//                'expanded' => true,
-//                'multiple' => false
-//            ])
             ->add('problem', EntityType::class, [
                 'label' => 'label.team.problem',
                 'class' => Problem::class,
@@ -91,8 +86,10 @@ class ForeignTeamType extends AbstractType
                     'placeholder' => 'label.team.problem'
                 ]
             ])
-            ->add('division', TextType::class, [
+            ->add('division', EntityType::class, [
                 'label' => 'label.team.division',
+                'class' => Division::class,
+                'multiple' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'label.team.division'

@@ -42,13 +42,19 @@ class ForeignTeamAdmin extends BaseTeamAdmin
                 'label' => 'label.team.problem',
                 'required' => false
             ])
+            //@toDo move 'problem' and 'division' to BaseTeamAdmin after '_t' fields removing
             ->add('problem', null, [
                 'label' => 'label.team.problem',
                 'expanded' => true,
                 'required' => true
             ])
-            ->add('division', TextType::class, [
+            ->add('division_t', TextType::class, [
                 'label' => 'label.team.division'
+            ])
+            ->add('division', null, [
+                'label' => 'label.team.division',
+                'expanded' => true,
+                'required' => true
             ])
             ->add('concerns', TextareaType::class, [
                 'label' => 'label.team.concerns',

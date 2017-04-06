@@ -95,6 +95,12 @@ abstract class BaseTeam
     protected $problem;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Division", inversedBy="teams")
+     * @ORM\JoinColumn(name="division_id", referencedColumnName="id")
+     */
+    protected $division;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -396,5 +402,29 @@ abstract class BaseTeam
     public function getProblem()
     {
         return $this->problem;
+    }
+
+    /**
+     * Set division
+     *
+     * @param \Omer\CompetitionBundle\Entity\Division $division
+     *
+     * @return BaseTeam
+     */
+    public function setDivision(\Omer\CompetitionBundle\Entity\Division $division = null)
+    {
+        $this->division = $division;
+
+        return $this;
+    }
+
+    /**
+     * Get division
+     *
+     * @return \Omer\CompetitionBundle\Entity\Division
+     */
+    public function getDivision()
+    {
+        return $this->division;
     }
 }

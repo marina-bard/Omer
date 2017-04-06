@@ -51,10 +51,10 @@ class ForeignTeam extends BaseTeam
     protected $problem_t;
 
     /**
-     * @ORM\Column(name="division", type="string", nullable=true)
+     * @ORM\Column(name="division_t", type="string", nullable=true)
      *
      */
-    protected $division;
+    protected $division_t;
 
     /**
      * @ORM\Column(name="concerns", type="string", nullable=true)
@@ -135,30 +135,6 @@ class ForeignTeam extends BaseTeam
     public function getAddress()
     {
         return $this->address;
-    }
-
-    /**
-     * Set division
-     *
-     * @param string $division
-     *
-     * @return ForeignTeam
-     */
-    public function setDivision($division)
-    {
-        $this->division = $division;
-
-        return $this;
-    }
-
-    /**
-     * Get division
-     *
-     * @return string
-     */
-    public function getDivision()
-    {
-        return $this->division;
     }
 
     /**
@@ -318,5 +294,29 @@ class ForeignTeam extends BaseTeam
     public function getProblemT()
     {
         return $this->problem_t;
+    }
+
+    /**
+     * Set divisionT
+     *
+     * @param string $divisionT
+     *
+     * @return ForeignTeam
+     */
+    public function setDivisionT($divisionT)
+    {
+        $this->division_t = $divisionT;
+
+        return $this;
+    }
+
+    /**
+     * Get divisionT
+     *
+     * @return string
+     */
+    public function getDivisionT()
+    {
+        return $this->division_t;
     }
 }

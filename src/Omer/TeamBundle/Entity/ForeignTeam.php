@@ -293,7 +293,7 @@ class ForeignTeam extends BaseTeam
 
     public function __toString()
     {
-        return $this->englishTeamName;
+        return (string) $this->englishTeamName;
     }
 
     /**

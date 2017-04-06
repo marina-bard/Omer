@@ -10,7 +10,6 @@
 namespace Omer\CompetitionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -130,7 +129,7 @@ class Problem
 
     public function __toString()
     {
-        return $this->type . '. ' . $this->title;
+        return (string) $this->type . '. ' . $this->title;
     }
     /**
      * Constructor

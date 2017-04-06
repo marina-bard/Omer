@@ -40,9 +40,12 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ])
             ->add('problem_t', TextType::class, [
                 'label' => 'label.team.problem',
+                'required' => false
             ])
             ->add('problem', null, [
                 'label' => 'label.team.problem',
+                'expanded' => true,
+                'required' => true
             ])
             ->add('division', TextType::class, [
                 'label' => 'label.team.division'

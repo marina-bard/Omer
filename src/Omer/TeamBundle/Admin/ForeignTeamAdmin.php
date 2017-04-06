@@ -46,7 +46,10 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ->add('problem', null, [
                 'label' => 'label.team.problem',
                 'expanded' => true,
-                'required' => true
+                'required' => true,
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('p')->orderBy('p.type');
+                }
             ])
             ->add('division_t', TextType::class, [
                 'label' => 'label.team.division'
@@ -54,7 +57,10 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ->add('division', null, [
                 'label' => 'label.team.division',
                 'expanded' => true,
-                'required' => true
+                'required' => true,
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('p')->orderBy('p.number');
+                }
             ])
             ->add('concerns', TextareaType::class, [
                 'label' => 'label.team.concerns',

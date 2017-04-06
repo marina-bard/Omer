@@ -90,13 +90,13 @@ abstract class BaseTeam
 
     /**
      * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Problem", inversedBy="teams")
-     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $problem;
 
     /**
      * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Division", inversedBy="teams")
-     * @ORM\JoinColumn(name="division_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="division_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $division;
 

@@ -16,20 +16,23 @@ use Omer\CompetitionBundle\Entity\ProblemType;
 class LoadProblemTypesData implements FixtureInterface
 {
     private $types = [
-        'Problem #1',
-        'Problem #2',
-        'Problem #3',
-        'Problem #4',
-        'Problem #5',
-        'Problem #6'
+        'Problem #1' => 1,
+        'Problem #2' => 2,
+        'Problem #3' => 3,
+        'Problem #4' => 4,
+        'Problem #5' => 5,
+        'Problem #6' => 6
     ];
 
     public function load(ObjectManager $manager)
     {
-        foreach ($this->types as $type) {
-            $value = $manager->getRepository('OmerCompetitionBundle:ProblemType')->findBy(['title' => $type]);
-            if (!$value) {
-                $manager->persist(new ProblemType($type));
+        foreach ($this->types as $key => $value) {
+            $type = $manager->getRepository('OmerCompetitionBundle:ProblemType')->findOneBy(['number' => $value]);
+            if (!$type) {
+                $manager->persist(new ProblemType($key, $value));
+            }
+            else {
+                $type->setTitle($key);
             }
         }
         $manager->flush();

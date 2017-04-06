@@ -30,15 +30,21 @@ class ProblemType
     protected $title;
 
     /**
+     * @ORM\Column(name="number", type="integer")
+     */
+    protected $number;
+
+    /**
      * @ORM\OneToMany(targetEntity="Omer\CompetitionBundle\Entity\Problem", mappedBy="type")
      */
     protected $problems;
     /**
      * Constructor
      */
-    public function __construct($title = null)
+    public function __construct($title = null, $number = null)
     {
         $this->title = $title;
+        $this->number = $number;
         $this->problems = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -113,5 +119,29 @@ class ProblemType
     public function __toString()
     {
         return (string) $this->title;
+    }
+
+    /**
+     * Set number
+     *
+     * @param integer $number
+     *
+     * @return ProblemType
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return integer
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 }

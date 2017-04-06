@@ -74,6 +74,12 @@ class BaseTeamAdmin extends AbstractAdmin
             ->add('englishTeamName', null, [
                 'label' => 'label.team.english_team_name'
             ])
+            ->add('problem', null, [
+                'label' => 'label.team.problem'
+            ])
+            ->add('division', null, [
+                'label' => 'label.team.problem'
+            ])
         ;
     }
 

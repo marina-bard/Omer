@@ -15,37 +15,20 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class ProblemAdmin extends AbstractAdmin
+class ProblemTypeAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('type', null, [
-                'label' => 'label.problem.type',
-                'multiple' => false,
-            ])
             ->add('title', TextType::class, [
-                'label' => 'label.problem.title'
+                'label' => 'label.problem.type'
             ])
-            ->add('description', TextareaType::class, [
-                'label' => 'label.problem.description',
-                'required' => false
-            ])
-        ;
-    }
-
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('type')
-            ->add('title')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('type')
             ->add('title')
             ->add('_action', 'actions', array(
                 'actions' => array(

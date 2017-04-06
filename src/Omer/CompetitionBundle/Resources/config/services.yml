@@ -19,3 +19,13 @@ services:
                - { name: sonata.admin, manager_type: orm, group: 'label.group.competition' , label: 'admin.group_label.division' }
            calls:
                - [ setTranslationDomain, [OmerCompetitionBundle] ]
+     sonata.admin.competition.problem_type:
+           class: Omer\CompetitionBundle\Admin\ProblemTypeAdmin
+           arguments:
+               - ~
+               - Omer\CompetitionBundle\Entity\ProblemType
+               - ~
+           tags:
+               - { name: sonata.admin, manager_type: orm, group: 'label.group.competition' , label: 'admin.group_label.problem_type' }
+           calls:
+               - [ setTranslationDomain, [OmerCompetitionBundle] ]

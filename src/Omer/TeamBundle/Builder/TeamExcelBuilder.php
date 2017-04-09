@@ -130,9 +130,10 @@ class TeamExcelBuilder
        $sheet
             ->setCellValue('C'.(++$value_row), $this->getDate($arrival->getDate()));
 
-       if ($arrival->getGoBy()) {
+       $value_row++;
+       if ($arrival->getGoBy() !== null) {
            $sheet
-               ->setCellValue('C'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$arrival->getGoBy()], [], 'OmerTravelBundle'));
+               ->setCellValue('C'.($value_row), $this->translator->trans(TravelInfo::TRANSPORT[$arrival->getGoBy()], [], 'OmerTravelBundle'));
        }
 
        $sheet
@@ -144,9 +145,11 @@ class TeamExcelBuilder
             ->setCellValue('C'.(++$value_row), $arrival->getTime());
        $sheet
             ->setCellValue('C'.(++$value_row), $this->getDate($departures->getDate()));
-       if ($arrival->getGoBy()) {
+
+        $value_row++;
+        if ($arrival->getGoBy() !== null) {
            $sheet
-               ->setCellValue('C'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$arrival->getGoBy()], [], 'OmerTravelBundle'));
+               ->setCellValue('C'.($value_row), $this->translator->trans(TravelInfo::TRANSPORT[$departures->getGoBy()], [], 'OmerTravelBundle'));
        }
         $sheet
             ->setCellValue('C'.(++$value_row), $departures->getTransportNumber())

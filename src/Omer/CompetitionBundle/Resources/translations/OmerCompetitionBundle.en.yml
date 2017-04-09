@@ -1,0 +1,14 @@
+admin:
+    group_label:
+        problem:      Problems
+        division:     Divisions
+        problem_type: Problem Type
+
+label:
+    problem:
+        type:         Problem Type
+        title:        Title
+        description:  Description
+
+    division:
+        title:  Title

@@ -16,9 +16,11 @@ use Omer\UserBundle\Traits\CurrentUserTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -59,7 +61,10 @@ class TeamMemberAdmin extends PersonalDataAdmin
     {
         $datagridMapper
             ->add('surname', null, [
-                'label' => 'label.team_member.surname'
+                'label' => 'label.personal_data.surname'
+            ])
+            ->add('team', null, [
+                'label' => 'label.team_member.team'
             ])
         ;
     }
@@ -69,14 +74,12 @@ class TeamMemberAdmin extends PersonalDataAdmin
         $listMapper
             ->add('fullName', null, [
                 'label' => 'label.personal_data.full_name',
-                'translation_domain' => 'OmerUserBundle'
             ])
             ->add('team', null, [
                 'label' => 'label.team_member.team'
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-//                    'show' => [],
                     'edit' => [],
                     'delete' => []
                 ]
@@ -89,7 +92,6 @@ class TeamMemberAdmin extends PersonalDataAdmin
         $showMapper
             ->add('fullName', null, [
                 'label' => 'label.personal_data.full_name',
-                'translation_domain' => 'OmerUserBundle'
             ])
             ->add('team', null, [
                 'label' => 'label.team_member.team'

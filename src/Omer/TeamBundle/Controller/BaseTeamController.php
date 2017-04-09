@@ -25,11 +25,6 @@ class BaseTeamController extends Controller
 {
     use CurrentUserTrait;
 
-    const TRANS_DOMAIN = [
-        'team' => 'OmerTeamBundle',
-        'user' => 'OmerUserBundle'
-    ];
-
     /**
      * @var EntityManager
      */

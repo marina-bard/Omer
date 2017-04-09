@@ -1,10 +1,9 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: marina
- * Date: 20.02.17
- * Time: 23:39
+ * Date: 06.04.17
+ * Time: 22:59
  */
 
 namespace Omer\CompetitionBundle\Entity;
@@ -13,9 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="problem")
+ * @ORM\Table(name="division")
  */
-class Problem
+class Division
 {
     /**
      * @ORM\Id
@@ -30,26 +29,22 @@ class Problem
     protected $title;
 
     /**
-     * @ORM\Column(name="description", type="string", nullable=true)
+     * @ORM\Column(name="number", type="integer", nullable=true)
      */
-    protected $description;
+    protected $number;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\ProblemType", inversedBy="problems")
-     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
-     */
-    protected $type;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Omer\TeamBundle\Entity\BaseTeam", mappedBy="problem")
+     * @ORM\OneToMany(targetEntity="Omer\TeamBundle\Entity\BaseTeam", mappedBy="division")
      */
     protected $teams;
 
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($title, $number)
     {
+        $this->title = $title;
+        $this->number = $number;
         $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -68,7 +63,7 @@ class Problem
      *
      * @param string $title
      *
-     * @return Problem
+     * @return Division
      */
     public function setTitle($title)
     {
@@ -88,56 +83,32 @@ class Problem
     }
 
     /**
-     * Set description
+     * Set number
      *
-     * @param string $description
+     * @param integer $number
      *
-     * @return Problem
+     * @return Division
      */
-    public function setDescription($description)
+    public function setNumber($number)
     {
-        $this->description = $description;
+        $this->number = $number;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get number
      *
-     * @return string
+     * @return integer
      */
-    public function getDescription()
+    public function getNumber()
     {
-        return $this->description;
-    }
-
-    /**
-     * Set type
-     *
-     * @param \Omer\CompetitionBundle\Entity\ProblemType $type
-     *
-     * @return Problem
-     */
-    public function setType(\Omer\CompetitionBundle\Entity\ProblemType $type = null)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return \Omer\CompetitionBundle\Entity\ProblemType
-     */
-    public function getType()
-    {
-        return $this->type;
+        return $this->number;
     }
 
     public function __toString()
     {
-        return (string) $this->type . '. ' . $this->title;
+        return (string) $this->title;
     }
 
     /**
@@ -145,7 +116,7 @@ class Problem
      *
      * @param \Omer\TeamBundle\Entity\BaseTeam $team
      *
-     * @return Problem
+     * @return Division
      */
     public function addTeam(\Omer\TeamBundle\Entity\BaseTeam $team)
     {

@@ -9,6 +9,7 @@ label:
         personal_info:  Personal information
         team_info:      Team information
         official_member:    Official Member
+        competition:   Competition
 
     login:  Log In
     logout: Log Out

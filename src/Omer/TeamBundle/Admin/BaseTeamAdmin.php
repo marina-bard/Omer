@@ -9,8 +9,6 @@
 
 namespace Omer\TeamBundle\Admin;
 
-use Doctrine\ORM\EntityRepository;
-use Omer\UserBundle\OmerUserBundle;
 use Omer\UserBundle\Traits\CurrentUserTrait;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -20,10 +18,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Omer\UserBundle\Entity\CoachUser;
-use Sonata\AdminBundle\Form\Type\CollectionType;
-
 
 class BaseTeamAdmin extends AbstractAdmin
 {
@@ -47,7 +41,6 @@ class BaseTeamAdmin extends AbstractAdmin
             ->add('city', TextType::class, [
                 'label' => 'label.team.city'
             ])
-//            ->add('coaches')
             ->add('coaches', 'sonata_type_model', [
                 'label' => 'coaches',
                 'property' => 'full_name',
@@ -75,6 +68,12 @@ class BaseTeamAdmin extends AbstractAdmin
             ->add('englishTeamName', null, [
                 'label' => 'label.team.english_team_name'
             ])
+            ->add('problem', null, [
+                'label' => 'label.team.problem'
+            ])
+            ->add('division', null, [
+                'label' => 'label.team.problem'
+            ])
         ;
     }
 
@@ -96,6 +95,9 @@ class BaseTeamAdmin extends AbstractAdmin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
+                    'download_excel' => [
+                        'template' => 'OmerTeamBundle:CRUD:list__action_download_team_excel.html.twig'
+                    ]
                 )
             ))
         ;
@@ -128,5 +130,7 @@ class BaseTeamAdmin extends AbstractAdmin
     public function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('add');
+
+        $collection->add('download_excel', $this->getRouterIdParameter() . '/download_excel');
     }
 }

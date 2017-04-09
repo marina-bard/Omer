@@ -10,21 +10,11 @@
 namespace Omer\TeamBundle\Admin;
 
 use Doctrine\ORM\EntityRepository;
-use Omer\TeamBundle\Entity\BaseTeam;
 use Omer\TeamBundle\Entity\ForeignTeam;
-use Omer\UserBundle\OmerUserBundle;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Sonata\AdminBundle\Form\Type\CollectionType;
-
 
 class ForeignTeamAdmin extends BaseTeamAdmin
 {
@@ -37,16 +27,39 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ])
             ->add('address', TextType::class, [
                 'label' => 'label.team.address'
-            ])
-            ->add('problem', TextType::class, [
+            ]);
+        if ($this->getSubject()->getProblemT()) {
+            $formMapper
+                ->add('problem_t', TextType::class, [
                 'label' => 'label.team.problem',
-            ])
-//            ->add('problem', 'sonata_type_model', [
-//                'label' => 'label.team.problem',
-//                'multiple' => false
-//            ])
-            ->add('division', TextType::class, [
-                'label' => 'label.team.division'
+                'required' => false
+            ]);
+        }
+            //@toDo move 'problem' and 'division' to BaseTeamAdmin after '_t' fields removing
+        $formMapper
+            ->add('problem', null, [
+                'label' => 'label.team.problem',
+                'expanded' => true,
+                'required' => true,
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('p')->orderBy('p.type');
+                }
+            ]);
+        if ($this->getSubject()->getDivisionT()) {
+            $formMapper
+                ->add('division_t', TextType::class, [
+                    'label' => 'label.team.division',
+                    'required' => false
+                ]);
+        }
+        $formMapper
+            ->add('division', null, [
+                'label' => 'label.team.division',
+                'expanded' => true,
+                'required' => true,
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('p')->orderBy('p.number');
+                }
             ])
             ->add('concerns', TextareaType::class, [
                 'label' => 'label.team.concerns',

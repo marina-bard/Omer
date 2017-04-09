@@ -89,6 +89,18 @@ abstract class BaseTeam
     protected $district;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Problem", inversedBy="teams")
+     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $problem;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Division", inversedBy="teams")
+     * @ORM\JoinColumn(name="division_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $division;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -366,5 +378,53 @@ abstract class BaseTeam
     public function getDistrict()
     {
         return $this->district;
+    }
+
+    /**
+     * Set problem
+     *
+     * @param \Omer\CompetitionBundle\Entity\Problem $problem
+     *
+     * @return BaseTeam
+     */
+    public function setProblem(\Omer\CompetitionBundle\Entity\Problem $problem = null)
+    {
+        $this->problem = $problem;
+
+        return $this;
+    }
+
+    /**
+     * Get problem
+     *
+     * @return \Omer\CompetitionBundle\Entity\Problem
+     */
+    public function getProblem()
+    {
+        return $this->problem;
+    }
+
+    /**
+     * Set division
+     *
+     * @param \Omer\CompetitionBundle\Entity\Division $division
+     *
+     * @return BaseTeam
+     */
+    public function setDivision(\Omer\CompetitionBundle\Entity\Division $division = null)
+    {
+        $this->division = $division;
+
+        return $this;
+    }
+
+    /**
+     * Get division
+     *
+     * @return \Omer\CompetitionBundle\Entity\Division
+     */
+    public function getDivision()
+    {
+        return $this->division;
     }
 }

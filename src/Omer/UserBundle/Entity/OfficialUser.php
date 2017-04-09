@@ -355,7 +355,7 @@ class OfficialUser extends User
 
     public function __toString()
     {
-        return $this->firstName.' '.$this->surname;
+        return (string) $this->firstName.' '.$this->surname;
     }
 
     /**

@@ -84,7 +84,7 @@ trait PersonalDataTrait
 
     public function __toString()
     {
-        return $this->getFullName();
+        return (string) $this->getFullName();
     }
 
     /**

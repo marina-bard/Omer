@@ -44,21 +44,17 @@ class ForeignTeam extends BaseTeam
      */
     protected $address;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Problem", inversedBy="teams", cascade={"all"})
-//     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id")
-//     */
     /**
      * @ORM\Column(name="problem", type="string", nullable=true)
      *
      */
-    protected $problem;
+    protected $problem_t;
 
     /**
-     * @ORM\Column(name="division", type="string", nullable=true)
+     * @ORM\Column(name="division_t", type="string", nullable=true)
      *
      */
-    protected $division;
+    protected $division_t;
 
     /**
      * @ORM\Column(name="concerns", type="string", nullable=true)
@@ -142,30 +138,6 @@ class ForeignTeam extends BaseTeam
     }
 
     /**
-     * Set division
-     *
-     * @param string $division
-     *
-     * @return ForeignTeam
-     */
-    public function setDivision($division)
-    {
-        $this->division = $division;
-
-        return $this;
-    }
-
-    /**
-     * Get division
-     *
-     * @return string
-     */
-    public function getDivision()
-    {
-        return $this->division;
-    }
-
-    /**
      * Set concerns
      *
      * @param string $concerns
@@ -238,30 +210,6 @@ class ForeignTeam extends BaseTeam
     }
 
     /**
-     * Set problem
-     *
-     * @param string $problem
-     *
-     * @return ForeignTeam
-     */
-    public function setProblem($problem)
-    {
-        $this->problem = $problem;
-
-        return $this;
-    }
-
-    /**
-     * Get problem
-     *
-     * @return string
-     */
-    public function getProblem()
-    {
-        return $this->problem;
-    }
-
-    /**
      * Set paymentCurrency
      *
      * @param string $paymentCurrency
@@ -321,6 +269,54 @@ class ForeignTeam extends BaseTeam
 
     public function __toString()
     {
-        return $this->englishTeamName;
+        return (string) $this->englishTeamName;
+    }
+
+    /**
+     * Set problemT
+     *
+     * @param string $problemT
+     *
+     * @return ForeignTeam
+     */
+    public function setProblemT($problemT)
+    {
+        $this->problem_t = $problemT;
+
+        return $this;
+    }
+
+    /**
+     * Get problemT
+     *
+     * @return string
+     */
+    public function getProblemT()
+    {
+        return $this->problem_t;
+    }
+
+    /**
+     * Set divisionT
+     *
+     * @param string $divisionT
+     *
+     * @return ForeignTeam
+     */
+    public function setDivisionT($divisionT)
+    {
+        $this->division_t = $divisionT;
+
+        return $this;
+    }
+
+    /**
+     * Get divisionT
+     *
+     * @return string
+     */
+    public function getDivisionT()
+    {
+        return $this->division_t;
     }
 }

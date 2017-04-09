@@ -31,7 +31,7 @@ class ExcelDownloader
 
         $dispositionHeader = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $filenameToView . self::XLS
+            \Nette\Utils\Strings::toAscii($filenameToView)  . self::XLS
         );
         $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
         $response->headers->set('Pragma', 'public');

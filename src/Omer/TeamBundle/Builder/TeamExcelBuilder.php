@@ -199,9 +199,10 @@ class TeamExcelBuilder
             ->setCellValue('C'.(++$value_row), $team->getDivision())
             ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
 
-        if ($team->getPaymentCurrency()) {
+        $value_row++;
+        if ($team->getPaymentCurrency() !== null) {
             $sheet
-                ->setCellValue('C'.(++$value_row), ForeignTeam::PAYMENT_CURRENCY[$team->getPaymentCurrency()]);
+                ->setCellValue('C'.($value_row), ForeignTeam::PAYMENT_CURRENCY[$team->getPaymentCurrency()]);
         }
 
         $sheet

@@ -61,6 +61,11 @@ class TeamExcelBuilder
         return $this->container->get('kernel')->getRootDir().'/'.self::TEAM_INFO_FILEPATH.$teamName.'.xls';
     }
 
+    public function getExcel()
+    {
+        return $this->excel;
+    }
+
     public function buildTeamExcel(ForeignTeam $team)
     {
         $coaches = $team->getCoaches();
@@ -123,8 +128,14 @@ class TeamExcelBuilder
         ;
 
        $sheet
-            ->setCellValue('C'.(++$value_row), date_format($arrival->getDate(), 'd-m-Y'))
-            ->setCellValue('C'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$arrival->getGoBy()], [], 'OmerTravelBundle'))
+            ->setCellValue('C'.(++$value_row), $this->getDate($arrival->getDate()));
+
+       if ($arrival->getGoBy()) {
+           $sheet
+               ->setCellValue('C'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$arrival->getGoBy()], [], 'OmerTravelBundle'));
+       }
+
+       $sheet
             ->setCellValue('C'.(++$value_row), $arrival->getTransportNumber())
            ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
        $sheet
@@ -132,8 +143,12 @@ class TeamExcelBuilder
             ->setCellValue('C'.(++$value_row), $arrival->getStationTo())
             ->setCellValue('C'.(++$value_row), $arrival->getTime());
        $sheet
-            ->setCellValue('C'.(++$value_row), date_format($departures->getDate(), 'd-m-Y'))
-            ->setCellValue('C'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$departures->getGoBy()], [], 'OmerTravelBundle'))
+            ->setCellValue('C'.(++$value_row), $this->getDate($departures->getDate()));
+       if ($arrival->getGoBy()) {
+           $sheet
+               ->setCellValue('C'.(++$value_row), $this->translator->trans(TravelInfo::TRANSPORT[$arrival->getGoBy()], [], 'OmerTravelBundle'));
+       }
+        $sheet
             ->setCellValue('C'.(++$value_row), $departures->getTransportNumber())
             ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
        $sheet
@@ -180,8 +195,13 @@ class TeamExcelBuilder
         $sheet
             ->setCellValue('C'.(++$value_row), $team->getDivision())
             ->getStyle('C'.$value_row)->applyFromArray($this->getAlignLeft());
+
+        if ($team->getPaymentCurrency()) {
+            $sheet
+                ->setCellValue('C'.(++$value_row), ForeignTeam::PAYMENT_CURRENCY[$team->getPaymentCurrency()]);
+        }
+
         $sheet
-            ->setCellValue('C'.(++$value_row), ForeignTeam::PAYMENT_CURRENCY[$team->getPaymentCurrency()])
             ->setCellValue('C'.(++$value_row), $team->getConcerns())
         ;
 
@@ -223,12 +243,12 @@ class TeamExcelBuilder
                 ->setCellValue('C'.($value_row), $coach->getSurname())
                 ->setCellValue('D'.($value_row), $coach->getTShirtSize())
                 ->setCellValue('E'.($value_row), $coach->getEmail())
-                ->setCellValue('F'.($value_row), date_format($coach->getDateOfBirth(), 'd-m-Y'))
+                ->setCellValue('F'.($value_row), $this->getDate($coach->getDateOfBirth()))
                 ->setCellValue('G'.($value_row), $coach->getPassportNumber())
                 ->getStyle('G'.$value_row)->applyFromArray($this->getAlignLeft());
             $sheet
-                ->setCellValue('H'.($value_row), date_format($coach->getDateOfIssue(),'d-m-Y'))
-                ->setCellValue('I'.($value_row), date_format($coach->getDateOfExpiry(),'d-m-Y'))
+                ->setCellValue('H'.($value_row), $this->getDate($coach->getDateOfIssue()))
+                ->setCellValue('I'.($value_row), $this->getDate($coach->getDateOfExpiry()))
                 ->setCellValue('J'.($value_row), $coach->getAddress())
                 ->setCellValue('K'.($value_row), $coach->getDietaryConcerns())
                 ->setCellValue('L'.($value_row), $coach->getMedicalConcerns())
@@ -271,12 +291,12 @@ class TeamExcelBuilder
                 ->setCellValue('B'.($value_row), $coach->getFirstName())
                 ->setCellValue('C'.($value_row), $coach->getSurname())
                 ->setCellValue('D'.($value_row), $coach->getTShirtSize())
-                ->setCellValue('E'.($value_row), date_format($coach->getDateOfBirth(), 'd-m-Y'))
+                ->setCellValue('E'.($value_row), $this->getDate($coach->getDateOfBirth()))
                 ->setCellValue('F'.($value_row), $coach->getPassportNumber())
                 ->getStyle('F'.$value_row)->applyFromArray($this->getAlignLeft());
             $sheet
-                ->setCellValue('G'.($value_row), date_format($coach->getDateOfIssue(), 'd-m-Y'))
-                ->setCellValue('H'.($value_row), date_format($coach->getDateOfExpiry(), 'd-m-Y'))
+                ->setCellValue('G'.($value_row), $this->getDate($coach->getDateOfIssue()))
+                ->setCellValue('H'.($value_row), $this->getDate($coach->getDateOfExpiry()))
                 ->setCellValue('I'.($value_row), $coach->getAddress())
                 ->setCellValue('J'.($value_row), $coach->getDietaryConcerns())
                 ->setCellValue('K'.($value_row), $coach->getMedicalConcerns())
@@ -287,6 +307,13 @@ class TeamExcelBuilder
         $this->value_row = $value_row;
 
         return $sheet;
+    }
+
+    private function getDate($date) {
+        if ($date instanceof \DateTimeInterface) {
+           return date_format($date, 'd-m-Y');
+        }
+        return '-';
     }
 
     private function addOtherPeople(PHPExcel_Worksheet $sheet, $coaches, $label_row)
@@ -323,12 +350,12 @@ class TeamExcelBuilder
                 ->setCellValue('D'.($value_row), $coach->getTShirtSize())
                 ->setCellValue('E'.($value_row), $coach->getTeamRole())
                 ->setCellValue('F'.($value_row), $coach->getEmail())
-                ->setCellValue('G'.($value_row), date_format($coach->getDateOfBirth(), 'd-m-Y'))
+                ->setCellValue('G'.($value_row), $this->getDate($coach->getDateOfBirth()))
                 ->setCellValue('H'.($value_row), $coach->getPassportNumber())
                 ->getStyle('H'.$value_row)->applyFromArray($this->getAlignLeft());
             $sheet
-                ->setCellValue('I'.($value_row), date_format($coach->getDateOfIssue(), 'd-m-Y'))
-                ->setCellValue('J'.($value_row), date_format($coach->getDateOfExpiry(), 'd-m-Y'))
+                ->setCellValue('I'.($value_row), $this->getDate($coach->getDateOfIssue()))
+                ->setCellValue('J'.($value_row), $this->getDate($coach->getDateOfExpiry()))
                 ->setCellValue('K'.($value_row), $coach->getAddress())
                 ->setCellValue('L'.($value_row), $coach->getDietaryConcerns())
                 ->setCellValue('M'.($value_row), $coach->getMedicalConcerns())

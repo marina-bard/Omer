@@ -140,5 +140,14 @@ class BaseTeamAdminController extends CRUDController
             $this->em->remove($object);
         }
     }
+
+    public function downloadExcelAction()
+    {
+        $team = $this->admin->getSubject();
+        $builder = $this->get('builder.team_excel_builder');
+        $builder->buildTeamExcel($team);
+        $excel = $builder->getExcel();
+        return $this->get('default.downloader.excel_downloader')->download($excel, $team->getEnglishTeamName());
+    }
 }
 

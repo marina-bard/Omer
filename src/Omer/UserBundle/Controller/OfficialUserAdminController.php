@@ -31,19 +31,6 @@ class OfficialUserAdminController extends CRUDController
 
         $excel = $this->get('user.builder.summary_excel')->formSummaryExcel($role, $officials);
 
-        $writer = $this->get('phpexcel')->createWriter($excel, 'Excel5');
-
-        $response = $this->get('phpexcel')->createStreamedResponse($writer);
-
-        $dispositionHeader = $response->headers->makeDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            'Summary table.xls'
-        );
-        $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
-        $response->headers->set('Content-Disposition', $dispositionHeader);
-
-        return $response;
+        return $this->get('default.downloader.excel_downloader')->download($excel, 'Summary_Table_' . date('d.m.Y_H:i:s'));
     }
 }

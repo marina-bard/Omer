@@ -10,21 +10,11 @@
 namespace Omer\TeamBundle\Admin;
 
 use Doctrine\ORM\EntityRepository;
-use Omer\TeamBundle\Entity\BaseTeam;
 use Omer\TeamBundle\Entity\ForeignTeam;
-use Omer\UserBundle\OmerUserBundle;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Sonata\AdminBundle\Form\Type\CollectionType;
-
 
 class ForeignTeamAdmin extends BaseTeamAdmin
 {

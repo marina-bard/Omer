@@ -278,7 +278,7 @@ class TeamExcelBuilder
                 ->setCellValue('G'.($value_row), date_format($coach->getDateOfIssue(), 'd-m-Y'))
                 ->setCellValue('H'.($value_row), date_format($coach->getDateOfExpiry(), 'd-m-Y'))
                 ->setCellValue('I'.($value_row), $coach->getAddress())
-                ->setCellValue('G'.($value_row), $coach->getDietaryConcerns())
+                ->setCellValue('J'.($value_row), $coach->getDietaryConcerns())
                 ->setCellValue('K'.($value_row), $coach->getMedicalConcerns())
             ;
         }

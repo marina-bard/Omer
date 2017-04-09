@@ -68,7 +68,10 @@ class OtherPeopleAdmin extends PersonalDataAdmin
     {
         $datagridMapper
             ->add('surname', null, [
-                'label' => 'label.other_name.surname'
+                'label' => 'label.personal_data.surname'
+            ])
+            ->add('team', null, [
+                'label' => 'label.other_people.team'
             ])
         ;
     }
@@ -78,7 +81,6 @@ class OtherPeopleAdmin extends PersonalDataAdmin
         $listMapper
             ->add('fullName', null, [
                 'label' => 'label.personal_data.full_name',
-                'translation_domain' => 'OmerUserBundle'
             ])
             ->add('teamRole', null, [
                 'label' => 'label.other_people.team_role'
@@ -88,7 +90,6 @@ class OtherPeopleAdmin extends PersonalDataAdmin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-//                    'show' => array(),
                     'edit' => [],
                     'delete' => []
                 ]
@@ -101,7 +102,6 @@ class OtherPeopleAdmin extends PersonalDataAdmin
         $showMapper
             ->add('fullName', null, [
                 'label' => 'label.personal_data.full_name',
-                'translation_domain' => 'OmerUserBundle'
             ])
             ->add('teamRole', null, [
                 'label' => 'label.other_people.team_role'
@@ -129,9 +129,4 @@ class OtherPeopleAdmin extends PersonalDataAdmin
 
         return $query;
     }
-
-//    public function configureRoutes(RouteCollection $collection)
-//    {
-//        $collection->remove('add');
-//    }
 }

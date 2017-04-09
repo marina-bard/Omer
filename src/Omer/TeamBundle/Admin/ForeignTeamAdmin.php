@@ -37,12 +37,16 @@ class ForeignTeamAdmin extends BaseTeamAdmin
             ])
             ->add('address', TextType::class, [
                 'label' => 'label.team.address'
-            ])
-            ->add('problem_t', TextType::class, [
+            ]);
+        if ($this->getSubject()->getProblemT()) {
+            $formMapper
+                ->add('problem_t', TextType::class, [
                 'label' => 'label.team.problem',
                 'required' => false
-            ])
+            ]);
+        }
             //@toDo move 'problem' and 'division' to BaseTeamAdmin after '_t' fields removing
+        $formMapper
             ->add('problem', null, [
                 'label' => 'label.team.problem',
                 'expanded' => true,
@@ -50,10 +54,15 @@ class ForeignTeamAdmin extends BaseTeamAdmin
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('p')->orderBy('p.type');
                 }
-            ])
-            ->add('division_t', TextType::class, [
-                'label' => 'label.team.division'
-            ])
+            ]);
+        if ($this->getSubject()->getDivisionT()) {
+            $formMapper
+                ->add('division_t', TextType::class, [
+                    'label' => 'label.team.division',
+                    'required' => false
+                ]);
+        }
+        $formMapper
             ->add('division', null, [
                 'label' => 'label.team.division',
                 'expanded' => true,

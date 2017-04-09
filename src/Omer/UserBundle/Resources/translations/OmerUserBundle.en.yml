@@ -41,6 +41,7 @@ label:
         job:          Job
         position:     Position
         preferences:  Preferences
+        role:         Role
 
     actions:
         confirm:      Confirm Registration

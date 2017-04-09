@@ -106,10 +106,15 @@ class OfficialUserAdmin extends PersonalDataAdmin
                 ])
             ;
 
-            if ($this->getCurrentUser()->hasRole('ROLE_JUDGE')) {
+            if ($this->getSubject()->hasRole('ROLE_JUDGE')) {
                 $formMapper
-                    ->add('preferences', TextType::class, [
-                        'label' => 'label.user.position'
+                    ->add('preferences', ChoiceType::class, [
+                        'choices' => OfficialUser::PREFERENCES,
+                        'choice_translation_domain' => 'OmerUserBundle',
+                        'expanded' => true,
+                        'multiple' => true,
+                        'label' => 'label.user.preferences',
+                        'translation_domain' => 'OmerUserBundle',
                     ])
                 ;
             }
@@ -157,6 +162,9 @@ class OfficialUserAdmin extends PersonalDataAdmin
         $listMapper
             ->add('fullName', null,[
                 'label' => 'label.personal_data.full_name'
+            ])
+            ->add('mainRole', null, [
+                'label' => 'label.user.role',
             ])
             ->add('email', null, [
                 'label' => 'label.coach_user.email',

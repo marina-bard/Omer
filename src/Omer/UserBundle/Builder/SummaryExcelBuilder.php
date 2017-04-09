@@ -61,6 +61,7 @@ class SummaryExcelBuilder
             ->setCellValue(($column++).$row, $this->translator->trans('label.user.mobile_phone', [], 'OmerUserBundle'))
             ->setCellValue(($column++).$row, $this->translator->trans('label.dietary_concerns_short', [], 'OmerUserBundle'))
             ->setCellValue(($column++).$row, $this->translator->trans('label.medical_concerns_short', [], 'OmerUserBundle'))
+            ->setCellValue(($column++).($row), $this->translator->trans('label.user.preferences', [], 'OmerUserBundle'))
 
             ->setCellValue(($column++).$row, $this->translator->trans('label.native.surname', [], 'OmerUserBundle'))
             ->setCellValue(($column++).$row, $this->translator->trans('label.native.first_name', [], 'OmerUserBundle'))
@@ -90,9 +91,10 @@ class SummaryExcelBuilder
             $roles = $user->getRoles();
             $arrival = $user->getTravelAttributes()[0];
             $departures = $user->getTravelAttributes()[1];
+            $role = reset($roles);
             $sheet
                 ->setCellValue(($column++).$row, $i)
-                ->setCellValue(($column++).$row, $this->translator->trans(array_search(reset($roles), OfficialUser::ROLES), [], 'OmerUserBundle'))
+                ->setCellValue(($column++).$row, $this->translator->trans(array_search($role, OfficialUser::ROLES), [], 'OmerUserBundle'))
                 ->setCellValue(($column++).$row, $user->getFirstName())
                 ->setCellValue(($column++).$row, $user->getSurname())
                 ->setCellValue(($column++).$row, $this->translator->trans(OfficialUser::GENDER[$user->getGender()], [], 'OmerUserBundle'))
@@ -108,7 +110,20 @@ class SummaryExcelBuilder
                 ->setCellValue(($column++).$row, $user->getMobilePhone())
                 ->setCellValue(($column++).$row, $user->getDietaryConcerns())
                 ->setCellValue(($column++).$row, $user->getMedicalConcerns())
+                ->setCellValue(($column).$row, "-");
 
+            if ($role == 'ROLE_JUDGE') {
+                $prefs = "";
+                if ($user->getPreferences()) {
+                    foreach ($user->getPreferences() as $item) {
+                        $prefs .= $this->translator->trans(array_search($item,OfficialUser::PREFERENCES), [], 'OmerUserBundle') . ", ";
+                    }
+                    $sheet->setCellValue(($column).$row, $prefs);
+                }
+            }
+
+            $column++;
+            $sheet
                 ->setCellValue(($column++).$row, $user->getNativeSurname())
                 ->setCellValue(($column++).$row, $user->getNativeFirstName())
                 ->setCellValue(($column++).$row, $user->getNativePatronymic())

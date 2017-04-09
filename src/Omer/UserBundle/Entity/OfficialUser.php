@@ -429,4 +429,16 @@ class OfficialUser extends User
     {
         return $this->preferences;
     }
+
+    public function getMainRole()
+    {
+        switch (reset($this->roles)) {
+            case 'ROLE_DIRECTOR':
+                return 'AD';
+            case 'ROLE_JUDGE':
+                return 'Judge';
+            default:
+                return 'User';
+        }
+    }
 }

@@ -20,11 +20,13 @@ class TravelInfoAdmin extends AbstractAdmin
 {
     use CurrentUserTrait;
 
-
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $type = $this->getSubject()->getType();
-        $data = $this->getTranslator()->trans(array_search($type,TravelInfo::TYPE), [], 'OmerTravelBundle');
+        $data = "";
+        if($this->getSubject()) {
+            $type = $this->getSubject()->getType();
+            $data = $this->getTranslator()->trans(array_search($type,TravelInfo::TYPE), [], 'OmerTravelBundle');
+        }
         $formMapper
             ->add('type', null, [
                 'label' => 'label.type',

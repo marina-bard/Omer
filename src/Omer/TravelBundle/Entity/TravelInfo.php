@@ -78,7 +78,7 @@ class TravelInfo
 
     /**
      * @ORM\ManyToOne(targetEntity="Omer\UserBundle\Entity\User", inversedBy="travelAttributes")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="cascade")
      */
     private $user;
 

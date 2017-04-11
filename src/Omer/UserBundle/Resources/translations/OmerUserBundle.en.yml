@@ -99,7 +99,8 @@ email:
             Odyssey of the Mind team.
 
 preferences:
-    problem:     Long-term Problems
+    problem:     Long-term Problem
+    style:       Style
     spontaneous: Spontaneous
 
 problem:

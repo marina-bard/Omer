@@ -43,6 +43,8 @@ class OfficialUser extends User
         'problem.classics' => 3,
         'problem.structure' => 4,
         'problem.performance' => 5,
+        'preferences.problem' => 6,
+        'preferences.style' => 7,
         'preferences.spontaneous' => 0
     ];
 

@@ -1,3 +1,4 @@
 knp_doctrine_behaviors:
     sluggable:     true
     timestampable: true
+    tree: true

@@ -1,0 +1,9 @@
+services:
+#    omer_score.example:
+#        class: Omer\ScoreBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    omer_score.admin.criterion:
+        class: Omer\ScoreBundle\Admin\CriterionAdmin
+        arguments: [~, Omer\ScoreBundle\Entity\Criterion, OmerScoreBundle:CriterionAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.scoring', label: 'admin.label.criterion' }

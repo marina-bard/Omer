@@ -10,6 +10,7 @@ label:
         team_info:      Team information
         official_member:    Official Member
         competition:   Competition
+        scoring:       Scoring
 
     login:  Log In
     logout: Log Out

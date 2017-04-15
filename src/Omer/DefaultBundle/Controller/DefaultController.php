@@ -33,6 +33,14 @@ class DefaultController extends Controller
         return $this->openPDF('@OmerDefaultBundle/Resources/templates/invitation_en.pdf');
     }
 
+    /**
+     * @Route("/invitation_en", name="default_performance_schedule")
+     */
+    public function performanceScheduleAction()
+    {
+        return $this->openPDF('@OmerDefaultBundle/Resources/templates/performance_schedule.pdf');
+    }
+
     private function openPDF($filepath)
     {
         $kernel = $this->get('kernel');

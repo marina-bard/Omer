@@ -34,12 +34,20 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/invitation_en", name="default_performance_schedule")
+     * @Route("/teams_schedule", name="default_teams_schedule")
      */
-    public function performanceScheduleAction()
+    public function teamsScheduleAction()
     {
         return $this->openPDF('@OmerDefaultBundle/Resources/templates/performance_schedule.pdf');
     }
+
+    // /**
+    //  * @Route("/teams_schedule", name="default_teams_schedule")
+    //  */
+    // public function teamsScheduleAction()
+    // {
+    //     return $this->openPDF('@OmerDefaultBundle/Resources/templates/performance_schedule.pdf');
+    // }
 
     private function openPDF($filepath)
     {

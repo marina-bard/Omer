@@ -8,5 +8,21 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'label.group.scoring', label: 'admin.label.criterion' }
         calls:
-            - [ setTranslationDomain, [OmerScorexBundle] ]
+            - [ setTranslationDomain, [OmerScoreBundle] ]
             # - [ setTokenStorage, ['@security.token_storage'] ]
+
+    omer_score.admin.point:
+        class: Omer\ScoreBundle\Admin\PointAdmin
+        arguments: [~, Omer\ScoreBundle\Entity\Point, OmerScoreBundle:PointAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Point, show_in_dashboard: false}
+        calls:
+            - [ setTranslationDomain, [OmerScoreBundle] ]
+
+    omer_score.admin.score:
+        class: Omer\ScoreBundle\Admin\ScoreAdmin
+        arguments: [~, Omer\ScoreBundle\Entity\Score, OmerScoreBundle:ScoreAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Score }
+        calls:
+            - [ setTranslationDomain, [OmerScoreBundle] ]

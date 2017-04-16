@@ -52,6 +52,11 @@ class Criterion implements ORMBehaviors\Tree\NodeInterface,  \ArrayAccess
     protected $isBoundaryValues;
 
     /**
+    * @ORM\OneToMany(targetEntity="Point", mappedBy="criterion", cascade={"all"})
+    */
+    protected $points;
+
+    /**
      * Get id
      *
      * @return integer
@@ -161,4 +166,45 @@ class Criterion implements ORMBehaviors\Tree\NodeInterface,  \ArrayAccess
     {
         return (string) $this->title;
      }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->points = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add point
+     *
+     * @param \Omer\ScoreBundle\Entity\Point $point
+     *
+     * @return Criterion
+     */
+    public function addPoint(\Omer\ScoreBundle\Entity\Point $point)
+    {
+        $this->points[] = $point;
+
+        return $this;
+    }
+
+    /**
+     * Remove point
+     *
+     * @param \Omer\ScoreBundle\Entity\Point $point
+     */
+    public function removePoint(\Omer\ScoreBundle\Entity\Point $point)
+    {
+        $this->points->removeElement($point);
+    }
+
+    /**
+     * Get points
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPoints()
+    {
+        return $this->points;
+    }
 }

@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Omer\ScoreBundle\Repository\CriterionRepository")
  * @ORM\Table(name="criterion")
  */
-class Criterion
+class Criterion implements ORMBehaviors\Tree\NodeInterface,  \ArrayAccess
 {
     use ORMBehaviors\Tree\Node;
 
@@ -29,25 +29,25 @@ class Criterion
 
     /**
      * @var string
-     * @ORM\Column(name="title", type="string")
+     * @ORM\Column(name="title", type="string", nullable=true)
      */
     protected $title;
 
     /**
      * @var string
-     * @ORM\Column(name="min_value", type="integer")
+     * @ORM\Column(name="min_value", type="integer", nullable=true)
      */
     protected $minValue;
 
     /**
      * @var string
-     * @ORM\Column(name="max_value", type="integer")
+     * @ORM\Column(name="max_value", type="integer", nullable=true)
      */
     protected $maxValue;
 
     /**
      * @var string
-     * @ORM\Column(name="is_boundary_values", type="boolean")
+     * @ORM\Column(name="is_boundary_values", type="boolean", nullable=true)
      */
     protected $isBoundaryValues;
 

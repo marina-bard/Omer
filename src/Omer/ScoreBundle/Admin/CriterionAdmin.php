@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Omer\ScoreBundle\Entity\Criterion;
 
 class CriterionAdmin extends AbstractAdmin
 {
@@ -29,18 +30,10 @@ class CriterionAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
             ->add('title')
-            ->add('minValue')
-            ->add('maxValue')
-            ->add('isBoundaryValues')
-            ->add('_action', null, array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                )
-            ))
+            ->add('parentNode'. 'string', [
+                // 'template' => 'OmerScoreBundle:Admin:list__tree_parentNode.html.twig'
+            ])
         ;
     }
 
@@ -55,6 +48,18 @@ class CriterionAdmin extends AbstractAdmin
             ->add('maxValue')
             ->add('isBoundaryValues')
         ;
+
+        $object = $this->getSubject();
+        if ($object && $object->getId()) {
+            $this->buildTree($object);
+        }
+
+        $formMapper
+            ->add('parentNode', 'sonata_type_model' ,[
+                'multiple' => false,
+                'class' => Criterion::class
+            ])
+        ;
     }
 
     /**
@@ -68,5 +73,12 @@ class CriterionAdmin extends AbstractAdmin
             ->add('maxValue')
             ->add('isBoundaryValues')
         ;
+    }
+
+    public function buildTree(Criterion $criterion)
+    {
+        $this->getConfigurationPool()->getContainer()->get('doctrine')
+            ->getRepository('OmerScoreBundle:Criterion')
+            ->getTree($criterion->getRootMaterializedPath());
     }
 }

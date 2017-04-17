@@ -26,12 +26,15 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 
             new Omer\UserBundle\OmerUserBundle(),
             new Omer\TeamBundle\OmerTeamBundle(),
             new Omer\CompetitionBundle\OmerCompetitionBundle(),
             new Omer\TravelBundle\OmerTravelBundle(),
             new Omer\DefaultBundle\OmerDefaultBundle(),
+            new Omer\InfoBundle\OmerInfoBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

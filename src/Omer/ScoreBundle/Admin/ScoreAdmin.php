@@ -29,6 +29,7 @@ class ScoreAdmin extends AbstractAdmin
         ->add('points', 'sonata_type_collection', [
                 'required' => false,
                 'label' => false,
+                'btn_add' => false,
                 'type_options' => array('delete' => false),
                 'data_class' => null
             ], [

@@ -1,9 +1,13 @@
 {% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
 
 {% import _self as tree %}
+
 {% macro navigate_child(collection, admin, root, depth) %}
     <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
         {% for element in collection %}
+            {% if element.materializedPath == '' %}
+                <h4>{{ element.problem }}</h4>
+            {% endif %}
             <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
                 <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
                     {% if element.rootNode or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}

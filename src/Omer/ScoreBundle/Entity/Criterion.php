@@ -57,6 +57,18 @@ class Criterion implements ORMBehaviors\Tree\NodeInterface,  \ArrayAccess
     protected $points;
 
     /**
+     * @ORM\ManyToOne(targetEntity="ScoreType", inversedBy="criterions")
+     * @ORM\JoinColumn(name="score_type_id", referencedColumnName="id", nullable=TRUE, onDelete="CASCADE")
+     */
+    protected $scoreType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Omer\CompetitionBundle\Entity\Problem", inversedBy="criterions")
+     * @ORM\JoinColumn(name="problem_id", referencedColumnName="id", nullable=TRUE, onDelete="CASCADE")
+     */
+    protected $problem;
+
+    /**
      * Get id
      *
      * @return integer
@@ -206,5 +218,53 @@ class Criterion implements ORMBehaviors\Tree\NodeInterface,  \ArrayAccess
     public function getPoints()
     {
         return $this->points;
+    }
+
+    /**
+     * Set scoreType
+     *
+     * @param \Omer\ScoreBundle\Entity\ScoreType $scoreType
+     *
+     * @return Criterion
+     */
+    public function setScoreType(\Omer\ScoreBundle\Entity\ScoreType $scoreType = null)
+    {
+        $this->scoreType = $scoreType;
+
+        return $this;
+    }
+
+    /**
+     * Get scoreType
+     *
+     * @return \Omer\ScoreBundle\Entity\ScoreType
+     */
+    public function getScoreType()
+    {
+        return $this->scoreType;
+    }
+
+    /**
+     * Set problem
+     *
+     * @param \Omer\CompetitionBundle\Entity\Problem $problem
+     *
+     * @return Criterion
+     */
+    public function setProblem(\Omer\CompetitionBundle\Entity\Problem $problem = null)
+    {
+        $this->problem = $problem;
+
+        return $this;
+    }
+
+    /**
+     * Get problem
+     *
+     * @return \Omer\CompetitionBundle\Entity\Problem
+     */
+    public function getProblem()
+    {
+        return $this->problem;
     }
 }

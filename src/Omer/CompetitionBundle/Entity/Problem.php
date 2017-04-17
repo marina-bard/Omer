@@ -46,6 +46,11 @@ class Problem
     protected $teams;
 
     /**
+     * @ORM\OneToMany(targetEntity="Omer\ScoreBundle\Entity\Criterion", mappedBy="problem")
+     */
+    protected $criterions;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -172,5 +177,39 @@ class Problem
     public function getTeams()
     {
         return $this->teams;
+    }
+
+    /**
+     * Add criterion
+     *
+     * @param \Omer\ScoreBundle\Entity\Criterion $criterion
+     *
+     * @return Problem
+     */
+    public function addCriterion(\Omer\ScoreBundle\Entity\Criterion $criterion)
+    {
+        $this->criterions[] = $criterion;
+
+        return $this;
+    }
+
+    /**
+     * Remove criterion
+     *
+     * @param \Omer\ScoreBundle\Entity\Criterion $criterion
+     */
+    public function removeCriterion(\Omer\ScoreBundle\Entity\Criterion $criterion)
+    {
+        $this->criterions->removeElement($criterion);
+    }
+
+    /**
+     * Get criterions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCriterions()
+    {
+        return $this->criterions;
     }
 }

@@ -18,7 +18,32 @@ class PointAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('criterion')
-            ->add('value', NumberType::class)
         ;
+
+        $criterion = $this->getSubject()->getCriterion();
+        if ($criterion->getIsBoundaryValues()) {
+            $placeholder = $criterion->getMinValue() . ' or ' . $criterion->getMaxValue();
+        }
+        else {
+            $placeholder = $criterion->getMinValue() . ' to ' . $criterion->getMaxValue();
+        }
+
+        if (!$criterion->getChildNodes()) {
+            $formMapper
+                ->add('value', NumberType::class, [
+                    'attr' => [
+                        'readonly' => true,
+                        'placeholder' => $placeholder
+                    ]
+                ]);
+        }
+        else {
+            $formMapper
+                ->add('value', NumberType::class, [
+                    'attr' => [
+                        'placeholder' => $placeholder
+                    ]
+                ]);
+        }
     }
 }

@@ -8,6 +8,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Omer\ScoreBundle\Entity\Criterion;
+use Omer\ScoreBundle\Entity\ScoreType;
+use Omer\CompetitionBundle\Entity\Problem;
 
 class CriterionAdmin extends AbstractAdmin
 {
@@ -47,6 +49,14 @@ class CriterionAdmin extends AbstractAdmin
             ->add('minValue')
             ->add('maxValue')
             ->add('isBoundaryValues')
+            ->add('scoreType', null, [
+                'required' => true,
+                'multiple' => false,
+            ])
+            ->add('problem', null, [
+                'multiple' => false,
+                'required' => true,
+            ])
         ;
 
         $object = $this->getSubject();

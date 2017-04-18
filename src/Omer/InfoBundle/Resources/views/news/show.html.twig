@@ -1,32 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends '@OmerDefault/Default/index.html.twig' %}
 
-{% block body %}
-    <h1>News</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ news.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ news.title }}</td>
-            </tr>
-            <tr>
-                <th>Preview</th>
-                <td>{{ news.preview }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ news.content }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('news_index') }}">Back to the list</a>
-        </li>
-    </ul>
+{% block news %}
+<section id="news">
+    <div class="container">
+        <div class="news-block">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>{{ news.title }} |
+                        <a href="{{ path('news_index') }}" style="display: inline-block"><h4>Back to list</h4></a>
+                    </h3>
+                    <p class="updated-at">Updated on: <i>{{ news.updatedAt | date}}</i></p>
+                    <p class="updated-at"><i>{{ news.preview }}</i></p>
+                    <p>{{ news.content | raw }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

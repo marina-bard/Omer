@@ -24,7 +24,7 @@ class NewsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $news = $em->getRepository('OmerInfoBundle:News')->findAll();
+        $news = $em->getRepository('OmerInfoBundle:News')->findBy([], ['updatedAt' => 'DESC']);
 
         return $this->render('OmerInfoBundle:news:index.html.twig', array(
             'news' => $news,

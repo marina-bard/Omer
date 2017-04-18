@@ -1,36 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends '@OmerDefault/Default/index.html.twig' %}
 
-{% block body %}
-    <h1>News list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Preview</th>
-                <th>Content</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for news in news %}
-            <tr>
-                <td><a href="{{ path('news_show', { 'id': news.id }) }}">{{ news.id }}</a></td>
-                <td>{{ news.title }}</td>
-                <td>{{ news.preview }}</td>
-                <td>{{ news.content }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('news_show', { 'id': news.id }) }}">show</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    
+{% block news %}
+    <section id="news">
+        <div class="container">
+            <div class="news-block">
+                {% for oneNews in news %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="/news/{{ oneNews.id }}" class="news-title ">
+                            <h4>{{ oneNews.title }}</h4>
+                        </a>
+                        <p class="updated-at">Updated on: <i>{{ oneNews.updatedAt | date}}</i></p>
+                        <p>{{ oneNews.preview  }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}
+

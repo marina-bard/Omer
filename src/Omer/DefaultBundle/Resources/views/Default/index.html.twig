@@ -59,6 +59,9 @@
         </div>
     </section>
 
-    {% include 'OmerDefaultBundle:Default:_news.html.twig' %}
+    {% block news %}
+        {% include 'OmerDefaultBundle:Default:_news.html.twig' %}
+    {% endblock news %}
+
 {% endblock %}
 

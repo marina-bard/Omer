@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "53ac96342881ecab81a2e623601849b1",
-    "content-hash": "f58ba6b19da9a3ab2da88fff3f51ea1e",
+    "hash": "52b4be07a03496c3be12457e9f4cb768",
+    "content-hash": "f1688b2628b4f65eecbd44ce441f4899",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1675,6 +1675,46 @@
                 "watermark"
             ],
             "time": "2017-02-04 10:37:19"
+        },
+        {
+            "name": "itm/file-preview-bundle",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/archer-developer/ITMFilePreviewBundle.git",
+                "reference": "4b062fb5f9bbd41ca374ac0e19314e6a867ca56f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/archer-developer/ITMFilePreviewBundle/zipball/4b062fb5f9bbd41ca374ac0e19314e6a867ca56f",
+                "reference": "4b062fb5f9bbd41ca374ac0e19314e6a867ca56f",
+                "shasum": ""
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "ITM\\FilePreviewBundle\\": ""
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Samusevich Alexander",
+                    "email": "aleksandeer.samusevich@itmhouse.com"
+                },
+                {
+                    "name": "Alexei Yanochkin",
+                    "email": "alexei.yanochkin@itmhouse.com"
+                }
+            ],
+            "description": "Bundle for upload files",
+            "support": {
+                "source": "https://github.com/archer-developer/ITMFilePreviewBundle/tree/1.1.3",
+                "issues": "https://github.com/archer-developer/ITMFilePreviewBundle/issues"
+            },
+            "time": "2017-02-01 08:46:59"
         },
         {
             "name": "jdorn/sql-formatter",

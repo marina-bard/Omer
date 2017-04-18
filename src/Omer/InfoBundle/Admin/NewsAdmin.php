@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use ITM\FilePreviewBundle\Form\Type\FilePreviewType;
 
 class NewsAdmin extends AbstractAdmin
 {
@@ -51,6 +52,13 @@ class NewsAdmin extends AbstractAdmin
         $formMapper
             ->add('title', TextType::class)
             ->add('preview', TextareaType::class)
+            ->add('fileName', TextType::class, [
+                'required' => false,
+            ])
+            ->add('file', FilePreviewType::class, [
+                'required' => false,
+                'data_class' => null
+            ])
             ->add('content', CKEditorType::class)
         ;
     }

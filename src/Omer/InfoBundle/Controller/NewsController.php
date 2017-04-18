@@ -39,8 +39,11 @@ class NewsController extends Controller
      */
     public function showAction(News $news)
     {
+        $url = $this->get('itm.file.preview.path.resolver')->getUrl($news, 'file');
+
         return $this->render('OmerInfoBundle:news:show.html.twig', array(
             'news' => $news,
+            'url' => $url
         ));
     }
 }

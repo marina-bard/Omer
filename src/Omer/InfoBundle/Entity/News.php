@@ -42,6 +42,16 @@ class News
     private $content;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $fileName;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $file;
+
+    /**
      * Get id
      *
      * @return integer
@@ -126,5 +136,53 @@ class News
     public function __toString()
     {
         return (string) $this->title;
+    }
+
+    /**
+     * Set fileName
+     *
+     * @param string $fileName
+     *
+     * @return News
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    /**
+     * Get fileName
+     *
+     * @return string
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     *
+     * @return News
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

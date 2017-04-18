@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new ITM\FilePreviewBundle\ITMFilePreviewBundle(),
 
             new Omer\UserBundle\OmerUserBundle(),
             new Omer\TeamBundle\OmerTeamBundle(),

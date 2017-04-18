@@ -18,7 +18,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $news = $em->getRepository("OmerInfoBundle:News")
-            ->findBy([], ['updatedAt' => 'DESC'], 4);
+            ->findBy([], ['updatedAt' => 'DESC'], 6);
 
         return $this->render('OmerDefaultBundle:Default:index.html.twig', [
             'news' => $news

@@ -8,12 +8,12 @@
             In Schedule part below you can view with the tentitive program for Long-Term Competitions.</p>
             <p class="login-text">The information on site will be updating every day. The changed data we will mark with such kind of message: "Updated on April 14th, 2017 (on Friday)".</p>
 
-        <div class="form-group">
-            <input type="button" class="btn registration active" value="{{ 'label.form.registration'|trans() }}">
-        </div>
-        <div class="form-group">
-            <input type="button" class="btn login" value="{{ 'label.form.title'|trans() }}">
-        </div>
+        {#<div class="form-group">#}
+            {#<input type="button" class="btn registration active" value="{{ 'label.form.registration'|trans() }}">#}
+        {#</div>#}
+        {#<div class="form-group">#}
+            {#<input type="button" class="btn login" value="{{ 'label.form.title'|trans() }}">#}
+        {#</div>#}
 
         {#<p class="login-text">{{ 'email.sorry_message'|trans({})|nl2br }}</p> #}
 
@@ -36,7 +36,7 @@
                 </a>
             </div> -->
 
-            <div class="form-group">
+            <div class="form-group login-text">
                 <a href="{{ path('officialuser_new') }}">
                     <input type="button" class="btn register-team-btn" value="{{ 'label.director_registration'|trans() }}">
                 </a>

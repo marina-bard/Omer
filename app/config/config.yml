@@ -6,6 +6,9 @@ imports:
     - { resource: sonata/sonata_block_config.yml }
     - { resource: knp/knp_config.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
+    - { resource: elfinder/elfinder_config.yml }
+    - { resource: ckeditor/ckeditor_config.yml }
+    - { resource: itm/itm_config.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -45,6 +48,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
+            - 'ITMFilePreviewBundle:Form:fields.html.twig'
 
 # Doctrine Configuration
 doctrine:

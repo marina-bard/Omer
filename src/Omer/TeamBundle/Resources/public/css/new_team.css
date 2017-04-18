@@ -392,6 +392,14 @@ div select[id="omer_teambundle_team_division"] {
     padding-bottom: 5em;
     background-color: white;
 }
+#news h4 {
+    font-size: 24px;
+    line-height: 1;
+    margin: 0 0 .75em;
+    font-weight: 700;
+    letter-spacing: -.04em;
+}
+
 #news h2 {
     font-size: 50px;
     line-height: 1;
@@ -408,6 +416,11 @@ div select[id="omer_teambundle_team_division"] {
     margin-bottom: 12px;
 }
 
+#news .news-main-title h3{
+    color: black;
+    margin-bottom: 40px;
+}
+
 #news .news-block p {
     font-size: 18px;
     font-weight: 400;
@@ -416,6 +429,10 @@ div select[id="omer_teambundle_team_division"] {
     text-align: justify;
 }
 
+#news .news-block p.updated-at {
+    font-size: 16px;
+    line-height: 1.2;
+}
 #news ol {
     margin-bottom: 1.5em;
 }

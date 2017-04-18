@@ -1,0 +1,9 @@
+services:
+#    omer_info.example:
+#        class: Omer\InfoBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    omer_info.admin.news:
+        class: Omer\InfoBundle\Admin\NewsAdmin
+        arguments: [~, Omer\InfoBundle\Entity\News, OmerInfoBundle:NewsAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Information, label: News }

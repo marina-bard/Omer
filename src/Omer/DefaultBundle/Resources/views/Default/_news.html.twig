@@ -1,5 +1,23 @@
 <section id="news">
     <div class="container">
+
+        {% if news is not empty %}
+            <div class="news-block">
+                <a href="/news" class="news-main-title"><h3>News</h3></a>
+                <div class="row">
+                {% for oneNews in news %}
+                    <div class="col-md-6">
+                        <a href="/news/{{ oneNews.id }}" class="news-title">
+                            <h4>{{ oneNews.title }}</h4>
+                        </a>
+                        <p class="updated-at">Updated on <i>{{ oneNews.updatedAt | date}}</i></p>
+                        <p>{{ oneNews.preview }}</p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
           <div class="row" id="about">
             <div class="col-md-12">
                 <div class="news-block">

@@ -1,0 +1,7 @@
+itm_file_preview:
+    upload_path: uploads
+    upload_url:  /uploads
+    entities:    # Array of entities
+        OmerInfoBundle:  # Bundle name
+            News:       # Entity name
+                file: ~ # Entity field which upload file

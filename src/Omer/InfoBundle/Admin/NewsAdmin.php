@@ -51,7 +51,9 @@ class NewsAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', TextType::class)
-            ->add('preview', TextareaType::class)
+            ->add('preview', TextareaType::class, [
+                'required' => false
+            ])
             ->add('fileName', TextType::class, [
                 'required' => false,
             ])
@@ -59,7 +61,9 @@ class NewsAdmin extends AbstractAdmin
                 'required' => false,
                 'data_class' => null
             ])
-            ->add('content', CKEditorType::class)
+            ->add('content', CKEditorType::class, [
+                'required' => false
+            ])
         ;
     }
 

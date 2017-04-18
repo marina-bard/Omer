@@ -11,7 +11,9 @@
                     </h3>
                     <p class="updated-at">Updated on: <i>{{ news.updatedAt | date}}</i></p>
                     <p class="updated-at"><i>{{ news.preview }}</i></p>
-                    <p><a href="{{ url }}" target="_blank">{{ news.fileName }}</a></p>
+                    {% if url is not empty %}
+                        <p><a href="{{ url }}" target="_blank">{{ news.fileName }}</a></p>
+                    {% endif %}
                     <p>{{ news.content | raw }}</p>
                 </div>
             </div>

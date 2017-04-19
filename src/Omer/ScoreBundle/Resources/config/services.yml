@@ -26,3 +26,8 @@ services:
             - { name: sonata.admin, manager_type: orm, group: 'label.group.scoring', label: Score }
         calls:
             - [ setTranslationDomain, [OmerScoreBundle] ]
+
+    omer_score.event_listener.total_score_subscriber:
+        class: Omer\ScoreBundle\EventListener\TotalScoreSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

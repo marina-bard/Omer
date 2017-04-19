@@ -53,4 +53,17 @@ class ScoreAdmin extends AbstractAdmin
                 )))
         ;
     }
+
+    public function postUpdate($object)
+    {
+        $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
+        $points = $object->getPoints();
+        foreach ($points as $point) {
+            if (!$point->getCriterion()->getMaterializedPath()) {
+                $object->setTotalScore($point->getValue());
+                $em->merge($object);
+            }
+        }
+        $em->flush();
+    }
 }

@@ -26,15 +26,15 @@ class Score
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Criterion", inversedBy="points")
-     * @ORM\JoinColumn(name="criterion_id", referencedColumnName="id", nullable=TRUE, onDelete="CASCADE")
-     */
-    protected $criterion;
-
-    /**
     * @ORM\OneToMany(targetEntity="Point", mappedBy="score", cascade={"all"})
     */
     protected $points;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $totalScore;
+
     /**
      * Constructor
      */
@@ -51,30 +51,6 @@ class Score
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set criterion
-     *
-     * @param \Omer\ScoreBundle\Entity\Criterion $criterion
-     *
-     * @return Score
-     */
-    public function setCriterion(\Omer\ScoreBundle\Entity\Criterion $criterion = null)
-    {
-        $this->criterion = $criterion;
-
-        return $this;
-    }
-
-    /**
-     * Get criterion
-     *
-     * @return \Omer\ScoreBundle\Entity\Criterion
-     */
-    public function getCriterion()
-    {
-        return $this->criterion;
     }
 
     /**
@@ -109,5 +85,29 @@ class Score
     public function getPoints()
     {
         return $this->points;
+    }
+
+    /**
+     * Set totalScore
+     *
+     * @param integer $totalScore
+     *
+     * @return Score
+     */
+    public function setTotalScore($totalScore)
+    {
+        $this->totalScore = $totalScore;
+
+        return $this;
+    }
+
+    /**
+     * Get totalScore
+     *
+     * @return integer
+     */
+    public function getTotalScore()
+    {
+        return $this->totalScore;
     }
 }

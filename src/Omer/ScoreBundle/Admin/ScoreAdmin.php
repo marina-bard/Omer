@@ -27,7 +27,7 @@ class ScoreAdmin extends AbstractAdmin
     {
         $formMapper
         ->add('points', 'sonata_type_collection', [
-                'required' => false,
+                'required' => true,
                 'label' => false,
                 'btn_add' => false,
                 'type_options' => array('delete' => false),

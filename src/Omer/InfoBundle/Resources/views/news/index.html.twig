@@ -1,0 +1,21 @@
+{% extends '@OmerDefault/Default/index.html.twig' %}
+
+{% block news %}
+    <section id="news">
+        <div class="container">
+            <div class="news-block">
+                {% for oneNews in news %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="/news/{{ oneNews.id }}" class="news-title ">
+                            <h4>{{ oneNews.title }}</h4>
+                        </a>
+                        <p class="updated-at">Updated on: <i>{{ oneNews.updatedAt | date}}</i></p>
+                        <p>{{ oneNews.preview  }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

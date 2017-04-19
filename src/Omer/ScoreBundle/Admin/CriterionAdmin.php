@@ -34,7 +34,7 @@ class CriterionAdmin extends AbstractAdmin
         $listMapper
             ->add('title')
             ->add('parentNode'. 'string', [
-                // 'template' => 'OmerScoreBundle:Admin:list__tree_parentNode.html.twig'
+//                 'template' => 'OmerScoreBundle:Admin:list__tree_parentNode.html.twig'
             ])
         ;
     }
@@ -80,7 +80,7 @@ class CriterionAdmin extends AbstractAdmin
         $showMapper
             ->add('title')
             ->add('minValue')
-            ->add('maxValue')
+            ->add('maxVxalue')
             ->add('isBoundaryValues')
         ;
     }

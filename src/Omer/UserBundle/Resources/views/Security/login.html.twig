@@ -4,17 +4,21 @@
     <form action="{{ path("fos_user_security_check") }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
         {#<h1 class="login-text">{{ 'label.form.title'|trans() }}</h1>#}
-        <div class="form-group">
-            <input type="button" class="btn registration active" value="{{ 'label.form.registration'|trans() }}">
-        </div>
-        <div class="form-group">
-            <input type="button" class="btn login" value="{{ 'label.form.title'|trans() }}">
-        </div>
+        <p class="login-text">The teams registration for 25th Eurofest Odyssey of the Mind is completed.
+            In Schedule part below you can view with the tentitive program for Long-Term Competitions.</p>
+            <p class="login-text">The information on site will be updating every day. The changed data we will mark with such kind of message: "Updated on April 14th, 2017 (on Friday)".</p>
 
-        {#<p class="login-text">{{ 'email.sorry_message'|trans({})|nl2br }}</p>#}
+        {#<div class="form-group">#}
+            {#<input type="button" class="btn registration active" value="{{ 'label.form.registration'|trans() }}">#}
+        {#</div>#}
+        {#<div class="form-group">#}
+            {#<input type="button" class="btn login" value="{{ 'label.form.title'|trans() }}">#}
+        {#</div>#}
+
+        {#<p class="login-text">{{ 'email.sorry_message'|trans({})|nl2br }}</p> #}
 
         <div class="registration-buttons">
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <a href="{{ path('team_excel_form') }}">
                     <input type="button" class="btn register-team-btn" value="{{ 'label.excel'|trans() }}">
                 </a>
@@ -24,9 +28,15 @@
                 <a href="{{ path('team_new') }}">
                     <input type="button" class="btn register-team-btn" value="{{ 'label.registration'|trans() }}">
                 </a>
-            </div>
+            </div> -->
 
-            <div class="form-group">
+            <!-- <div class="form-group">
+                <a href="{{ path('default_teams_schedule') }}">
+                    <input type="button" class="btn register-team-btn" value="{{ 'label.performance_schedule'|trans() }}">
+                </a>
+            </div> -->
+
+            <div class="form-group login-text">
                 <a href="{{ path('officialuser_new') }}">
                     <input type="button" class="btn register-team-btn" value="{{ 'label.director_registration'|trans() }}">
                 </a>
@@ -59,5 +69,3 @@
 
     </form>
 </div>
-
-

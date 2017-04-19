@@ -36,35 +36,42 @@ $(document).ready(function ($) {
         event.preventDefault();
     });
 
-//убрать после появления рабочих ссылок
-    $('#schedule a').on('click', function (e) {
-        e.preventDefault();
-    });
-
     $('input#omer_teambundle_team_travelAttributes_0_date').attr('placeholder', 'Arrival Date');
     $('input#omer_teambundle_team_travelAttributes_1_date').attr('placeholder', 'Departure Date');
     $('input#omer_userbundle_directoruser_travelAttributes_0_date').attr('placeholder', 'Arrival Date');
     $('input#omer_userbundle_directoruser_travelAttributes_1_date').attr('placeholder', 'Departure Date');
 
+    // (function () {
+    //     var mainForm = $('.main-form'),
+    //         loginTab = mainForm.find('.login'),
+    //         registrationTab = mainForm.find('.registration'),
+    //         registrationButtons = mainForm.find('.registration-buttons'),
+    //         loginFields = mainForm.find('.login-fields');
+    //
+    //     loginTab.on('click', function () {
+    //         $(this).addClass('active');
+    //         registrationTab.removeClass('active');
+    //         registrationButtons.hide();
+    //         loginFields.show();
+    //     });
+    //
+    //     registrationTab.on('click', function () {
+    //         $(this).addClass('active');
+    //         loginTab.removeClass('active');
+    //         loginFields.hide();
+    //         registrationButtons.show();
+    //     });
+    // })();
+
     (function () {
         var mainForm = $('.main-form'),
-            loginTab = mainForm.find('.login'),
-            registrationTab = mainForm.find('.registration'),
-            registrationButtons = mainForm.find('.registration-buttons'),
-            loginFields = mainForm.find('.login-fields');
+            loginFields = mainForm.find('.login-fields'),
+            loginHref = $('.login-href'),
+            loginText = mainForm.find('.login-text');
 
-        loginTab.on('click', function () {
-            $(this).addClass('active');
-            registrationTab.removeClass('active');
-            registrationButtons.hide();
+        loginHref.on('click', function () {
+            loginText.hide();
             loginFields.show();
-        });
-
-        registrationTab.on('click', function () {
-            $(this).addClass('active');
-            loginTab.removeClass('active');
-            loginFields.hide();
-            registrationButtons.show();
         });
     })();
 
@@ -93,4 +100,10 @@ $(document).ready(function ($) {
         else
             preferencesInJudgementRow.hide();
     });
+
+    if(window.location.href.indexOf("news") !== -1) {
+        $('html, body').animate({
+            scrollTop: $("#news").offset().top
+        }, 500);
+    }
 });

@@ -18,5 +18,5 @@
 *.php~
 /bower_components/
 /web/assets/
-/web/uploads/teams/
-/web/uploads/official_users/
+/web/uploads/
+/components

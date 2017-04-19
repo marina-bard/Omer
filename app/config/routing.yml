@@ -3,6 +3,11 @@ omer_score:
     type:     annotation
     prefix:   /
 
+omer_info:
+    resource: "@OmerInfoBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 omer_default:
     resource: "@OmerDefaultBundle/Controller/"
     type:     annotation
@@ -52,8 +57,9 @@ admin_login:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"
+
 #fos_user_resetting:
 #    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
 #    prefix: /resetting
-
-

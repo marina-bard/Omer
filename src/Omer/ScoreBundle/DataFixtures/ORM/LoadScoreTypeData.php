@@ -31,7 +31,7 @@ class LoadScoreTypeData implements FixtureInterface
                 $manager->persist(new ScoreType($key, $value));
             }
             else {
-                $division->setType($value);
+                $type->setType($value);
             }
         }
 

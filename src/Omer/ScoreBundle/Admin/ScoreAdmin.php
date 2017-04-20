@@ -13,21 +13,14 @@ use Sonata\AdminBundle\Show\ShowMapper;
 class ScoreAdmin extends AbstractAdmin
 {
     /**
-     * @param DatagridMapper $datagridMapper
-     */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('id')
-        ;
-    }
-
-    /**
      * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('team', null, [
+                'required' => true
+            ])
             ->add('judge', 'sonata_type_model', [
                 'multiple' => false,
                 'required' => true,

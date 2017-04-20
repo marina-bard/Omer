@@ -17,10 +17,6 @@ class PointAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->add('criterion')
-        ;
-
         $criterion = $this->getSubject()->getCriterion();
         if ($criterion->getIsBoundaryValues()) {
             $placeholder = $criterion->getMinValue() . ' or ' . $criterion->getMaxValue();
@@ -37,6 +33,7 @@ class PointAdmin extends AbstractAdmin
 
         $parentNode = $this->getParentNode($criterion);
         $formMapper
+            ->add('criterion')
             ->add('value', NumberType::class, [
                 'required' => true,
                 'attr' => [

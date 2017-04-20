@@ -40,6 +40,7 @@ class PointAdmin extends AbstractAdmin
             ->add('value', NumberType::class, [
                 'required' => true,
                 'attr' => [
+                    'self_id' => $criterion->getId(),
                     'parent_id' => $parentNode,
                     'child_nodes_ids' => $childIds,
                     'placeholder' => $placeholder

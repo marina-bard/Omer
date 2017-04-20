@@ -29,7 +29,7 @@ class Point
 
     /**
      * @var string
-     * @ORM\Column(name="value", type="integer")
+     * @ORM\Column(name="value", type="integer", nullable=true)
      */
     protected $value;
 
@@ -38,7 +38,6 @@ class Point
      * @ORM\JoinColumn(name="criterion_id", referencedColumnName="id", nullable=TRUE, onDelete="CASCADE")
      */
     protected $criterion;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="Score", inversedBy="points")

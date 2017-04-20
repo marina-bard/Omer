@@ -33,9 +33,15 @@ class Score
     protected $points;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $totalScore;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Omer\TeamBundle\Entity\BaseTeam", inversedBy="scores")
+     * @ORM\JoinColumn(name="base_team_id", referencedColumnName="id", onDelete="cascade")
+     */
+    protected $team;
 
     /**
      * Constructor
@@ -111,5 +117,29 @@ class Score
     public function getTotalScore()
     {
         return $this->totalScore;
+    }
+
+    /**
+     * Set team
+     *
+     * @param \Omer\TeamBundle\Entity\BaseTeam $team
+     *
+     * @return Score
+     */
+    public function setTeam(\Omer\TeamBundle\Entity\BaseTeam $team = null)
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Omer\TeamBundle\Entity\BaseTeam
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 }

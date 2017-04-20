@@ -23,11 +23,19 @@ services:
         class: Omer\ScoreBundle\Admin\ScoreAdmin
         arguments: [~, Omer\ScoreBundle\Entity\Score, OmerScoreBundle:ScoreAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'label.group.scoring', label: Score }
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.scoring', label: Score, show_in_dashboard: false }
         calls:
             - [ setTranslationDomain, [OmerScoreBundle] ]
 
-    omer_score.event_listener.total_score_subscriber:
+    omer_score.event_subscriber.total_score:
         class: Omer\ScoreBundle\EventListener\TotalScoreSubscriber
         tags:
             - { name: doctrine.event_subscriber, connection: default }
+
+    omer_score.admin.judge_scoring:
+        class: Omer\ScoreBundle\Admin\JudgeScoringAdmin
+        arguments: [~, Omer\TeamBundle\Entity\BaseTeam, OmerScoreBundle:JudgeScoringAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'label.group.scoring', label: Scoring }
+        calls:
+            - [ setTranslationDomain, [OmerTeamBundle] ]

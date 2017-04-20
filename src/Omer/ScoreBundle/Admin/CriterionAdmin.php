@@ -33,9 +33,7 @@ class CriterionAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('title')
-            ->add('parentNode'. 'string', [
-//                 'template' => 'OmerScoreBundle:Admin:list__tree_parentNode.html.twig'
-            ])
+            ->add('parentNode'. 'string')
         ;
     }
 
@@ -63,7 +61,7 @@ class CriterionAdmin extends AbstractAdmin
             $formMapper
                 ->add('parentNode', 'sonata_type_model' ,[
                     'multiple' => false,
-                    'required' => true,
+                    'required' => false,
                     'class' => Criterion::class,
                 ])
             ;

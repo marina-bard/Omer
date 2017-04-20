@@ -101,6 +101,12 @@ abstract class BaseTeam
     protected $division;
 
     /**
+     * @Assert\Valid
+     * @ORM\OneToMany(targetEntity="Omer\ScoreBundle\Entity\Score", mappedBy="team", cascade={"all"})
+     */
+    protected $scores;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -426,5 +432,39 @@ abstract class BaseTeam
     public function getDivision()
     {
         return $this->division;
+    }
+
+    /**
+     * Add score
+     *
+     * @param \Omer\ScoreBundle\Entity\Score $score
+     *
+     * @return BaseTeam
+     */
+    public function addScore(\Omer\ScoreBundle\Entity\Score $score)
+    {
+        $this->scores[] = $score;
+
+        return $this;
+    }
+
+    /**
+     * Remove score
+     *
+     * @param \Omer\ScoreBundle\Entity\Score $score
+     */
+    public function removeScore(\Omer\ScoreBundle\Entity\Score $score)
+    {
+        $this->scores->removeElement($score);
+    }
+
+    /**
+     * Get scores
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getScores()
+    {
+        return $this->scores;
     }
 }

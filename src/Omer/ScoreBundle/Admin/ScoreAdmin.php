@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class ScoreAdmin extends AbstractAdmin
@@ -65,5 +66,15 @@ class ScoreAdmin extends AbstractAdmin
             }
         }
         $em->flush();
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $query = parent::createQuery($context);
+        $query->andWhere(
+            $query->expr()->eq($query->getRootAliases()[0] . '.team', ':id')
+        );
+        $query->setParameter('id', $this->getRequest()->get('id'));
+        return $query;
     }
 }

@@ -11,6 +11,8 @@ namespace Omer\ScoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Omer\ScoreBundle\Repository\PointRepository")
@@ -124,5 +126,28 @@ class Point
     public function getScore()
     {
         return $this->score;
+    }
+
+    /**
+     * @Assert\Callback()
+     */
+    public function isValidValue(ExecutionContextInterface $context, $payload)
+    {
+        if ($this->getCriterion()->getIsBoundaryValues()) {
+            if ($this->getValue() != $this->getCriterion()->getMaxValue()
+                && $this->getValue() != $this->getCriterion()->getMinValue()) {
+                $context->buildViolation('point.value.value_error')
+                    ->atPath('value')
+                    ->addViolation();
+            }
+        }
+        else {
+            if ($this->getValue() < $this->getCriterion()->getMinValue()
+                || $this->getValue() > $this->getCriterion()->getMaxValue()) {
+                $context->buildViolation('point.value.value_error')
+                    ->atPath('value')
+                    ->addViolation();
+            }
+        }
     }
 }

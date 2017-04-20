@@ -14,3 +14,7 @@ label:
 
     login:  Log In
     logout: Log Out
+
+error:
+    value:
+        out_of_range: Out of range of values.

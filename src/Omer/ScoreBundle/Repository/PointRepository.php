@@ -11,7 +11,7 @@ namespace Omer\ScoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class Point Repository extends EntityRepository
+class PointRepository extends EntityRepository
 {
 
 }

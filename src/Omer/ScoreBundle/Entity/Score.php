@@ -11,6 +11,7 @@ namespace Omer\ScoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Omer\ScoreBundle\Repository\ScoreRepository")
@@ -26,8 +27,9 @@ class Score
     protected $id;
 
     /**
-    * @ORM\OneToMany(targetEntity="Point", mappedBy="score", cascade={"all"})
-    */
+     * @Assert\Valid
+     * @ORM\OneToMany(targetEntity="Point", mappedBy="score", cascade={"all"})
+     */
     protected $points;
 
     /**

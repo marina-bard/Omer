@@ -47,18 +47,29 @@ class CriterionAdmin extends AbstractAdmin
         $object = $this->getSubject();
         if ($object && $object->getId()) {
             $this->buildTree($object);
+            $formMapper
+                ->add('parentNode', 'sonata_type_model' ,[
+                    'multiple' => false,
+                    'class' => Criterion::class,
+                    'query' => $this->getConfigurationPool()
+                        ->getContainer()
+                        ->get('doctrine')
+                        ->getRepository('OmerScoreBundle:Criterion')
+                        ->getTreeExceptNodeAndItsChildrenQB($this->getSubject())
+                ])
+            ;
+        }
+        else {
+            $formMapper
+                ->add('parentNode', 'sonata_type_model' ,[
+                    'multiple' => false,
+                    'required' => true,
+                    'class' => Criterion::class,
+                ])
+            ;
         }
 
         $formMapper
-            ->add('parentNode', 'sonata_type_model' ,[
-                'multiple' => false,
-                'class' => Criterion::class,
-                'query' => $this->getConfigurationPool()
-                    ->getContainer()
-                    ->get('doctrine')
-                    ->getRepository('OmerScoreBundle:Criterion')
-                    ->getTreeExceptNodeAndItsChildrenQB($this->getSubject())
-            ])
             ->add('title')
             ->add('minValue')
             ->add('maxValue')

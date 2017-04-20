@@ -11,34 +11,10 @@ class ScoreAdminController extends CRUDController
     {
         $request = $this->getRequest();
         $teamId = $request->get('id');
-        // the key used to lookup the template
-//        $templateKey = 'edit';
-//
         $this->admin->checkAccess('create');
-//
-//        $class = new \ReflectionClass($this->admin->hasActiveSubClass() ? $this->admin->getActiveSubClass() : $this->admin->getClass());
-//
-//        if ($class->isAbstract()) {
-//            return $this->render(
-//                'SonataAdminBundle:CRUD:select_subclass.html.twig',
-//                array(
-//                    'base_template' => $this->getBaseTemplate(),
-//                    'admin' => $this->admin,
-//                    'action' => 'create',
-//                ),
-//                null,
-//                $request
-//            );
-//        }
 
         $object = $this->admin->getNewInstance();
 
-//        $preResponse = $this->preCreate($request, $object);
-//        if ($preResponse !== null) {
-//            return $preResponse;
-//        }
-
-//        dump($teamId);
         if ($teamId) {
             $team = $this->get('doctrine')->getRepository('OmerTeamBundle:BaseTeam')->find($teamId);
             $object->setTeam($team);

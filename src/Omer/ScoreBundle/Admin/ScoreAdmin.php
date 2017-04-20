@@ -2,6 +2,7 @@
 
 namespace Omer\ScoreBundle\Admin;
 
+use Omer\UserBundle\Entity\OfficialUser;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -27,7 +28,19 @@ class ScoreAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-        ->add('points', 'sonata_type_collection', [
+            ->add('judge', 'sonata_type_model', [
+                'multiple' => false,
+                'required' => true,
+                'btn_add' => false,
+                'query' => $this->getConfigurationPool()
+                    ->getContainer()
+                    ->get('doctrine')
+                    ->getRepository('OmerUserBundle:OfficialUser')
+                    ->findByRoleQB('ROLE_JUDGE')
+            ], [
+                'admin_code' => 'sonata.admin.official_user'
+            ])
+            ->add('points', 'sonata_type_collection', [
                 'required' => true,
                 'label' => false,
                 'btn_add' => false,
@@ -46,7 +59,9 @@ class ScoreAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
+            ->add('judge', null, [
+                'admin_code' => 'sonata.admin.official_user'
+            ])
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),

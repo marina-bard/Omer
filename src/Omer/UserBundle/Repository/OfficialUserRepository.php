@@ -22,6 +22,15 @@ class OfficialUserRepository extends EntityRepository
             ->getResult();
     }
 
+    public function findByRoleQB($role)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.roles like :role')
+            ->setParameter('role', '%' . $role . '%')
+            ->orderBy('u.firstName','ASC')
+            ->getQuery();
+    }
+
     public function findNotAdmin()
     {
         return $this->createQueryBuilder('u')

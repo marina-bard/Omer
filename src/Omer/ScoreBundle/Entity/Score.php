@@ -44,6 +44,12 @@ class Score
     protected $team;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Omer\UserBundle\Entity\OfficialUser", inversedBy="scores")
+     * @ORM\JoinColumn(name="judge_id", referencedColumnName="id", onDelete="cascade")
+     */
+    protected $judge;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -141,5 +147,29 @@ class Score
     public function getTeam()
     {
         return $this->team;
+    }
+
+    /**
+     * Set judge
+     *
+     * @param \Omer\UserBundle\Entity\OfficialUser $judge
+     *
+     * @return Score
+     */
+    public function setJudge(\Omer\UserBundle\Entity\OfficialUser $judge = null)
+    {
+        $this->judge = $judge;
+
+        return $this;
+    }
+
+    /**
+     * Get judge
+     *
+     * @return \Omer\UserBundle\Entity\OfficialUser
+     */
+    public function getJudge()
+    {
+        return $this->judge;
     }
 }

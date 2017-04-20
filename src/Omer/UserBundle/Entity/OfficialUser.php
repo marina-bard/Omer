@@ -118,6 +118,11 @@ class OfficialUser extends User
      */
     protected $preferences;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Omer\ScoreBundle\Entity\Score", mappedBy="judge")
+     */
+    protected $scores;
+
     public function __construct()
     {
         parent::__construct();
@@ -442,5 +447,39 @@ class OfficialUser extends User
             default:
                 return 'User';
         }
+    }
+
+    /**
+     * Add score
+     *
+     * @param \Omer\ScoreBundle\Entity\Score $score
+     *
+     * @return OfficialUser
+     */
+    public function addScore(\Omer\ScoreBundle\Entity\Score $score)
+    {
+        $this->scores[] = $score;
+
+        return $this;
+    }
+
+    /**
+     * Remove score
+     *
+     * @param \Omer\ScoreBundle\Entity\Score $score
+     */
+    public function removeScore(\Omer\ScoreBundle\Entity\Score $score)
+    {
+        $this->scores->removeElement($score);
+    }
+
+    /**
+     * Get scores
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getScores()
+    {
+        return $this->scores;
     }
 }

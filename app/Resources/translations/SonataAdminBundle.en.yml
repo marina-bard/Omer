@@ -18,3 +18,7 @@ label:
 error:
     value:
         out_of_range: Out of range of values.
+    score:
+        invalid_team:       Oops! Invalid team.
+        invalid_score_type: Oops! Invalid score type.
+        no_criterions:      Can't find matched score criteria.

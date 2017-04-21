@@ -36,16 +36,22 @@ class ScoreType
     protected $value;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isDependsOnProblem;
+
+    /**
      * @ORM\OneToMany(targetEntity="Criterion", mappedBy="scoreType", cascade={"all"})
      */
     protected $criterions;
     /**
      * Constructor
      */
-    public function __construct($value, $type)
+    public function __construct($value, $type, $isDependsInProblem)
     {
         $this->value = $value;
         $this->type = $type;
+        $this->isDependsOnProblem = $isDependsInProblem;
         $this->criterions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -144,5 +150,29 @@ class ScoreType
     public function __toString()
     {
         return (string) $this->type;
+    }
+
+    /**
+     * Set isDependsOnProblem
+     *
+     * @param boolean $isDependsOnProblem
+     *
+     * @return ScoreType
+     */
+    public function setIsDependsOnProblem($isDependsOnProblem)
+    {
+        $this->isDependsOnProblem = $isDependsOnProblem;
+
+        return $this;
+    }
+
+    /**
+     * Get isDependsOnProblem
+     *
+     * @return boolean
+     */
+    public function getIsDependsOnProblem()
+    {
+        return $this->isDependsOnProblem;
     }
 }

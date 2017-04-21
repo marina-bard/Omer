@@ -1,0 +1,17 @@
+{% extends 'standard_layout.html.twig' %}
+
+{% block content %}
+    <div class="radio col-md-12">
+        <h3>Score Type</h3>
+        <br>
+        {% set i = 0 %}
+        {% for scoreType in scoreTypes %}
+            <a href="{{ path('admin_omer_score_score_create', {'scoreTypeId' : scoreType.id, 'id' : teamId } ) }}">
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <br>{{ scoreType.type  }}
+                </button>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

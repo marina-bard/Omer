@@ -4,30 +4,70 @@ namespace Omer\ScoreBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController;
 use Omer\ScoreBundle\Entity\Point;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ScoreAdminController extends CRUDController
 {
     public function createAction()
     {
         $request = $this->getRequest();
-        $teamId = $request->get('id');
-        $this->admin->checkAccess('create');
 
+        $this->admin->checkAccess('create');
         $object = $this->admin->getNewInstance();
 
-        if ($teamId) {
-            $team = $this->get('doctrine')->getRepository('OmerTeamBundle:BaseTeam')->find($teamId);
-            $object->setTeam($team);
-            $team->addScore($object);
+        $doctrine = $this->get('doctrine');
 
-            $criterions = $this->get('doctrine')->getRepository('OmerScoreBundle:Criterion')->findBy(['problem' => $team->getProblem()->getId()]);
-            foreach ($criterions as $criterion) {
-                $point = new Point();
-                $criterion->addPoint($point);
-                $point->setCriterion($criterion);
-                $object->addPoint($point);
-                $point->setScore($object);
-            }
+        $teamId = $request->get('id');
+        $team = $doctrine->getRepository('OmerTeamBundle:BaseTeam')->find($teamId);
+
+        if (!$team) {
+            $this->addFlash(
+                'sonata_flash_error',
+                $this->trans('error.score.invalid_team', [],'SonataAdminBundle')
+            );
+            return new RedirectResponse($this->admin->generateUrl('list'));
+        }
+
+        $scoreTypeId = $request->get('scoreTypeId');
+        $scoreType = $doctrine->getRepository('OmerScoreBundle:ScoreType')->find($scoreTypeId);
+
+        if (!$scoreType) {
+            $this->addFlash(
+                'sonata_flash_error',
+                $this->trans('error.score.invalid_score_type', [],'SonataAdminBundle')
+            );
+            return new RedirectResponse($this->admin->generateUrl('list'));
+        }
+
+        $object->setTeam($team);
+        $team->addScore($object);
+
+        if ($scoreType->getIsDependsOnProblem()) {
+            $criterions = $this->get('doctrine')->getRepository('OmerScoreBundle:Criterion')->findBy([
+                'problem' => $team->getProblem()->getId(),
+                'scoreType' => $scoreType
+            ]);
+        }
+        else {
+            $criterions = $this->get('doctrine')->getRepository('OmerScoreBundle:Criterion')->findBy([
+                'scoreType' => $scoreType
+            ]);
+        }
+
+        if (!$criterions) {
+            $this->addFlash(
+                'sonata_flash_error',
+                $this->trans('error.score.no_criterions', [],'SonataAdminBundle')
+            );
+            return new RedirectResponse($this->admin->generateUrl('list'));
+        }
+
+        foreach ($criterions as $criterion) {
+            $point = new Point();
+            $criterion->addPoint($point);
+            $point->setCriterion($criterion);
+            $object->addPoint($point);
+            $point->setScore($object);
         }
 
         $object = $this->admin->create($object);
@@ -139,4 +179,44 @@ class ScoreAdminController extends CRUDController
         ), null);
     }
 
+//    protected function redirectTo($object)
+//    {
+//        $request = $this->getRequest();
+//
+//        $url = false;
+//
+//        if (null !== $request->get('btn_update_and_list')) {
+//            $url = $this->admin->generateUrl('list');
+//        }
+//        if (null !== $request->get('btn_create_and_list')) {
+//            $url = $this->admin->generateUrl('list');
+//        }
+//
+//        if (null !== $request->get('btn_create_and_create')) {
+//            $params = array();
+//            if ($this->admin->hasActiveSubClass()) {
+//                $params['subclass'] = $request->get('subclass');
+//            }
+//            $url = $this->admin->generateUrl('create', $params);
+//        }
+//
+////        if ($this->getRestMethod() === 'DELETE') {
+////            $url = $this->admin->generateUrl('admin_omer_score_judgescoring_list');
+////        }
+//
+//        if (!$url) {
+//            foreach (array('edit', 'show') as $route) {
+//                if ($this->admin->hasRoute($route) && $this->admin->isGranted(strtoupper($route), $object)) {
+//                    $url = $this->admin->generateObjectUrl($route, $object);
+//                    break;
+//                }
+//            }
+//        }
+//
+//        if (!$url) {
+//            $url = $this->admin->generateUrl('list');
+//        }
+//
+//        return new RedirectResponse($url);
+//    }
 }

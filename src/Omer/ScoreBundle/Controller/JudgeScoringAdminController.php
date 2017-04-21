@@ -23,10 +23,12 @@ class JudgeScoringAdminController extends CRUDController
 
     public function createScoreAction()
     {
-        return new RedirectResponse($this->generateUrl(
-            'admin_omer_score_score_create', [
-            'id' => $this->admin->getSubject()->getId()
-        ]));
+        $scoreTypes = $this->get('doctrine')->getRepository('OmerScoreBundle:ScoreType')->findAll();
+
+        return $this->render('OmerScoreBundle:CRUD:new_score.html.twig',[
+            'scoreTypes' => $scoreTypes,
+            'teamId' => $this->admin->getSubject()->getId()
+        ]);
     }
 
 }

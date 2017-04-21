@@ -16,22 +16,32 @@ use Omer\ScoreBundle\Entity\ScoreType;
 class LoadScoreTypeData implements FixtureInterface
 {
     private $types = [
-        'Scoring',
-        'Style',
-        'Spontaneous',
-        'Mixed',
-        'Penalties'
+        'title' => [
+            'Long-Term Problem',
+            'Style',
+            'Spontaneous',
+            'Mixed',
+            'Penalties'
+        ],
+        'isDependsOnProblem' => [
+            true,
+            true,
+            false,
+            false,
+            false
+        ]
     ];
 
     public function load(ObjectManager $manager)
     {
-        foreach ($this->types as $key => $value) {
+        foreach ($this->types['title'] as $key => $value) {
             $type = $manager->getRepository('OmerScoreBundle:ScoreType')->findOneBy(['value' => $key]);
             if (!$type) {
-                $manager->persist(new ScoreType($key, $value));
+                $manager->persist(new ScoreType($key, $value, $this->types['isDependsOnProblem'][$key]));
             }
             else {
                 $type->setType($value);
+                $type->setIsDependsOnProblem($this->types['isDependsOnProblem'][$key]);
             }
         }
 

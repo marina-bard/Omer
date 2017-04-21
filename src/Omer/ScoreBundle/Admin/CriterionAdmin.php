@@ -78,7 +78,7 @@ class CriterionAdmin extends AbstractAdmin
             ])
             ->add('problem', null, [
                 'multiple' => false,
-                'required' => true,
+                'required' => false,
             ])
         ;
     }

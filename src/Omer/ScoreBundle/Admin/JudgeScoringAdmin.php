@@ -14,6 +14,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class JudgeScoringAdmin extends AbstractAdmin
 {
+//    protected $baseRouteName = 'admin_omer_score_judgescoring';
+
+//    protected $baseRoutePattern = 'omer/score/judgescoring';
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -28,7 +32,6 @@ class JudgeScoringAdmin extends AbstractAdmin
                 )))
         ;
     }
-
 
     protected function configureRoutes(RouteCollection $collection)
     {

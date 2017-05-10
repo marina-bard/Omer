@@ -59,8 +59,15 @@
         </div>
     </section>
 
+    {% block video %}
+        {% include 'OmerDefaultBundle:Default:_video.html.twig' %}
+    {% endblock video %}
+
+
     {% block news %}
-        {% include 'OmerDefaultBundle:Default:_news.html.twig' %}
+        <div class="news-section">
+            {% include 'OmerDefaultBundle:Default:_news.html.twig' %}
+        </div>
     {% endblock news %}
 
 {% endblock %}

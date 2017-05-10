@@ -1,5 +1,8 @@
 {% extends '@OmerDefault/Default/index.html.twig' %}
 
+{% block video %}
+{% endblock %}
+
 {% block news %}
     <section id="news">
         <div class="container">
@@ -7,7 +10,7 @@
                 {% for oneNews in news %}
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="/news/{{ oneNews.id }}" class="news-title ">
+                        <a href="{{ path('news_show', {'id': oneNews.id}) }}" class="news-title">
                             <h4>{{ oneNews.title }}</h4>
                         </a>
                         <p class="updated-at">Updated on: <i>{{ oneNews.updatedAt | date}}</i></p>

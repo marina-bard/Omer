@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Omer\TravelBundle\OmerTravelBundle(),
             new Omer\DefaultBundle\OmerDefaultBundle(),
             new Omer\InfoBundle\OmerInfoBundle(),
+            new Omer\GalleryBundle\OmerGalleryBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

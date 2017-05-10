@@ -20,8 +20,12 @@ class DefaultController extends Controller
         $news = $em->getRepository("OmerInfoBundle:News")
             ->findBy([], ['updatedAt' => 'DESC'], 6);
 
+        $frontVideo = $em->getRepository('OmerGalleryBundle:Video')
+            ->findOneBy(['frontVideo' => true]);
+
         return $this->render('OmerDefaultBundle:Default:index.html.twig', [
-            'news' => $news
+            'news' => $news,
+            'video' => $frontVideo
         ]);
     }
 

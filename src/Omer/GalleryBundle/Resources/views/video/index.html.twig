@@ -1,0 +1,23 @@
+{% extends '@OmerDefault/Default/index.html.twig' %}
+
+{% block video %}
+    <section id="video">
+        <div class="container">
+            <div class="video-block">
+                {% for video in videos %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <iframe class="video_frame" src="{{ video.link }}" width="660" height="415" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>{{ video.title }}</h4>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block news %}
+{% endblock %}

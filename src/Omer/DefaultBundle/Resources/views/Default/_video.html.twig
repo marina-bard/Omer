@@ -1,0 +1,37 @@
+<section id="video">
+    <div class="container">
+            {% if video is not null %}
+                    <div class="video-block">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="video-main-title">
+                                    <h3>25 Eurofestival international competition
+                                        of creativity Odyssey of the mind
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <iframe src="{{ video.link }}" align="middle"
+                                        width="660" height="415"
+                                        frameborder="0" allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="video-main-title">
+                                    <h4>
+                                        <a href="{{ path('video_index') }}">
+                                            Find more videos from Eurofest 2017.
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

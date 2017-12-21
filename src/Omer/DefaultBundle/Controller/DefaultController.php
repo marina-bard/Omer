@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    const HOMEPAGE_NEWS_LIMIT = 6;
 
     /**
      * @Route("/", name="homepage")
@@ -18,7 +19,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $news = $em->getRepository("OmerInfoBundle:News")
-            ->findBy([], ['updatedAt' => 'DESC'], 6);
+            ->findBy([], ['updatedAt' => 'DESC'], self::HOMEPAGE_NEWS_LIMIT);
 
         $frontVideo = $em->getRepository('OmerGalleryBundle:Video')
             ->findOneBy(['frontVideo' => true]);

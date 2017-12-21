@@ -8,7 +8,6 @@
 
 namespace Omer\CompetitionBundle\DataFixtures;
 
-
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Omer\CompetitionBundle\Entity\Division;

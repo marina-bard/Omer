@@ -147,7 +147,7 @@ class BaseTeamAdminController extends CRUDController
         $builder = $this->get('builder.team_excel_builder');
         $builder->buildTeamExcel($team);
         $excel = $builder->getExcel();
-        return $this->get('default.downloader.excel_downloader')->download($excel, $team->getEnglishTeamName());
+        return $this->get('omer_default.downloader.excel')->download($excel, $team->getEnglishTeamName());
     }
 }
 

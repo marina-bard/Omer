@@ -1,4 +1,16 @@
 services:
-    default.downloader.excel_downloader:
+    omer_default.downloader.excel:
         class: Omer\DefaultBundle\Downloader\ExcelDownloader
         arguments: ['@phpexcel']
+
+    omer_default.admin.drop_down_menu:
+        class: Omer\DefaultBundle\Admin\DropDownMenuAdmin
+        arguments: [~, Omer\DefaultBundle\Entity\DropDownMenu, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: DropDownMenu }
+
+    omer_default.updater.object_updater:
+        class: Omer\DefaultBundle\Modifier\ObjectUpdater
+        arguments: [ '@property_accessor' ]
+
+

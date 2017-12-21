@@ -31,6 +31,6 @@ class OfficialUserAdminController extends CRUDController
 
         $excel = $this->get('user.builder.summary_excel')->formSummaryExcel($role, $officials);
 
-        return $this->get('default.downloader.excel_downloader')->download($excel, 'Summary_Table_' . date('d.m.Y_H:i:s'));
+        return $this->get('omer_default.downloader.excel')->download($excel, 'Summary_Table_' . date('d.m.Y_H:i:s'));
     }
 }
